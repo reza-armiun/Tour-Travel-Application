@@ -5,12 +5,10 @@ import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.location.Address;
 
 public class AddressToAddressDto implements Mapper<Address, AddressDto> {
-    private final CountryToCountryDto countryToCountryDto;
     private final CityToCityDto cityToCityDto;
 
 
-    public AddressToAddressDto(CountryToCountryDto countryToCountryDto, CityToCityDto cityToCityDto) {
-        this.countryToCountryDto = countryToCountryDto;
+    public AddressToAddressDto( CityToCityDto cityToCityDto) {
         this.cityToCityDto = cityToCityDto;
     }
 

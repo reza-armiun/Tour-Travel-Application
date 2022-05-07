@@ -3,29 +3,46 @@ package razarm.tosan;
 
 
 import razarm.tosan.controller.commandline.*;
+import razarm.tosan.exception.UserNotFoundException;
 
+import javax.naming.directory.InvalidAttributeValueException;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 
 
 public class Main {
 
 
 
-    public static void main(String[] args) throws IOException {
 
 
-        var authQuestion = new AuthQuestionHandler();
 
+    public static void main(String[] args) throws IOException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, InvalidAttributeValueException, UserNotFoundException {
+
+        MockDataInitializer.initialize();
+
+
+        var authQuestion = new AuthQuestionHandler(AppContextHolder.getAuthService());
         authQuestion
-                .nextQuestionHandler(new SelectTourQuestionHandler())
-                .nextQuestionHandler(new TourBuilderQuestionHandler());
+                .nextQuestionHandler(SelectTourTypeHandler.NAME, new SelectTourTypeHandler())
+                .nextQuestionHandler(SelectTourHandler.NAME, new SelectTourHandler(AppContextHolder.getTourService()))
+                .nextQuestionHandler(AddTravelerHandler.NAME, new AddTravelerHandler())
+                .nextQuestionHandler(BookingTourHandler.NAME, new BookingTourHandler(AppContextHolder.getBookingService()))
+                .nextQuestionHandler(DisplayTourTicketHandler.NAME, new DisplayTourTicketHandler());
+        ;
 
-
-        authQuestion.run();
-
-
-
-
+        authQuestion.run(new HashMap<>());
+//
+//        authQuestion
+//                .nextQuestionHandler(new DisplayTourTicketHandler());
+//
+//
+//        authQuestion.run();
+        //////////////////////////////////////////////////////
+//                .nextQuestionHandler(new BookingTourHandler());
+//                .nextQuestionHandler(new SelectTourQuestionHandler())
+//                .nextQuestionHandler(new TourBuilderQuestionHandler());
 
 
 
@@ -62,6 +79,8 @@ public class Main {
 
         // write your code here
     }
+
+
 }
 
 

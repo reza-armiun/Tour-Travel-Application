@@ -107,6 +107,7 @@ public class City extends BaseEntity implements Serializable {
                 ", modifiedBy='" + modifiedBy + '\'' +
                 ", name='" + name + '\'' +
                 ", zipCode=" + zipCode +
+                ", country=" + country +
                 '}';
     }
 }

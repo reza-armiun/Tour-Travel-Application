@@ -1,21 +1,23 @@
 package razarm.tosan.repository.data.accommodation;
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
 import razarm.tosan.repository.domain.location.Address;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.Instant;
 
-public abstract class AccommodationData extends BaseEntityData {
+public abstract class AccommodationData extends BaseEntityData implements Serializable {
     protected final String name;
     protected final AccommodationType type;
-    protected final Address address;
+    protected final AddressData address;
     protected final BigInteger price;
     protected final Long time;
     protected final AccommodationProviderData accommodationProvider;
 
-    public AccommodationData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, Address address, BigInteger price, Long time, AccommodationProviderData accommodationProvider) {
+    public AccommodationData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, AddressData address, BigInteger price, Long time, AccommodationProviderData accommodationProvider) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
@@ -33,7 +35,7 @@ public abstract class AccommodationData extends BaseEntityData {
         return type;
     }
 
-    public Address getAddress() {
+    public AddressData getAddress() {
         return address;
     }
 
@@ -48,6 +50,8 @@ public abstract class AccommodationData extends BaseEntityData {
     public AccommodationProviderData getAccommodationProvider() {
         return accommodationProvider;
     }
+
+
 
 
 }

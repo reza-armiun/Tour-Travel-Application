@@ -2,9 +2,10 @@ package razarm.tosan.repository.data.accommodation;
 
 import razarm.tosan.repository.data.BaseEntityData;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class AccommodationProviderData extends BaseEntityData {
+public class AccommodationProviderData extends BaseEntityData implements Serializable {
     private final String name;
     private final String description;
     private final String email;

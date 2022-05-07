@@ -43,4 +43,20 @@ public abstract class Accommodation extends BaseEntity
     public Address getAddress() {
         return address;
     }
+
+    public BigInteger getPrice() {
+        return price;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public AccommodationProvider getAccommodationProvider() {
+        return accommodationProvider;
+    }
+
+    public Set<AccommodationOrder> getAccommodationOrders() {
+        return accommodationOrders;
+    }
 }

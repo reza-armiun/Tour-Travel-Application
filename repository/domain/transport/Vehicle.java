@@ -79,6 +79,23 @@ public abstract class Vehicle extends BaseEntity
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id='" + id + '\'' +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", fromStation='" + fromStation + '\'' +
+                ", toStation='" + toStation + '\'' +
+                ", ticketNumber='" + ticketNumber + '\'' +
+                ", price=" + price +
+                ", departure=" + departure +
+                ", arrival=" + arrival +
+                ", vehicleProvider=" + vehicleProvider +
+                '}';
+    }
 }

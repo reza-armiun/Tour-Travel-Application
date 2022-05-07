@@ -7,6 +7,7 @@ import razarm.tosan.repository.domain.tour.TourType;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class TourDto extends BaseEntityDto {
     private final String name;
@@ -63,6 +64,7 @@ public class TourDto extends BaseEntityDto {
     public Set<SchedulePlanDto> getSchedulePlans() {
         return schedulePlans;
     }
+
 
 
     public static final class TourDtoBuilder {
@@ -155,5 +157,24 @@ public class TourDto extends BaseEntityDto {
         public TourDto build() {
             return new TourDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, date, categories, tourismManager, schedulePlans);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TourDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("type=" + type)
+                .add("guide='" + guide + "'")
+                .add("description='" + description + "'")
+                .add("date=" + date)
+                .add("categories=" + categories)
+                .add("tourismManager=" + tourismManager)
+                .add("schedulePlans=" + schedulePlans)
+                .toString();
     }
 }

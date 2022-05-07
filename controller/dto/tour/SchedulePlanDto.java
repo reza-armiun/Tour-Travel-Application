@@ -1,12 +1,16 @@
 package razarm.tosan.controller.dto.tour;
 
 import razarm.tosan.controller.dto.BaseEntityDto;
+import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.dto.accommodation.AccommodationDto;
+import razarm.tosan.controller.dto.food.FoodOrderDto;
 import razarm.tosan.controller.dto.transport.VehicleOrderDto;
+import razarm.tosan.utility.AppCollections;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public  class SchedulePlanDto extends BaseEntityDto {
     private final String name;
@@ -15,21 +19,23 @@ public  class SchedulePlanDto extends BaseEntityDto {
     private final AddressDto source;
     private final AddressDto destination;
 
+    private final AccommodationOrderDto accommodationOrder;
     private final Set<ActivityDto> activities;
-    private final AccommodationDto accommodation;
+    private final Set<FoodOrderDto> foodOrders;
     private final Set<VehicleOrderDto> vehicleOrders;
 
 
-    public SchedulePlanDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, ZonedDateTime startTime, ZonedDateTime arrivalTime, AddressDto source, AddressDto destination, Set<ActivityDto> activities, AccommodationDto accommodation, Set<VehicleOrderDto> vehicleOrders) {
+    public SchedulePlanDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, ZonedDateTime startTime, ZonedDateTime arrivalTime, AddressDto source, AddressDto destination, AccommodationOrderDto accommodationOrder, Set<ActivityDto> activities, Set<FoodOrderDto> foodOrders, Set<VehicleOrderDto> vehicleOrders) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
         this.source = source;
         this.destination = destination;
-        this.activities = activities;
-        this.accommodation = accommodation;
-        this.vehicleOrders = vehicleOrders;
+        this.accommodationOrder = accommodationOrder;
+        this.activities = AppCollections.unmodifiableSet(activities);
+        this.foodOrders = AppCollections.unmodifiableSet(foodOrders);
+        this.vehicleOrders = AppCollections.unmodifiableSet(vehicleOrders);
     }
 
     public String getName() {
@@ -56,13 +62,19 @@ public  class SchedulePlanDto extends BaseEntityDto {
         return activities;
     }
 
-    public AccommodationDto getAccommodation() {
-        return accommodation;
+
+    public AccommodationOrderDto getAccommodationOrder() {
+        return accommodationOrder;
     }
 
     public Set<VehicleOrderDto> getVehicleOrders() {
         return vehicleOrders;
     }
+
+    public Set<FoodOrderDto> getFoodOrders() {
+        return foodOrders;
+    }
+
 
     public static final class SchedulePlanDtoBuilder {
         protected String id;
@@ -75,8 +87,9 @@ public  class SchedulePlanDto extends BaseEntityDto {
         private ZonedDateTime arrivalTime;
         private AddressDto source;
         private AddressDto destination;
+        private AccommodationOrderDto accommodationOrder;
         private Set<ActivityDto> activities;
-        private AccommodationDto accommodation;
+        private Set<FoodOrderDto> foodOrders;
         private Set<VehicleOrderDto> vehicleOrders;
 
         private SchedulePlanDtoBuilder() {
@@ -136,13 +149,18 @@ public  class SchedulePlanDto extends BaseEntityDto {
             return this;
         }
 
+        public SchedulePlanDtoBuilder accommodationOrder(AccommodationOrderDto accommodationOrder) {
+            this.accommodationOrder = accommodationOrder;
+            return this;
+        }
+
         public SchedulePlanDtoBuilder activities(Set<ActivityDto> activities) {
             this.activities = activities;
             return this;
         }
 
-        public SchedulePlanDtoBuilder accommodation(AccommodationDto accommodation) {
-            this.accommodation = accommodation;
+        public SchedulePlanDtoBuilder foodOrders(Set<FoodOrderDto> foodOrders) {
+            this.foodOrders = foodOrders;
             return this;
         }
 
@@ -152,7 +170,27 @@ public  class SchedulePlanDto extends BaseEntityDto {
         }
 
         public SchedulePlanDto build() {
-            return new SchedulePlanDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, source, destination, activities, accommodation, vehicleOrders);
+            return new SchedulePlanDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, source, destination, accommodationOrder, activities, foodOrders, vehicleOrders);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", SchedulePlanDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("startTime=" + startTime)
+                .add("arrivalTime=" + arrivalTime)
+                .add("source=" + source)
+                .add("destination=" + destination)
+                .add("accommodationOrder=" + accommodationOrder)
+                .add("activities=" + activities)
+                .add("foodOrders=" + foodOrders)
+                .add("vehicleOrders=" + vehicleOrders)
+                .toString();
     }
 }

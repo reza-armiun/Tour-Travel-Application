@@ -5,6 +5,7 @@ import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.address.AddressDto;
 
 import java.time.ZonedDateTime;
+import java.util.StringJoiner;
 
 public class VehicleProviderDto extends BaseEntityDto {
     private final String name;
@@ -115,5 +116,21 @@ public class VehicleProviderDto extends BaseEntityDto {
         public VehicleProviderDto build() {
             return new VehicleProviderDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, phone, email, description, address);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", VehicleProviderDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("phone='" + phone + "'")
+                .add("email='" + email + "'")
+                .add("description='" + description + "'")
+                .add("address=" + address)
+                .toString();
     }
 }

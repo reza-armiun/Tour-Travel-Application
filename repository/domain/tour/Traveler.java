@@ -7,11 +7,11 @@ import razarm.tosan.repository.domain.location.Address;
 import java.time.Instant;
 
 public class Traveler extends BaseEntity {
-    private final Address address;
-    private final String email;
     private final String name;
+    private final String email;
     private final Long nationalId;
     private final String phone;
+    private final Address address;
     private final Booking booking;
 
 

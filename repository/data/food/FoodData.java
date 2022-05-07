@@ -13,9 +13,9 @@ public class FoodData extends BaseEntityData {
     private final String [] ingredients;
     private final BigInteger price;
     private final Long cookTime;
-    private final FoodProvider provider;
+    private final FoodProviderData provider;
 
-    public FoodData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, FoodType type, String[] ingredients, BigInteger price, Long cookTime, FoodProvider provider) {
+    public FoodData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, FoodType type, String[] ingredients, BigInteger price, Long cookTime, FoodProviderData provider) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
@@ -45,7 +45,7 @@ public class FoodData extends BaseEntityData {
         return cookTime;
     }
 
-    public FoodProvider getProvider() {
+    public FoodProviderData getProvider() {
         return provider;
     }
 
@@ -66,7 +66,7 @@ public class FoodData extends BaseEntityData {
         private String [] ingredients;
         private BigInteger price;
         private Long cookTime;
-        private FoodProvider provider;
+        private FoodProviderData provider;
 
         private FoodDataBuilder() {
         }
@@ -125,7 +125,7 @@ public class FoodData extends BaseEntityData {
             return this;
         }
 
-        public FoodDataBuilder provider(FoodProvider provider) {
+        public FoodDataBuilder provider(FoodProviderData provider) {
             this.provider = provider;
             return this;
         }

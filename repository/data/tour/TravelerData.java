@@ -1,29 +1,28 @@
 package razarm.tosan.repository.data.tour;
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 
 import java.time.Instant;
 
 public class TravelerData extends BaseEntityData {
 
-    private final String addressId;
-    private final String email;
     private final String name;
+    private final String email;
+    private final AddressData address;
     private final Long nationalId;
     private final String phone;
 
-    public TravelerData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String addressId, String email, String name, Long nationalId, String phone) {
+
+    public TravelerData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String email, AddressData address, Long nationalId, String phone) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
-        this.addressId = addressId;
-        this.email = email;
         this.name = name;
+        this.email = email;
+        this.address = address;
         this.nationalId = nationalId;
         this.phone = phone;
     }
 
-    public String getAddressId() {
-        return addressId;
-    }
 
     public String getEmail() {
         return email;
@@ -41,9 +40,13 @@ public class TravelerData extends BaseEntityData {
         return phone;
     }
 
+    public AddressData getAddress() {
+        return address;
+    }
+
     @Override
     public BaseEntityData cloneWithId(String id) {
-        return new TravelerData(id, createdAt, modifiedAt, createdBy, modifiedBy, addressId, email, name, nationalId, phone);
+        return new TravelerData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, email, address, nationalId, phone);
     }
 
 
@@ -53,9 +56,9 @@ public class TravelerData extends BaseEntityData {
         protected Instant modifiedAt;
         protected String createdBy;
         protected String modifiedBy;
-        private String addressId;
-        private String email;
         private String name;
+        private String email;
+        private AddressData address;
         private Long nationalId;
         private String phone;
 
@@ -91,8 +94,8 @@ public class TravelerData extends BaseEntityData {
             return this;
         }
 
-        public TravelerDataBuilder addressId(String addressId) {
-            this.addressId = addressId;
+        public TravelerDataBuilder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -101,8 +104,8 @@ public class TravelerData extends BaseEntityData {
             return this;
         }
 
-        public TravelerDataBuilder name(String name) {
-            this.name = name;
+        public TravelerDataBuilder address(AddressData address) {
+            this.address = address;
             return this;
         }
 
@@ -117,7 +120,7 @@ public class TravelerData extends BaseEntityData {
         }
 
         public TravelerData build() {
-            return new TravelerData(id, createdAt, modifiedAt, createdBy, modifiedBy, addressId, email, name, nationalId, phone);
+            return new TravelerData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, email, address, nationalId, phone);
         }
     }
 }

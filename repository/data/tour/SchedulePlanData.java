@@ -1,33 +1,37 @@
 package razarm.tosan.repository.data.tour;
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class SchedulePlanData extends BaseEntityData {
     private final String name;
     private final Instant startTime;
     private final Instant arrivalTime;
-    private final String sourceId;
-    private final String destinationId;
+    private final AddressData source;
+    private final AddressData destination;
 
     private final Set<ActivityData> activities ;
 
-    private final String accommodationId;
+    private final String accommodationOrderId;
     private final Set<String> vehicleOrderIds;
+    private final Set<String> foodOrderIds;
 
 
-    public SchedulePlanData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, Instant startTime, Instant arrivalTime, String sourceId, String destinationId, Set<ActivityData> activities, String accommodationId, Set<String> vehicleOrderIds) {
+    public SchedulePlanData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, Instant startTime, Instant arrivalTime, AddressData source, AddressData destination, Set<ActivityData> activities, String accommodationOrderId, Set<String> vehicleOrderIds, Set<String> foodOrderIds) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
-        this.sourceId = sourceId;
-        this.destinationId = destinationId;
+        this.source = source;
+        this.destination = destination;
         this.activities = activities;
-        this.accommodationId = accommodationId;
+        this.accommodationOrderId = accommodationOrderId;
         this.vehicleOrderIds = vehicleOrderIds;
+        this.foodOrderIds = foodOrderIds;
     }
 
     public String getName() {
@@ -42,30 +46,36 @@ public class SchedulePlanData extends BaseEntityData {
         return arrivalTime;
     }
 
-    public String getSourceId() {
-        return sourceId;
+    public AddressData getSource() {
+        return source;
     }
 
-    public String getDestinationId() {
-        return destinationId;
+    public AddressData getDestination() {
+        return destination;
     }
 
     public Set<ActivityData> getActivities() {
         return activities;
     }
 
-    public String getAccommodationId() {
-        return accommodationId;
+    public String getAccommodationOrderId() {
+        return accommodationOrderId;
     }
 
     public Set<String> getVehicleOrderIds() {
         return vehicleOrderIds;
     }
 
-    @Override
-    public BaseEntityData cloneWithId(String id) {
-        return new SchedulePlanData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, sourceId, destinationId, activities, accommodationId, vehicleOrderIds);
+    public Set<String> getFoodOrderIds() {
+        return foodOrderIds;
     }
+
+    @Override
+    public SchedulePlanData cloneWithId(String id) {
+        return new SchedulePlanData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, source, destination, activities, accommodationOrderId, vehicleOrderIds, foodOrderIds);
+    }
+
+
 
 
     public static final class SchedulePlanDataBuilder {
@@ -77,11 +87,12 @@ public class SchedulePlanData extends BaseEntityData {
         private String name;
         private Instant startTime;
         private Instant arrivalTime;
-        private String sourceId;
-        private String destinationId;
+        private AddressData source;
+        private AddressData destination;
         private Set<ActivityData> activities ;
-        private String accommodationId;
+        private String accommodationOrderId;
         private Set<String> vehicleOrderIds;
+        private Set<String> foodOrderIds;
 
         private SchedulePlanDataBuilder() {
         }
@@ -130,13 +141,13 @@ public class SchedulePlanData extends BaseEntityData {
             return this;
         }
 
-        public SchedulePlanDataBuilder sourceId(String sourceId) {
-            this.sourceId = sourceId;
+        public SchedulePlanDataBuilder source(AddressData source) {
+            this.source = source;
             return this;
         }
 
-        public SchedulePlanDataBuilder destinationId(String destinationId) {
-            this.destinationId = destinationId;
+        public SchedulePlanDataBuilder destination(AddressData destination) {
+            this.destination = destination;
             return this;
         }
 
@@ -145,8 +156,8 @@ public class SchedulePlanData extends BaseEntityData {
             return this;
         }
 
-        public SchedulePlanDataBuilder accommodationId(String accommodationId) {
-            this.accommodationId = accommodationId;
+        public SchedulePlanDataBuilder accommodationOrderId(String accommodationOrderId) {
+            this.accommodationOrderId = accommodationOrderId;
             return this;
         }
 
@@ -155,8 +166,33 @@ public class SchedulePlanData extends BaseEntityData {
             return this;
         }
 
-        public SchedulePlanData build() {
-            return new SchedulePlanData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, sourceId, destinationId, activities, accommodationId, vehicleOrderIds);
+        public SchedulePlanDataBuilder foodOrderIds(Set<String> foodOrderIds) {
+            this.foodOrderIds = foodOrderIds;
+            return this;
         }
+
+        public SchedulePlanData build() {
+            return new SchedulePlanData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, startTime, arrivalTime, source, destination, activities, accommodationOrderId, vehicleOrderIds, foodOrderIds);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", SchedulePlanData.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("startTime=" + startTime)
+                .add("arrivalTime=" + arrivalTime)
+                .add("source=" + source)
+                .add("destination=" + destination)
+                .add("activities=" + activities)
+                .add("accommodationOrderId='" + accommodationOrderId + "'")
+                .add("vehicleOrderIds=" + vehicleOrderIds)
+                .add("foodOrderIds=" + foodOrderIds)
+                .toString();
     }
 }

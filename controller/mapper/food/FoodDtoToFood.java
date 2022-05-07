@@ -5,6 +5,12 @@ import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.food.Food;
 
 public class FoodDtoToFood implements Mapper<FoodDto, Food> {
+    private final FoodProviderDtoToFoodProvider foodProviderDtoToFoodProvider;
+
+    public FoodDtoToFood(FoodProviderDtoToFoodProvider foodProviderDtoToFoodProvider) {
+        this.foodProviderDtoToFoodProvider = foodProviderDtoToFoodProvider;
+    }
+
     @Override
     public Food convert(FoodDto foodDto) {
         return Food.FoodBuilder.aFood()
@@ -14,7 +20,7 @@ public class FoodDtoToFood implements Mapper<FoodDto, Food> {
                                .ingredients(foodDto.getIngredients())
                                .price(foodDto.getPrice())
                                .cookTime(foodDto.getCookTime())
-                               .cookTime(foodDto.getCookTime())
+                               .provider(foodProviderDtoToFoodProvider.convert(foodDto.getProvider()))
                                .createdAt(foodDto.getCreatedAt().toInstant())
                                .modifiedAt(foodDto.getModifiedAt().toInstant())
                                .createdBy(foodDto.getCreatedBy())

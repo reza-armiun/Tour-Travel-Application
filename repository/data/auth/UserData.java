@@ -4,6 +4,7 @@ import razarm.tosan.repository.data.BaseEntityData;
 import razarm.tosan.repository.domain.Booking;
 
 import java.time.Instant;
+import java.util.StringJoiner;
 
 public abstract class UserData extends BaseEntityData {
     protected final String name;
@@ -69,5 +70,26 @@ public abstract class UserData extends BaseEntityData {
 
     public Booking getIsCredentialsNonExpired() {
         return isCredentialsNonExpired;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", UserData.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("username='" + username + "'")
+                .add("password='" + password + "'")
+                .add("email='" + email + "'")
+                .add("phone='" + phone + "'")
+                .add("nationalId=" + nationalId)
+                .add("validEmail=" + validEmail)
+                .add("isExpired=" + isExpired)
+                .add("isEnabled=" + isEnabled)
+                .add("isCredentialsNonExpired=" + isCredentialsNonExpired)
+                .toString();
     }
 }

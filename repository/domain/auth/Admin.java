@@ -42,7 +42,7 @@ public class Admin extends User{
 
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public Admin cloneWithId(String id) {
         return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorities);
     }
 

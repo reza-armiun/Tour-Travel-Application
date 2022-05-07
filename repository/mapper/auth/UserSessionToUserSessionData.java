@@ -8,9 +8,10 @@ public class UserSessionToUserSessionData implements Mapper<UserSession, UserSes
     @Override
     public UserSessionData convert(UserSession userSession) {
         return UserSessionData.UserSessionDataBuilder.anUserSessionData()
-                                                     .username(userSession.getUsername())
-                                                     .sessionId(userSession.getSessionId())
-                                                     .createdAt(userSession.getCreatedAt())
-                                                     .build();
+            .username(userSession.getUsername())
+            .sessionId(userSession.getSessionId())
+            .createdAt(userSession.getCreatedAt())
+            .expiresAt(userSession.getExpiresAt())
+            .build();
     }
 }

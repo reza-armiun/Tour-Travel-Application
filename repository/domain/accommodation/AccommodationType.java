@@ -1,6 +1,8 @@
 package razarm.tosan.repository.domain.accommodation;
 
-public enum AccommodationType {
+import java.io.Serializable;
+
+public enum AccommodationType implements Serializable {
     HOTEL,
     APARTMENT,
     HOSTEL,

@@ -1,6 +1,7 @@
 package razarm.tosan.repository.data.accommodation;
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
 import razarm.tosan.repository.domain.location.Address;
 
@@ -13,7 +14,7 @@ public class HotelData extends AccommodationData {
     private final AccommodationType type = AccommodationType.HOTEL;
 
 
-    public HotelData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, Address address, BigInteger price, Long time, AccommodationProviderData accommodationProvider, Integer floor, Integer room) {
+    public HotelData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AddressData address, BigInteger price, Long time, AccommodationProviderData accommodationProvider, Integer floor, Integer room) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, address, price, time, accommodationProvider);
         this.floor = floor;
         this.room = room;
@@ -29,6 +30,14 @@ public class HotelData extends AccommodationData {
         return new HotelData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, time, accommodationProvider, floor, room);
     }
 
+    public Integer getFloor() {
+        return floor;
+    }
+
+    public Integer getRoom() {
+        return room;
+    }
+
 
     public static final class HotelDataBuilder {
         protected String id;
@@ -37,13 +46,13 @@ public class HotelData extends AccommodationData {
         protected String createdBy;
         protected String modifiedBy;
         protected String name;
-        protected Address address;
+        protected AccommodationType type;
+        protected AddressData address;
         protected BigInteger price;
         protected Long time;
         protected AccommodationProviderData accommodationProvider;
         private Integer floor;
         private Integer room;
-        private AccommodationType type = AccommodationType.HOTEL;
 
         private HotelDataBuilder() {
         }
@@ -82,7 +91,12 @@ public class HotelData extends AccommodationData {
             return this;
         }
 
-        public HotelDataBuilder address(Address address) {
+        public HotelDataBuilder type(AccommodationType type) {
+            this.type = type;
+            return this;
+        }
+
+        public HotelDataBuilder address(AddressData address) {
             this.address = address;
             return this;
         }
@@ -109,11 +123,6 @@ public class HotelData extends AccommodationData {
 
         public HotelDataBuilder room(Integer room) {
             this.room = room;
-            return this;
-        }
-
-        public HotelDataBuilder type(AccommodationType type) {
-            this.type = type;
             return this;
         }
 

@@ -10,6 +10,7 @@ public abstract class User extends BaseEntity {
     protected final String name;
     protected final String username;
     protected final String password;
+
     protected final String email;
     protected final String phone;
     protected final Long nationalId;
@@ -76,6 +77,9 @@ public abstract class User extends BaseEntity {
     abstract Boolean isExpired();
     abstract Boolean isEnabled();
     abstract Boolean isCredentialsNonExpired();
+
+
+
 
 
 }

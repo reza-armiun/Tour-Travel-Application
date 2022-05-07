@@ -6,11 +6,12 @@ import razarm.tosan.controller.dto.address.AddressDto;
 import java.time.ZonedDateTime;
 
 public class TravelerDto extends BaseEntityDto {
-    private final AddressDto address;
-    private final String email;
     private final String name;
+    private final String email;
     private final Long nationalId;
     private final String phone;
+    //Add PassportNo
+    private final AddressDto address;
 
     public TravelerDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, AddressDto address, String email, String name, Long nationalId, String phone) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);

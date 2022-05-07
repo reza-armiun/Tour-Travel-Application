@@ -8,11 +8,7 @@ import razarm.tosan.repository.domain.location.Country;
 import java.time.ZoneId;
 
 public class CountryToCountryDto implements Mapper<Country, CountryDto> {
-    private final CityToCityDto cityToCityDto;
 
-    public CountryToCountryDto(CityToCityDto cityToCityDto) {
-        this.cityToCityDto = cityToCityDto;
-    }
 
     @Override
     public CountryDto convert(Country country) {

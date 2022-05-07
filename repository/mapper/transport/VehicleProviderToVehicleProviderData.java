@@ -13,7 +13,7 @@ public class VehicleProviderToVehicleProviderData implements Mapper<VehicleProvi
                                                              .phone(vehicleProvider.getPhone())
                                                              .email(vehicleProvider.getEmail())
                                                              .description(vehicleProvider.getDescription())
-                                                             .addressId(vehicleProvider.getAddress().getId())
+                                                             .addressId(vehicleProvider.getAddress() != null ?vehicleProvider.getAddress().getId() : null)
                                                              .createdAt(vehicleProvider.getCreatedAt())
                                                              .modifiedAt(vehicleProvider.getModifiedAt())
                                                              .createdBy(vehicleProvider.getCreatedBy())

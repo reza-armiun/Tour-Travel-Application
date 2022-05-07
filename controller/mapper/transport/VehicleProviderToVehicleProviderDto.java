@@ -10,11 +10,9 @@ import java.time.ZoneId;
 
 public class VehicleProviderToVehicleProviderDto implements Mapper<VehicleProvider, VehicleProviderDto> {
     private final AddressToAddressDto addressToAddressDto;
-    private final VehicleToVehicleDto vehicleToVehicleDto;
 
-    public VehicleProviderToVehicleProviderDto(AddressToAddressDto addressToAddressDto, VehicleToVehicleDto vehicleToVehicleDto) {
+    public VehicleProviderToVehicleProviderDto(AddressToAddressDto addressToAddressDto) {
         this.addressToAddressDto = addressToAddressDto;
-        this.vehicleToVehicleDto = vehicleToVehicleDto;
     }
 
     @Override

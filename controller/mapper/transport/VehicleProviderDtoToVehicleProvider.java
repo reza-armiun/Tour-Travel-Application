@@ -20,7 +20,7 @@ public class VehicleProviderDtoToVehicleProvider implements Mapper<VehicleProvid
                 .email(vehicleProviderDto.getEmail())
                 .phone(vehicleProviderDto.getPhone())
                 .description(vehicleProviderDto.getDescription())
-                .address(addressDtoToAddress.convert(vehicleProviderDto.getAddress()))
+                .address(vehicleProviderDto.getAddress() != null ? addressDtoToAddress.convert(vehicleProviderDto.getAddress()) : null)
                 .createdAt(vehicleProviderDto.getCreatedAt().toInstant())
                 .modifiedAt(vehicleProviderDto.getModifiedAt().toInstant())
                 .createdBy(vehicleProviderDto.getCreatedBy())

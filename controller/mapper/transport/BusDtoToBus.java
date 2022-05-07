@@ -6,23 +6,30 @@ import razarm.tosan.repository.domain.transport.Bus;
 
 
 public class BusDtoToBus implements Mapper<BusDto, Bus> {
+    private final VehicleProviderDtoToVehicleProvider vehicleProviderDtoToVehicleProvider;
+
+    public BusDtoToBus(VehicleProviderDtoToVehicleProvider vehicleProviderDtoToVehicleProvider) {
+        this.vehicleProviderDtoToVehicleProvider = vehicleProviderDtoToVehicleProvider;
+    }
+
     @Override
     public Bus convert(BusDto busDto) {
         return Bus.BusBuilder.aBus()
-                             .id(busDto.getId())
-                             .name(busDto.getName())
-                             .fromStation(busDto.getFromStation())
-                             .toStation(busDto.getToStation())
-                             .ticketNumber(busDto.getTicketNumber())
-                             .price(busDto.getPrice())
-//                             .discountRate(busDto.getDiscountRate())
-//                             .busModel(busDto.getBusModel())
-                             .departure(busDto.getDeparture().toInstant())
-                             .arrival(busDto.getArrival().toInstant())
-                             .createdAt(busDto.getCreatedAt().toInstant())
-                             .modifiedAt(busDto.getModifiedAt().toInstant())
-                             .createdBy(busDto.getCreatedBy())
-                             .modifiedBy(busDto.getModifiedBy())
-                             .build();
+            .id(busDto.getId())
+            .name(busDto.getName())
+            .fromStation(busDto.getFromStation())
+            .toStation(busDto.getToStation())
+            .ticketNumber(busDto.getTicketNumber())
+            .price(busDto.getPrice())
+            //                             .discountRate(busDto.getDiscountRate())
+            .busModel(busDto.getBusModel())
+            .departure(busDto.getDeparture().toInstant())
+            .arrival(busDto.getArrival().toInstant())
+            .vehicleProvider(vehicleProviderDtoToVehicleProvider.convert(busDto.getVehicleProvider()))
+            .createdAt(busDto.getCreatedAt().toInstant())
+            .modifiedAt(busDto.getModifiedAt().toInstant())
+            .createdBy(busDto.getCreatedBy())
+            .modifiedBy(busDto.getModifiedBy())
+            .build();
     }
 }

@@ -61,10 +61,13 @@ public class VehicleOrder extends BaseEntity implements Orderable {
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public VehicleOrder cloneWithId(String id) {
         return new VehicleOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, name, discount, vehicle, schedulePlan);
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
 
     public static final class VehicleOrderBuilder {
         protected String id;
@@ -132,5 +135,19 @@ public class VehicleOrder extends BaseEntity implements Orderable {
         public VehicleOrder build() {
             return new VehicleOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, name, discount, vehicle, schedulePlan);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleOrder{" +
+                "id='" + id + '\'' +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                ", name='" + name + '\'' +
+                ", discount=" + discount +
+                ",\n\t vehicle=" + vehicle +
+                '}';
     }
 }

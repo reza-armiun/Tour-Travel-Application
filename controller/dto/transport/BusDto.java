@@ -7,28 +7,16 @@ import java.time.ZonedDateTime;
 
 
 public class BusDto extends VehicleDto{
-    private final Integer allowedLuggage;
-    private final String cabinClass;
-    private final Long planeNumber;
-    private final VehicleType type = VehicleType.PLANE;
+    private final String busModel;
+    private final VehicleType type = VehicleType.BUS;
 
-    public BusDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, String fromStation, String toStation, String ticketNumber, BigInteger price, ZonedDateTime departure, ZonedDateTime arrival, VehicleProviderDto vehicleProvider, Integer allowedLuggage, String cabinClass, Long planeNumber) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, VehicleType.PLANE, fromStation, toStation, ticketNumber, price, departure, arrival, vehicleProvider);
-        this.allowedLuggage = allowedLuggage;
-        this.cabinClass = cabinClass;
-        this.planeNumber = planeNumber;
+    public BusDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, String fromStation, String toStation, String ticketNumber, BigInteger price, ZonedDateTime departure, ZonedDateTime arrival, VehicleProviderDto vehicleProvider, String busModel) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, VehicleType.BUS, fromStation, toStation, ticketNumber, price, departure, arrival, vehicleProvider);
+        this.busModel = busModel;
     }
 
-    public Integer getAllowedLuggage() {
-        return allowedLuggage;
-    }
-
-    public String getCabinClass() {
-        return cabinClass;
-    }
-
-    public Long getPlaneNumber() {
-        return planeNumber;
+    public String getBusModel() {
+        return busModel;
     }
 
     @Override
@@ -52,9 +40,7 @@ public class BusDto extends VehicleDto{
         protected ZonedDateTime departure;
         protected ZonedDateTime arrival;
         protected VehicleProviderDto vehicleProvider;
-        private Integer allowedLuggage;
-        private String cabinClass;
-        private Long planeNumber;
+        private String busModel;
 
         private BusDtoBuilder() {
         }
@@ -88,18 +74,8 @@ public class BusDto extends VehicleDto{
             return this;
         }
 
-        public BusDtoBuilder allowedLuggage(Integer allowedLuggage) {
-            this.allowedLuggage = allowedLuggage;
-            return this;
-        }
-
-        public BusDtoBuilder cabinClass(String cabinClass) {
-            this.cabinClass = cabinClass;
-            return this;
-        }
-
-        public BusDtoBuilder planeNumber(Long planeNumber) {
-            this.planeNumber = planeNumber;
+        public BusDtoBuilder busModel(String busModel) {
+            this.busModel = busModel;
             return this;
         }
 
@@ -149,7 +125,8 @@ public class BusDto extends VehicleDto{
         }
 
         public BusDto build() {
-            return new BusDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, fromStation, toStation, ticketNumber, price, departure, arrival, vehicleProvider, allowedLuggage, cabinClass, planeNumber);
+            BusDto busDto = new BusDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, fromStation, toStation, ticketNumber, price, departure, arrival, vehicleProvider, busModel);
+            return busDto;
         }
     }
 }

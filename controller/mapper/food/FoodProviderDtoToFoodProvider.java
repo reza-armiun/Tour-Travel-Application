@@ -7,11 +7,6 @@ import razarm.tosan.repository.domain.food.FoodProvider;
 import java.util.stream.Collectors;
 
 public class FoodProviderDtoToFoodProvider implements Mapper<FoodProviderDto, FoodProvider> {
-    private final FoodDtoToFood foodDtoToFood;
-
-    public FoodProviderDtoToFoodProvider(FoodDtoToFood foodDtoToFood) {
-        this.foodDtoToFood = foodDtoToFood;
-    }
 
     @Override
     public FoodProvider convert(FoodProviderDto foodProviderDto) {
@@ -22,7 +17,7 @@ public class FoodProviderDtoToFoodProvider implements Mapper<FoodProviderDto, Fo
                                                .phone(foodProviderDto.getPhone())
                                                .email(foodProviderDto.getEmail())
                                                .description(foodProviderDto.getDescription())
-                                               .foods(foodProviderDto.getFoods().stream().map(foodDtoToFood::convert).collect(Collectors.toUnmodifiableSet()))
+//                                               .foods(foodProviderDto.getFoods().stream().map(foodDtoToFood::convert).collect(Collectors.toUnmodifiableSet()))
                                                .createdAt(foodProviderDto.getCreatedAt().toInstant())
                                                .modifiedAt(foodProviderDto.getModifiedAt().toInstant())
                                                .createdBy(foodProviderDto.getCreatedBy())

@@ -36,6 +36,8 @@ public class PremiumUser extends User{
         return interests;
     }
 
+
+
     @Override
     Boolean validEmail() {
         return null;
@@ -89,6 +91,7 @@ public class PremiumUser extends User{
     public PremiumUser cloneWithId(String id) {
         return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookings, interests);
     }
+
 
     public static final class PremiumUserBuilder {
         protected String id;

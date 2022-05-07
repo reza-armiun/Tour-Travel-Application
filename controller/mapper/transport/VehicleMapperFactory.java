@@ -1,14 +1,27 @@
 package razarm.tosan.controller.mapper.transport;
 
 import razarm.tosan.controller.mapper.Mapper;
+import razarm.tosan.controller.mapper.address.*;
 import razarm.tosan.repository.domain.transport.VehicleType;
 
 public class VehicleMapperFactory {
-    private static final PlaneToPlaneDto planeToPlaneDto= new PlaneToPlaneDto();
-    private static final PlaneDtoToPlane planeDtoToPlane = new PlaneDtoToPlane();
+    private static final CountryToCountryDto countryToCountryDto = new CountryToCountryDto();
+    private static final CountryDtoToCountry countryDtoToCountry = new CountryDtoToCountry();
 
-    private static final BusToBusDto busToBusDto =  new BusToBusDto();
-    private static final BusDtoToBus busDtoToBus = new BusDtoToBus();
+    private static final CityToCityDto cityToCityDto = new CityToCityDto(countryToCountryDto);
+    private static final CityDtoToCity cityDtoToCity = new CityDtoToCity(countryDtoToCountry);
+
+    private static final AddressToAddressDto addressToAddressDto = new AddressToAddressDto(cityToCityDto);
+    private static final AddressDtoToAddress addressDtoToAddress = new AddressDtoToAddress(cityDtoToCity);
+
+    private static final VehicleProviderToVehicleProviderDto vehicleProviderToVehicleProviderDto = new VehicleProviderToVehicleProviderDto(addressToAddressDto);
+    private static final VehicleProviderDtoToVehicleProvider vehicleProviderDtoToVehicleProvider= new VehicleProviderDtoToVehicleProvider(addressDtoToAddress);
+
+    private static final PlaneToPlaneDto planeToPlaneDto= new PlaneToPlaneDto(vehicleProviderToVehicleProviderDto);
+    private static final PlaneDtoToPlane planeDtoToPlane = new PlaneDtoToPlane(vehicleProviderDtoToVehicleProvider);
+
+    private static final BusToBusDto busToBusDto =  new BusToBusDto(vehicleProviderToVehicleProviderDto);
+    private static final BusDtoToBus busDtoToBus = new BusDtoToBus(vehicleProviderDtoToVehicleProvider);
 
 
 

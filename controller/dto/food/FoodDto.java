@@ -5,6 +5,8 @@ import razarm.tosan.repository.domain.food.FoodType;
 
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class FoodDto extends BaseEntityDto {
     private final String name;
@@ -127,5 +129,22 @@ public class FoodDto extends BaseEntityDto {
         public FoodDto build() {
             return new FoodDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, ingredients, price, cookTime, provider);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FoodDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("type=" + type)
+                .add("ingredients=" + Arrays.toString(ingredients))
+                .add("price=" + price)
+                .add("cookTime=" + cookTime)
+                .add("provider=" + provider)
+                .toString();
     }
 }

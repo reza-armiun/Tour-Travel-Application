@@ -1,10 +1,11 @@
 package razarm.tosan.controller.dto.tour;
 
 import razarm.tosan.controller.dto.BaseEntityDto;
-import razarm.tosan.utility.AppCollections;
+import razarm.tosan.controller.dto.auth.UserDto;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class BookingDto extends BaseEntityDto {
     private final ZonedDateTime date;
@@ -13,12 +14,15 @@ public class BookingDto extends BaseEntityDto {
     private final Set<TravelerDto> travelers;
     private final TourDto tour;
 
-    public BookingDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, ZonedDateTime date, String description, Set<TravelerDto> travelers, TourDto tour) {
+    private final UserDto user;
+
+    public BookingDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, ZonedDateTime date, String description, Set<TravelerDto> travelers, TourDto tour, UserDto user) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.date = date;
         this.description = description;
-        this.travelers = AppCollections.unmodifiableSet(travelers);
+        this.travelers = travelers;
         this.tour = tour;
+        this.user = user;
     }
 
     public ZonedDateTime getDate() {
@@ -37,6 +41,20 @@ public class BookingDto extends BaseEntityDto {
         return tour;
     }
 
+    public UserDto getUser() {
+        return user;
+    }
+
+    public BookingDto cloneWithTour(TourDto tour) {
+        return new BookingDto(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tour, user);
+    }
+
+    public BookingDto cloneWithUser(UserDto user) {
+        return new BookingDto(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tour, user);
+    }
+
+
+
 
     public static final class BookingDtoBuilder {
         protected String id;
@@ -48,6 +66,7 @@ public class BookingDto extends BaseEntityDto {
         private String description;
         private Set<TravelerDto> travelers;
         private TourDto tour;
+        private UserDto user;
 
         private BookingDtoBuilder() {
         }
@@ -101,8 +120,30 @@ public class BookingDto extends BaseEntityDto {
             return this;
         }
 
+        public BookingDtoBuilder user(UserDto user) {
+            this.user = user;
+            return this;
+        }
+
         public BookingDto build() {
-            return new BookingDto(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tour);
+            return new BookingDto(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tour, user);
         }
     }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", BookingDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("date=" + date)
+                .add("description='" + description + "'")
+                .add("travelers=" + travelers)
+                .add("tour=" + tour)
+                .add("user=" + user)
+                .toString();
+    }
 }
+

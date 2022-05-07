@@ -2,9 +2,10 @@ package razarm.tosan.repository.data.location;
 
 import razarm.tosan.repository.data.BaseEntityData;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class CountryData extends BaseEntityData {
+public class CountryData extends BaseEntityData implements Serializable {
     private final String name;
     private final String countryCode;
 

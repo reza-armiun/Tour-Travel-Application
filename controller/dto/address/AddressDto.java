@@ -30,6 +30,7 @@ public class AddressDto extends BaseEntityDto {
     }
 
 
+
     public static final class AddressDtoBuilder {
         protected String id;
         protected ZonedDateTime createdAt;

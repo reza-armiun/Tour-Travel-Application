@@ -51,9 +51,18 @@ public class Booking extends BaseEntity implements Discountable {
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public Booking cloneWithId(String id) {
         return new Booking(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, user, travelers, tour);
     }
+
+    public Booking cloneWithTour(Tour tour) {
+        return new Booking(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, user, travelers, tour);
+    }
+    public Booking cloneWithUser(User user) {
+        return new Booking(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, user, travelers, tour);
+    }
+
+
 
 
     public static final class BookingBuilder {

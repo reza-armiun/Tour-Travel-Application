@@ -2,6 +2,7 @@ package razarm.tosan.repository.data.tour;
 
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 import razarm.tosan.repository.domain.location.Address;
 
 import java.time.Instant;
@@ -11,10 +12,10 @@ public class TourismManagerData extends BaseEntityData {
     private final String name;
     private final String email;
     private final String phone;
-    private final Address address;
+    private final AddressData address;
     private final Long nationalId;
 
-    public TourismManagerData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String email, String phone, Address address, Long nationalId) {
+    public TourismManagerData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String email, String phone, AddressData address, Long nationalId) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.email = email;
@@ -35,9 +36,6 @@ public class TourismManagerData extends BaseEntityData {
         return phone;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
     public Long getNationalId() {
         return nationalId;
@@ -46,6 +44,10 @@ public class TourismManagerData extends BaseEntityData {
     @Override
     public BaseEntityData cloneWithId(String id) {
         return new TourismManagerData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, email, phone, address, nationalId);
+    }
+
+    public AddressData getAddress() {
+        return address;
     }
 
 
@@ -58,7 +60,7 @@ public class TourismManagerData extends BaseEntityData {
         private String name;
         private String email;
         private String phone;
-        private Address address;
+        private AddressData address;
         private Long nationalId;
 
         private TourismManagerDataBuilder() {
@@ -108,7 +110,7 @@ public class TourismManagerData extends BaseEntityData {
             return this;
         }
 
-        public TourismManagerDataBuilder address(Address address) {
+        public TourismManagerDataBuilder address(AddressData address) {
             this.address = address;
             return this;
         }

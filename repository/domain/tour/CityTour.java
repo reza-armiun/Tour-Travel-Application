@@ -25,22 +25,22 @@ public class CityTour extends Tour {
     }
 
     @Override
-    Set<TourCategory> getCategories() {
+    public Set<TourCategory> getCategories() {
         return Set.of(TourCategory.CITY, TourCategory.TOURIST);
     }
 
     @Override
-    Set<SchedulePlan> getSchedulePlans() {
+    public Set<SchedulePlan> getSchedulePlans() {
         return null;
     }
 
     @Override
-    TourType getTourType() {
+    public TourType getTourType() {
         return TourType.CITY;
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public CityTour cloneWithId(String id) {
         return new CityTour(id, createdAt, modifiedAt, createdBy, modifiedBy, name, guide, description, date, categories, booking, tourismManager, schedulePlans);
     }
 

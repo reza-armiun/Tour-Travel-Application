@@ -23,11 +23,13 @@ public class BaseEntityDto {
         return id;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() { //TODO
+        if(createdAt == null) return ZonedDateTime.now();
         return createdAt;
     }
 
-    public ZonedDateTime getModifiedAt() {
+    public ZonedDateTime getModifiedAt() { //TODO
+        if(modifiedAt == null) return ZonedDateTime.now();
         return modifiedAt;
     }
 

@@ -2,21 +2,25 @@ package razarm.tosan.repository.domain.food;
 
 import razarm.tosan.repository.domain.BaseEntity;
 import razarm.tosan.repository.domain.Orderable;
+import razarm.tosan.repository.domain.tour.SchedulePlan;
 
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.StringJoiner;
 
 public class FoodOrder extends BaseEntity implements Orderable {
     private final Instant date;
     private final Integer discount;
     private final Food food;
+    private final SchedulePlan schedulePlan;
 
 
-    public FoodOrder(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, Integer discount, Food food) {
+    public FoodOrder(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, Integer discount, Food food, SchedulePlan schedulePlan) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.date = date;
         this.discount = discount;
         this.food = food;
+        this.schedulePlan = schedulePlan;
     }
 
     public Instant getDate() {
@@ -29,6 +33,10 @@ public class FoodOrder extends BaseEntity implements Orderable {
 
     public Food getFood() {
         return food;
+    }
+
+    public SchedulePlan getSchedulePlan() {
+        return schedulePlan;
     }
 
     @Override
@@ -57,8 +65,8 @@ public class FoodOrder extends BaseEntity implements Orderable {
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
-        return new FoodOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, food);
+    public FoodOrder cloneWithId(String id) {
+        return new FoodOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, food, schedulePlan);
     }
 
 
@@ -71,6 +79,7 @@ public class FoodOrder extends BaseEntity implements Orderable {
         private Instant date;
         private Integer discount;
         private Food food;
+        private SchedulePlan schedulePlan;
 
         private FoodOrderBuilder() {
         }
@@ -119,8 +128,28 @@ public class FoodOrder extends BaseEntity implements Orderable {
             return this;
         }
 
-        public FoodOrder build() {
-            return new FoodOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, food);
+        public FoodOrderBuilder schedulePlan(SchedulePlan schedulePlan) {
+            this.schedulePlan = schedulePlan;
+            return this;
         }
+
+        public FoodOrder build() {
+            return new FoodOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, food, schedulePlan);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FoodOrder.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("date=" + date)
+                .add("discount=" + discount)
+                .add("food=" + food)
+                .add("schedulePlan=" + schedulePlan)
+                .toString();
     }
 }

@@ -2,9 +2,10 @@ package razarm.tosan.repository.data.location;
 
 import razarm.tosan.repository.data.BaseEntityData;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class CityData extends BaseEntityData {
+public class CityData extends BaseEntityData implements Serializable {
     private final String name ;
     private final Integer zipCode;
     private final CountryData country;
@@ -95,4 +96,6 @@ public class CityData extends BaseEntityData {
             return new CityData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, zipCode, country);
         }
     }
+
+
 }

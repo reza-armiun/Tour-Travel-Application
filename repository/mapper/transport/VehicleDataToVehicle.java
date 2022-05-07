@@ -7,6 +7,7 @@ import razarm.tosan.repository.domain.transport.Vehicle;
 public class VehicleDataToVehicle implements Mapper<VehicleData, Vehicle> {
     @Override
     public Vehicle convert(VehicleData vehicleData) {
-        return null;
+        final Mapper<VehicleData, Vehicle> mapper = VehicleDataMapperFactory.createVehicleDataMapper(vehicleData.getType());
+        return mapper.convert(vehicleData);
     }
 }

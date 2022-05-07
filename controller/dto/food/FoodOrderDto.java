@@ -3,6 +3,7 @@ package razarm.tosan.controller.dto.food;
 import razarm.tosan.controller.dto.BaseEntityDto;
 
 import java.time.ZonedDateTime;
+import java.util.StringJoiner;
 
 public class FoodOrderDto extends BaseEntityDto {
     private final ZonedDateTime date;
@@ -89,5 +90,19 @@ public class FoodOrderDto extends BaseEntityDto {
         public FoodOrderDto build() {
             return new FoodOrderDto(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, food);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FoodOrderDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("date=" + date)
+                .add("discount=" + discount)
+                .add("food=" + food)
+                .toString();
     }
 }

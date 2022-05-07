@@ -11,15 +11,15 @@ public class BookingData extends BaseEntityData {
     private final String description;
     private final String userId;
     private final Set<TravelerData> travelers;
-    private final TourData tour;
+    private final String tourId;
 
-    public BookingData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, String description, String userId, Set<TravelerData> travelers, TourData tour) {
+    public BookingData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, String description, String userId, Set<TravelerData> travelers, String tourId) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.date = date;
         this.description = description;
         this.userId = userId;
         this.travelers = travelers;
-        this.tour = tour;
+        this.tourId = tourId;
     }
 
     public Instant getDate() {
@@ -38,14 +38,16 @@ public class BookingData extends BaseEntityData {
         return travelers;
     }
 
-    public TourData getTour() {
-        return tour;
+
+    public String getTourId() {
+        return tourId;
     }
 
     @Override
-    public BaseEntityData cloneWithId(String id) {
-        return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tour);
+    public BookingData cloneWithId(String id) {
+        return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tourId);
     }
+
 
 
     public static final class BookingDataBuilder {
@@ -58,7 +60,7 @@ public class BookingData extends BaseEntityData {
         private String description;
         private String userId;
         private Set<TravelerData> travelers;
-        private TourData tour;
+        private String tourId;
 
         private BookingDataBuilder() {
         }
@@ -112,13 +114,13 @@ public class BookingData extends BaseEntityData {
             return this;
         }
 
-        public BookingDataBuilder tour(TourData tour) {
-            this.tour = tour;
+        public BookingDataBuilder tourId(String tourId) {
+            this.tourId = tourId;
             return this;
         }
 
         public BookingData build() {
-            return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tour);
+            return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tourId);
         }
     }
 }

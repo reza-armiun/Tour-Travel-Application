@@ -110,7 +110,6 @@ public class Country extends BaseEntity implements Serializable {
                 ", modifiedBy='" + modifiedBy + '\'' +
                 ", name='" + name + '\'' +
                 ", countryCode='" + countryCode + '\'' +
-                ", cities=" + cities +
                 '}';
     }
 }

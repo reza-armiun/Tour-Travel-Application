@@ -1,5 +1,8 @@
 package razarm.tosan.service.impl;
 
+import razarm.tosan.controller.mapper.user.UserToUserDto;
+import razarm.tosan.exception.UserNotFoundException;
+import razarm.tosan.repository.domain.auth.PremiumType;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.auth.UserSession;
 import razarm.tosan.controller.dto.auth.LoginRequest;
@@ -9,28 +12,31 @@ import razarm.tosan.controller.dto.auth.UserDto;
 import razarm.tosan.exception.InvalidCredentialException;
 import razarm.tosan.exception.PasswordNotMatchException;
 import razarm.tosan.controller.mapper.user.PremiumUserToPremiumUserDto;
-import razarm.tosan.repository.PremiumUserRepository;
+import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.UserSessionRepository;
 import razarm.tosan.service.AuthService;
 import razarm.tosan.utility.PasswordEncoder;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AuthServiceImpl implements AuthService {
 
-    private final PremiumUserRepository userRepository;
+    private final UserRepository userRepository;
     private final UserSessionRepository userSessionRepository;
     private final PasswordEncoder passwordEncoder;
-    private final PremiumUserToPremiumUserDto premiumUserToPremiumUserDto;
+    private final UserToUserDto userToUserDto;
 
-    public AuthServiceImpl(PremiumUserRepository userRepository, UserSessionRepository userSessionRepository
-            , PasswordEncoder passwordEncoder, PremiumUserToPremiumUserDto premiumUserToPremiumUserDto) {
+    public AuthServiceImpl(UserRepository userRepository, UserSessionRepository userSessionRepository
+            , PasswordEncoder passwordEncoder, UserToUserDto userToUserDto) {
         this.userRepository = userRepository;
         this.userSessionRepository = userSessionRepository;
         this.passwordEncoder = passwordEncoder;
-        this.premiumUserToPremiumUserDto = premiumUserToPremiumUserDto;
+        this.userToUserDto = userToUserDto;
     }
 
 
@@ -39,33 +45,43 @@ public class AuthServiceImpl implements AuthService {
         if(!request.getPassword().equals(request.getRePassword())) throw new PasswordNotMatchException("password not match");
         if(request.getPassword().length() < 8) throw new InvalidAttributeValueException("password must have more than 7 characters");
 
-        final var newUser = PremiumUser.PremiumUserBuilder.aPremiumUser()
-                                                    .name(request.getName())
-                                                    .username(request.getUsername())
-                                                    .password(this.passwordEncoder.encrypt(request.getPassword().toCharArray()))
-                                                    .email(request.getEmail())
-                                                    .build();
+        final var newUser =
+            PremiumUser.PremiumUserBuilder.aPremiumUser()
+                .name(request.getName())
+                .username(request.getUsername())
+                .password(this.passwordEncoder.encrypt(request.getPassword().toCharArray()))
+                .email(request.getEmail())
+                .type(PremiumType.NORMAL)
+                .build();
         final var savedUser = this.userRepository.save(newUser);
-        return this.premiumUserToPremiumUserDto.convert(savedUser);
+        return this.userToUserDto.convert(savedUser);
     }
 
     @Override
-    public String login(LoginRequest request) {
+    public String login(LoginRequest request) throws UserNotFoundException {
         var user = userRepository.findByUsername(request.getUsername());
         var isValidPw = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
         if(!isValidPw)
             throw new InvalidCredentialException("invalid credential , please try again");
 
-        var session = new UserSession(user.getUsername(), user.getPassword().substring(0, 8), Instant.now());
+        final Instant now = Instant.now();
+        var session = new UserSession(user.getUsername(), user.getPassword().substring(0, 8), now, now.plus(15, ChronoUnit.DAYS));
         return userSessionRepository.save(session).getSessionId();
 
     }
 
     @Override
-    public void logout(LogoutWithCredential request) {
+    public void logout(LogoutWithCredential request) throws UserNotFoundException {
         var user = userRepository.findByUsername(request.getUsername());
         var passwordMatch = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
         if(!passwordMatch) throw new IllegalArgumentException("invalid password");
         userSessionRepository.deleteById(user.getUsername());
+    }
+
+    @Override
+    public List<UserDto> findAllUsers() {
+        return userRepository.findAll().stream()
+                .map(userToUserDto::convert)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

@@ -9,6 +9,7 @@ import razarm.tosan.repository.mapper.transport.VehicleOrderToVehicleOrderData;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VehicleOrderRepositoryImpl implements VehicleOrderRepository {
     private Map<String, VehicleOrderData> vehicleOrderDataMap = new HashMap<>();
@@ -21,29 +22,33 @@ public class VehicleOrderRepositoryImpl implements VehicleOrderRepository {
         this.vehicleOrderDataToVehicleOrder = vehicleOrderDataToVehicleOrder;
     }
 
-
     @Override
     public VehicleOrder save(VehicleOrder vehicleOrder) {
-        return null;
+        final var vehicleOrderData = vehicleOrderToVehicleOrderData.convert(vehicleOrder);
+        vehicleOrderDataMap.put(vehicleOrderData.getId(), vehicleOrderData);
+        return vehicleOrder.cloneWithId(vehicleOrderData.getId());
     }
 
     @Override
     public void update(VehicleOrder vehicleOrder) {
-
+        final var vehicleOrderData = vehicleOrderToVehicleOrderData.convert(vehicleOrder);
+        vehicleOrderDataMap.put(vehicleOrderData.getId(), vehicleOrderData);
     }
 
     @Override
     public void deleteById(String s) {
-
+        vehicleOrderDataMap.remove(s);
     }
 
     @Override
     public VehicleOrder findById(String s) {
-        return null;
+        return vehicleOrderDataToVehicleOrder.convert(vehicleOrderDataMap.get(s));
     }
 
     @Override
     public List<VehicleOrder> findAll() {
-        return null;
+        return vehicleOrderDataMap.values().stream()
+            .map(vehicleOrderDataToVehicleOrder::convert)
+            .collect(Collectors.toUnmodifiableList());
     }
 }

@@ -7,12 +7,14 @@ public class UserSessionData {
     private final String username;
     private final String sessionId;
     private final Instant createdAt;
+    private final Instant expiresAt;
 
 
-    public UserSessionData(String username, String sessionId, Instant createdAt) {
+    public UserSessionData(String username, String sessionId, Instant createdAt, Instant expiresAt) {
         this.username = username;
         this.sessionId = sessionId;
         this.createdAt = createdAt;
+        this.expiresAt = expiresAt;
     }
 
     public String getUsername() {
@@ -27,11 +29,16 @@ public class UserSessionData {
         return createdAt;
     }
 
+    public Instant getExpiresAt() {
+        return expiresAt;
+    }
+
 
     public static final class UserSessionDataBuilder {
         private String username;
         private String sessionId;
         private Instant createdAt;
+        private Instant expiresAt;
 
         private UserSessionDataBuilder() {
         }
@@ -55,8 +62,13 @@ public class UserSessionData {
             return this;
         }
 
+        public UserSessionDataBuilder expiresAt(Instant expiresAt) {
+            this.expiresAt = expiresAt;
+            return this;
+        }
+
         public UserSessionData build() {
-            return new UserSessionData(username, sessionId, createdAt);
+            return new UserSessionData(username, sessionId, createdAt, expiresAt);
         }
     }
 }

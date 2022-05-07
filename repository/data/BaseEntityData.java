@@ -1,8 +1,12 @@
 package razarm.tosan.repository.data;
 
+import razarm.tosan.repository.inMemoryImpl.IdGenerator;
+
+import java.io.Serializable;
 import java.time.Instant;
 
-public abstract class BaseEntityData {
+public abstract class BaseEntityData implements Serializable {
+
     protected final String id;
 
 
@@ -15,7 +19,8 @@ public abstract class BaseEntityData {
     public abstract BaseEntityData cloneWithId(String id);
 
     public BaseEntityData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy) {
-        this.id = id;
+        if(id == null) this.id = IdGenerator.generateId();
+        else this.id = id;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
         this.createdBy = createdBy;

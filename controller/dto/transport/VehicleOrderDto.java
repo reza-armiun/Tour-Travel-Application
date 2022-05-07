@@ -3,6 +3,7 @@ package razarm.tosan.controller.dto.transport;
 import razarm.tosan.controller.dto.BaseEntityDto;
 
 import java.time.ZonedDateTime;
+import java.util.StringJoiner;
 
 
 public class VehicleOrderDto extends BaseEntityDto {
@@ -90,5 +91,20 @@ public class VehicleOrderDto extends BaseEntityDto {
         public VehicleOrderDto build() {
             return new VehicleOrderDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, discount, vehicle);
         }
+    }
+
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", VehicleOrderDto.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("name='" + name + "'")
+                .add("discount=" + discount)
+                .add("vehicle=" + vehicle)
+                .toString();
     }
 }

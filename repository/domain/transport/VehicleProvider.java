@@ -135,4 +135,20 @@ public class VehicleProvider extends BaseEntity {
             return new VehicleProvider(id, createdAt, modifiedAt, createdBy, modifiedBy, name, phone, email, description, address, vehicles);
         }
     }
+
+    @Override
+    public String toString() {
+        return "VehicleProvider{" +
+                "id='" + id + '\'' +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

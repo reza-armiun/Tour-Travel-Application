@@ -2,9 +2,10 @@ package razarm.tosan.repository.data.location;
 
 import razarm.tosan.repository.data.BaseEntityData;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class AddressData extends BaseEntityData {
+public class AddressData extends BaseEntityData implements Serializable {
     private final String street;
     private final String postalCode;
     private final CityData city;
@@ -29,7 +30,7 @@ public class AddressData extends BaseEntityData {
     }
 
     @Override
-    public BaseEntityData cloneWithId(String id) {
+    public AddressData cloneWithId(String id) {
         return new AddressData(id, createdAt, modifiedAt, createdBy, modifiedBy, street, postalCode, city);
     }
 

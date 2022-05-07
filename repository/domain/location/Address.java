@@ -3,7 +3,6 @@ package razarm.tosan.repository.domain.location;
 import razarm.tosan.repository.domain.BaseEntity;
 
 import java.time.Instant;
-
 public class Address extends BaseEntity {
 
     private final String street;
@@ -31,7 +30,7 @@ public class Address extends BaseEntity {
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public Address cloneWithId(String id) {
         return new Address(id, createdAt, modifiedAt, createdBy, modifiedBy, street, postalCode, city);
     }
 
@@ -96,5 +95,20 @@ public class Address extends BaseEntity {
         public Address build() {
             return new Address(id, createdAt, modifiedAt, createdBy, modifiedBy, street, postalCode, city);
         }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id='" + id + '\'' +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city=" + city +
+                '}';
     }
 }

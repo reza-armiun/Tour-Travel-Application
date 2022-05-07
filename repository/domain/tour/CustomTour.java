@@ -25,17 +25,17 @@ public class CustomTour extends Tour{
     }
 
     @Override
-    Set<TourCategory> getCategories() {
+    public Set<TourCategory> getCategories() {
         return null;
     }
 
     @Override
-    Set<SchedulePlan> getSchedulePlans() {
+    public Set<SchedulePlan> getSchedulePlans() {
         return null;
     }
 
     @Override
-    TourType getTourType() {
+    public TourType getTourType() {
         return null;
     }
 
@@ -53,7 +53,7 @@ public class CustomTour extends Tour{
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public CustomTour cloneWithId(String id) {
         return new CustomTour(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, date, categories, booking, tourismManager, schedulePlans);
     }
 

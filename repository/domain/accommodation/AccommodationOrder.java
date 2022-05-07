@@ -6,6 +6,7 @@ import razarm.tosan.repository.domain.Orderable;
 
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.StringJoiner;
 
 public class AccommodationOrder extends BaseEntity implements Orderable {
     private final Instant date;
@@ -54,10 +55,13 @@ public class AccommodationOrder extends BaseEntity implements Orderable {
     }
 
     @Override
-    public BaseEntity cloneWithId(String id) {
+    public AccommodationOrder cloneWithId(String id) {
         return new AccommodationOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, accommodation);
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
 
     public static final class AccommodationOrderBuilder {
         protected String id;
@@ -119,5 +123,19 @@ public class AccommodationOrder extends BaseEntity implements Orderable {
         public AccommodationOrder build() {
             return new AccommodationOrder(id, createdAt, modifiedAt, createdBy, modifiedBy, date, discount, accommodation);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", AccommodationOrder.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("date=" + date)
+                .add("discount=" + discount)
+                .add("accommodation=" + accommodation)
+                .toString();
     }
 }

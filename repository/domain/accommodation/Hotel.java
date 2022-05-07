@@ -31,7 +31,7 @@ public class Hotel extends  Accommodation{
 
     @Override
     public AccommodationType getType() {
-        return AccommodationType.HOTEL;
+        return type;
     }
 
     @Override
@@ -46,6 +46,7 @@ public class Hotel extends  Accommodation{
     public Integer getRoom() {
         return room;
     }
+
 
 
     public static final class HotelBuilder {

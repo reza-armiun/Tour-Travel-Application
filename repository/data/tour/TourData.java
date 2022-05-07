@@ -65,7 +65,11 @@ public class TourData extends BaseEntityData {
     }
 
     @Override
-    public BaseEntityData cloneWithId(String id) {
+    public TourData cloneWithId(String id) {
+        return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, date, categories, tourismManager, schedulePlans);
+    }
+
+    public TourData cloneWith(Set<SchedulePlanData> schedulePlans) {
         return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, date, categories, tourismManager, schedulePlans);
     }
 

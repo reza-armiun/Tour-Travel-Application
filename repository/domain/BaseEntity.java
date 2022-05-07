@@ -1,7 +1,9 @@
 package razarm.tosan.repository.domain;
 
+
 import java.io.Serializable;
 import java.time.Instant;
+
 
 public abstract class BaseEntity implements Serializable {
     protected final String id;
@@ -12,7 +14,7 @@ public abstract class BaseEntity implements Serializable {
     protected final String createdBy;
     protected final String modifiedBy;
 
-    public abstract  BaseEntity cloneWithId(String id);
+    public abstract BaseEntity cloneWithId(String id);
 
     public BaseEntity(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy) {
         this.id = id;
