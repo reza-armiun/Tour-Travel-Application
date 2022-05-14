@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+
+    <display-name>Quick Servlet Demo Application</display-name>
+
+
+
+
+
+    <listener>
+        <listener-class>razarm.tosan.controller.servlet.listener.MyServletContextListener</listener-class>
+    </listener>
+
+
+
+    <servlet>
+        <servlet-name>Sample</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.Sample</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Sample</servlet-name>
+        <url-pattern>/sample</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.Home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Secure</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.Secure</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Secure</servlet-name>
+        <url-pattern>/secure</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Secure</servlet-name>
+        <url-pattern>/secure/*</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>razarm.tosan.controller.servlet.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+</web-app>
