@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/app.css" >
+    <link rel="stylesheet" href="../css/top-navbar.css"  >
+    <script src="../js/top-navbar.js" defer></script>
+</head>
+<body>
+<div class="navbar" >
+    <div class="navbar-left">
+        <div class="navbar__item">
+            <div id="home">HOME</div>
+        </div>
+        <div class="navbar__item">
+            Tours
+        </div>
+    </div>
+    <div class="navbar-right">
+        <div class="navbar__item">username</div>
+        <div class="navbar__item dropdown" onclick="dropdownClickHandler()">
+                actions
+                <div   id="dropdown-arrow" ></div>
+
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="#">Profile</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>
