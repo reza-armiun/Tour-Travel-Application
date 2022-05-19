@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 public class MyServletContextListener implements ServletContextListener {
     Logger logger = Logger.getLogger(MyServletContextListener.class.getName());
 
+
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContextListener.super.contextInitialized(sce);

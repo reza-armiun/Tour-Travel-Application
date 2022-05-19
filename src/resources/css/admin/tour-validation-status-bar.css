@@ -1,0 +1,74 @@
+.status__container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+
+.status__navbar {
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(248, 233, 83 , 0.8);
+    border-radius: 6px;
+    bottom: 12vh;
+    width: 60vw;
+    padding: 6px 12px;
+    box-shadow: 1px 1px 6px rgba(128, 128, 128, 1);
+}
+
+.navbar__header {
+    font-size: 25px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tour__status {
+    margin: 0 8px;
+    padding: 6px;
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.7);
+    background-color: #47ccde;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tour__status-loading {
+    background-color: lightgrey!important;
+}
+.tour__status-success {
+    background-color: green !important;
+}
+.tour__status-failed {
+    background-color: red !important;
+}
+.status__txt {
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+.hide{
+    display: none!important;
+}
+
+.divider {
+    width: 95%;
+    display: block;
+    unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.3);
+}

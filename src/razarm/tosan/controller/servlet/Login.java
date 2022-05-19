@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("principal", user);
             }
 
-            resp.setHeader("Set-Cookie", "JSESSIONID=" + req.changeSessionId() +"; HttpOnly; SameSite=strict"); // adds new session
+            resp.setHeader("Set-Cookie", "JSESSIONID=" + req.changeSessionId() +"; HttpOnly=true; SameSite=strict"); // adds new session
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }catch (InvalidCredentialException | UserNotFoundException e) {
