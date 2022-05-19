@@ -23,6 +23,7 @@
     border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 3px;
     margin: 5px;
+    max-height: 310px;
 }
 .tour__checkbox {
     align-self: center;
@@ -86,6 +87,7 @@
     color: green;
 }
 .item__footer {
+    width: 100%;
     margin-top: 12px;
     border-top: 1px solid rgba(128, 128, 128, 0.4);
     padding: 8px;
@@ -104,11 +106,17 @@
 .item__expand-arrow:hover {
     border-color: white;
 }
+
+.item__expand-wrapper {
+    animation-name: expanding;
+    animation-duration: 3s;
+    /*min-height: 85px;*/
+}
 .item__expand {
     cursor: initial !important;
     margin-right: 6px;
-    min-height: 85px;
     width: 100%;
+    max-height: 150px;
     border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 6px;
     overflow-y: auto;
@@ -122,4 +130,28 @@
 
 .border-orange {
     border: 2px solid orange !important;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.show-animation {
+    animation-name: expanding;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+
+}
+
+@keyframes expanding {
+    from {
+        height: 0;
+        overflow-y: hidden;
+    }
+    to {
+        height: 140px;
+        overflow-y: hidden;
+    }
 }

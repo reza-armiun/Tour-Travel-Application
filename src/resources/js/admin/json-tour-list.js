@@ -60,31 +60,44 @@ class JsonItem {
         return body;
     }
 
-    showDetails(node) {
-        node.classList.toggle('hide');
+    renderDetails() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('item__expand-wrapper');
+        wrapper.classList.add('hide');
+        const details = document.createElement('pre');
+        details.classList.add('item__expand');
+        details.classList.add('hide');
+        const obj = {id : this.id , img: this.img, header: this.header, description: this.rate, rate: this.rate, price: this.price};
+        details.innerHTML = JSON.stringify(obj , undefined, 4)
+        details.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+        });
+        wrapper.appendChild(details);
+
+        return details;
     }
 
     renderFooter() {
         const footer = document.createElement('div');
         const expandArrow = document.createElement('i');
-        const details = document.createElement('pre');
+        const  details = this.renderDetails();
         footer.classList.add('item__footer');
         expandArrow.classList.add('item__expand-arrow');
-        details.classList.add('item__expand');
-        details.classList.add('hide');
-        const obj = {id : this.id , img: this.img, header: this.header, description: this.rate, rate: this.rate, price: this.price};
-        details.innerHTML = JSON.stringify(obj , undefined, 4)
         expandArrow.addEventListener('click' ,  (ev) => {
             ev.stopPropagation();
             this.showDetails(details);
-        });
-        details.addEventListener('click', function (ev) {
-            ev.stopPropagation();
         });
         footer.appendChild(expandArrow);
         footer.appendChild(details);
         return footer;
     }
+
+    showDetails(node) {
+        node.classList.toggle('hide');
+        node.classList.toggle('show-animation');
+    }
+
+
 
     render() {
         const item = document.createElement('div');
@@ -157,6 +170,7 @@ const ITEMS =[{
             this.tourItems[id] = {...it, checked: false};
         }
     }
+
 
     renderTourItem(item) {
         const itemWrapper = document.createElement('div');
