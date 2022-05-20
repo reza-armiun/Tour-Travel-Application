@@ -22,10 +22,7 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var tourList = tourService.findAll();
-//        HttpSession session = req.getSession();
-//        synchronized (session) {
-//            session.setAttribute("tourList", tourList);
-//        }
+
         req.setAttribute("tourList" , tourList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/home.jsp");
         dispatcher.forward(req, resp);

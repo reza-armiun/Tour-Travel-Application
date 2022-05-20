@@ -1,6 +1,5 @@
 package razarm.tosan.controller.servlet.listener;
 
-import razarm.tosan.AppContextHolder;
 import razarm.tosan.MockDataInitializer;
 
 import javax.naming.directory.InvalidAttributeValueException;
@@ -15,7 +14,6 @@ public class MyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ServletContextListener.super.contextInitialized(sce);
         try {
             MockDataInitializer.initialize();
             logger.info("initialized...#############################");
@@ -26,7 +24,6 @@ public class MyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        ServletContextListener.super.contextDestroyed(sce);
         logger.info("destroyed");
     }
 }

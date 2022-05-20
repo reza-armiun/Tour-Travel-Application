@@ -18,8 +18,12 @@ import razarm.tosan.controller.dto.transport.VehicleProviderDto;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
+import razarm.tosan.repository.domain.auth.Admin;
+import razarm.tosan.repository.domain.auth.Authority;
+import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.food.FoodType;
 import razarm.tosan.repository.domain.tour.TourType;
+import razarm.tosan.utility.PasswordEncoder;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.math.BigInteger;
@@ -261,6 +265,17 @@ public class MockDataInitializer {
         authService.signup(signupRequest1);
         authService.signup(signupRequest2);
         authService.signup(signupRequest3);
+
+        AppContextHolder.getUserRepository()
+                .save(
+                        PremiumUser.PremiumUserBuilder.aPremiumUser()
+                                .name("reza")
+                                .email("reza@gmail")
+                                .authorities(
+                                        Set.of(Authority.AuthorityBuilder.anAuthority().name("ADMIN").build()))
+                                .username("admin")
+                                .password(new PasswordEncoder().encrypt("12345678".toCharArray()))
+                                .build());
 
         return authService.findAllUsers();
 

@@ -18,7 +18,7 @@ class TourItem {
 
     renderPhoto() {
         const photo = document.createElement('img');
-        photo.classList.add('item__photo');
+        photo.classList.add('app-item__photo');
         photo.src = this.img;
         return photo;
     }
@@ -26,9 +26,9 @@ class TourItem {
         const content = document.createElement('div');
         const header= document.createElement('div');
         const description= document.createElement('div');
-        content.classList.add('item__content');
-        header.classList.add('item__header');
-        description.classList.add('item__description');
+        content.classList.add('app-item__content');
+        header.classList.add('app-item__header');
+        description.classList.add('app-item__description');
         content.appendChild(header);
         content.appendChild(description);
         header.textContent = this.header;
@@ -39,9 +39,9 @@ class TourItem {
         const review = document.createElement('div');
         const rate = document.createElement('div');
         const price = document.createElement('div');
-        review.classList.add('item__review');
-        rate.classList.add('item__rate');
-        price.classList.add('item__price');
+        review.classList.add('app-item__review');
+        rate.classList.add('app-item__rate');
+        price.classList.add('app-item__price');
         review.appendChild(rate);
         review.appendChild(price);
 
@@ -51,7 +51,7 @@ class TourItem {
     }
     renderBody() {
         const body = document.createElement('div');
-        body.classList.add('item__body');
+        body.classList.add('app-item__body');
         body.appendChild(this.renderPhoto());
         body.appendChild(this.renderContent());
         body.appendChild(this.renderReview());
@@ -93,7 +93,7 @@ const ITEMS =[{
 
 
 
-class TourList {
+class AppTourList {
     container = null;
     tours = null;
     tourItems = {};
@@ -104,7 +104,7 @@ class TourList {
 
          link.rel = 'stylesheet';
          link.type = 'text/css';
-         link.href = '../../css/admin/tour-list.css';
+         link.href = '../../css/admin/app-tour-list.css';
 
          head.appendChild(link);
 
@@ -138,7 +138,7 @@ class TourList {
     renderContainer() {
         const el  = document.createElement('div');
         el.id = 'server-list'
-        el.classList.add('container');
+        el.classList.add('server-container');
         return el;
     }
 
@@ -168,6 +168,6 @@ class TourList {
     }
 }
 
-export default TourList;
+export default AppTourList;
 
 

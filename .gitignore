@@ -39,3 +39,7 @@ build/
 bin
 sources.txt
 tomcat
+tomcat/*
+tomcat.*
+lib
+.DS_store

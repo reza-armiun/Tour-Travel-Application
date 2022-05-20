@@ -35,13 +35,6 @@ public class Main {
 
         authQuestion.run(new HashMap<>());
 
-
-
-//        var tourService = AppContextHolder.getTourService();
-//        var tour = tourService.findById("69");
-//        System.out.println(tour);
-//        var tourRateRepository = AppContextHolder.getTourRateRepository();
-//        System.out.println(tourService.findAll());
     }
 
 

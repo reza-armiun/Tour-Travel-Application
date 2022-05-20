@@ -1,13 +1,13 @@
 .status__container {
     display: flex;
+    position: fixed;
+    z-index: 1000;
     justify-content: center;
     margin-bottom: 8px;
 }
 
 
 .status__navbar {
-    position: fixed;
-    z-index: 1000;
     background-color: rgba(248, 233, 83 , 0.8);
     border-radius: 6px;
     bottom: 12vh;

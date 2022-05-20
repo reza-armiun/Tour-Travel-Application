@@ -25,6 +25,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>app</finalName>
@@ -35,6 +36,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
                 <configuration>
                     <webXml>${project.basedir}/src/resources/web.xml</webXml>
                     <webResources>
@@ -43,17 +45,6 @@
                         </resource>
                     </webResources>
                     <outputDirectory>${project.basedir}/tomcat/webapps</outputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:8080/app</url>
-                    <server>localhost</server>
-<!--                    <path>/${project.build.finalName}</path>-->
-                    <path>/${project.build.finalName}</path>
                 </configuration>
             </plugin>
         </plugins>

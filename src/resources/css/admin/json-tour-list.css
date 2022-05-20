@@ -1,7 +1,8 @@
-.container {
+.json-container {
     border-radius: 4px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 35px;
 }
 .header {
     font-size: 28px;
@@ -126,6 +127,11 @@
 }
 .hide {
     display: none !important;
+}
+
+.disable {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .border-orange {

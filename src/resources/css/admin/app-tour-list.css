@@ -32,7 +32,7 @@
 
 .tour__item {
     height: 90px;
-    width:  250px;
+    /*width:  250px;*/
     padding: 7px 12px;
     display: flex;
     flex-direction: column;
@@ -43,32 +43,32 @@
     color: white;
     border-radius: 5px;
 }
-.item__body {
+.app-item__body {
     height: 85px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 }
-.item__photo{
+.app-item__photo{
     height: inherit;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(128, 128, 128, 0.3);
 }
-.item__content{
+.app-item__content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 15px;
 }
-.item__header {
+.app-item__header {
     font-size: 20px;
     font-weight: 600;
 }
-.item__description {
+.app-item__description {
     font-size: 14px;
     font-weight: 400;
 }
-.item__review{
+.app-item__review{
     padding: 4px 6px 4px 15px;
     height: inherit;
     margin: auto;
@@ -76,17 +76,17 @@
     flex-direction: column;
     justify-content: space-between;
 }
-.item__rate{
+.app-item__rate{
     font-size: 19px;
     font-weight: bold;
     color: #0071c2;
 }
-.item__price{
+.app-item__price{
     font-size: 15px;
     font-weight: bold;
     color: green;
 }
-.item__footer {
+.app-item__footer {
     margin-top: 12px;
     border-top: 1px solid rgba(128, 128, 128, 0.4);
     padding: 8px;

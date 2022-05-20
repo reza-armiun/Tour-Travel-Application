@@ -28,6 +28,10 @@ public class AuthenticationFilter extends HttpFilter {
                         .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/login").method(MethodType.values()).build())
                         .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/booking").method(MethodType.values()).roles(new String[]{"ROLE_BASIC"}).build())
                         .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/booking/*").method(MethodType.values()).roles(new String[]{"ROLE_BASIC"}).build())
+
+                        .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/admin").method(MethodType.values()).roles(new String[]{"ROLE_ADMIN"}).build())
+                        .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/admin/*").method(MethodType.values()).roles(new String[]{"ROLE_ADMIN"}).build())
+
                         .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/secure").method(MethodType.values()).roles(new String[]{"ROLE_BASIC"}).build())
                         .matcher(PathMatcher.PathMatcherBuilder.aPathMatcher().path("/secure/*").method(MethodType.values()).roles(new String[]{"ROLE_ADMIN"}).build())
                         .build();
@@ -90,7 +94,8 @@ public class AuthenticationFilter extends HttpFilter {
     }
 
 
+    @Override
+    public void destroy() {
 
-
-
+    }
 }
