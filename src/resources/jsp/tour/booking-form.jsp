@@ -4,7 +4,7 @@
     <%@ include file="../../css/booking-form.css" %>
 </style>
 
-<jsp:useBean id="tour" type="razarm.tosan.controller.dto.tour.TourDto"  scope="session"/>
+<jsp:useBean id="tour" type="razarm.tosan.controller.dto.tour.TourDto" scope="session"/>
 
 <div class="container" >
     <h1 class="header">Booking Ticket</h1>
