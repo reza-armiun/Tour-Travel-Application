@@ -8,5 +8,6 @@
     <%@ include file="../../css/admin/validation-notification.css" %>
 </style>
 
-<script type="module" src="${pageContext.request.contextPath}/resources/js/admin/tour-page.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/tour-page.js"></script>
+
 

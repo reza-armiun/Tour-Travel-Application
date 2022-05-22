@@ -64,6 +64,14 @@
         <servlet-name>Tour</servlet-name>
         <url-pattern>/tour</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RestTour</servlet-name>
+        <servlet-class>razarm.tosan.controller.servlet.rest.RestTourServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RestTour</servlet-name>
+        <url-pattern>/rest/tour</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>BookingTour</servlet-name>

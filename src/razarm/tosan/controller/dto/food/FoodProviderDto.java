@@ -1,12 +1,14 @@
 package razarm.tosan.controller.dto.food;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FoodProviderDto extends BaseEntityDto {
     private  String name;
     private  String address;

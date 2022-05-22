@@ -82,6 +82,8 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
+    font-size: 15px;
+    font-weight: 500;
     color: white !important;
     text-decoration: none;
 }

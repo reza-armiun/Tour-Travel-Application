@@ -1,6 +1,8 @@
 package razarm.tosan.controller.dto.tour;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.tour.TourCategory;
 import razarm.tosan.repository.domain.tour.TourType;
@@ -8,16 +10,20 @@ import razarm.tosan.repository.domain.tour.TourType;
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.Set;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TourDto extends BaseEntityDto {
     private  String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  TourType type;
     private  String guide;
     private   String description;
     private  String imgUrl;
     private  Float rating;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigInteger price;
     private  ZonedDateTime date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  Set<TourCategory> categories;
 
     private  TourismManagerDto tourismManager;
@@ -268,4 +274,6 @@ public class TourDto extends BaseEntityDto {
             return new TourDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, rating, price, date, categories, tourismManager, schedulePlans);
         }
     }
+
+
 }

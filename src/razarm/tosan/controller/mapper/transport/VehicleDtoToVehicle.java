@@ -4,11 +4,11 @@ import razarm.tosan.controller.dto.transport.VehicleDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.transport.Vehicle;
 
-public class VehicleDtoToVehicle implements Mapper<VehicleDto, Vehicle> {
+public class VehicleDtoToVehicle<S extends  VehicleDto, T extends Vehicle> implements Mapper<S, T> {
 
     @Override
-    public Vehicle convert(VehicleDto vehicleDto) {
-        final Mapper<VehicleDto, Vehicle> mapper = VehicleMapperFactory.createVehicleDtoMapper(vehicleDto.getType());
+    public T convert(S vehicleDto) {
+        final Mapper<S, T> mapper = VehicleMapperFactory.createVehicleDtoMapper(vehicleDto.getType());
         return mapper.convert(vehicleDto);
     }
 }

@@ -23,7 +23,7 @@ public class HotelToHotelData implements Mapper<Hotel, HotelData> {
             .room(hotel.getRoom())
             .price(hotel.getPrice())
             .time(hotel.getTime())
-            .address(this.addressToAddressData.convert(hotel.getAddress()))
+            .address(hotel.getAddress() != null ? this.addressToAddressData.convert(hotel.getAddress()) : null)
             .accommodationProvider(this.accProviderToAccProviderData.convert(hotel.getAccommodationProvider()))
             .type(hotel.getType())
             .createdAt(hotel.getCreatedAt())

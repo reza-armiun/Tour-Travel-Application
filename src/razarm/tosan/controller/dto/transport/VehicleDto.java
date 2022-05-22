@@ -1,18 +1,33 @@
 package razarm.tosan.controller.dto.transport;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import razarm.tosan.controller.dto.BaseEntityDto;
+import razarm.tosan.controller.dto.accommodation.HotelDto;
 import razarm.tosan.repository.domain.transport.VehicleType;
 
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = BusDto.class, name = "BUS"),
+        @JsonSubTypes.Type(value = PlaneDto.class, name = "PLANE"),
+})
 public class VehicleDto extends BaseEntityDto {
     protected  String name;
     protected  VehicleType type;
     protected  String fromStation;
     protected  String toStation;
     protected  String ticketNumber;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected  BigInteger price;
     protected  ZonedDateTime departure;
     protected  ZonedDateTime arrival;

@@ -25,7 +25,7 @@ public class HotelDataToHotel implements Mapper<HotelData, Hotel> {
             .floor(hotelData.getFloor())
             .room(hotelData.getRoom())
             .accommodationProvider(accProviderDataToAccProvider.convert(hotelData.getAccommodationProvider()))
-            .address(addressDataToAddress.convert(hotelData.getAddress()))
+            .address(hotelData.getAddress() != null ? addressDataToAddress.convert(hotelData.getAddress()) : null)
             .createdAt(hotelData.getCreatedAt())
             .modifiedAt(hotelData.getModifiedAt())
             .createdBy(hotelData.getCreatedBy())

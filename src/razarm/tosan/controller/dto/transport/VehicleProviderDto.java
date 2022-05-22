@@ -1,12 +1,14 @@
 package razarm.tosan.controller.dto.transport;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.address.AddressDto;
 
 import java.time.ZonedDateTime;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VehicleProviderDto extends BaseEntityDto {
     private  String name;
     private  String phone;

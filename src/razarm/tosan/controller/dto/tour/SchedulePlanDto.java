@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.tour;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
 import razarm.tosan.controller.dto.address.AddressDto;
@@ -15,6 +16,7 @@ import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public  class SchedulePlanDto extends BaseEntityDto implements Costable {
     private  String name;
     private  ZonedDateTime startTime;
@@ -63,7 +65,7 @@ public  class SchedulePlanDto extends BaseEntityDto implements Costable {
     }
 
     public Set<ActivityDto> getActivities() {
-        return activities;
+        return activities != null ?activities : Set.of();
     }
 
 

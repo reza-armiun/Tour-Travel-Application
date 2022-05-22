@@ -4,19 +4,19 @@ const omitKey = (key, { [key]: _, ...obj }) => obj
 
 class JsonItem {
     id = null;
-    img = '';
+    imgUrl = '';
     name = '';
     description = '';
-    rate = null;
+    rating = null;
     price = null;
     rest;
 
-    constructor({id, img, name, description, rate = 0.0, price = 0.0, ...rest}) {
+    constructor({id, imgUrl, name, description, rating = 0.0, price = 0.0, ...rest}) {
         this.id = id;
-        this.img = img;
+        this.imgUrl = imgUrl;
         this.name = name;
         this.description = description;
-        this.rate = rate;
+        this.rating = rating;
         this.price = price;
         this.rest = omitKey('checked', rest);
     }
@@ -25,7 +25,7 @@ class JsonItem {
     renderPhoto() {
         const photo = document.createElement('img');
         photo.classList.add('item__photo');
-        photo.src = this.img;
+        photo.src = this.imgUrl;
         return photo;
     }
     renderContent() {
@@ -52,7 +52,7 @@ class JsonItem {
         review.appendChild(rate);
         review.appendChild(price);
 
-        rate.textContent = this.rate;
+        rate.textContent = this.rating;
         price.textContent = this.price;
         return review;
     }
@@ -72,7 +72,7 @@ class JsonItem {
         const details = document.createElement('pre');
         details.classList.add('item__expand');
         details.classList.add('hide');
-        const obj = {id : this.id , img: this.img, header: this.name, description: this.rate, rate: this.rate, price: this.price, ...this.rest};
+        const obj = {id : this.id , imgUrl: this.imgUrl, header: this.name, description: this.rating, rating: this.rating, price: this.price, ...this.rest};
         details.innerHTML = JSON.stringify(obj , undefined, 4)
         details.addEventListener('click', function (ev) {
             ev.stopPropagation();
@@ -124,14 +124,6 @@ class JsonItem {
 
 
     constructor() {
-        let head = document.getElementsByTagName('HEAD')[0]; //TODO REMOVE CSS LINK IN CONS
-        let link = document.createElement('link');
-
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '../../css/admin/json-app-tour-list.css';
-
-        head.appendChild(link);
         for(let it of MOCK_ITEMS) { //TODO
             const id = it.id;
             this.tourItems[id] = {...it, checked: false};
@@ -203,7 +195,7 @@ class JsonItem {
          this.tourItems = {...newList};
      }
 
-     tagItem(id) {
+     setFailMode(id) {
          let domIndex = Object.keys(this.tourItems).findIndex(tourId => tourId == id);
          let item = this.toursEl.childNodes.item(domIndex);
          item.classList.add('border-orange');

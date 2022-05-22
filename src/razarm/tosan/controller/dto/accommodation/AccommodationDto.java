@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.accommodation;
 
+import com.fasterxml.jackson.annotation.*;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
@@ -8,8 +9,17 @@ import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = HotelDto.class, name = "HOTEL"),
+})
 public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
     private  String name;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  AccommodationType type;
     private  BigInteger price;
     private  Long time;

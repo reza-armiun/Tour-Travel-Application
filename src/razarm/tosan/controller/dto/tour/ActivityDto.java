@@ -1,12 +1,16 @@
 package razarm.tosan.controller.dto.tour;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.tour.ActivityType;
 
 import java.time.ZonedDateTime;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActivityDto extends BaseEntityDto {
     private  String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  ActivityType type;
     private  ZonedDateTime startAt;
     private  ZonedDateTime endAt;

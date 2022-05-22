@@ -14,17 +14,32 @@ class ValidationNotification {
         head.appendChild(link);
     }
 
-     renderStatusTxt() {
+     renderStatusTxt(name) {
+        const wrapper =document.createElement('div')
         const txt = document.createElement('div');
+        const header = document.createElement('div');
+        header.textContent = name;
+        wrapper.classList.add('status__wrapper');
+        header.classList.add('status__header');
         txt.classList.add('status__txt');
-        return txt;
+        wrapper.appendChild(header);
+        wrapper.appendChild(txt);
+        return wrapper;
     }
-    renderTourStatus(tour) {
+    renderStatusTimer(time) {
+        const timer = document.createElement('div');
+        timer.classList.add('status__timer');
+        timer.textContent = 0;
+        setInterval(() => {
+            timer.textContent = timer.textContent + 1;
+        }, time);
+        return timer;
+    }
+    renderTourStatus(tour, time) {
         const st = document.createElement('div');
         st.classList.add('tour__status');
-        let statusTxt1 = this.renderStatusTxt();
-        st.appendChild(statusTxt1);
-        // this.startValidating(st);
+        let statusTxt = this.renderStatusTxt(tour.name);
+        st.appendChild(statusTxt);
         return st;
     }
 
@@ -48,9 +63,9 @@ class ValidationNotification {
         return navbar;
     }
 
-    addTour(tour) {
+    addTour(tour , time) {
         this.container.classList.remove('hide');
-        this.navbarItemsEl.appendChild(this.renderTourStatus(tour));
+        this.navbarItemsEl.appendChild(this.renderTourStatus(tour , time));
         this.items.push(tour.id);
     }
     setTourStatus(id, status, classList = []) {
@@ -67,7 +82,6 @@ class ValidationNotification {
         const index = this.items.findIndex(trId => trId == id);
          this.navbarItemsEl.childNodes.item(index)?.remove();
          this.items.splice(index, 1);
-         console.log('items ', this.items)
     }
     get container() {
         this.container;

@@ -1,11 +1,12 @@
 package razarm.tosan.controller.dto.transport;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.repository.domain.transport.VehicleType;
 
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlaneDto extends VehicleDto{
     private  Integer allowedLuggage;
     private  String cabinClass;

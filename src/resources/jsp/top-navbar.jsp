@@ -30,7 +30,7 @@
         </a>
         <c:if test="${roles.contains('ADMIN')}">
             <a class="navbar__item" href="${pageContext.request.contextPath}/admin">
-                <div >Admin</div>
+                <div ><b>Admin</b></div>
             </a>
         </c:if>
     </div>

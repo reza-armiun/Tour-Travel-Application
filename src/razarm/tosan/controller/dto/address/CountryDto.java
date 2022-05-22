@@ -1,10 +1,12 @@
 package razarm.tosan.controller.dto.address;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 
 import java.time.ZonedDateTime;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryDto extends BaseEntityDto {
     private  String name;
     private  String countryCode;

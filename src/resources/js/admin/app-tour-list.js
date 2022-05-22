@@ -1,17 +1,20 @@
+import {getRequest} from "./api.js";
+
+
 class TourItem {
     id = null;
-    img = '';
+    imgUrl = '';
     header = '';
     description = '';
-    rate = null;
+    rating = null;
     price = null;
 
-    constructor({id, img, header, description, rate = 0.0, price = 0.0}) {
+    constructor({id, imgUrl, header, description, rating = 0.0, price = 0.0}) {
         this.id = id;
-        this.img = img;
+        this.imgUrl = imgUrl;
         this.header = header;
         this.description = description;
-        this.rate = rate;
+        this.rating = rating;
         this.price = price;
     }
 
@@ -19,7 +22,7 @@ class TourItem {
     renderPhoto() {
         const photo = document.createElement('img');
         photo.classList.add('app-item__photo');
-        photo.src = this.img;
+        photo.src = this.imgUrl;
         return photo;
     }
     renderContent() {
@@ -38,14 +41,17 @@ class TourItem {
     renderReview() {
         const review = document.createElement('div');
         const rate = document.createElement('div');
+        const priceWrapper= document.createElement('div');
         const price = document.createElement('div');
+        priceWrapper.classList.add('app-item__price-wrapper');
         review.classList.add('app-item__review');
         rate.classList.add('app-item__rate');
         price.classList.add('app-item__price');
         review.appendChild(rate);
-        review.appendChild(price);
+        priceWrapper.appendChild(price);
+        review.appendChild(priceWrapper);
 
-        rate.textContent = this.rate;
+        rate.textContent = this.rating;
         price.textContent = this.price;
         return review;
     }
@@ -66,28 +72,7 @@ class TourItem {
         return item;
     }
 }
-const ITEMS =[{
-    id: 1,
-    img: 'https://th.bing.com/th/id/OIP.YPTa9g7VLfC2rRjD4VQrMAHaE8?pid=ImgDet&rs=1',
-    header: 'Tour 1',
-    description: 'Tour Description',
-    rate: 8.1,
-    price: 25.6
-},{
-    id: 2,
-    img: 'https://th.bing.com/th/id/OIP.YPTa9g7VLfC2rRjD4VQrMAHaE8?pid=ImgDet&rs=1',
-    header: 'Tour 2',
-    description: 'Tour Description',
-    rate: 8.1,
-    price: 25.6
-},{
-    id: 3,
-    img: 'https://th.bing.com/th/id/OIP.YPTa9g7VLfC2rRjD4VQrMAHaE8?pid=ImgDet&rs=1',
-    header: 'Tour 3',
-    description: 'Tour Description',
-    rate: 8.1,
-    price: 25.6
-}];
+
 
 
 
@@ -97,22 +82,22 @@ class AppTourList {
     container = null;
     tours = null;
     tourItems = {};
+    newItemCounterEl= null;
+    failedCounterEl= null;
+    successCounter = 0;
+    failCounter = 0;
 
-     constructor() {
-         let head = document.getElementsByTagName('HEAD')[0];
-         let link = document.createElement('link');
+    initTours() {
+        getRequest('http://localhost:8080/app/rest/tour' , (items) => {
+            for(let it of JSON.parse(items)) { //TODO
+                const id = it.id;
+                this.tourItems[id] = {...it, checked: false};
+                this.addItem(it);
+            }
+        });
+    }
 
-         link.rel = 'stylesheet';
-         link.type = 'text/css';
-         link.href = '../../css/admin/app-tour-list.css';
-
-         head.appendChild(link);
-
-         for(let it of ITEMS) { //TODO
-             const id = it.id;
-             this.tourItems[id] = {...it, checked: false};
-         }
-     }
+     constructor() {}
 
 
     renderTourItem(item) {
@@ -128,8 +113,8 @@ class AppTourList {
         const items = Object.values(this.tourItems);
         this.tours = document.createElement('div');
         this.tours.classList.add('server-tours');
-        items.forEach((it ,index) => {
-            this.tours.appendChild(this.renderTourItem(it, index));
+        items.forEach((it) => {
+            this.tours.appendChild(this.renderTourItem(it));
         });
         return this.tours;
     }
@@ -143,30 +128,67 @@ class AppTourList {
     }
 
 
-    addItem(item) {
+    addNewItem(item) {
         this.tourItems[item.id] = {...item, checked: false};
-        const tours = document.querySelector('.server-tours');
         let newTour = this.renderTourItem(item);
         newTour.classList.add('border-green');
-        tours.appendChild(newTour);
+        this.tours.appendChild(newTour);
+        // this.successCounter+=1;
+        // this.newItemCounterEl.textContent = this.successCounter;
+    }
 
+    addItem(item) {
+        this.tourItems[item.id] = {...item, checked: false};
+        let newTour = this.renderTourItem(item);
+        this.tours.appendChild(newTour);
+    }
+    countItem(success){
+        if(success)
+           this.newItemCounterEl.textContent = ++this.successCounter;
+        else this.failedCounterEl.textContent = ++this.failCounter;
+    }
+
+    renderItemCounter() {
+        const wrapper = document.createElement('div');
+        this.newItemCounterEl = document.createElement('div');
+        this.failedCounterEl = document.createElement('div');
+
+        this.newItemCounterEl.textContent = this.successCounter;
+        this.failedCounterEl.textContent = this.failCounter;
+
+        wrapper.classList.add('counter__wrapper');
+        this.newItemCounterEl.classList.add('header__counter');
+        this.failedCounterEl.classList.add('header__counter-fail');
+
+        wrapper.appendChild(this.newItemCounterEl);
+        wrapper.appendChild(this.failedCounterEl);
+        return wrapper;
+    }
+
+    renderHeader() {
+        const header = document.createElement('div');
+        const title = document.createElement('h2');
+        title.textContent = 'App Tours';
+
+        header.classList.add('header');
+        title.classList.add('header__title');
+        header.appendChild(title);
+        header.appendChild(this.renderItemCounter());
+        return header;
     }
 
 
-     render() {
-         this.container = this.renderContainer();
-         const header = document.createElement('h2');
-         const divider = document.createElement('hr');
-         header.textContent = 'App Tours';
-         header.classList.add('header');
-         divider.classList.add('divider');
-         this.container.classList.add('server-container');
-         this.container.appendChild(header);
-         this.container.appendChild(divider);
-         this.container.appendChild(this.renderItems());
-         return this.container;
-    }
-}
+    render() {
+        this.container = this.renderContainer();
+        const divider = document.createElement('hr');
+
+        divider.classList.add('divider');
+        this.container.classList.add('server-container');
+        this.container.appendChild(this.renderHeader());
+        this.container.appendChild(divider);
+        this.container.appendChild(this.renderItems());
+        return this.container;
+    }}
 
 export default AppTourList;
 

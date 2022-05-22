@@ -2,13 +2,35 @@
     padding: 6px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     border: 1px solid rgba(0, 191, 255, 0.3);
     border-radius: 6px;
+    margin-bottom: 100px;
 }
 
 .header {
+    width: 100%;
+}
+.header__title {
     font-size: 28px;
     font-weight: 700;
+    text-align: center;
+}
+.counter__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.header__counter {
+    font-size: 15px;
+    color: green;
+    margin-right: 8px;
+}
+.header__counter-fail {
+    font-size: 15px;
+    color: red;
+    margin-right: 8px;
 }
 
 .server-tours {
@@ -32,7 +54,7 @@
 
 .tour__item {
     height: 90px;
-    /*width:  250px;*/
+    width:  300px;
     padding: 7px 12px;
     display: flex;
     flex-direction: column;
@@ -54,6 +76,9 @@
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(128, 128, 128, 0.3);
 }
+.app-item__photo img {
+    max-width: 100px;
+}
 .app-item__content{
     display: flex;
     flex-direction: column;
@@ -69,6 +94,7 @@
     font-weight: 400;
 }
 .app-item__review{
+    /*width: 50px;*/
     padding: 4px 6px 4px 15px;
     height: inherit;
     margin: auto;
@@ -77,9 +103,16 @@
     justify-content: space-between;
 }
 .app-item__rate{
+    align-self: end;
     font-size: 19px;
     font-weight: bold;
     color: #0071c2;
+}
+.app-item__price-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 .app-item__price{
     font-size: 15px;

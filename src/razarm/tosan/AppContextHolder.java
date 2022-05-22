@@ -231,7 +231,7 @@ private static final VehicleToVehicleData vehicleToVehicleData = new VehicleToVe
         tourRateRepository = new TourRateRepositoryImpl(tourRateToTourRateData, tourRateDataToTourRate);
         tourRateService = new TourRateServiceImpl(tourRateRepository);
 
-        tourService = new TourServiceImpl(tourRepository, tourToTourDto, tourDtoToTour, tourRateRepository);
+        tourService = new TourServiceImpl(tourRepository, tourToTourDto, tourDtoToTour, tourRateRepository, accommodationOrderRepository, foodOrderRepository, vehicleOrderRepository);
         bookingService =  new BookingServiceImpl(userRepository, bookingRepository, tourRepository, tourRateRepository, bookingDtoToBooking, bookingToBookingDto);
     }
 

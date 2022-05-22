@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.accommodation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.repository.domain.location.Address;
@@ -7,6 +8,7 @@ import razarm.tosan.repository.domain.location.Address;
 import java.time.ZonedDateTime;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccommodationProviderDto extends BaseEntityDto {
     private  String name;
     private  String description;

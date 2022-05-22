@@ -24,7 +24,7 @@ public class HotelToHotelDto implements Mapper<Hotel, HotelDto> {
                 .name(hotel.getName())
                 .price(hotel.getPrice())
                 .time(hotel.getTime())
-                .addressDto(addressToAddressDto.convert(hotel.getAddress()))
+                .addressDto(hotel.getAddress() != null ? addressToAddressDto.convert(hotel.getAddress()) : null)
                 .accommodationProvider(accProviderToAccProviderDto.convert(hotel.getAccommodationProvider()))
                 .floor(hotel.getFloor())
                 .room(hotel.getRoom())

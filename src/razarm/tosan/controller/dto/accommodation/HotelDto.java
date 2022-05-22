@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.accommodation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
@@ -7,6 +8,7 @@ import razarm.tosan.repository.domain.accommodation.AccommodationType;
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HotelDto extends AccommodationDto {
     private  Integer floor;
     private  Integer room;
