@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.food.FoodOrderDto;
 import razarm.tosan.controller.mapper.food.FoodOrderDtoToFoodOrder;
 import razarm.tosan.controller.mapper.food.FoodOrderToFoodOrderDto;
@@ -9,6 +10,7 @@ import razarm.tosan.service.FoodOrderService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class FoodOrderServiceImpl implements FoodOrderService {
     private final FoodOrderRepository foodOrderRepository;
     private final FoodOrderToFoodOrderDto foodOrderToFoodOrderDto;

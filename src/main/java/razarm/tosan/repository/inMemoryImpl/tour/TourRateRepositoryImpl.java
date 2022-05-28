@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.tour;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.TourRateRepository;
 import razarm.tosan.repository.data.tour.TourRateData;
 import razarm.tosan.repository.domain.tour.TourRate;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class TourRateRepositoryImpl implements TourRateRepository {
 //    Map<String, Map<String, TourRateData>> tourRateDataMap = new HashMap<>(); //<tourId , <username, TourData>>
 

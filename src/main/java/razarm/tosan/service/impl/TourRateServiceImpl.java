@@ -1,9 +1,11 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.repository.TourRateRepository;
 import razarm.tosan.repository.domain.tour.TourRate;
 import razarm.tosan.service.tour.TourRateService;
 
+@Service
 public class TourRateServiceImpl implements TourRateService {
     private final TourRateRepository tourRateRepository;
 

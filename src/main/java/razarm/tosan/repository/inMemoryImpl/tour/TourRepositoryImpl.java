@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.tour;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.AccommodationOrderRepository;
 import razarm.tosan.repository.FoodOrderRepository;
 import razarm.tosan.repository.TourRepository;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Repository
 public class TourRepositoryImpl implements TourRepository {
     private Map<String, TourData> tourDataMap = new HashMap<>();
 

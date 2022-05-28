@@ -1,5 +1,6 @@
 package razarm.tosan.repository.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.tour.SchedulePlanData;
 import razarm.tosan.repository.domain.food.FoodOrder;
@@ -9,6 +10,7 @@ import razarm.tosan.repository.mapper.location.AddressToAddressData;
 
 import java.util.stream.Collectors;
 
+@Component
 public class SchedulePlanToSchedulePlanData implements Mapper<SchedulePlan, SchedulePlanData> {
     private final AddressToAddressData addressToAddressData;
     private final ActivityToActivityData activityToActivityData;

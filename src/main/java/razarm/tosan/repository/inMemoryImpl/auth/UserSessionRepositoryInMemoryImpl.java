@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.auth;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.data.auth.UserSessionData;
 import razarm.tosan.repository.domain.auth.UserSession;
 import razarm.tosan.repository.UserSessionRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class UserSessionRepositoryInMemoryImpl implements UserSessionRepository {
     private Map<String , UserSessionData> userSessions= new HashMap<>();
 

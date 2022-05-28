@@ -1,5 +1,9 @@
 package razarm.tosan;
 
+import lombok.AllArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
 import razarm.tosan.controller.dto.accommodation.AccommodationProviderDto;
 import razarm.tosan.controller.dto.accommodation.HotelDto;
@@ -17,12 +21,16 @@ import razarm.tosan.controller.dto.transport.VehicleOrderDto;
 import razarm.tosan.controller.dto.transport.VehicleProviderDto;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.props.AppProperties;
+import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
 import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.food.FoodType;
 import razarm.tosan.repository.domain.tour.TourType;
-import razarm.tosan.utility.PasswordEncoder;
+import razarm.tosan.service.*;
+import razarm.tosan.service.tour.BookingService;
+import razarm.tosan.service.tour.TourRateService;
+import razarm.tosan.service.tour.TourService;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.math.BigInteger;
@@ -34,7 +42,22 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
 
-public class MockDataInitializer {
+
+@AllArgsConstructor
+@Component
+public class MockDataInitializer implements CommandLineRunner {
+    private final AuthService authService;
+    private final UserRepository userRepository;
+    private final FoodOrderService foodOrderService;
+    private final AccommodationOrderService accommodationOrderService;
+    private final VehicleOrderService vehicleOrderService;
+    private final AddressService addressService;
+    private final TourRateService tourRateService;
+    private final BookingService bookService;
+    private final TourService tourService;
+    private final PasswordEncoder passwordEncoder;
+
+
     private static final SignupRequest signupRequest1 = SignupRequest.SignupRequestBuilder.aSignupRequest()
             .name("reza armiun")
             .username("reza")
@@ -76,7 +99,7 @@ public class MockDataInitializer {
                             .build())
                     .build();
 
-    private static final VehicleOrderDto vehicleOrder2 =
+    private  final VehicleOrderDto vehicleOrder2 =
             VehicleOrderDto.VehicleOrderDtoBuilder.aVehicleOrderDto()
                     .name("new order 2")
                     .discount(2)
@@ -96,7 +119,7 @@ public class MockDataInitializer {
 
 
 
-    private static AddressDto address1 =
+    private final AddressDto address1 =
             AddressDto.AddressDtoBuilder.anAddressDto()
                     .street("street 1")
                     .postalCode("postal code 12345")
@@ -110,7 +133,7 @@ public class MockDataInitializer {
                                             .build())
                                     .build())
                     .build();
-    private static AddressDto address2 =
+    private final AddressDto address2 =
             AddressDto.AddressDtoBuilder.anAddressDto()
                     .street("street 2")
                     .postalCode("postal code 123123345")
@@ -124,7 +147,7 @@ public class MockDataInitializer {
                                             .build())
                                     .build())
                     .build();
-    private static AddressDto address3 =
+    private  final AddressDto address3 =
             AddressDto.AddressDtoBuilder.anAddressDto()
                     .street("street 3")
                     .postalCode("postal code 213123")
@@ -142,7 +165,7 @@ public class MockDataInitializer {
 
 
 
-    private static final FoodOrderDto foodOrder1 = FoodOrderDto.FoodOrderDtoBuilder.aFoodOrderDto()
+    private  final FoodOrderDto foodOrder1 = FoodOrderDto.FoodOrderDtoBuilder.aFoodOrderDto()
             .date(ZonedDateTime.now())
             .discount(2)
             .food(FoodDto.FoodDtoBuilder.aFoodDto()
@@ -160,7 +183,7 @@ public class MockDataInitializer {
                     .build())
             .build();
 
-    private static final FoodOrderDto foodOrder2 = FoodOrderDto.FoodOrderDtoBuilder.aFoodOrderDto()
+    private  final FoodOrderDto foodOrder2 = FoodOrderDto.FoodOrderDtoBuilder.aFoodOrderDto()
             .date(ZonedDateTime.now())
             .discount(2)
             .food(FoodDto.FoodDtoBuilder.aFoodDto()
@@ -178,7 +201,7 @@ public class MockDataInitializer {
                     .build())
             .build();
 
-    private static final AccommodationOrderDto accommodationOrder1 =
+    private  final AccommodationOrderDto accommodationOrder1 =
             AccommodationOrderDto.AccommodationOrderDtoBuilder.anAccommodationOrderDto()
                     .date(ZonedDateTime.now())
                     .discount(2)
@@ -200,7 +223,7 @@ public class MockDataInitializer {
                                     .build())
                     .build();
 
-    private static final AccommodationOrderDto accommodationOrder2 =
+    private  final AccommodationOrderDto accommodationOrder2 =
             AccommodationOrderDto.AccommodationOrderDtoBuilder.anAccommodationOrderDto()
                     .date(ZonedDateTime.now())
                     .discount(2)
@@ -222,21 +245,21 @@ public class MockDataInitializer {
                                     .build())
                     .build();
     //////////////////////////////////////////////////////BOOKING////////////////////////////////////////////////////////////
-    private static final TravelerDto mockTraveler =
+    private  final TravelerDto mockTraveler =
             TravelerDto.TravelerDtoBuilder.aTravelerDto()
                     .name("reza")
                     .phone("312312312")
                     .email("razarm@gmail.com")
                     .nationalId(34021123123L)
                     .build();
-    private static final TravelerDto mockTraveler2 =
+    private  final TravelerDto mockTraveler2 =
             TravelerDto.TravelerDtoBuilder.aTravelerDto()
                     .name("armin")
                     .phone("231391")
                     .email("armin@gmail.com")
                     .nationalId(1111111L)
                     .build();
-    private static final TourismManagerDto mockTourismManager =
+    private  final TourismManagerDto mockTourismManager =
             TourismManagerDto.TourismManagerDtoBuilder.aTourismManagerDto()
                     .name("reza")
                     .phone("12311231")
@@ -246,7 +269,7 @@ public class MockDataInitializer {
 
 
 
-    public static void initialize() throws InvalidAttributeValueException, UserNotFoundException {
+    public  void initialize() throws InvalidAttributeValueException, UserNotFoundException {
         getMockAddresses();
         getMockVehicles();
         getMockAccommodations();
@@ -257,15 +280,14 @@ public class MockDataInitializer {
 
 
 
-    private static List<UserDto> getMockUsers() throws InvalidAttributeValueException {
+    private  List<UserDto> getMockUsers() throws InvalidAttributeValueException {
 
-        var authService = AppContextHolder.getAuthService();
 
-        authService.signup(signupRequest1);
+        this.authService.signup(signupRequest1);
         authService.signup(signupRequest2);
         authService.signup(signupRequest3);
 
-        AppContextHolder.getUserRepository()
+        this.userRepository
                 .save(
                         PremiumUser.PremiumUserBuilder.aPremiumUser()
                                 .name("reza")
@@ -273,7 +295,11 @@ public class MockDataInitializer {
                                 .authorities(
                                         Set.of(Authority.AuthorityBuilder.anAuthority().name("ADMIN").build()))
                                 .username("admin")
-                                .password(new PasswordEncoder().encrypt("12345678".toCharArray()))
+                                .password(passwordEncoder.encode("12345678"))
+                                .isEnabled(true)
+                                .isExpired(false)
+                                .isCredentialsNonExpired(true)
+                                .validEmail(true)
                                 .build());
 
         return authService.findAllUsers();
@@ -283,7 +309,7 @@ public class MockDataInitializer {
 
 
 
-    private static List<BookingDto> getMockBookings() throws UserNotFoundException {
+    private  List<BookingDto> getMockBookings() throws UserNotFoundException {
         var accommodationOrder = getMockAccommodations();
         var vehicleOrder = getMockVehicles();
         var foodOrder = getMockFoods();
@@ -372,10 +398,7 @@ public class MockDataInitializer {
                         .tour(mockTour3)
                         .description("mock Booking 3")
                         .build();
-        var tourRateService = AppContextHolder.getTourRateService();
-        var bookService = AppContextHolder.getBookingService();
-        var tourService = AppContextHolder.getTourService();
-        var tour1 =tourService.create(mockTour);
+        var tour1 = tourService.create(mockTour);
         var tour2 = tourService.create(mockTour2);
         var tour3 = tourService.create(mockTour3);
         var savedTour1 = tourService.create(tour1);
@@ -394,19 +417,17 @@ public class MockDataInitializer {
         return bookService.findAllBooking();
     }
 
-    private static List<FoodOrderDto> getMockFoods() {
+    private  List<FoodOrderDto> getMockFoods() {
 
-        var orderService = AppContextHolder.getFoodOrderService();
 
-        orderService.create(foodOrder1);
-        orderService.create(foodOrder2);
+        foodOrderService.create(foodOrder1);
+        foodOrderService.create(foodOrder2);
 
-        return orderService.findAll();
+        return foodOrderService.findAll();
     }
 
-    private static List<AccommodationOrderDto> getMockAccommodations() {
+    private  List<AccommodationOrderDto> getMockAccommodations() {
 
-        var accommodationOrderService = AppContextHolder.getAccommodationOrderService();
         accommodationOrderService.create(accommodationOrder1);
         accommodationOrderService.create(accommodationOrder2);
 
@@ -415,9 +436,8 @@ public class MockDataInitializer {
     }
 
 
-    private static List<VehicleOrderDto> getMockVehicles() {
+    private  List<VehicleOrderDto> getMockVehicles() {
 
-        var vehicleOrderService = AppContextHolder.getVehicleOrderService();
 
         vehicleOrderService.create(vehicleOrder1);
         vehicleOrderService.create(vehicleOrder2);
@@ -426,8 +446,7 @@ public class MockDataInitializer {
     }
 
 
-    public static List<AddressDto> getMockAddresses () {
-        var addressService = AppContextHolder.getAddressService();
+    public  List<AddressDto> getMockAddresses () {
 
         addressService.create(address1);
         addressService.create(address2);
@@ -438,5 +457,8 @@ public class MockDataInitializer {
     }
 
 
-
+    @Override
+    public void run(String... args) throws Exception {
+        this.initialize();
+    }
 }

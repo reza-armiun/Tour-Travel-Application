@@ -1,0 +1,35 @@
+.navbar {
+  margin: 0;
+  /*height: 65px;*/
+  width: 100vw;
+  background-color: dodgerblue;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.navbar-left {
+  padding: 8px 15px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.navbar-right {
+  padding: 8px 15px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar__item {
+  padding: 0 5px 0 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}

@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.food;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.FoodOrderRepository;
 import razarm.tosan.repository.data.food.FoodOrderData;
 import razarm.tosan.repository.domain.food.FoodOrder;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class FoodOrderRepositoryImpl implements FoodOrderRepository {
     private Map<String, FoodOrderData> foodDataMap = new HashMap<>();
 

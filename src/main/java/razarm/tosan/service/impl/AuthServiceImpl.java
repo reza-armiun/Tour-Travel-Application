@@ -1,5 +1,7 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.mapper.user.UserToUserDto;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.repository.domain.auth.*;
@@ -12,7 +14,6 @@ import razarm.tosan.exception.PasswordNotMatchException;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.UserSessionRepository;
 import razarm.tosan.service.AuthService;
-import razarm.tosan.utility.PasswordEncoder;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.time.Instant;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
@@ -40,6 +41,11 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
+    public User findUserByUsername(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    @Override
     public UserDto signup(SignupRequest request) throws InvalidAttributeValueException {
         if(!request.getPassword().equals(request.getRePassword())) throw new PasswordNotMatchException("password not match");
         if(request.getPassword().length() < 8) throw new InvalidAttributeValueException("password must have more than 7 characters");
@@ -48,7 +54,8 @@ public class AuthServiceImpl implements AuthService {
                 PremiumUser.PremiumUserBuilder.aPremiumUser()
                         .name(request.getName())
                         .username(request.getUsername())
-                        .password(this.passwordEncoder.encrypt(request.getPassword().toCharArray()))
+//                        .password(this.passwordEncoder.encrypt(request.getPassword().toCharArray()))
+                        .password(this.passwordEncoder.encode(request.getPassword()))
                         .email(request.getEmail())
                         .type(PremiumType.NORMAL)
                         .authorities(
@@ -63,7 +70,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UserDetails login(LoginRequest request) throws UserNotFoundException {
         var user = userRepository.findByUsername(request.getUsername());
-        var isValidPw = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
+//        var isValidPw = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
+        var isValidPw = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if(!isValidPw)
             throw new InvalidCredentialException("invalid credential , please try again");
 
@@ -116,7 +124,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void logout(LogoutWithCredential request) throws UserNotFoundException {
         var user = userRepository.findByUsername(request.getUsername());
-        var passwordMatch = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
+//        var passwordMatch = passwordEncoder.authenticate(request.getPassword().toCharArray(), user.getPassword());
+        var passwordMatch = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if(!passwordMatch) throw new IllegalArgumentException("invalid password");
         userSessionRepository.deleteById(user.getUsername());
     }

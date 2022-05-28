@@ -1,5 +1,6 @@
 package razarm.tosan.controller.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.tour.SchedulePlanDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.accommodation.AccOrderToAccOrderDto;
@@ -11,7 +12,7 @@ import razarm.tosan.repository.domain.tour.SchedulePlan;
 
 import java.time.ZoneId;
 import java.util.stream.Collectors;
-
+@Component
 public class SchedulePlanToSchedulePlanDto implements Mapper<SchedulePlan, SchedulePlanDto> {
     private final AddressToAddressDto addressToAddressDto;
     private final AccOrderToAccOrderDto accOrderToAccOrderDto;

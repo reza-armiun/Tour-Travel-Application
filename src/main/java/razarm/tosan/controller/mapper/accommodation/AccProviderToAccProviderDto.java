@@ -1,5 +1,6 @@
 package razarm.tosan.controller.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.accommodation.AccommodationProviderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.AddressToAddressDto;
@@ -7,7 +8,7 @@ import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.accommodation.AccommodationProvider;
 
 import java.time.ZoneId;
-
+@Component
 public class AccProviderToAccProviderDto implements Mapper<AccommodationProvider, AccommodationProviderDto> {
     private final AddressToAddressDto addressToAddressDto;
 

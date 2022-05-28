@@ -1,5 +1,6 @@
 package razarm.tosan.controller.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.tour.BookingDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.user.UserToUserDto;
@@ -8,7 +9,7 @@ import razarm.tosan.repository.domain.Booking;
 
 import java.time.ZoneId;
 import java.util.stream.Collectors;
-
+@Component
 public class BookingToBookingDto implements Mapper<Booking, BookingDto> {
     private final TravelerToTravelerDto travelerToTravelerDto;
     private final TourToTourDto tourToTourDto;

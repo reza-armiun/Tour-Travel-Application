@@ -1,5 +1,7 @@
 package razarm.tosan.repository.inMemoryImpl.auth;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.repository.data.auth.UserData;
 import razarm.tosan.repository.UserRepository;
@@ -10,6 +12,8 @@ import razarm.tosan.repository.mapper.auth.UserToUserData;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Repository
+@Slf4j
 public class UserRepositoryInMemoryImpl implements UserRepository {
     private Map<String, UserData> userDataMap = new HashMap<>();
 

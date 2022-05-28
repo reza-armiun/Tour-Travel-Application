@@ -1,9 +1,11 @@
 package razarm.tosan.repository.mapper.auth;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.PremiumUserData;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 
+@Component
 public class UserDataMapperFactory {
     private static final InterestDataToInterest interestDataToInterest = new InterestDataToInterest();
     private static final InterestToInterestData interestToInterestData = new InterestToInterestData();

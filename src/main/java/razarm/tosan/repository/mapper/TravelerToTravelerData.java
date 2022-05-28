@@ -1,11 +1,12 @@
 package razarm.tosan.repository.mapper;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.tour.TravelerData;
 import razarm.tosan.repository.domain.tour.Traveler;
 import razarm.tosan.repository.mapper.location.AddressToAddressData;
 
-
+@Component
 public class TravelerToTravelerData implements Mapper<Traveler, TravelerData> {
     private final AddressToAddressData addressToAddressData;
 

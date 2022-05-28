@@ -2,6 +2,7 @@ package razarm.tosan.repository.inMemoryImpl;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+
 public class IdGenerator {
     private static AtomicLong atomicLong = new AtomicLong(0L);
 

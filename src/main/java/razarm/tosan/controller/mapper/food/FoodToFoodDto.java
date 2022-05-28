@@ -1,12 +1,13 @@
 package razarm.tosan.controller.mapper.food;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.food.FoodDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.food.Food;
 
 import java.time.ZoneId;
-
+@Component
 public class FoodToFoodDto implements Mapper<Food, FoodDto> {
     private final FoodProviderToFoodProviderDto foodProviderToFoodProviderDto;
 

@@ -5,6 +5,7 @@ import razarm.tosan.repository.domain.Interest;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class PremiumUser extends User {
     private final PremiumType type ;
@@ -43,44 +44,48 @@ public class PremiumUser extends User {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 
     @Override
     public String toString() {
-        return "PremiumUser{" +
-                "id='" + id + '\'' +
-                ", createdAt=" + createdAt +
-                ", modifiedAt=" + modifiedAt +
-                ", createdBy='" + createdBy + '\'' +
-                ", modifiedBy='" + modifiedBy + '\'' +
-                ", type=" + type +
-                ", authorities=" + authorities +
-                ", bookings=" + bookings +
-                ", interests=" + interests +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", nationalId=" + nationalId +
-                '}';
+        return new StringJoiner(", ", PremiumUser.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("createdAt=" + createdAt)
+                .add("modifiedAt=" + modifiedAt)
+                .add("createdBy='" + createdBy + "'")
+                .add("modifiedBy='" + modifiedBy + "'")
+                .add("type=" + type)
+                .add("authorities=" + authorities)
+                .add("bookings=" + bookings)
+                .add("interests=" + interests)
+                .add("name='" + name + "'")
+                .add("username='" + username + "'")
+                .add("password='" + password + "'")
+                .add("email='" + email + "'")
+                .add("phone='" + phone + "'")
+                .add("nationalId=" + nationalId)
+                .add("validEmail=" + validEmail)
+                .add("isExpired=" + isExpired)
+                .add("isEnabled=" + isEnabled)
+                .add("isCredentialsNonExpired=" + isCredentialsNonExpired)
+                .toString();
     }
 
     @Override

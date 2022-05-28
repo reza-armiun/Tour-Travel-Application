@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.mapper.address.AddressDtoToAddress;
 import razarm.tosan.controller.mapper.address.AddressToAddressDto;
@@ -9,6 +10,7 @@ import razarm.tosan.service.AddressService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final AddressDtoToAddress addressDtoToAddress;

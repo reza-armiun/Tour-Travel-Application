@@ -1,9 +1,11 @@
 package razarm.tosan.repository.mapper.location;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.location.CityData;
 import razarm.tosan.repository.domain.location.City;
 
+@Component
 public class CityDataToCity implements Mapper<CityData, City> {
     private final CountryDataToCountry countryDataToCountry;
 

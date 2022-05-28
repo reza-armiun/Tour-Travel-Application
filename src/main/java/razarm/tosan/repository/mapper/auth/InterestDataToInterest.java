@@ -1,9 +1,11 @@
 package razarm.tosan.repository.mapper.auth;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.InterestData;
 import razarm.tosan.repository.domain.Interest;
 
+@Component
 public class InterestDataToInterest implements Mapper<InterestData, Interest> {
     @Override
     public Interest convert(InterestData interestData) {

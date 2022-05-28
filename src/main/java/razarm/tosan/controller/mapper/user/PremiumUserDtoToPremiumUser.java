@@ -1,11 +1,12 @@
 package razarm.tosan.controller.mapper.user;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.auth.PremiumUserDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 
 import java.util.stream.Collectors;
-
+@Component
 public class PremiumUserDtoToPremiumUser implements Mapper<PremiumUserDto, PremiumUser> {
     private final InterestDtoToInterest interestDtoInterest;
 

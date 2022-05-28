@@ -1,9 +1,11 @@
 package razarm.tosan.repository.mapper.auth;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.UserSessionData;
 import razarm.tosan.repository.domain.auth.UserSession;
 
+@Component
 public class UserSessionDataToUserSession implements Mapper<UserSessionData, UserSession> {
     @Override
     public UserSession convert(UserSessionData userSessionData) {

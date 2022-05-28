@@ -1,9 +1,10 @@
 package razarm.tosan.repository.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.accommodation.AccommodationOrderData;
 import razarm.tosan.repository.domain.accommodation.AccommodationOrder;
-
+@Component
 public class AccOrderDataToAccOrder implements Mapper<AccommodationOrderData, AccommodationOrder> {
     private final AccommodationDataToAccommodation accommodationDataToAccommodation;
 

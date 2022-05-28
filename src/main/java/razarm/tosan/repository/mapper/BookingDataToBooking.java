@@ -1,5 +1,6 @@
 package razarm.tosan.repository.mapper;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.tour.BookingData;
 import razarm.tosan.repository.domain.Booking;
@@ -8,6 +9,7 @@ import razarm.tosan.repository.domain.tour.Tour;
 
 import java.util.stream.Collectors;
 
+@Component
 public class BookingDataToBooking implements Mapper<BookingData, Booking> {
     private final TravelerDataToTraveler travelerDataToTraveler;
 

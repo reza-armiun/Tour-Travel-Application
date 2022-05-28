@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.transport;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.VehicleOrderRepository;
 import razarm.tosan.repository.data.transport.VehicleOrderData;
 import razarm.tosan.repository.domain.transport.VehicleOrder;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class VehicleOrderRepositoryImpl implements VehicleOrderRepository {
     private Map<String, VehicleOrderData> vehicleOrderDataMap = new HashMap<>();
 

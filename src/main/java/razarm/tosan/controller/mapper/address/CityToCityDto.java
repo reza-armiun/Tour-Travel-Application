@@ -1,12 +1,13 @@
 package razarm.tosan.controller.mapper.address;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.address.CityDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.location.City;
 
 import java.time.ZoneId;
-
+@Component
 public class CityToCityDto implements Mapper<City, CityDto> {
     private final CountryToCountryDto countryToCountryDto;
 

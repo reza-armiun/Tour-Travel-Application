@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.tour;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.BookingRepository;
 import razarm.tosan.repository.TourRepository;
 import razarm.tosan.repository.UserRepository;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class BookingRepositoryImpl implements BookingRepository {
     private Map<String, BookingData> bookingDataMap= new HashMap<>();
 

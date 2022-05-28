@@ -1,8 +1,10 @@
 package razarm.tosan.repository.mapper.transport;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.transport.VehicleType;
 
+@Component
 public class VehicleDataMapperFactory {
     private static final VehicleProviderToVehicleProviderData vehicleProviderToVehicleProviderData = new VehicleProviderToVehicleProviderData();
     private static final VehicleProviderDataToVehicleProvider vehicleProviderDataToVehicleProvider = new VehicleProviderDataToVehicleProvider();

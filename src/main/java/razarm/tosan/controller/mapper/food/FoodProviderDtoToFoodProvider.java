@@ -1,9 +1,10 @@
 package razarm.tosan.controller.mapper.food;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.food.FoodProviderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.food.FoodProvider;
-
+@Component
 public class FoodProviderDtoToFoodProvider implements Mapper<FoodProviderDto, FoodProvider> {
 
     @Override

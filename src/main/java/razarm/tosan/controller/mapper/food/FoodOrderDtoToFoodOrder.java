@@ -1,9 +1,10 @@
 package razarm.tosan.controller.mapper.food;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.food.FoodOrderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.food.FoodOrder;
-
+@Component
 public class FoodOrderDtoToFoodOrder implements Mapper<FoodOrderDto, FoodOrder> {
     private final FoodDtoToFood foodDtoToFood;
 

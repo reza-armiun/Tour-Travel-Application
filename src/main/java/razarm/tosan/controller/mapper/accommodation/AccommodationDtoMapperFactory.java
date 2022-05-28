@@ -1,9 +1,11 @@
 package razarm.tosan.controller.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.*;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
 
+@Component
 public class AccommodationDtoMapperFactory {
     private static final CountryDtoToCountry countryDtoToCountry = new CountryDtoToCountry();
     private static final CountryToCountryDto countryToCountryDto = new CountryToCountryDto();

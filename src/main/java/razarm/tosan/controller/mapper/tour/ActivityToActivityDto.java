@@ -1,12 +1,13 @@
 package razarm.tosan.controller.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.tour.ActivityDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.tour.Activity;
 
 import java.time.ZoneId;
-
+@Component
 public class ActivityToActivityDto implements Mapper<Activity, ActivityDto> {
     @Override
     public ActivityDto convert(Activity activity) {

@@ -1,12 +1,13 @@
 package razarm.tosan.controller.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.accommodation.AccommodationOrder;
 
 import java.time.ZoneId;
-
+@Component
 public class AccOrderToAccOrderDto implements Mapper<AccommodationOrder, AccommodationOrderDto> {
     private final AccommodationToAccommodationDto accommodationToAccommodationDto ;
 

@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.location;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.AddressRepository;
 import razarm.tosan.repository.data.location.AddressData;
 import razarm.tosan.repository.domain.location.Address;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class AddressRepositoryImpl implements AddressRepository {
     private Map<String , AddressData> addressDataMap = new HashMap<>();
 

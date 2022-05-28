@@ -1,5 +1,6 @@
 package razarm.tosan.controller.mapper.transport;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.transport.VehicleProviderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.AddressToAddressDto;
@@ -7,7 +8,7 @@ import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.transport.VehicleProvider;
 
 import java.time.ZoneId;
-
+@Component
 public class VehicleProviderToVehicleProviderDto implements Mapper<VehicleProvider, VehicleProviderDto> {
     private final AddressToAddressDto addressToAddressDto;
 

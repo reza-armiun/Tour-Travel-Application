@@ -1,10 +1,11 @@
 package razarm.tosan.controller.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.tour.TourismManagerDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.AddressDtoToAddress;
 import razarm.tosan.repository.domain.tour.TourismManager;
-
+@Component
 public class TourismManagerDtoToTourismManager implements Mapper<TourismManagerDto, TourismManager> {
     private final AddressDtoToAddress addressDtoToAddress;
 

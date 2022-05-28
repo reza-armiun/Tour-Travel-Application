@@ -1,10 +1,11 @@
 package razarm.tosan.controller.mapper.transport;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.transport.VehicleProviderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.AddressDtoToAddress;
 import razarm.tosan.repository.domain.transport.VehicleProvider;
-
+@Component
 public class VehicleProviderDtoToVehicleProvider implements Mapper<VehicleProviderDto, VehicleProvider> {
     private final AddressDtoToAddress addressDtoToAddress;
 

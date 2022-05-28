@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
 import razarm.tosan.controller.mapper.accommodation.AccOrderDtoToAccOrder;
 import razarm.tosan.controller.mapper.accommodation.AccOrderToAccOrderDto;
@@ -9,6 +10,7 @@ import razarm.tosan.service.AccommodationOrderService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AccommodationOrderServiceImpl implements AccommodationOrderService {
     private final AccommodationOrderRepository accommodationOrderRepository;
     private final AccOrderToAccOrderDto accOrderToAccOrderDto;

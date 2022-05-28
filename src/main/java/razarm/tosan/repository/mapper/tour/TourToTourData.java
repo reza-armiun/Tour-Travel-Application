@@ -1,11 +1,13 @@
 package razarm.tosan.repository.mapper.tour;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.tour.TourData;
 import razarm.tosan.repository.domain.tour.Tour;
 
 import java.util.stream.Collectors;
 
+@Component
 public class TourToTourData implements Mapper<Tour, TourData> {
     private final TourismManagerToTourismManagerData tourismManagerToTourismManagerData;
     private final SchedulePlanToSchedulePlanData schedulePlanToSchedulePlanData;

@@ -1,9 +1,10 @@
 package razarm.tosan.controller.mapper.address;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.domain.location.Address;
-
+@Component
 public class AddressToAddressDto implements Mapper<Address, AddressDto> {
     private final CityToCityDto cityToCityDto;
 

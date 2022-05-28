@@ -1,9 +1,11 @@
 package razarm.tosan.repository.mapper.transport;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.transport.VehicleProviderData;
 import razarm.tosan.repository.domain.transport.VehicleProvider;
 
+@Component
 public class VehicleProviderToVehicleProviderData implements Mapper<VehicleProvider, VehicleProviderData> {
     @Override
     public VehicleProviderData convert(VehicleProvider vehicleProvider) {

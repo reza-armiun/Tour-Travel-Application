@@ -1,10 +1,11 @@
 package razarm.tosan.controller.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.accommodation.AccommodationProviderDto;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.address.AddressDtoToAddress;
 import razarm.tosan.repository.domain.accommodation.AccommodationProvider;
-
+@Component
 public class AccProviderDtoToAccProvider implements Mapper<AccommodationProviderDto, AccommodationProvider> {
     private final AddressDtoToAddress addressDtoToAddress;
 

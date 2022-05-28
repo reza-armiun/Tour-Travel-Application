@@ -1,5 +1,6 @@
 package razarm.tosan.repository.mapper.auth;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.PremiumUserData;
 import razarm.tosan.repository.domain.BaseEntity;
@@ -9,6 +10,7 @@ import razarm.tosan.repository.domain.auth.PremiumUser;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class PremiumUserToPremiumUserData implements Mapper<PremiumUser, PremiumUserData> {
     private final InterestToInterestData interestToInterestData;
 

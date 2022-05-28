@@ -1,10 +1,11 @@
 package razarm.tosan.repository.mapper.accommodation;
 
+import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.accommodation.HotelData;
 import razarm.tosan.repository.domain.accommodation.Hotel;
 import razarm.tosan.repository.mapper.location.AddressDataToAddress;
-
+@Component
 public class HotelDataToHotel implements Mapper<HotelData, Hotel> {
     private final AccProviderDataToAccProvider accProviderDataToAccProvider;
     private final AddressDataToAddress addressDataToAddress;

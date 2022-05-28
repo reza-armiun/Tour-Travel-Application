@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.tour.TourDto;
 import razarm.tosan.controller.mapper.tour.TourDtoToTour;
 import razarm.tosan.controller.mapper.tour.TourToTourDto;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class TourServiceImpl implements TourService {
     private final TourRepository tourRepository;
     private final TourToTourDto tourToTourDto;

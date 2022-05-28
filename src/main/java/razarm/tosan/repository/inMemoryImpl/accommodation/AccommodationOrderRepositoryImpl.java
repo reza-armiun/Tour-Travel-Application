@@ -1,5 +1,6 @@
 package razarm.tosan.repository.inMemoryImpl.accommodation;
 
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.AccommodationOrderRepository;
 import razarm.tosan.repository.data.accommodation.AccommodationOrderData;
 import razarm.tosan.repository.domain.accommodation.AccommodationOrder;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Repository
 public class AccommodationOrderRepositoryImpl implements AccommodationOrderRepository {
     private Map<String, AccommodationOrderData> accOrderMap = new HashMap<>();
 

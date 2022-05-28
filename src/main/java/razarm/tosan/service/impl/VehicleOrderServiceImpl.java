@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.transport.VehicleOrderDto;
 import razarm.tosan.controller.mapper.transport.VehicleOrderDtoToVehicleOrder;
 import razarm.tosan.controller.mapper.transport.VehicleOrderToVehicleOrderDto;
@@ -9,6 +10,7 @@ import razarm.tosan.service.VehicleOrderService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class VehicleOrderServiceImpl implements VehicleOrderService {
     private final VehicleOrderRepository vehicleOrderRepository;
     private final VehicleOrderDtoToVehicleOrder vehicleOrderDtoToVehicleOrder;
