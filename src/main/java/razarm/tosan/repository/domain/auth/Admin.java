@@ -1,19 +1,27 @@
 package razarm.tosan.repository.domain.auth;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import razarm.tosan.repository.domain.location.Address;
+
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Admin extends User{
 
     private final Set<Authority> authorities ;
 
-    public Admin(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<Authority> authorities) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public Admin(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address, Set<Authority> authorities) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address);
         this.authorities = authorities;
     }
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities.stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
@@ -39,7 +47,11 @@ public class Admin extends User{
 
     @Override
     public Admin cloneWithId(String id) {
-        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorities);
+        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
+    }
+
+    public Admin cloneWithNewPassword(String password) {
+        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
     }
 
 
@@ -55,10 +67,12 @@ public class Admin extends User{
         protected String email;
         protected String phone;
         protected Long nationalId;
+        protected String imageUrl;
         protected Boolean validEmail;
         protected Boolean isExpired;
         protected Boolean isEnabled;
         protected Boolean isCredentialsNonExpired;
+        protected Address address;
         private Set<Authority> authorities ;
 
         private AdminBuilder() {
@@ -128,6 +142,11 @@ public class Admin extends User{
             return this;
         }
 
+        public AdminBuilder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
         public AdminBuilder validEmail(Boolean validEmail) {
             this.validEmail = validEmail;
             return this;
@@ -148,8 +167,13 @@ public class Admin extends User{
             return this;
         }
 
+        public AdminBuilder address(Address address) {
+            this.address = address;
+            return this;
+        }
+
         public Admin build() {
-            return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorities);
+            return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
         }
     }
 }

@@ -1,0 +1,7 @@
+<div class="background" *ngIf="isOpen" (click)="closeOptions()"></div>
+<div class="dropdown">
+  <input type="text" class="dropdown__input" (click)="showOptions()" (input)="onInputChange()" #input>
+  <div class="dropdown__options" *ngIf="isOpen">
+    <div class="dropdown__option" *ngFor="let option of filteredOptions" (click)="setValue(option)">{{option}}</div>
+  </div>
+</div>

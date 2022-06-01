@@ -2,6 +2,7 @@ package razarm.tosan.repository.data.auth;
 
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 
 import java.time.Instant;
 import java.util.Set;
@@ -9,8 +10,8 @@ import java.util.Set;
 public class AdminData extends UserData {
     private final Set<String> authorityIds ;
 
-    public AdminData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<String> authorityIds) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public AdminData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<String> authorityIds) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
         this.authorityIds = authorityIds;
     }
 
@@ -20,7 +21,7 @@ public class AdminData extends UserData {
 
     @Override
     public BaseEntityData cloneWithId(String id) {
-        return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
+        return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
     }
 
 
@@ -36,6 +37,8 @@ public class AdminData extends UserData {
         protected String email;
         protected String phone;
         protected Long nationalId;
+        protected String imageUrl;
+        protected AddressData addressData;
         protected Boolean validEmail;
         protected Boolean isExpired;
         protected Boolean isEnabled;
@@ -109,6 +112,16 @@ public class AdminData extends UserData {
             return this;
         }
 
+        public AdminDataBuilder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public AdminDataBuilder addressData(AddressData addressData) {
+            this.addressData = addressData;
+            return this;
+        }
+
         public AdminDataBuilder validEmail(Boolean validEmail) {
             this.validEmail = validEmail;
             return this;
@@ -130,7 +143,7 @@ public class AdminData extends UserData {
         }
 
         public AdminData build() {
-            return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
+            return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
         }
     }
 }

@@ -1,0 +1,7 @@
+
+<div class="dropdown">
+  <div class="dropdown__selected" (click)="toggleOptions()"><div class="dropdown__value">{{selectedValue}}</div> <span class="dropdown__arrow"></span></div>
+  <div class="dropdown__options" *ngIf="isOpen">
+    <div class="dropdown__option" *ngFor="let option of filteredOptions" (click)="setValue(option)">{{option}}</div>
+  </div>
+</div>

@@ -1,13 +1,45 @@
-<form (ngSubmit)="onSubmit()" class="ui form" [formGroup]="authForm">
+<div class="container">
 
-  <div class="form-field">
-    <label>Username: </label>
-    <input type="text">
-  </div>
-  <div class="form-field">
-    <label>Password: </label>
-    <input type="password">
-  </div>
-  <button type="submit" >Login</button>
+  <form  (ngSubmit)="onSubmit()" class="ui form" [formGroup]="authForm">
 
-</form>
+    <div class="form-field">
+      <h2 class="header">Login</h2>
+      <hr/>
+      <label>Username: </label>
+      <input type="text"  name="username" formControlName="username">
+      <div class="error-segment" *ngIf="username?.getError('required') && (username?.touched || username?.dirty)">
+        Username is required.
+      </div>
+      <div class="error-segment" *ngIf="username?.getError('minlength') && (username?.touched || username?.dirty)">
+        Username must be at least 3 characters long.
+      </div>
+      <div class="error-segment" *ngIf="username?.getError('maxlength') && (username?.touched || username?.dirty)">
+        Maximum 20 characters.
+      </div>
+      <div class="error-segment" *ngIf="username?.getError('pattern') && (username?.touched || username?.dirty)">
+        Username should start with alphabetic characters.
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Password: </label>
+      <input type="password" name="password" formControlName="password">
+      <div class="error-segment" *ngIf="password?.getError('required') && (password?.touched || password?.dirty)">
+        Password is required.
+      </div>
+      <div class="error-segment" *ngIf="password?.getError('minlength') && (password?.touched || password?.dirty)">
+        Password must be at least 4 characters long.
+      </div>
+      <div class="error-segment" *ngIf="password?.getError('maxlength') && (password?.touched || password?.dirty)">
+        Password 20 characters.
+      </div>
+
+    </div>
+    <div class="description">
+      New User? <a routerLink="/register"> Create an account</a>
+    </div>
+    <div class="error-segment" *ngIf="authForm.errors && authForm.errors['credentials']">
+         Invalid username or password, please try again
+    </div>
+    <button type="submit" >Login</button>
+  </form>
+</div>

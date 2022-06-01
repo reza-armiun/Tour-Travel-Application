@@ -1,1 +1,55 @@
-<p>register works!</p>
+<div class="container">
+
+  <form  (ngSubmit)="onSubmit()" class="ui form" [formGroup]="authForm">
+
+    <h2 class="header">Register New Account</h2>
+    <hr/>
+    <div class="form-field">
+      <label>Name: </label>
+      <input type="text" name="name" formControlName="name">
+    </div>
+    <div class="form-field">
+      <label>Email: </label>
+      <input type="text" name="email" formControlName="email">
+    </div>
+    <div class="form-field__username">
+      <label>Username: </label>
+      <div class="field">
+        <input type="text" class="input" name="username" formControlName="username">
+
+        <div class="spinner" >
+          <span class="checkmark" *ngIf="!(username?.getError('notUniqueUsername')) && !username?.pending && statusChecks && disableStatusChecks()  ">
+            <div class="checkmark_stem"></div>
+            <div class="checkmark_kick"></div>
+          </span>
+            <div class="close-icon" *ngIf="(username?.getError('notUniqueUsername')) && !username?.pending && statusChecks"></div>
+
+          <ng-container *ngIf="username?.pending && enableStatusChecks()" >
+            <mat-spinner [diameter]="18"  color="primary"></mat-spinner>
+          </ng-container>
+        </div>
+      </div>
+      <div class="error-segment" *ngIf="username?.getError('notUniqueUsername') && (username?.touched || username?.dirty)">
+        Username already taken, Please try another username.
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Password: </label>
+      <input type="password" name="password" formControlName="password">
+    </div>
+    <div class="form-field">
+      <label>Password Confirmation: </label>
+      <input type="password" name="rePassword" formControlName="rePassword">
+      <div class="error-segment" *ngIf="authForm?.getError('passwordsNotMatch') && (rePassword?.touched || rePassword?.dirty)">
+        Password do not match.
+      </div>
+    </div>
+    <div class="description">
+     Already have an account? <a routerLink="/signin"> Click here</a>
+    </div>
+    <div class="error-segment" *ngIf="authForm.errors && authForm.errors['invalidInput']">
+      Something goes wrong, please try again
+    </div>
+    <button type="submit">Register</button>
+  </form>
+</div>

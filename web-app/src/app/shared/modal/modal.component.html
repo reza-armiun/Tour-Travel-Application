@@ -1,0 +1,5 @@
+<div class="container" (click)="closeBackground()" *ngIf="show ? showBackground() : closeBackground()">
+   <div class="modal" (click)="disableBubbling($event)">
+     <ng-content></ng-content>
+   </div>
+</div>

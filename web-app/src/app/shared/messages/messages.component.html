@@ -1,0 +1,17 @@
+<div class="messages-error" *ngIf="(errors$ | async) as errors">
+  <ng-container *ngIf="showErrorMessage">
+    <div class="error" *ngFor="let error of errors">
+      <div class="message">{{error}}</div>
+      <div class="close red" (click)="onClose()"></div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="messages-success" *ngIf="(success$ | async) as success">
+    <div class="success" >
+      <div class="message">{{success}}</div>
+      <div class="close green" (click)="onClose()"></div>
+    </div>
+</div>
+
+

@@ -1,45 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import { Router} from "@angular/router";
+import {Subscription, tap} from "rxjs";
+import {LoadingService} from "../../shared/loading/loading.service";
+import {MessagesService} from "../../shared/messages/messages.service";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
+  subs: Subscription | undefined;
+
 
   authForm = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-      Validators.pattern(/^[a-z0-9]+$/)
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(20)
-    ])
+    username: new FormControl('', {validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+        Validators.pattern(/^[a-z]+[a-z0-9]*$/)
+      ], updateOn: 'blur'}),
+    password: new FormControl('', {validators: [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ], updateOn: 'submit'})
   });
 
-  constructor(private authService: AuthService) {}
+  get username() {return this.authForm.get('username');}
+  get password() {return this.authForm.get('password');}
 
-  ngOnInit() {}
+  constructor(private authService: AuthService, private router: Router, private loadingService: LoadingService, private messageService: MessagesService) {
+  }
+
+  ngOnInit() {
+  }
 
   onSubmit() {
     if (this.authForm.invalid) {
       return;
     }
-
-    this.authService.signin(this.authForm.value).subscribe({
-      next: () => {},
-      error: ({ error }) => {
-        if (error.username || error.password) {
-          this.authForm.setErrors({ credentials: true });
-        }
+    this.subs = this.loadingService.showLoadingUntilCompletion(this.authService.signin(this.authForm.value)).subscribe({
+      next: () => {
+        this.router.navigate(['./'], )
+      },
+      error: ({error}) => {
+        // if (error.username || error.password) {
+          this.authForm.setErrors({credentials: true});
+        // }
       }
     });
   }
+
+
+  ngOnDestroy(): void {
+    this.subs?.unsubscribe();
+  }
+
 
 }

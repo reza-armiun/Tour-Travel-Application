@@ -62,8 +62,22 @@ public class Booking extends BaseEntity implements Discountable {
         return new Booking(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, user, travelers, tour);
     }
 
-
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Booking{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", modifiedAt=").append(modifiedAt);
+        sb.append(", createdBy='").append(createdBy).append('\'');
+        sb.append(", modifiedBy='").append(modifiedBy).append('\'');
+        sb.append(", date=").append(date);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", user=").append(user);
+        sb.append(", travelers=").append(travelers);
+        sb.append(", tour=").append(tour);
+        sb.append('}');
+        return sb.toString();
+    }
 
     public static final class BookingBuilder {
         protected String id;

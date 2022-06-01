@@ -1,0 +1,351 @@
+.password-form {
+  width: 400px;
+  max-width: 600px;
+  padding: 0 8px 15px 8px;
+  background-color: white;
+  border-radius: 22px;
+  box-shadow: 1px 1px 8px  rgba(128, 128, 128, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 10px;
+}
+.password-form__header {
+  width: 100%;
+  padding: 20px 15px 15px 15px;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.6);
+}
+
+.password-form__content  {
+  width: 100%;
+  display: flex;
+  padding: 6px 12px 15px 12px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  row-gap: 15px;
+}
+.password-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.45);
+}
+.password-field label {
+  /*color: rgba(128, 128, 128, 0.9);*/
+  font-size: 12px;
+  font-weight: 500;
+}
+.password-field input {
+  outline: none !important;
+  border: none !important;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 0 6px 0;
+}
+.password-field:hover  {
+  color: dodgerblue !important;
+  border-bottom: 1px solid dodgerblue;
+}
+
+.field-focus  {
+  color: dodgerblue !important;
+  border-bottom: 1px solid dodgerblue;
+}
+
+.password-form__actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+.btn-cancel {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  align-self: center ;
+  padding: 11px 15px;
+  width: 85px;
+  background: rgba(128, 128,128, 0.4);
+  color: black;
+}
+.btn-submit {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  align-self: center ;
+  padding: 11px 15px;
+  width: 85px;
+  background: linear-gradient(to right, #1368fa, #2435f8);
+  color: white;
+}
+
+
+
+ .profile-form {
+  width: 100vw;
+  padding:  50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 60px;
+  row-gap: 45px;
+}
+
+.profile__info {
+  /*width: 40%;*/
+  min-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 25px 50px 25px;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 1px 1px 7px rgba(128, 128, 128, 0.4);
+}
+
+.profile__img-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+.profile__img-wrapper img{
+  cursor: pointer;
+  width: 350px;
+  height: 350px;
+}
+.profile__img-wrapper img:hover {
+ opacity: 0.85;
+}
+.form-field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 6px;
+  margin-bottom: 20px;
+}
+.form-field label {
+  flex: 4;
+  font-size: 13px;
+  color: rgba(128, 128, 128, 1);
+}
+.form-field input {
+  flex: 5;
+  outline: none;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.form-field a {
+  cursor: pointer;
+  flex: 5;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: dodgerblue;
+  text-align: center;
+}
+
+input:hover {
+  border-bottom: 1px solid dodgerblue !important;
+}
+input:focus {
+  border-bottom: 1px solid dodgerblue !important;
+}
+
+
+
+.form-btn {
+  cursor: pointer;
+  margin-top: 25px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  align-self: center ;
+  padding: 11px 15px;
+  width: 100px;
+  background: linear-gradient(to right,orange, #ff487c);
+  color: white;
+}
+.form-btn:hover {
+  box-shadow: 1px 1px 6px -1px rgba(255, 72, 124, 0.7) ;
+}
+
+.profile__details {
+  width: 30%;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 50px;
+  background-color: transparent;
+}
+
+.profile__address {
+  width: 100%;
+  padding: 30px 30px 50px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 1px 1px 7px rgba(128, 128, 128, 0.4);
+}
+
+.address__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+.divider {
+  width: 100%;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(128, 128, 128 ,0.15);
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.inline-fields {
+  width:  100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  margin-top: 15px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.field label {
+  font-size: 12px;
+  color: rgba(128, 128, 128, 1);
+}
+.field input {
+  outline: none;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.address-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+.address-field label {
+  font-size: 13px;
+  color: rgba(128, 128, 128, 1);
+}
+.address-field input {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.address__btn {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 25px;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.profile__bookings {
+  width: 100%;
+  height: 300px;
+  padding: 30px 30px 50px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 1px 1px 7px rgba(128, 128, 128, 0.4);
+}
+.bookings__header {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 600;
+}
+.booking__item {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.booking__content {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.booking__name {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgba(128, 128, 128, 0.9);
+}
+.booking__date {
+  font-size: 12px;
+  color: rgba(128, 128, 128, 0.6);
+}
+.booking_actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 3px;
+}
+.view_btn {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 22px;
+  background: linear-gradient(to right, #039c03, #2aef01);
+  color: white;
+}
+.view_btn:hover {
+  box-shadow: 1px 1px 6px -1px #039c03;
+}
+
+
+
+
+

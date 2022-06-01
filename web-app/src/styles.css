@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  background-color: rgba(197, 177, 205, 0.15);
+  z-index: -1;
+  margin: 0;
+}
+
+
+.error-segment {
+  display: flex;
+  padding: 12px 15px;
+  background-color: rgb(253, 189, 189);
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.checkmark {
+  display:inline-block;
+  width: 20px;
+  height: 20px;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+}
+
+.checkmark_stem {
+  position: absolute;
+  width:3px;
+  height:9px;
+  background-color:green;
+  left:11px;
+  top:6px;
+}
+
+.checkmark_kick {
+  position: absolute;
+  width:3px;
+  height:3px;
+  background-color:green;
+  left:8px;
+  top:12px;
+}
+
+
+.close-icon:after {
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+  display: inline-block;
+  content: "\00d7"; /* This will render the 'X' */
+}

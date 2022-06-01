@@ -1,22 +1,25 @@
 package razarm.tosan.repository.mapper.auth;
 
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.PremiumUserData;
 import razarm.tosan.repository.domain.BaseEntity;
 import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
+import razarm.tosan.repository.mapper.location.AddressDataToAddress;
+import razarm.tosan.repository.mapper.location.AddressToAddressData;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class PremiumUserToPremiumUserData implements Mapper<PremiumUser, PremiumUserData> {
     private final InterestToInterestData interestToInterestData;
+    private final AddressToAddressData addressToAddressData;
 
-    public PremiumUserToPremiumUserData(InterestToInterestData interestToInterestData) {
-        this.interestToInterestData = interestToInterestData;
-    }
 
     @Override
     public PremiumUserData convert(PremiumUser premiumUser) {
@@ -28,15 +31,17 @@ public class PremiumUserToPremiumUserData implements Mapper<PremiumUser, Premium
                 .email(premiumUser.getEmail())
                 .phone(premiumUser.getPhone())
                 .nationalId(premiumUser.getNationalId())
+                .addressData(premiumUser.getAddress() != null ? this.addressToAddressData.convert(premiumUser.getAddress()) : null)
+                .imageUrl(premiumUser.getImageUrl())
                 .type(premiumUser.getType())
                 .authorities(
                         premiumUser.getAuthorities().stream()
-                                .map(Authority::getName)
+                                .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toUnmodifiableSet()))
                 .validEmail(premiumUser.getValidEmail())
-                .isExpired(premiumUser.getExpired())
-                .isEnabled(premiumUser.getEnabled())
-                .isCredentialsNonExpired(premiumUser.getCredentialsNonExpired())
+                .isExpired(premiumUser.getIsExpired())
+                .isEnabled(premiumUser.getIsEnabled())
+                .isCredentialsNonExpired(premiumUser.getIsCredentialsNonExpired())
                 //
                 // .authorityIds(premiumUser.getAuthorities().stream().map(BaseEntity::getId).collect(Collectors.toUnmodifiableSet()))
                 .bookingIds(

@@ -3,8 +3,11 @@ package razarm.tosan.repository.inMemoryImpl.auth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import razarm.tosan.exception.UserNotFoundException;
+import razarm.tosan.repository.data.auth.PremiumUserData;
 import razarm.tosan.repository.data.auth.UserData;
 import razarm.tosan.repository.UserRepository;
+import razarm.tosan.repository.domain.Booking;
+import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.auth.User;
 import razarm.tosan.repository.mapper.auth.UserDataToUser;
 import razarm.tosan.repository.mapper.auth.UserToUserData;
@@ -61,6 +64,17 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
                         .filter(userData -> userData.getUsername().equals(username))
                         .findAny()
                         .orElseThrow(UserNotFoundException::new);
-        return userDataToUser.convert(user);
+        User convertedUser = userDataToUser.convert(user);
+        PremiumUser premiumUser = null;
+        if(user instanceof PremiumUserData) {  //TODO refactor
+            var premiumUserData = (PremiumUserData)user;
+            premiumUser = ((PremiumUser) convertedUser)
+                    .cloneWithBookings(
+                            premiumUserData.getBookingIds().stream()
+                                    .map(id -> Booking.BookingBuilder.aBooking().id(id).build())
+                                    .collect(Collectors.toUnmodifiableSet()));
+        }
+
+        return premiumUser != null ? premiumUser : convertedUser;
     }
 }

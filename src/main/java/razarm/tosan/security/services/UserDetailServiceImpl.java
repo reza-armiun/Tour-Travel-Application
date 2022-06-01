@@ -32,7 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 @Override
                 public Collection<? extends GrantedAuthority> getAuthorities() {
                     return user.getAuthorities().stream()
-                            .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                            .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
                             .collect(Collectors.toUnmodifiableSet());
                 }
 
@@ -48,7 +48,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
                 @Override
                 public boolean isAccountNonExpired() {
-                    return user.getCredentialsNonExpired();
+                    return true;
                 }
 
                 @Override

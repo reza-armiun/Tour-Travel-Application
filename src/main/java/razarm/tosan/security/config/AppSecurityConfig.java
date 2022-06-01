@@ -4,6 +4,7 @@ package razarm.tosan.security.config;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.util.WebUtils;
 import razarm.tosan.security.jwt.JwtConfig;
 import razarm.tosan.security.jwt.JwtTokenVerifier;
@@ -31,13 +36,16 @@ import razarm.tosan.security.services.SessionService;
 import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final SessionService userSessionService;
@@ -46,10 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-
-                .cors()
-                .and()
+        http.cors().configurationSource(corsConfigurationSource())
+                .and().antMatcher("/v1/**")
                 .csrf()
                 .disable()
                 .sessionManagement()
@@ -62,16 +68,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         new JwtTokenVerifier(userSessionService, secretKey, jwtConfig),
                         JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers("/v1/signup", "/v1/check-username").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .logout()
-                .logoutUrl("/v1/logout")
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/v1/logout"))
+//                .logoutUrl("/v1/logout")
+//                .addLogoutHandler((request, response, authentication) -> {
+//                    log.info("logout user " );
+//                })
+
                 .logoutSuccessHandler(
                         (req, res, auth) -> {
                             final Cookie authCookie = WebUtils.getCookie(req, "Authorization");
 
-                            String token = authCookie.getValue();
+                            String token = authCookie != null ? authCookie.getValue() : null;
                             log.debug("Removing token: {} ", token);
                             if (token != null) {
                                 this.userSessionService.removeToken(token);
@@ -95,5 +108,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return daoAuthenticationProvider;
     }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+//        config.setAllowedOrigins(List.of("http://localhost:4200"));
+//        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        config.addAllowedOrigin("http://localhost:4200");
+        config.setMaxAge(Duration.ofDays(10));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "content-type", "x-auth-token", "Access-Control-Allow-Origin"));
+        config.setExposedHeaders(Arrays.asList("x-auth-token", "Authorization", "Access-Control-Allow-Origin", "user-info"));
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
+
+
+
 
 }

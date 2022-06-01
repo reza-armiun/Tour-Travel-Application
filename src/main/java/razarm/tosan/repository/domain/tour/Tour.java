@@ -12,7 +12,7 @@ import java.util.StringJoiner;
 public class Tour extends BaseEntity
         implements Timeable, Costable {
     protected final String name;
-    protected final TourType type;
+    protected final TourType type; //TODO remove
     protected final String guide;
     protected final String description;
     protected final String imgUrl;

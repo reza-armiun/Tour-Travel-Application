@@ -1,39 +1,24 @@
 package razarm.tosan.controller.dto.auth;
 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SignupRequest {
-    private final String name;
-    private final String email;
-    private final String username;
-    private final String password;
-    private final String rePassword;
+    private  String name;
+    private  String email;
+    private  String username;
+    private  String password;
+    private  String rePassword;
 
-    public SignupRequest(String name, String email, String username, String password, String rePassword) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.rePassword = rePassword;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getRePassword() {
-        return rePassword;
-    }
 
 
     @Override

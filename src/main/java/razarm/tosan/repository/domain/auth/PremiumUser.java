@@ -1,11 +1,16 @@
 package razarm.tosan.repository.domain.auth;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import razarm.tosan.repository.domain.Booking;
 import razarm.tosan.repository.domain.Interest;
+import razarm.tosan.repository.domain.location.Address;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Set;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class PremiumUser extends User {
     private final PremiumType type ;
@@ -14,8 +19,8 @@ public class PremiumUser extends User {
     private final Set<Booking> bookings ;
     private final Set<Interest> interests;
 
-    public PremiumUser(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, PremiumType type, Set<Authority> authorities, Set<Booking> bookings, Set<Interest> interests) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public PremiumUser(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address, PremiumType type, Set<Authority> authorities, Set<Booking> bookings, Set<Interest> interests) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address);
         this.type = type;
         this.authorities = authorities;
         this.bookings = bookings;
@@ -38,8 +43,10 @@ public class PremiumUser extends User {
 
 
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities.stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
@@ -90,7 +97,15 @@ public class PremiumUser extends User {
 
     @Override
     public PremiumUser cloneWithId(String id) {
-        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookings, interests);
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+    }
+
+    public PremiumUser cloneWithBookings(Set<Booking> bookings) {
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+    }
+
+    public PremiumUser cloneWithNewPassword(String password) {
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
     }
 
 
@@ -106,10 +121,12 @@ public class PremiumUser extends User {
         protected String email;
         protected String phone;
         protected Long nationalId;
+        protected String imageUrl;
         protected Boolean validEmail;
         protected Boolean isExpired;
         protected Boolean isEnabled;
         protected Boolean isCredentialsNonExpired;
+        protected Address address;
         private PremiumType type ;
         private Set<Authority> authorities ;
         private Set<Booking> bookings ;
@@ -197,6 +214,11 @@ public class PremiumUser extends User {
             return this;
         }
 
+        public PremiumUserBuilder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
         public PremiumUserBuilder validEmail(Boolean validEmail) {
             this.validEmail = validEmail;
             return this;
@@ -217,8 +239,13 @@ public class PremiumUser extends User {
             return this;
         }
 
+        public PremiumUserBuilder address(Address address) {
+            this.address = address;
+            return this;
+        }
+
         public PremiumUser build() {
-            return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookings, interests);
+            return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
         }
     }
 }

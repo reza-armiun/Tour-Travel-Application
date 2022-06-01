@@ -1,0 +1,10 @@
+.background {
+  position: fixed;
+  z-index: 499;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128 , 128,  0.3);
+}
+.hide {
+  display: none;
+}

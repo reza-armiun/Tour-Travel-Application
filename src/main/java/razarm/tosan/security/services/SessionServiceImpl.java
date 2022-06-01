@@ -26,7 +26,7 @@ public class SessionServiceImpl implements SessionService {
         if(username == null || token == null )return false;
 
         final Session session = this.userSessionRepository.findByUsername(username);
-        if(session.getToken().equals(token)) return true;
+        if(session != null && session.getToken().equals(token)) return true;
         else return false;
     }
 

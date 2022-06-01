@@ -1,0 +1,78 @@
+form{
+  display: flex;
+  flex-direction: column;
+  padding: 30px 25px;
+  box-shadow: 1px 1px 8px rgba(128, 128, 128, 0.6);
+  border-radius: 6px;
+  min-width: 500px;
+  background-color: rgba(135, 206, 250, 0.6);
+}
+hr{
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25vh;
+}
+.header {
+  text-align: center;
+  margin: 8px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+.form-field label {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.form-field input {
+  background-color: white;
+  margin-bottom: 10px;
+  padding:  10px;
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  border-radius: 7px;
+}
+.form-field input:hover {
+  border-color: dodgerblue;
+  box-shadow: 1px 1px 7px rgba(30, 144, 255, 0.3);
+}
+.form-field input:focus{
+  border-color: dodgerblue;
+}
+
+form button {
+  cursor: pointer;
+  align-self: center;
+  margin-top: 12px;
+  padding: 10px 8px;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 153, 0 ,1);
+  color: white;
+  border-radius: 6px;
+  width: 95%;
+  font-size: 16px;
+}
+form button:hover {
+  opacity: 0.85;
+  box-shadow: 1px 1px 10px rgba(30, 144, 255, 0.3);
+}
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 13px;
+}
+.description a {
+  text-decoration: none;
+  font-size: 12px;
+  color: blue;
+}

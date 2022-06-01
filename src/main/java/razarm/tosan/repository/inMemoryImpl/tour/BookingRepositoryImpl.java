@@ -1,20 +1,22 @@
 package razarm.tosan.repository.inMemoryImpl.tour;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.BookingRepository;
 import razarm.tosan.repository.TourRepository;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.data.tour.BookingData;
 import razarm.tosan.repository.domain.Booking;
+import razarm.tosan.repository.domain.auth.PremiumUser;
+import razarm.tosan.repository.domain.auth.User;
 import razarm.tosan.repository.mapper.BookingDataToBooking;
 import razarm.tosan.repository.mapper.BookingToBookingData;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class BookingRepositoryImpl implements BookingRepository {
     private Map<String, BookingData> bookingDataMap= new HashMap<>();
 
@@ -44,10 +46,15 @@ public class BookingRepositoryImpl implements BookingRepository {
             var availableTour = tourRepository.findById(tour.getId());
             booking = booking.cloneWithTour(availableTour);
         }
-//        else if(tour.getId() == null) throw new IllegalArgumentException("null tour id");
+
 
         var bookingData = bookingToBookingData.convert(booking);
         bookingDataMap.put(bookingData.getId(), bookingData);
+
+        PremiumUser premiumUser = (PremiumUser)booking.getUser();
+        Set<Booking> newBookings = new HashSet<>(premiumUser.getBookings());;
+        newBookings.add(Booking.BookingBuilder.aBooking().id(bookingData.getId()).build());
+        this.userRepository.update(premiumUser.cloneWithBookings(newBookings));
 
         return booking.cloneWithId(bookingData.getId());
     }

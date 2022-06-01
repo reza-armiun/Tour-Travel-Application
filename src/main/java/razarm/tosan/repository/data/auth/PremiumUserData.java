@@ -1,5 +1,6 @@
 package razarm.tosan.repository.data.auth;
 
+import razarm.tosan.repository.data.location.AddressData;
 import razarm.tosan.repository.domain.auth.PremiumType;
 
 import java.time.Instant;
@@ -12,8 +13,8 @@ public class PremiumUserData extends UserData{
     private final Set<InterestData> interests;
 
 
-    public PremiumUserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, PremiumType type, Set<String> authorities, Set<String> bookingIds, Set<InterestData> interests) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public PremiumUserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, PremiumType type, Set<String> authorities, Set<String> bookingIds, Set<InterestData> interests) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
         this.type = type;
         this.authorities = authorities;
         this.bookingIds = bookingIds;
@@ -38,9 +39,37 @@ public class PremiumUserData extends UserData{
 
     @Override
     public PremiumUserData cloneWithId(String id) {
-        return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
+        return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
     }
 
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("PremiumUserData{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", modifiedAt=").append(modifiedAt);
+        sb.append(", createdBy='").append(createdBy).append('\'');
+        sb.append(", modifiedBy='").append(modifiedBy).append('\'');
+        sb.append(", type=").append(type);
+        sb.append(", authorities=").append(authorities);
+        sb.append(", bookingIds=").append(bookingIds);
+        sb.append(", interests=").append(interests);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", nationalId=").append(nationalId);
+        sb.append(", imageUrl='").append(imageUrl).append('\'');
+        sb.append(", addressData=").append(addressData);
+        sb.append(", validEmail=").append(validEmail);
+        sb.append(", isExpired=").append(isExpired);
+        sb.append(", isEnabled=").append(isEnabled);
+        sb.append(", isCredentialsNonExpired=").append(isCredentialsNonExpired);
+        sb.append('}');
+        return sb.toString();
+    }
 
     public static final class PremiumUserDataBuilder {
         protected String id;
@@ -54,6 +83,8 @@ public class PremiumUserData extends UserData{
         protected String email;
         protected String phone;
         protected Long nationalId;
+        protected String imageUrl;
+        protected AddressData addressData;
         protected Boolean validEmail;
         protected Boolean isExpired;
         protected Boolean isEnabled;
@@ -145,6 +176,16 @@ public class PremiumUserData extends UserData{
             return this;
         }
 
+        public PremiumUserDataBuilder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public PremiumUserDataBuilder addressData(AddressData addressData) {
+            this.addressData = addressData;
+            return this;
+        }
+
         public PremiumUserDataBuilder validEmail(Boolean validEmail) {
             this.validEmail = validEmail;
             return this;
@@ -166,7 +207,7 @@ public class PremiumUserData extends UserData{
         }
 
         public PremiumUserData build() {
-            return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
+            return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
         }
     }
 }

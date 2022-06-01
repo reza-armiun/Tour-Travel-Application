@@ -1,19 +1,24 @@
 package razarm.tosan.service.impl;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import razarm.tosan.controller.dto.auth.*;
+import razarm.tosan.controller.dto.tour.BookingInfo;
+import razarm.tosan.controller.mapper.user.UserToProfile;
 import razarm.tosan.controller.mapper.user.UserToUserDto;
 import razarm.tosan.exception.UserNotFoundException;
-import razarm.tosan.repository.domain.auth.*;
-import razarm.tosan.controller.dto.auth.LoginRequest;
-import razarm.tosan.controller.dto.auth.LogoutWithCredential;
-import razarm.tosan.controller.dto.auth.SignupRequest;
-import razarm.tosan.controller.dto.auth.UserDto;
 import razarm.tosan.exception.InvalidCredentialException;
 import razarm.tosan.exception.PasswordNotMatchException;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.UserSessionRepository;
+import razarm.tosan.repository.domain.auth.*;
+import razarm.tosan.security.model.UpdatePasswordRequest;
 import razarm.tosan.service.AuthService;
+import razarm.tosan.service.tour.BookingService;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.time.Instant;
@@ -24,20 +29,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final UserSessionRepository userSessionRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserToUserDto userToUserDto;
+    private final UserToProfile userToProfile;
+    private final BookingService bookingService;
 
-    public AuthServiceImpl(UserRepository userRepository, UserSessionRepository userSessionRepository
-            , PasswordEncoder passwordEncoder, UserToUserDto userToUserDto) {
-        this.userRepository = userRepository;
-        this.userSessionRepository = userSessionRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userToUserDto = userToUserDto;
-    }
 
 
     @Override
@@ -52,17 +54,17 @@ public class AuthServiceImpl implements AuthService {
 
         final var newUser =
                 PremiumUser.PremiumUserBuilder.aPremiumUser()
-                        .name(request.getName())
-                        .username(request.getUsername())
+                                              .name(request.getName())
+                                              .username(request.getUsername())
 //                        .password(this.passwordEncoder.encrypt(request.getPassword().toCharArray()))
-                        .password(this.passwordEncoder.encode(request.getPassword()))
-                        .email(request.getEmail())
-                        .type(PremiumType.NORMAL)
-                        .authorities(
+                                              .password(this.passwordEncoder.encode(request.getPassword()))
+                                              .email(request.getEmail())
+                                              .type(PremiumType.NORMAL)
+                                              .authorities(
                                 Set.of(
                                         Authority.AuthorityBuilder.anAuthority().name("BASIC")
-                                                .build())) // TODO refactor this
-                        .build();
+                                                                  .build())) // TODO refactor this
+                                              .build();
         final var savedUser = this.userRepository.save(newUser);
         return this.userToUserDto.convert(savedUser);
     }
@@ -85,18 +87,12 @@ public class AuthServiceImpl implements AuthService {
              }
 
              @Override
-             public String getEmail() {
-                 return user.getEmail();
+             public Collection<? extends GrantedAuthority> getAuthorities() {
+                 return user.getAuthorities();
              }
-
              @Override
              public String getPassword() {
                  return null;
-             }
-
-             @Override
-             public Collection<? extends Authority> getAuthorities() {
-                 return user.getAuthorities();
              }
 
              @Override
@@ -136,4 +132,44 @@ public class AuthServiceImpl implements AuthService {
                 .map(userToUserDto::convert)
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    @Override
+    public boolean checkUsername(String username) {
+        try {
+            return this.userRepository.findByUsername(username) != null;
+        }catch (UserNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public Profile getUserProfileByUsername(String username) {
+        var user = this.userRepository.findByUsername(username);
+        var profile = this.userToProfile.convert(user);
+        if(user instanceof PremiumUser) {
+            var premiumUser = (PremiumUser) user;
+            profile.setBookings(premiumUser.getBookings().stream().map(booking -> {
+                var bk =  this.bookingService.findById(booking.getId());
+                return BookingInfo.builder().id(bk.getId())
+                                  .tourName(bk.getTour().getName())
+                                  .date(bk.getDate())
+                                  .build();
+            }).collect(Collectors.toUnmodifiableSet()));
+        }
+        return profile;
+    }
+
+    @Override
+    public void updatePassword(UpdatePasswordRequest updatePasswordRequest) throws PasswordNotMatchException {
+        if(!updatePasswordRequest.getPassword().equals(updatePasswordRequest.getRePassword())) throw new PasswordNotMatchException("password not match");
+        var user = this.userRepository
+                .findByUsername(updatePasswordRequest.getUsername());
+
+        var isMatched = passwordEncoder.matches(updatePasswordRequest.getOldPassword(), user.getPassword());
+        if(!isMatched ) throw new InvalidCredentialException("invalid credentials");
+        user.setPassword(this.passwordEncoder.encode(updatePasswordRequest.getPassword()) );
+         this.userRepository.update(user);
+    }
+
+
 }

@@ -1,0 +1,29 @@
+<div class="tour">
+  <div class="tour__photo">
+    <img src="{{tour.imgUrl}}" >
+  </div>
+  <div class="tour__container">
+    <div class="tour__content">
+      <div class="tour__content-main">
+        <div class="tour__content-header">{{tour.name}}</div>
+        <div class="tour__content-text">
+          {{tour.description}}
+        </div>
+      </div>
+      <div class="tour__content-review">
+        <div class="tour__score">
+          Very Good
+          <div class="label blue" >
+            {{tour.rating || 0}}
+          </div>
+        </div>
+        <div class="tour__price">
+          Price From
+          <div class="currency">{{tour.price}}</div></div>
+      </div>
+    </div>
+    <div class="tour__container-book">
+      <a class="blue-btn" href="#" >Book Now</a>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 package razarm.tosan.security.jwt;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.SneakyThrows;
@@ -13,11 +14,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import razarm.tosan.controller.rest.resolver.ErrorDetails;
 import razarm.tosan.security.model.Session;
+import razarm.tosan.security.model.UserAuthDetails;
 import razarm.tosan.security.services.SessionService;
+import razarm.tosan.utility.AppJsonMapper;
 
 
 import javax.crypto.SecretKey;
@@ -31,6 +35,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -71,8 +76,8 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             if(e instanceof AuthenticationException) {
 //                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ((AuthenticationException) e).getMessage());
 //                return null;
-                throw new AuthenticationCredentialsNotFoundException(((AuthenticationException) e).getMessage());
-            } else throw new RuntimeException(e);
+                throw new AuthenticationCredentialsNotFoundException(e.getMessage());
+            } else throw new UsernameNotFoundException("User name not found...."); //TODO
         }
 
     }
@@ -83,7 +88,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult)  {
+                                            Authentication authResult) throws JsonProcessingException {
 
         final String username = authResult.getName();
         final Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
@@ -98,12 +103,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .setExpiration(expiration)
                 .signWith(secretKey)
                 .compact();
-        final String userInfo = Jwts.builder()
-                .setSubject(username)
-                .claim("authorities" ,authorities)
-                .setIssuedAt(new Date())
-                .setExpiration(expiration)
-                .compact();
+//        final String userInfo = Jwts.builder()
+//                .setSubject(username)
+//                .claim("authorities" ,authorities)
+//                .setIssuedAt(new Date())
+//                .setExpiration(expiration)
+//                .compact();
 
         this.userSessionService.insertSession(
                 new Session(username , token));
@@ -114,10 +119,21 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         jwtTokenCookie.setMaxAge(maxAge);
         jwtTokenCookie.setPath("/");
         response.addCookie(jwtTokenCookie);
-        final Cookie userInfoCookie =  new Cookie("user_info", userInfo);
-        userInfoCookie.setMaxAge(maxAge);
-        userInfoCookie.setPath("/");
-        response.addCookie(userInfoCookie);
+        UserAuthDetails userAuthDetails = UserAuthDetails.builder()
+                                               .username(username)
+                                               .authorities(
+                                                       authorities.stream()
+                                                                  .map(GrantedAuthority::getAuthority)
+                                                                  .collect(Collectors.toSet()))
+                                               .build();
+        response.addHeader(
+                "user-info",
+                AppJsonMapper.getAppJsonMapper().writeValueAsString(userAuthDetails));
+
+//        final Cookie userInfoCookie =  new Cookie("user_info", userInfo);
+//        userInfoCookie.setMaxAge(maxAge);
+//        userInfoCookie.setPath("/");
+//        response.addCookie(userInfoCookie);
 
 
     }

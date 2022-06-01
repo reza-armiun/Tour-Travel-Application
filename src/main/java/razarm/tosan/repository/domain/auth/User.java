@@ -1,24 +1,31 @@
 package razarm.tosan.repository.domain.auth;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
 import razarm.tosan.repository.domain.BaseEntity;
+import razarm.tosan.repository.domain.location.Address;
 
 import java.time.Instant;
+@Getter
+@Setter
+public abstract class User extends BaseEntity implements UserDetails {
 
-public abstract class User extends BaseEntity implements UserDetails  {
+    protected  String name;
+    protected  String username;
+    protected  String password;
 
-    protected final String name;
-    protected final String username;
-    protected final String password;
+    protected  String email;
+    protected  String phone;
+    protected  Long nationalId;
+    protected  String imageUrl;
+    protected  Boolean validEmail;
+    protected  Boolean isExpired;
+    protected  Boolean isEnabled;
+    protected  Boolean isCredentialsNonExpired;
+    protected  Address address;
 
-    protected final String email;
-    protected final String phone;
-    protected final Long nationalId;
-    protected final Boolean validEmail;
-    protected final Boolean isExpired;
-    protected final Boolean isEnabled;
-    protected final Boolean isCredentialsNonExpired;
-
-    public User(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired) {
+    public User(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.username = username;
@@ -26,51 +33,16 @@ public abstract class User extends BaseEntity implements UserDetails  {
         this.email = email;
         this.phone = phone;
         this.nationalId = nationalId;
+        this.imageUrl = imageUrl;
         this.validEmail = validEmail;
         this.isExpired = isExpired;
         this.isEnabled = isEnabled;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.address = address;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Long getNationalId() {
-        return nationalId;
-    }
-
-    public Boolean getValidEmail() {
-        return validEmail;
-    }
-
-    public Boolean getExpired() {
-        return isExpired;
-    }
-
-    public Boolean getEnabled() {
-        return isEnabled;
-    }
-
-    public Boolean getCredentialsNonExpired() {
-        return isCredentialsNonExpired;
-    }
 
     @Override
     public String toString() {

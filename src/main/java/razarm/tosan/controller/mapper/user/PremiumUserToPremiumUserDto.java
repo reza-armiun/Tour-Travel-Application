@@ -3,6 +3,7 @@ package razarm.tosan.controller.mapper.user;
 import org.springframework.stereotype.Component;
 import razarm.tosan.controller.dto.auth.PremiumUserDto;
 import razarm.tosan.controller.mapper.Mapper;
+import razarm.tosan.controller.mapper.address.AddressToAddressDto;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 
@@ -12,9 +13,11 @@ import java.util.stream.Collectors;
 @Component
 public class PremiumUserToPremiumUserDto implements Mapper<PremiumUser, PremiumUserDto> {
     private final InterestToInterestDto interestToInterestDto;
+    private final AddressToAddressDto addressDto;
 
-    public PremiumUserToPremiumUserDto(InterestToInterestDto interestToInterestDto) {
+    public PremiumUserToPremiumUserDto(InterestToInterestDto interestToInterestDto, AddressToAddressDto addressDto) {
         this.interestToInterestDto = interestToInterestDto;
+        this.addressDto = addressDto;
     }
 
     @Override
@@ -26,10 +29,12 @@ public class PremiumUserToPremiumUserDto implements Mapper<PremiumUser, PremiumU
                 .phone(premiumUser.getPhone())
                 .email(premiumUser.getEmail())
                 .nationalId(premiumUser.getNationalId())
+                .imageUrl(premiumUser.getImageUrl())
+                .addressDto(premiumUser.getAddress() != null ? this.addressDto.convert(premiumUser.getAddress()) : null)
                 .validEmail(premiumUser.getValidEmail())
-                .isEnabled(premiumUser.getEnabled())
-                .isExpired(premiumUser.getExpired())
-                .isCredentialsNonExpired(premiumUser.getCredentialsNonExpired())
+                .isEnabled(premiumUser.getIsEnabled())
+                .isExpired(premiumUser.getIsExpired())
+                .isCredentialsNonExpired(premiumUser.isCredentialsNonExpired())
                 .interests(
                         premiumUser.getInterests() != null
                                 ? premiumUser.getInterests().stream()

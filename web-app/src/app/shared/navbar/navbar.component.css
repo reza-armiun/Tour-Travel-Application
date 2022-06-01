@@ -1,35 +1,66 @@
 .navbar {
   margin: 0;
-  /*height: 65px;*/
+  padding: 9px 15px;
   width: 100vw;
-  background-color: dodgerblue;
-  position: fixed;
+  background-color: rgba(55, 55, 69, 1);
+  position: relative;
   top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.hamburger {
+  display: block !important;
+  cursor: pointer;
+}
+.hamburger div{
+  width: 20px;
+  height: 3px;
+  background-color: white;
+  margin-top: 4px;
+}
+.app-icon {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  width: 37px;
+  height: 33px;
+}
+.invert { filter: invert(100%);  }
 
+.header {
+  font-size: 21px;
+  font-weight: 700;
 }
 .navbar-left {
-  padding: 8px 15px;
   flex: 1;
+  padding-left: 0px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 .navbar-right {
-  padding: 8px 15px;
   flex: 1;
+  padding-right: 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   align-items: center;
 }
 
 .navbar__item {
-  padding: 0 5px 0 5px;
+  padding: 6px 12px ;
   text-decoration: none;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
   color: white;
+  border-bottom: 2px solid transparent;
+}
+.navbar__item:hover {
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.active {
+  border-bottom: 2px solid white;
 }

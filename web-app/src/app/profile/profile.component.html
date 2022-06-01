@@ -1,0 +1,115 @@
+<app-modal [show]="showPasswordModal"  (onClose)="showPasswordModal = false">
+  <form [formGroup]="passwordForm" (ngSubmit)="changePasswordHandler()" class="password-form">
+    <div class="password-form__header">Edit Password</div>
+    <div class="password-form__content">
+      <div class="password-field">
+        <label>Old Password: </label>
+        <input type="password" name="oldPassword" formControlName="oldPassword"
+               (focusout)="removeFocusOnField($event)" (focus)="setFocusOnField($event)">
+      </div>
+      <div class="password-field">
+        <label>New Password: </label>
+        <input type="password" name="password" formControlName="password"
+               (focusout)="removeFocusOnField($event)" (focus)="setFocusOnField($event)" >
+      </div>
+      <div class="password-field">
+        <label>New Password Confirmation: </label>
+        <input type="password" name="rePassword" formControlName="rePassword"
+               (focusout)="removeFocusOnField($event)" (focus)="setFocusOnField($event)">
+      </div>
+    </div>
+    <div class="password-form__actions">
+      <button class="btn-cancel" type="submit" >Cancel</button>
+      <button class="btn-submit" type="button">Change</button>
+    </div>
+  </form>
+</app-modal>
+
+<form [formGroup]="profileForm" class="profile-form">
+    <div class="profile__info">
+      <div class="profile__img-wrapper">
+        <input type="file" id="imgupload" style="display:none"/>
+<!--        <img [src]="profile?.imageUrl"  (click)="showFilePicker()" />-->
+        <label for="file-input">
+          <img [src]="profile?.imageUrl"/>
+        </label>
+        <input id="file-input" type="file" style="display:none;"/>
+      </div>
+      <div class="form-field">
+        <label>Name: </label>
+        <input type="text" name="name" formControlName="name" >
+      </div>
+      <div class="form-field">
+        <label>Username: </label>
+        <input type="text" name="username" formControlName="username">
+      </div>
+      <div class="form-field">
+        <label>Phone: </label>
+        <input type="text"  name="phone" formControlName="phone" >
+      </div>
+      <div class="form-field">
+        <label>Email: </label>
+        <input type="email"  name="email" formControlName="email">
+      </div>
+      <div class="form-field">
+        <label>National Id: </label>
+        <input type="text"  name="nationalId" formControlName="nationalId">
+      </div>
+      <div class="form-field">
+        <label>Password: </label>
+        <a  (click)="showPasswordModal = true" style="font-weight: 500" >Edit Password</a>
+      </div>
+      <button class="form-btn" >Save</button>
+    </div>
+
+    <div class="profile__details">
+      <div class="profile__address">
+        <div class="address__header">Address Info
+          <!--        <button class="address__btn">Edit</button>-->
+        </div>
+
+        <hr class="divider" />
+        <div class="address-field">
+          <label>address: </label>
+          <input type="text">
+        </div>
+        <div class="inline-fields">
+          <div class="field">
+            <label>City: </label>
+            <input type="text">
+          </div>
+          <div class="field">
+            <label>Zip Code: </label>
+            <input type="text">
+          </div>
+        </div>
+        <div class="inline-fields">
+          <div class="field">
+            <label>Country: </label>
+            <input type="text">
+          </div>
+          <div class="field">
+            <label>Country Code: </label>
+            <input type="text">
+          </div>
+        </div>
+      </div>
+      <div class="profile__bookings">
+        <div class="bookings__header">Booking Info</div>
+        <hr class="divider" />
+        <div class="booking__item" *ngFor="let booking of profile?.bookings">
+          <div class="booking__content">
+            <div class="booking__name">{{booking?.tourName}}</div>
+            <div class="booking__date">{{booking?.date | date}}</div>
+          </div>
+          <div class="booking_actions">
+            <button class="view_btn">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+
+

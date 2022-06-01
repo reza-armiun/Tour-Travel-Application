@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.auth;
 
+import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.dto.tour.BookingDto;
 
 import java.time.ZonedDateTime;
@@ -10,8 +11,8 @@ public class PremiumUserDto extends UserDto {
     private  Set<BookingDto> bookings;
     private  Set<InterestDto> interests;
 
-    public PremiumUserDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, String username, String phone, String email, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<String> authorities, Set<BookingDto> bookings, Set<InterestDto> interests) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, phone, email, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public PremiumUserDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, String username, String phone, String email, Long nationalId, String imageUrl, AddressDto addressDto, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<String> authorities, Set<BookingDto> bookings, Set<InterestDto> interests) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, phone, email, nationalId, imageUrl, addressDto, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
         this.authorities = authorities;
         this.bookings = bookings;
         this.interests = interests;
@@ -41,6 +42,7 @@ public class PremiumUserDto extends UserDto {
         this.interests = interests;
     }
 
+
     public static final class PremiumUserDtoBuilder {
         protected  String id;
         protected ZonedDateTime createdAt;
@@ -52,6 +54,8 @@ public class PremiumUserDto extends UserDto {
         protected  String phone;
         protected  String email;
         protected  Long nationalId;
+        protected  String imageUrl;
+        protected AddressDto addressDto;
         protected  Boolean validEmail;
         protected  Boolean isExpired;
         protected  Boolean isEnabled;
@@ -132,6 +136,16 @@ public class PremiumUserDto extends UserDto {
             return this;
         }
 
+        public PremiumUserDtoBuilder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public PremiumUserDtoBuilder addressDto(AddressDto addressDto) {
+            this.addressDto = addressDto;
+            return this;
+        }
+
         public PremiumUserDtoBuilder validEmail(Boolean validEmail) {
             this.validEmail = validEmail;
             return this;
@@ -153,7 +167,7 @@ public class PremiumUserDto extends UserDto {
         }
 
         public PremiumUserDto build() {
-            return new PremiumUserDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, phone, email, nationalId, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorities, bookings, interests);
+            return new PremiumUserDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, phone, email, nationalId, imageUrl, addressDto, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorities, bookings, interests);
         }
     }
 }

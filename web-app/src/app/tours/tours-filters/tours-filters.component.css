@@ -1,0 +1,38 @@
+.filters {
+  max-width: 260px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+  padding: 15px 8px;
+  margin-top: 120px;
+  background-color: white;
+}
+.filters__header{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 8px;
+}
+.filter-segment {
+  padding: 6px 8px;
+}
+.filter-segment__header{
+  font-size: 17px;
+  font-weight: bold;
+  padding-bottom: 6px;
+}
+.filter-segment__body {}
+.filter-segment__item {
+  padding: 8px 0 0 3px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.filter-segment__item input[type=checkbox]
+{
+  /*z-index: -1000;*/
+  margin: 0 8px 0 0;
+  -ms-transform: scale(1.35); /* IE */
+  -moz-transform: scale(1.435); /* FF */
+  -webkit-transform: scale(1.35); /* Safari and Chrome */
+  -o-transform: scale(1.35); /* Opera */
+  transform: scale(1.35);
+}

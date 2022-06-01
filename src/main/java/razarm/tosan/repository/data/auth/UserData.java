@@ -1,6 +1,7 @@
 package razarm.tosan.repository.data.auth;
 
 import razarm.tosan.repository.data.BaseEntityData;
+import razarm.tosan.repository.data.location.AddressData;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -13,12 +14,14 @@ public abstract class UserData extends BaseEntityData {
     protected final String email;
     protected final String phone;
     protected final Long nationalId;
+    protected final String imageUrl;
+    protected final AddressData addressData;
     protected final Boolean validEmail;
     protected final Boolean isExpired;
     protected final Boolean isEnabled;
     protected final Boolean isCredentialsNonExpired;
 
-    public UserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired) {
+    public UserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.username = username;
@@ -26,10 +29,16 @@ public abstract class UserData extends BaseEntityData {
         this.email = email;
         this.phone = phone;
         this.nationalId = nationalId;
+        this.imageUrl = imageUrl;
+        this.addressData = addressData;
         this.validEmail = validEmail;
         this.isExpired = isExpired;
         this.isEnabled = isEnabled;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getName() {
@@ -54,6 +63,10 @@ public abstract class UserData extends BaseEntityData {
 
     public Long getNationalId() {
         return nationalId;
+    }
+
+    public AddressData getAddressData() {
+        return addressData;
     }
 
     public Boolean getValidEmail() {

@@ -1,15 +1,24 @@
 <div class="navbar">
-  <div class="navber-left">
-    <div class="navbar__item"><b>Home</b></div>
+  <div class="navbar-left">
+    <div *ngIf="signedin$ | async" class="hamburger navbar__item"  (click)="showSidebar()">
+      <div ></div>
+      <div ></div>
+      <div ></div>
+    </div>
+    <div routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar__item app-icon ">
+      <img  class="icon invert  " src="assets/images/touricon.png" />
+      <b>TourArm</b>
+    </div>
+<!--    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar__item"><b class="header">Home</b></a>-->
   </div>
   <div class="navbar-right">
-    <ng-container >
-      <div class="navbar__item">Profile</div>
-      <div class="navbar__item">Logout</div>
+    <ng-container *ngIf="signedin$ | async" >
+      <a routerLink="/profile" routerLinkActive="active" class="navbar__item">Profile</a>
+      <a routerLink="/signout" routerLinkActive="active" class="navbar__item">Signout</a>
     </ng-container>
-    <ng-container>
-      <div class="navbar__item">Register</div>
-      <div class="navbar__item">Login</div>
+    <ng-container *ngIf="!(signedin$ | async)">
+      <a routerLink="/register" routerLinkActive="active" class="navbar__item">Register</a>
+      <a routerLink="/signin" routerLinkActive="active" class="navbar__item">Signin</a>
     </ng-container>
   </div>
 
