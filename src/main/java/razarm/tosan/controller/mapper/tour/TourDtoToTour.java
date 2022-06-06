@@ -26,7 +26,6 @@ public class TourDtoToTour implements Mapper<TourDto, Tour> {
                 .description(tourDto.getDescription())
                 .imgUrl(tourDto.getImgUrl())
                 .date(tourDto.getDate().toInstant())
-                .categories(tourDto.getCategories())
                 .tourismManager(tourismManagerDtoToTourismManager.convert(tourDto.getTourismManager()))
                 .schedulePlans(tourDto.getSchedulePlans().stream().map(schedulePlanDtoToSchedulePlan::convert).collect(Collectors.toUnmodifiableSet()))
                 .createdAt(tourDto.getCreatedAt().toInstant())

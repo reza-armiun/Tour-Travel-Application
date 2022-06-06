@@ -5,6 +5,7 @@ import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
 import {LoadingService} from "../shared/loading/loading.service";
 import {MessagesService} from "../shared/messages/messages.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -71,7 +72,9 @@ export class ProfileComponent implements OnInit {
   constructor(private profileStore: ProfileStore
               , private authService: AuthService
               , private loadingService: LoadingService
-              , private messageService: MessagesService) { }
+              , private messageService: MessagesService
+              , private router: Router
+              , private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.profileStore.profile$.subscribe(profile => {
@@ -114,4 +117,22 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  updateProfileHandler() {
+    if(this.profileForm.invalid) return;
+
+    this.loadingService.showLoadingUntilCompletion(this.authService.updateProfile(this.profileForm.value))
+      .subscribe({
+        next: () => {
+          this.messageService.showSuccessForPeriodOfTime(2000, 'Profile updated successfully');
+        },
+        error: ({error}) => {
+          this.messageService.showErrorForPeriodOfTime(2000 , 'Failed to update profile');
+        },
+      });
+
+  }
+
+  viewTourDetailsHandler(id: string) {
+    this.router.navigate(['/booking', id ] , {relativeTo: this.activatedRoute})
+  }
 }

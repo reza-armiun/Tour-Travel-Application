@@ -27,11 +27,21 @@ public class TourToTourDto implements Mapper<Tour, TourDto> {
                 .guide(tour.getGuide())
                 .description(tour.getDescription())
                 .imgUrl(tour.getImgUrl())
-                .date(tour.getDate() != null ? tour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)) : null)
-                .categories(tour.getCategories())
-                                     .price(tour.calculatePrice())
-                .tourismManager(tourismManagerToTourismManagerDto.convert(tour.getTourismManager()))
-                .schedulePlans(tour.getSchedulePlans().stream().map(schedulePlanToSchedulePlanDto::convert).collect(Collectors.toUnmodifiableSet()))
+                .date(
+                        tour.getDate() != null
+                                ? tour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE))
+                                : null)
+                .tourismManager(
+                        tour.getTourismManager() != null
+                                ? tourismManagerToTourismManagerDto.convert(
+                                        tour.getTourismManager())
+                                : null)
+                .schedulePlans(
+                        tour.getSchedulePlans() != null
+                                ? tour.getSchedulePlans().stream()
+                                        .map(schedulePlanToSchedulePlanDto::convert)
+                                        .collect(Collectors.toUnmodifiableSet())
+                                : null)
                 .createdAt(tour.getCreatedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .modifiedAt(tour.getModifiedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .createdBy(tour.getCreatedBy())

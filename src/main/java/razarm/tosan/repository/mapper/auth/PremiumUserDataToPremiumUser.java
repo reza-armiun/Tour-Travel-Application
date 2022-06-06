@@ -1,22 +1,22 @@
 package razarm.tosan.repository.mapper.auth;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.PremiumUserData;
 import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
+import razarm.tosan.repository.mapper.BookingDataToBooking;
 import razarm.tosan.repository.mapper.location.AddressDataToAddress;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 @Component
+@AllArgsConstructor
 public class PremiumUserDataToPremiumUser implements Mapper<PremiumUserData, PremiumUser> {
     private final InterestDataToInterest interestDataToInterest;
     private final AddressDataToAddress addressDataToAddress;
-
-    public PremiumUserDataToPremiumUser(InterestDataToInterest interestDataToInterest, AddressDataToAddress addressDataToAddress) {
-        this.interestDataToInterest = interestDataToInterest;
-        this.addressDataToAddress = addressDataToAddress;
-    }
+    private final BookingDataToBooking bookingDataToBooking;
 
     @Override
     public PremiumUser convert(PremiumUserData premiumUserData) {
@@ -28,7 +28,17 @@ public class PremiumUserDataToPremiumUser implements Mapper<PremiumUserData, Pre
                 .email(premiumUserData.getEmail())
                 .phone(premiumUserData.getPhone())
                 .imageUrl(premiumUserData.getImageUrl())
-                .address(premiumUserData.getAddressData() != null ? this.addressDataToAddress.convert(premiumUserData.getAddressData()) : null)
+                .address(
+                        premiumUserData.getAddressData() != null
+                                ? this.addressDataToAddress.convert(
+                                        premiumUserData.getAddressData())
+                                : null)
+                .bookings(
+                        premiumUserData.getBookings() != null
+                                ? premiumUserData.getBookings().stream()
+                                        .map(this.bookingDataToBooking::convert)
+                                        .collect(Collectors.toUnmodifiableSet())
+                                : Set.of())
                 .authorities(
                         premiumUserData.getAuthorities().stream()
                                 .map(s -> Authority.AuthorityBuilder.anAuthority().name(s).build())

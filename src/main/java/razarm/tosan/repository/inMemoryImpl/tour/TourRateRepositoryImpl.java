@@ -49,27 +49,5 @@ public class TourRateRepositoryImpl implements TourRateRepository {
                                .map(tourRateDataToTourRate::convert)
                                .collect(Collectors.toUnmodifiableList());
     }
-//    @Override
-//    public Float addRating(String username, String tourId, int rating) {
-//        var tourData = TourRateData.TourRateDataBuilder.aTourRateData().username(username).tourId(tourId).rating(rating).date(Instant.now()).build();
-//        tourRateDataMap.put(tourId, Map.of(username, tourData));
-//
-//        var oldTourData= tourRateDataMap.get(tourId);
-//        Collection<TourRateData> values = oldTourData.values();
-//        var size = values.size();
-//        var sum = values.stream().map(TourRateData::getRating).reduce(0, Integer::sum);
-//        int rt = sum + rating;
-//        var newRating = (float) rt / (float) (size + 1);
-//        return newRating;
-//    }
-//
-//    @Override
-//    public Float getTourRating(String tourId) {
-//        var tourData= tourRateDataMap.get(tourId);
-//        Collection<TourRateData> values = tourData.values();
-//        var size = values.size();
-//        var sum = values.stream().map(TourRateData::getRating).reduce(0, Integer::sum);
-//        var rating = (float) sum / (float) size ;
-//        return rating;
-//    }
+
 }

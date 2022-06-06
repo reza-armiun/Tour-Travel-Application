@@ -30,6 +30,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatIconModule} from "@angular/material/icon";
 import { ModalComponent } from './shared/modal/modal.component';
+import { BookingDetailsComponent } from './booking-details/booking-details.component';
+import {MatDividerModule} from "@angular/material/divider";
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {TourDetailsComponent} from "./booking-details/tour-details/tour-details.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import { AccommodationComponent } from './booking-details/tour-details/accommodation/accommodation.component';
+import { VehicleComponent } from './booking-details/tour-details/vehicle/vehicle.component';
 
 
 @NgModule({
@@ -52,7 +61,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     ModalBackgroundComponent,
     FiltersComponent,
     NotFoundComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +70,12 @@ import { ModalComponent } from './shared/modal/modal.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    MatTableModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [AuthService, LoadingService, MessagesService
     ,{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}],

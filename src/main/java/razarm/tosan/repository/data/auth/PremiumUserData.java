@@ -1,6 +1,7 @@
 package razarm.tosan.repository.data.auth;
 
 import razarm.tosan.repository.data.location.AddressData;
+import razarm.tosan.repository.data.tour.BookingData;
 import razarm.tosan.repository.domain.auth.PremiumType;
 
 import java.time.Instant;
@@ -9,15 +10,13 @@ import java.util.Set;
 public class PremiumUserData extends UserData{
     private final PremiumType type ;
     private final Set<String> authorities;
-    private final Set<String> bookingIds ;
     private final Set<InterestData> interests;
 
 
-    public PremiumUserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, PremiumType type, Set<String> authorities, Set<String> bookingIds, Set<InterestData> interests) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public PremiumUserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<BookingData> bookings, PremiumType type, Set<String> authorities, Set<InterestData> interests) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings);
         this.type = type;
         this.authorities = authorities;
-        this.bookingIds = bookingIds;
         this.interests = interests;
     }
 
@@ -29,9 +28,6 @@ public class PremiumUserData extends UserData{
         return authorities;
     }
 
-    public Set<String> getBookingIds() {
-        return bookingIds;
-    }
 
     public Set<InterestData> getInterests() {
         return interests;
@@ -39,7 +35,7 @@ public class PremiumUserData extends UserData{
 
     @Override
     public PremiumUserData cloneWithId(String id) {
-        return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
+        return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, type, authorities, interests);
     }
 
 
@@ -53,7 +49,6 @@ public class PremiumUserData extends UserData{
         sb.append(", modifiedBy='").append(modifiedBy).append('\'');
         sb.append(", type=").append(type);
         sb.append(", authorities=").append(authorities);
-        sb.append(", bookingIds=").append(bookingIds);
         sb.append(", interests=").append(interests);
         sb.append(", name='").append(name).append('\'');
         sb.append(", username='").append(username).append('\'');
@@ -70,6 +65,7 @@ public class PremiumUserData extends UserData{
         sb.append('}');
         return sb.toString();
     }
+
 
     public static final class PremiumUserDataBuilder {
         protected String id;
@@ -89,9 +85,9 @@ public class PremiumUserData extends UserData{
         protected Boolean isExpired;
         protected Boolean isEnabled;
         protected Boolean isCredentialsNonExpired;
+        protected Set<BookingData> bookings;
         private PremiumType type ;
         private Set<String> authorities;
-        private Set<String> bookingIds ;
         private Set<InterestData> interests;
 
         private PremiumUserDataBuilder() {
@@ -133,11 +129,6 @@ public class PremiumUserData extends UserData{
 
         public PremiumUserDataBuilder authorities(Set<String> authorities) {
             this.authorities = authorities;
-            return this;
-        }
-
-        public PremiumUserDataBuilder bookingIds(Set<String> bookingIds) {
-            this.bookingIds = bookingIds;
             return this;
         }
 
@@ -206,8 +197,13 @@ public class PremiumUserData extends UserData{
             return this;
         }
 
+        public PremiumUserDataBuilder bookings(Set<BookingData> bookings) {
+            this.bookings = bookings;
+            return this;
+        }
+
         public PremiumUserData build() {
-            return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, type, authorities, bookingIds, interests);
+            return new PremiumUserData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, type, authorities, interests);
         }
     }
 }

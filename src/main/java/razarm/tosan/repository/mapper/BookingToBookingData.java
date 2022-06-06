@@ -21,7 +21,6 @@ public class BookingToBookingData implements Mapper<Booking, BookingData> {
             .id(booking.getId())
             .date(booking.getDate())
             .description(booking.getDescription())
-            .userId(booking.getUser().getId())
             .travelers(booking.getTravelers().stream().map(travelerToTravelerData::convert).collect(Collectors.toUnmodifiableSet()))
             .tourId(booking.getTour().getId())
             .createdAt(booking.getCreatedAt())

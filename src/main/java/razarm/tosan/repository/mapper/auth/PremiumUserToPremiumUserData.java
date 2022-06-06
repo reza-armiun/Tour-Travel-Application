@@ -5,10 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.repository.data.auth.PremiumUserData;
-import razarm.tosan.repository.domain.BaseEntity;
-import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
-import razarm.tosan.repository.mapper.location.AddressDataToAddress;
+import razarm.tosan.repository.mapper.BookingToBookingData;
 import razarm.tosan.repository.mapper.location.AddressToAddressData;
 
 import java.util.Set;
@@ -19,6 +17,7 @@ import java.util.stream.Collectors;
 public class PremiumUserToPremiumUserData implements Mapper<PremiumUser, PremiumUserData> {
     private final InterestToInterestData interestToInterestData;
     private final AddressToAddressData addressToAddressData;
+    private final BookingToBookingData bookingToBookingData;
 
 
     @Override
@@ -44,11 +43,9 @@ public class PremiumUserToPremiumUserData implements Mapper<PremiumUser, Premium
                 .isCredentialsNonExpired(premiumUser.getIsCredentialsNonExpired())
                 //
                 // .authorityIds(premiumUser.getAuthorities().stream().map(BaseEntity::getId).collect(Collectors.toUnmodifiableSet()))
-                .bookingIds(
+                .bookings(
                         premiumUser.getBookings() != null
-                                ? premiumUser.getBookings().stream()
-                                        .map(BaseEntity::getId)
-                                        .collect(Collectors.toUnmodifiableSet())
+                                ? premiumUser.getBookings().stream().map(this.bookingToBookingData::convert).collect(Collectors.toUnmodifiableSet())
                                 : Set.of())
                 .interests(premiumUser.getInterests() != null ?
                         premiumUser.getInterests().stream()

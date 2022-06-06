@@ -27,7 +27,6 @@ public class TourDataToTour implements Mapper<TourData, Tour> {
                 .description(tourData.getDescription())
                 .imgUrl(tourData.getImgUrl())
                 .date(tourData.getDate())
-                .categories(tourData.getCategories())
                 .tourismManager(tourismManagerDataToTourismManager.convert(tourData.getTourismManager()))
                 .schedulePlans(tourData.getSchedulePlans().stream().map(scheduleplanDataToSchedulePlan::convert).collect(Collectors.toUnmodifiableSet()))
                 .createdAt(tourData.getCreatedAt())

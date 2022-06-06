@@ -16,14 +16,12 @@ public class PremiumUser extends User {
     private final PremiumType type ;
 
     private final Set<Authority> authorities ;
-    private final Set<Booking> bookings ;
     private final Set<Interest> interests;
 
-    public PremiumUser(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address, PremiumType type, Set<Authority> authorities, Set<Booking> bookings, Set<Interest> interests) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address);
+    public PremiumUser(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<Booking> bookings, Address address, PremiumType type, Set<Authority> authorities, Set<Interest> interests) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address);
         this.type = type;
         this.authorities = authorities;
-        this.bookings = bookings;
         this.interests = interests;
     }
 
@@ -97,15 +95,15 @@ public class PremiumUser extends User {
 
     @Override
     public PremiumUser cloneWithId(String id) {
-        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, type, authorities, interests);
     }
 
     public PremiumUser cloneWithBookings(Set<Booking> bookings) {
-        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, type, authorities, interests);
     }
 
     public PremiumUser cloneWithNewPassword(String password) {
-        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+        return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, type, authorities, interests);
     }
 
 
@@ -115,21 +113,21 @@ public class PremiumUser extends User {
         protected Instant modifiedAt;
         protected String createdBy;
         protected String modifiedBy;
-        protected String name;
-        protected String username;
-        protected String password;
-        protected String email;
-        protected String phone;
-        protected Long nationalId;
-        protected String imageUrl;
-        protected Boolean validEmail;
-        protected Boolean isExpired;
-        protected Boolean isEnabled;
-        protected Boolean isCredentialsNonExpired;
+        protected  String name;
+        protected  String username;
+        protected  String password;
+        protected  String email;
+        protected  String phone;
+        protected  Long nationalId;
+        protected  String imageUrl;
+        protected  Boolean validEmail;
+        protected  Boolean isExpired;
+        protected  Boolean isEnabled;
+        protected  Boolean isCredentialsNonExpired;
+        protected   Set<Booking> bookings ;
         protected Address address;
         private PremiumType type ;
         private Set<Authority> authorities ;
-        private Set<Booking> bookings ;
         private Set<Interest> interests;
 
         private PremiumUserBuilder() {
@@ -171,11 +169,6 @@ public class PremiumUser extends User {
 
         public PremiumUserBuilder authorities(Set<Authority> authorities) {
             this.authorities = authorities;
-            return this;
-        }
-
-        public PremiumUserBuilder bookings(Set<Booking> bookings) {
-            this.bookings = bookings;
             return this;
         }
 
@@ -239,13 +232,18 @@ public class PremiumUser extends User {
             return this;
         }
 
+        public PremiumUserBuilder bookings(Set<Booking> bookings) {
+            this.bookings = bookings;
+            return this;
+        }
+
         public PremiumUserBuilder address(Address address) {
             this.address = address;
             return this;
         }
 
         public PremiumUser build() {
-            return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, type, authorities, bookings, interests);
+            return new PremiumUser(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, type, authorities, interests);
         }
     }
 }

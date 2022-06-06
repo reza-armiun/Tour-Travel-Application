@@ -1,0 +1,69 @@
+<div class="container">
+
+  <div class="booking-info">
+    <div class="header">Booking Information</div>
+    <mat-divider></mat-divider>
+    <div class="segment">
+      <div class="segment__header">Details</div>
+      <div class="segment__content">
+        <div class="text-field">
+          <label>Booking Date: </label>
+          <div class="description">{{booking?.date | date}}</div>
+        </div>
+        <div class="text-field">
+          <label>Booking Description: </label>
+          <div class="description">{{booking?.description}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment__header">Travelers</div>
+      <div class="segment__content">
+        <table mat-table class="mat-elevation-z1"
+               [dataSource]="travelers"
+               multiTemplateDataRows
+        >
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef  colspan="3">Name</th>
+            <td mat-cell *matCellDef="let traveler" colspan="3">{{traveler?.name}}</td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef  colspan="3">Email</th>
+            <td mat-cell *matCellDef="let traveler" colspan="3">{{traveler?.email}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nationalId">
+            <th mat-header-cell *matHeaderCellDef colspan="2">National Id</th>
+            <td mat-cell *matCellDef="let traveler" colspan="2">{{traveler?.nationalId}}</td>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef colspan="2">Phone</th>
+            <td mat-cell *matCellDef="let traveler" colspan="2">{{traveler?.phone}}</td>
+          </ng-container>
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef colspan="2">Address</th>
+            <td mat-cell *matCellDef="let traveler" colspan="2">{{traveler?.address}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+          <tr
+              mat-row *matRowDef="let activity; columns: displayedColumns"></tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="tour-info">
+    <mat-card  style="max-width: 100%; background-color: transparent">
+      <img mat-card-image [src]="booking?.tour?.imgUrl" >
+        <mat-card-title>{{booking?.tour?.name}}</mat-card-title>
+      <mat-card-content >
+        <p>{{booking?.tour?.description}}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" [routerLink]="['tour', booking?.tour?.id]"  >View Tour</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+</div>

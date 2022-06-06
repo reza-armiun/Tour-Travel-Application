@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.tour;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.auth.UserDto;
 
@@ -7,6 +8,7 @@ import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingDto extends BaseEntityDto {
     private  ZonedDateTime date;
     private  String description;

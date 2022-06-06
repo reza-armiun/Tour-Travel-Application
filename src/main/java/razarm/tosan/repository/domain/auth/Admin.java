@@ -2,6 +2,7 @@ package razarm.tosan.repository.domain.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import razarm.tosan.repository.domain.Booking;
 import razarm.tosan.repository.domain.location.Address;
 
 import java.time.Instant;
@@ -13,8 +14,8 @@ public class Admin extends User{
 
     private final Set<Authority> authorities ;
 
-    public Admin(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address, Set<Authority> authorities) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address);
+    public Admin(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<Booking> bookings, Address address, Set<Authority> authorities) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address);
         this.authorities = authorities;
     }
 
@@ -47,11 +48,11 @@ public class Admin extends User{
 
     @Override
     public Admin cloneWithId(String id) {
-        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
+        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, authorities);
     }
 
     public Admin cloneWithNewPassword(String password) {
-        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
+        return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, authorities);
     }
 
 
@@ -61,17 +62,18 @@ public class Admin extends User{
         protected Instant modifiedAt;
         protected String createdBy;
         protected String modifiedBy;
-        protected String name;
-        protected String username;
-        protected String password;
-        protected String email;
-        protected String phone;
-        protected Long nationalId;
-        protected String imageUrl;
-        protected Boolean validEmail;
-        protected Boolean isExpired;
-        protected Boolean isEnabled;
-        protected Boolean isCredentialsNonExpired;
+        protected  String name;
+        protected  String username;
+        protected  String password;
+        protected  String email;
+        protected  String phone;
+        protected  Long nationalId;
+        protected  String imageUrl;
+        protected  Boolean validEmail;
+        protected  Boolean isExpired;
+        protected  Boolean isEnabled;
+        protected  Boolean isCredentialsNonExpired;
+        protected   Set<Booking> bookings ;
         protected Address address;
         private Set<Authority> authorities ;
 
@@ -167,13 +169,18 @@ public class Admin extends User{
             return this;
         }
 
+        public AdminBuilder bookings(Set<Booking> bookings) {
+            this.bookings = bookings;
+            return this;
+        }
+
         public AdminBuilder address(Address address) {
             this.address = address;
             return this;
         }
 
         public Admin build() {
-            return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, address, authorities);
+            return new Admin(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, address, authorities);
         }
     }
 }

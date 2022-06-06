@@ -20,7 +20,7 @@ hr {
 .sidebar {
   margin: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 2001;
   width: 200px;
   height: 100vh;
   left: 0;

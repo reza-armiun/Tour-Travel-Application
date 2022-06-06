@@ -3,6 +3,7 @@ package razarm.tosan.controller.dto.tour;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.ToString;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.tour.TourCategory;
 import razarm.tosan.repository.domain.tour.TourType;
@@ -10,6 +11,8 @@ import razarm.tosan.repository.domain.tour.TourType;
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.Set;
+
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TourDto extends BaseEntityDto {
     private  String name;
@@ -23,17 +26,13 @@ public class TourDto extends BaseEntityDto {
     private BigInteger price;
     private  ZonedDateTime date;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private  Set<TourCategory> categories;
-
     private  TourismManagerDto tourismManager;
     private  Set<SchedulePlanDto> schedulePlans;
 
     public TourDto() { }
 
 
-
-    public TourDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Float rating, BigInteger price, ZonedDateTime date, Set<TourCategory> categories, TourismManagerDto tourismManager, Set<SchedulePlanDto> schedulePlans) {
+    public TourDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Float rating, BigInteger price, ZonedDateTime date, TourismManagerDto tourismManager, Set<SchedulePlanDto> schedulePlans) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
@@ -43,7 +42,6 @@ public class TourDto extends BaseEntityDto {
         this.rating = rating;
         this.price = price;
         this.date = date;
-        this.categories = categories;
         this.tourismManager = tourismManager;
         this.schedulePlans = schedulePlans;
     }
@@ -69,6 +67,7 @@ public class TourDto extends BaseEntityDto {
     }
 
     public String getRating() {
+        if(rating == null) return "0.0";
         return String.format("%.1f", !Float.isNaN(rating) ? rating : 0.00); // TODO
     }
 
@@ -77,9 +76,6 @@ public class TourDto extends BaseEntityDto {
         return date;
     }
 
-    public Set<TourCategory> getCategories() {
-        return categories;
-    }
 
     public TourismManagerDto getTourismManager() {
         return tourismManager;
@@ -125,9 +121,6 @@ public class TourDto extends BaseEntityDto {
         this.date = date;
     }
 
-    public void setCategories(Set<TourCategory> categories) {
-        this.categories = categories;
-    }
 
     public void setTourismManager(TourismManagerDto tourismManager) {
         this.tourismManager = tourismManager;
@@ -138,31 +131,27 @@ public class TourDto extends BaseEntityDto {
     }
 
     public TourDto cloneWithRating(Float rating) {
-        return new TourDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, rating, price, date, categories, tourismManager, schedulePlans);
+        TourDto tourDto = new TourDto();
+        tourDto.setId(id);
+        tourDto.setCreatedAt(createdAt);
+        tourDto.setModifiedAt(modifiedAt);
+        tourDto.setCreatedBy(createdBy);
+        tourDto.setModifiedBy(modifiedBy);
+        tourDto.setName(name);
+        tourDto.setType(type);
+        tourDto.setGuide(guide);
+        tourDto.setDescription(description);
+        tourDto.setImgUrl(imgUrl);
+        tourDto.setRating(rating);
+        tourDto.setPrice(price);
+        tourDto.setDate(date);
+        tourDto.setTourismManager(tourismManager);
+        tourDto.setSchedulePlans(schedulePlans);
+        return tourDto;
     }
 
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("TourDto{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", modifiedAt=").append(modifiedAt);
-        sb.append(", createdBy='").append(createdBy).append('\'');
-        sb.append(", modifiedBy='").append(modifiedBy).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", type=").append(type);
-        sb.append(", guide='").append(guide).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", imgUrl='").append(imgUrl).append('\'');
-        sb.append(", rating=").append(getRating());
-        sb.append(", date=").append(date);
-        sb.append(", categories=").append(categories);
-        sb.append(", tourismManager=").append(tourismManager);
-        sb.append(", schedulePlans=").append(schedulePlans);
-        sb.append('}');
-        return sb.toString();
-    }
+
 
 
     public static final class TourDtoBuilder {
@@ -179,9 +168,8 @@ public class TourDto extends BaseEntityDto {
         private  Float rating;
         private BigInteger price;
         private  ZonedDateTime date;
-        private Set<TourCategory> categories;
         private TourismManagerDto tourismManager;
-        private  Set<SchedulePlanDto> schedulePlans;
+        private Set<SchedulePlanDto> schedulePlans;
 
         private TourDtoBuilder() {
         }
@@ -255,11 +243,6 @@ public class TourDto extends BaseEntityDto {
             return this;
         }
 
-        public TourDtoBuilder categories(Set<TourCategory> categories) {
-            this.categories = categories;
-            return this;
-        }
-
         public TourDtoBuilder tourismManager(TourismManagerDto tourismManager) {
             this.tourismManager = tourismManager;
             return this;
@@ -271,9 +254,23 @@ public class TourDto extends BaseEntityDto {
         }
 
         public TourDto build() {
-            return new TourDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, rating, price, date, categories, tourismManager, schedulePlans);
+            TourDto tourDto = new TourDto();
+            tourDto.setId(id);
+            tourDto.setCreatedAt(createdAt);
+            tourDto.setModifiedAt(modifiedAt);
+            tourDto.setCreatedBy(createdBy);
+            tourDto.setModifiedBy(modifiedBy);
+            tourDto.setName(name);
+            tourDto.setType(type);
+            tourDto.setGuide(guide);
+            tourDto.setDescription(description);
+            tourDto.setImgUrl(imgUrl);
+            tourDto.setRating(rating);
+            tourDto.setPrice(price);
+            tourDto.setDate(date);
+            tourDto.setTourismManager(tourismManager);
+            tourDto.setSchedulePlans(schedulePlans);
+            return tourDto;
         }
     }
-
-
 }

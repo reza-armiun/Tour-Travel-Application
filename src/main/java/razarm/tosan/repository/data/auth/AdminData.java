@@ -3,6 +3,7 @@ package razarm.tosan.repository.data.auth;
 
 import razarm.tosan.repository.data.BaseEntityData;
 import razarm.tosan.repository.data.location.AddressData;
+import razarm.tosan.repository.data.tour.BookingData;
 
 import java.time.Instant;
 import java.util.Set;
@@ -10,8 +11,8 @@ import java.util.Set;
 public class AdminData extends UserData {
     private final Set<String> authorityIds ;
 
-    public AdminData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<String> authorityIds) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired);
+    public AdminData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<BookingData> bookings, Set<String> authorityIds) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings);
         this.authorityIds = authorityIds;
     }
 
@@ -21,7 +22,7 @@ public class AdminData extends UserData {
 
     @Override
     public BaseEntityData cloneWithId(String id) {
-        return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
+        return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, authorityIds);
     }
 
 
@@ -43,6 +44,7 @@ public class AdminData extends UserData {
         protected Boolean isExpired;
         protected Boolean isEnabled;
         protected Boolean isCredentialsNonExpired;
+        protected Set<BookingData> bookings;
         private Set<String> authorityIds ;
 
         private AdminDataBuilder() {
@@ -142,8 +144,13 @@ public class AdminData extends UserData {
             return this;
         }
 
+        public AdminDataBuilder bookings(Set<BookingData> bookings) {
+            this.bookings = bookings;
+            return this;
+        }
+
         public AdminData build() {
-            return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, authorityIds);
+            return new AdminData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, username, password, email, phone, nationalId, imageUrl, addressData, validEmail, isExpired, isEnabled, isCredentialsNonExpired, bookings, authorityIds);
         }
     }
 }

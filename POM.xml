@@ -11,7 +11,6 @@
     <groupId>org.example</groupId>
     <artifactId>maven-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -90,20 +89,6 @@
     <build>
         <finalName>app</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-                <configuration>
-                    <webXml>${project.basedir}/src/resources/web.xml</webXml>
-                    <webResources>
-                        <resource>
-                            <directory>${project.basedir}/src/resources</directory>
-                        </resource>
-                    </webResources>
-                    <outputDirectory>${project.basedir}/tomcat/webapps</outputDirectory>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

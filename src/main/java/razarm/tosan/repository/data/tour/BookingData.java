@@ -9,15 +9,13 @@ public class BookingData extends BaseEntityData {
 
     private final Instant date;
     private final String description;
-    private final String userId;
     private final Set<TravelerData> travelers;
     private final String tourId;
 
-    public BookingData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, String description, String userId, Set<TravelerData> travelers, String tourId) {
+    public BookingData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, Instant date, String description, Set<TravelerData> travelers, String tourId) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.date = date;
         this.description = description;
-        this.userId = userId;
         this.travelers = travelers;
         this.tourId = tourId;
     }
@@ -30,9 +28,6 @@ public class BookingData extends BaseEntityData {
         return description;
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
     public Set<TravelerData> getTravelers() {
         return travelers;
@@ -45,9 +40,8 @@ public class BookingData extends BaseEntityData {
 
     @Override
     public BookingData cloneWithId(String id) {
-        return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tourId);
+        return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tourId);
     }
-
 
 
     public static final class BookingDataBuilder {
@@ -58,7 +52,6 @@ public class BookingData extends BaseEntityData {
         protected String modifiedBy;
         private Instant date;
         private String description;
-        private String userId;
         private Set<TravelerData> travelers;
         private String tourId;
 
@@ -104,11 +97,6 @@ public class BookingData extends BaseEntityData {
             return this;
         }
 
-        public BookingDataBuilder userId(String userId) {
-            this.userId = userId;
-            return this;
-        }
-
         public BookingDataBuilder travelers(Set<TravelerData> travelers) {
             this.travelers = travelers;
             return this;
@@ -120,7 +108,7 @@ public class BookingData extends BaseEntityData {
         }
 
         public BookingData build() {
-            return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, userId, travelers, tourId);
+            return new BookingData(id, createdAt, modifiedAt, createdBy, modifiedBy, date, description, travelers, tourId);
         }
     }
 }

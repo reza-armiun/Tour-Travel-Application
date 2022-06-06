@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 @Builder
 public class BookingInfo {
     private String id;
+    private String tourId;
     private String tourName;
     private ZonedDateTime date;
 }

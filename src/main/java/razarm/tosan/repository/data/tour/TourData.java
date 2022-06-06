@@ -14,23 +14,21 @@ public class TourData extends BaseEntityData {
     protected final String guide;
     protected final String description;
     protected final String imgUrl;
-    protected final Integer tourRateId;
+//    protected final Integer tourRateId;
     protected final Instant date;
-    protected final Set<TourCategory> categories;
+//    protected final Set<TourCategory> categories;
     protected final TourismManagerData tourismManager;
     protected final Set<SchedulePlanData> schedulePlans;
 
 
-    public TourData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Integer tourRateId, Instant date, Set<TourCategory> categories, TourismManagerData tourismManager, Set<SchedulePlanData> schedulePlans) {
+    public TourData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Instant date, TourismManagerData tourismManager, Set<SchedulePlanData> schedulePlans) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
         this.guide = guide;
         this.description = description;
         this.imgUrl = imgUrl;
-        this.tourRateId = tourRateId;
         this.date = date;
-        this.categories = categories;
         this.tourismManager = tourismManager;
         this.schedulePlans = schedulePlans;
     }
@@ -55,17 +53,11 @@ public class TourData extends BaseEntityData {
         return imgUrl;
     }
 
-    public Integer getTourRateId() {
-        return tourRateId;
-    }
 
     public Instant getDate() {
         return date;
     }
 
-    public Set<TourCategory> getCategories() {
-        return categories;
-    }
 
     public TourismManagerData getTourismManager() {
         return tourismManager;
@@ -77,11 +69,11 @@ public class TourData extends BaseEntityData {
 
     @Override
     public TourData cloneWithId(String id) {
-        return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, tourRateId, date, categories, tourismManager, schedulePlans);
+        return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, date, tourismManager, schedulePlans);
     }
 
     public TourData cloneWith(Set<SchedulePlanData> schedulePlans) {
-        return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, tourRateId, date, categories, tourismManager, schedulePlans);
+        return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, date, tourismManager, schedulePlans);
     }
 
 
@@ -96,10 +88,10 @@ public class TourData extends BaseEntityData {
         protected String guide;
         protected String description;
         protected String imgUrl;
-        protected Integer tourRateId;
-        protected Instant date;
-        protected Set<TourCategory> categories;
-        protected TourismManagerData tourismManager;
+        //    protected final Integer tourRateId;
+            protected Instant date;
+        //    protected final Set<TourCategory> categories;
+            protected TourismManagerData tourismManager;
         protected Set<SchedulePlanData> schedulePlans;
 
         private TourDataBuilder() {
@@ -159,18 +151,8 @@ public class TourData extends BaseEntityData {
             return this;
         }
 
-        public TourDataBuilder tourRateId(Integer tourRateId) {
-            this.tourRateId = tourRateId;
-            return this;
-        }
-
         public TourDataBuilder date(Instant date) {
             this.date = date;
-            return this;
-        }
-
-        public TourDataBuilder categories(Set<TourCategory> categories) {
-            this.categories = categories;
             return this;
         }
 
@@ -185,7 +167,7 @@ public class TourData extends BaseEntityData {
         }
 
         public TourData build() {
-            return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, tourRateId, date, categories, tourismManager, schedulePlans);
+            return new TourData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, type, guide, description, imgUrl, date, tourismManager, schedulePlans);
         }
     }
 }

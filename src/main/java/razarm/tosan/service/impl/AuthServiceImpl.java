@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import razarm.tosan.controller.dto.address.AddressInfo;
 import razarm.tosan.controller.dto.auth.*;
 import razarm.tosan.controller.dto.tour.BookingInfo;
 import razarm.tosan.controller.mapper.user.UserToProfile;
@@ -13,15 +14,21 @@ import razarm.tosan.controller.mapper.user.UserToUserDto;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.exception.InvalidCredentialException;
 import razarm.tosan.exception.PasswordNotMatchException;
+import razarm.tosan.props.AppProperties;
+import razarm.tosan.repository.TourRepository;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.UserSessionRepository;
 import razarm.tosan.repository.domain.auth.*;
+import razarm.tosan.repository.domain.location.Address;
+import razarm.tosan.repository.domain.location.City;
+import razarm.tosan.repository.domain.location.Country;
 import razarm.tosan.security.model.UpdatePasswordRequest;
 import razarm.tosan.service.AuthService;
 import razarm.tosan.service.tour.BookingService;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.List;
@@ -39,6 +46,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserToUserDto userToUserDto;
     private final UserToProfile userToProfile;
     private final BookingService bookingService;
+    private final TourRepository tourRepository;
 
 
 
@@ -146,17 +154,41 @@ public class AuthServiceImpl implements AuthService {
     public Profile getUserProfileByUsername(String username) {
         var user = this.userRepository.findByUsername(username);
         var profile = this.userToProfile.convert(user);
-        if(user instanceof PremiumUser) {
-            var premiumUser = (PremiumUser) user;
-            profile.setBookings(premiumUser.getBookings().stream().map(booking -> {
-                var bk =  this.bookingService.findById(booking.getId());
-                return BookingInfo.builder().id(bk.getId())
-                                  .tourName(bk.getTour().getName())
-                                  .date(bk.getDate())
-                                  .build();
-            }).collect(Collectors.toUnmodifiableSet()));
-        }
+         profile.setBookings(user.getBookings().stream().map(booking ->
+                            BookingInfo.builder().id(booking.getId())
+                           .tourId(booking.getTour().getId())
+                           .tourName(this.tourRepository.findById(booking.getTour().getId()).getName()) //TOD
+                           .date(booking.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                           .build()).collect(Collectors.toUnmodifiableSet()));
         return profile;
+    }
+
+    @Override
+    public void updateUserProfile(String username, Profile profile) {
+        var user = this.userRepository.findByUsername(profile.getUsername());
+        if(!username.equals(profile.getUsername()))  throw new UserNotFoundException("invalid username");
+        user.setName(profile.getUsername());
+        user.setPhone(profile.getPhone());
+        user.setEmail(profile.getEmail());
+        user.setNationalId(profile.getNationalId());
+        var address = profile.getAddress();
+        if(address != null) {
+            user.setAddress(
+                    Address.AddressBuilder.anAddress()
+                            .street(address.getStreet())
+                            .postalCode(address.getPostalCode())
+                            .city(
+                                    City.CityBuilder.aCity()
+                                            .name(address.getCity())
+                                            .zipCode(address.getZipCode())
+                                            .country(Country.CountryBuilder.aCountry()
+                                                    .name(address.getCountry())
+                                                    .countryCode(address.getCountryCode())
+                                                    .build())
+                                            .build())
+                            .build());
+        }
+        userRepository.update(user);
     }
 
     @Override

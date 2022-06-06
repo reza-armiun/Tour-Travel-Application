@@ -65,16 +65,14 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
                         .findAny()
                         .orElseThrow(UserNotFoundException::new);
         User convertedUser = userDataToUser.convert(user);
-        PremiumUser premiumUser = null;
-        if(user instanceof PremiumUserData) {  //TODO refactor
-            var premiumUserData = (PremiumUserData)user;
-            premiumUser = ((PremiumUser) convertedUser)
-                    .cloneWithBookings(
-                            premiumUserData.getBookingIds().stream()
-                                    .map(id -> Booking.BookingBuilder.aBooking().id(id).build())
-                                    .collect(Collectors.toUnmodifiableSet()));
-        }
-
-        return premiumUser != null ? premiumUser : convertedUser;
+//        PremiumUser premiumUser = null;
+//            premiumUser = ((PremiumUser) convertedUser)
+//                    .cloneWithBookings(
+//                            premiumUserData.getBookingIds().stream()
+//                                    .map(id -> Booking.BookingBuilder.aBooking().id(id).build())
+//                                    .collect(Collectors.toUnmodifiableSet()));
+//
+        return  convertedUser;
+//        return premiumUser != null ? premiumUser : convertedUser;
     }
 }

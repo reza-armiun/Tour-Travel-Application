@@ -1,12 +1,17 @@
 package razarm.tosan.repository.data.auth;
 
+import lombok.ToString;
 import razarm.tosan.repository.data.BaseEntityData;
 import razarm.tosan.repository.data.location.AddressData;
+import razarm.tosan.repository.data.tour.BookingData;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 
+
+@ToString
 public abstract class UserData extends BaseEntityData {
     protected final String name;
     protected final String username;
@@ -21,7 +26,9 @@ public abstract class UserData extends BaseEntityData {
     protected final Boolean isEnabled;
     protected final Boolean isCredentialsNonExpired;
 
-    public UserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired) {
+    protected final Set<BookingData> bookings;
+
+    public UserData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, AddressData addressData, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<BookingData> bookings) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.username = username;
@@ -35,6 +42,7 @@ public abstract class UserData extends BaseEntityData {
         this.isExpired = isExpired;
         this.isEnabled = isEnabled;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.bookings = bookings;
     }
 
     public String getImageUrl() {
@@ -85,26 +93,10 @@ public abstract class UserData extends BaseEntityData {
         return isCredentialsNonExpired;
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", UserData.class.getSimpleName() + "[", "]")
-                .add("id='" + id + "'")
-                .add("createdAt=" + createdAt)
-                .add("modifiedAt=" + modifiedAt)
-                .add("createdBy='" + createdBy + "'")
-                .add("modifiedBy='" + modifiedBy + "'")
-                .add("name='" + name + "'")
-                .add("username='" + username + "'")
-                .add("password='" + password + "'")
-                .add("email='" + email + "'")
-                .add("phone='" + phone + "'")
-                .add("nationalId=" + nationalId)
-                .add("validEmail=" + validEmail)
-                .add("isExpired=" + isExpired)
-                .add("isEnabled=" + isEnabled)
-                .add("isCredentialsNonExpired=" + isCredentialsNonExpired)
-                .toString();
+    public Set<BookingData> getBookings() {
+        return bookings;
     }
+
 
     @Override
     public boolean equals(Object o) {

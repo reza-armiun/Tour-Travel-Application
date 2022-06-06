@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 import razarm.tosan.repository.domain.BaseEntity;
+import razarm.tosan.repository.domain.Booking;
 import razarm.tosan.repository.domain.location.Address;
 
 import java.time.Instant;
+import java.util.Set;
+
 @Getter
 @Setter
 public abstract class User extends BaseEntity implements UserDetails {
@@ -23,9 +26,10 @@ public abstract class User extends BaseEntity implements UserDetails {
     protected  Boolean isExpired;
     protected  Boolean isEnabled;
     protected  Boolean isCredentialsNonExpired;
+    protected   Set<Booking> bookings ;
     protected  Address address;
 
-    public User(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Address address) {
+    public User(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, String username, String password, String email, String phone, Long nationalId, String imageUrl, Boolean validEmail, Boolean isExpired, Boolean isEnabled, Boolean isCredentialsNonExpired, Set<Booking> bookings, Address address) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.username = username;
@@ -38,11 +42,9 @@ public abstract class User extends BaseEntity implements UserDetails {
         this.isExpired = isExpired;
         this.isEnabled = isEnabled;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.bookings = bookings;
         this.address = address;
     }
-
-
-
 
     @Override
     public String toString() {

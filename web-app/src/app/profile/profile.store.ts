@@ -16,6 +16,7 @@ interface  Address{
 }
 interface  Booking {
   id: string;
+  tourId: string;
   tourName: string;
   date: string;
 }
@@ -46,7 +47,6 @@ export class ProfileStore {
               , private loadingService: LoadingService
               , private messageService: MessagesService, private authService: AuthService) {
     this.authService.username$.subscribe(username => {
-      console.log('username  :', username)
       if(username)
         this.loadProfileByUsername(username)
     });
@@ -56,6 +56,7 @@ export class ProfileStore {
 
   loadProfileByUsername(username: string) {
     const profileObs =  this.httpClient.get<Profile>(`${this.rootUrl}/v1/profile`, {params: { username}}).pipe(
+      tap(profile => console.log('profile ', profile)),
       tap(profile => this.profileSub$.next(profile)),
       catchError(err => {
         this.messageService.showErrorForPeriodOfTime(1500, 'Failed to get profile details');

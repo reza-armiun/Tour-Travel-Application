@@ -7,13 +7,16 @@ import java.util.List;
 
 public interface BookingService {
 
-   BookingDto bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException;
-   BookingDto bookingTour(String username, String tourId , BookingDto bookingDto) throws UserNotFoundException;
+//   BookingDto bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException;
+   void bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException;
+   void bookingTour(String username, String tourId , BookingDto bookingDto) throws UserNotFoundException;
 
    void editBooking(String username, BookingDto bookingDto) throws UserNotFoundException;
-   void removeBooking(String bookingId);
+   void removeBooking(String username, String bookingId);
+//   void removeBooking(String bookingId);
+   List<BookingDto> findUserBookings(String username);
    List<BookingDto> findAllBooking();
-   BookingDto findById(String id);
+   BookingDto findById(String username, String id);
 
 
 

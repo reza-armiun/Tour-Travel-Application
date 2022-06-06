@@ -1,5 +1,6 @@
 package razarm.tosan.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.tour.BookingDto;
 import razarm.tosan.controller.dto.tour.TourDto;
@@ -10,45 +11,49 @@ import razarm.tosan.repository.BookingRepository;
 import razarm.tosan.repository.TourRateRepository;
 import razarm.tosan.repository.TourRepository;
 import razarm.tosan.repository.UserRepository;
+import razarm.tosan.repository.domain.auth.User;
 import razarm.tosan.repository.domain.tour.TourRate;
 import razarm.tosan.service.tour.BookingService;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
     private final UserRepository userRepository;
-    private final BookingRepository bookingRepository;
     private final TourRepository tourRepository;
     private final TourRateRepository tourRateRepository;
     private final BookingDtoToBooking bookingDtoToBooking;
     private final BookingToBookingDto bookingToBookingDto;
 
-    public BookingServiceImpl(UserRepository userRepository, BookingRepository bookingRepository, TourRepository tourRepository, TourRateRepository tourRateRepository, BookingDtoToBooking bookingDtoToBooking, BookingToBookingDto bookingToBookingDto) {
-        this.userRepository = userRepository;
-        this.bookingRepository = bookingRepository;
-        this.tourRepository = tourRepository;
-        this.tourRateRepository = tourRateRepository;
-        this.bookingDtoToBooking = bookingDtoToBooking;
-        this.bookingToBookingDto = bookingToBookingDto;
-    }
+
 
 
     @Override
-    public BookingDto bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException {
+    public void bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException {
         var user =  userRepository.findByUsername(username);
         if(user == null) throw new UserNotFoundException("user not found");
 
         var booking = bookingDtoToBooking.convert(bookingDto);
+        var newTour = booking.getTour();
+        var savedTour = tourRepository.save(newTour);
 
-        var savedBooking = bookingRepository.save(booking.cloneWithUser(user));
-        return this.bookingToBookingDto.convert(savedBooking);
+
+        var newBookings = new HashSet<>(user.getBookings());
+        newBookings.add(booking.cloneWithTour(savedTour));
+        user.setBookings(newBookings);
+        userRepository.update(user);
+
+//        var savedBooking = bookingRepository.save(booking.cloneWithUser(user));
+//        return this.bookingToBookingDto.convert(savedBooking);
     }
 
     @Override
-    public BookingDto bookingTour(String username, String tourId, BookingDto bookingDto) throws UserNotFoundException {
+    public void bookingTour(String username, String tourId, BookingDto bookingDto) throws UserNotFoundException {
         var user =  userRepository.findByUsername(username);
         if(user == null) throw new UserNotFoundException("user not found");
 
@@ -56,9 +61,15 @@ public class BookingServiceImpl implements BookingService {
         if(tour == null ) throw new IllegalStateException("tour not found");
 
         var booking = bookingDtoToBooking.convert(bookingDto);
-        var savedBooking = bookingRepository.save(booking.cloneWithUser(user).cloneWithTour(tour));
 
-        return this.bookingToBookingDto.convert(savedBooking);
+
+        var newBookings = new HashSet<>(user.getBookings());
+        newBookings.add(booking.cloneWithTour(tour));
+        user.setBookings(newBookings);
+        userRepository.update(user);
+//        var savedBooking = bookingRepository.save(booking.cloneWithUser(user).cloneWithTour(tour));
+
+//        return this.bookingToBookingDto.convert(savedBooking);
     }
 
     @Override
@@ -67,36 +78,75 @@ public class BookingServiceImpl implements BookingService {
         if(user == null) throw new IllegalStateException("user not found");
 
         var booking = bookingDtoToBooking.convert(bookingDto);
-        bookingRepository.update(booking.cloneWithUser(user));
+
+        var newBookings = new HashSet<>(user.getBookings());
+        newBookings.removeIf(bk -> bk.getId().equals(booking.getId()));
+        newBookings.add(booking);
+        user.setBookings(newBookings);
+        userRepository.update(user);
+//        bookingRepository.update(booking.cloneWithUser(user));
     }
 
     @Override
-    public void removeBooking(String bookingId) {
-        bookingRepository.deleteById(bookingId);
+    public void removeBooking(String username, String bookingId) {
+        var user =  userRepository.findByUsername(username);
+        if(user == null) throw new IllegalStateException("user not found");
+
+        var newBookings = new HashSet<>(user.getBookings());
+        newBookings.removeIf(bk -> bk.getId().equals(bookingId));
+        user.setBookings(newBookings);
+        userRepository.update(user);
+//        bookingRepository.deleteById(bookingId);
     }
 
     @Override
-    public List<BookingDto> findAllBooking() {
-        return bookingRepository.findAll().stream()
-                .map(bookingToBookingDto::convert)
-                .map(
-                        bookingDto -> {
-                            TourDto tour =
-                                    bookingDto
-                                            .getTour()
-                                            .cloneWithRating(
-                                                    getTourRating(bookingDto.getTour().getId()));
-                            return bookingDto.cloneWithTour(tour);
-                        })
+    public List<BookingDto> findUserBookings(String username) {
+        var user =  userRepository.findByUsername(username);
+        if(user == null) throw new IllegalStateException("user not found");
+
+        return user.getBookings().stream()
+                .map(this.bookingToBookingDto::convert)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
-    public BookingDto findById(String id) {
-        BookingDto bookingDto = bookingToBookingDto.convert(bookingRepository.findById(id));
-        TourDto tour =
-                bookingDto.getTour().cloneWithRating(getTourRating(bookingDto.getTour().getId()));
-        return bookingDto.cloneWithTour(tour);
+    public List<BookingDto> findAllBooking() {
+        return this.userRepository.findAll().stream()
+                .map(User::getBookings)
+                .flatMap(Collection::stream)
+                .map(this.bookingToBookingDto::convert)
+                .collect(Collectors.toUnmodifiableList());
+//        return bookingRepository.findAll().stream()
+//                .map(bookingToBookingDto::convert)
+//                .map(
+//                        bookingDto -> {
+//                            TourDto tour =
+//                                    bookingDto
+//                                            .getTour()
+//                                            .cloneWithRating(
+//                                                    getTourRating(bookingDto.getTour().getId()));
+//                            return bookingDto.cloneWithTour(tour);
+//                        })
+//                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public BookingDto findById(String username ,String id) {
+        var user = this.userRepository.findByUsername(username);
+        var booking = user.getBookings().stream()
+                .filter(bk -> bk.getId().equals(id))
+                .findFirst().orElse(null);
+
+
+
+        if(booking != null) return this.bookingToBookingDto
+                .convert(booking.cloneWithTour(this.tourRepository.findById(booking.getTour().getId())));
+        else return null;
+
+//        BookingDto bookingDto = bookingToBookingDto.convert(bookingRepository.findById(id));
+//        TourDto tour =
+//                bookingDto.getTour().cloneWithRating(getTourRating(bookingDto.getTour().getId()));
+//        return bookingDto.cloneWithTour(tour);
     }
 
     private Float getTourRating(String tourId) {

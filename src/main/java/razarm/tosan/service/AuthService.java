@@ -21,6 +21,7 @@ public interface AuthService {
     boolean checkUsername(String username);
 
     Profile getUserProfileByUsername(String username);
+    void updateUserProfile(String username, Profile profile);
 
     void updatePassword(UpdatePasswordRequest updatePasswordRequest) throws PasswordNotMatchException;
 }

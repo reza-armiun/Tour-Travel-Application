@@ -1,9 +1,10 @@
 .navbar {
   margin: 0;
-  padding: 9px 15px;
+  padding: 3px 15px;
   width: 100vw;
   background-color: rgba(55, 55, 69, 1);
-  position: relative;
+  position: fixed;
+  z-index: 2000;
   top: 0;
   display: flex;
   justify-content: space-between;

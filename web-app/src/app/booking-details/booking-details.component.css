@@ -1,0 +1,69 @@
+
+.container {
+  padding: 25px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 10px;
+}
+
+.booking-info {
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.2);
+  flex: 2;
+  padding: 30px 60px;
+  min-width: 450px;
+  min-height: 500px;
+}
+.booking-info .header {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.segment {
+  padding: 15px 7px;
+}
+.segment__header {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(19, 104, 250, 0.8);
+}
+.segment__content {
+  padding: 6px 3px;
+}
+.booking-info table {
+  margin-top: 12px;
+  width: 100%;
+}
+.tour-info {
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.2);
+  flex: 1;
+  min-width: 450px;
+}
+
+
+
+
+.text-field {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-width: 400px;
+  max-width: 500px;
+}
+.text-field label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: bold;
+}
+.text-field .description {
+  flex: 3;
+  max-width: 300px;
+  font-size: 12px;
+  color: gray;
+  word-wrap: break-word;
+}

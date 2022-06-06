@@ -23,18 +23,18 @@ public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
     private  AccommodationType type;
     private  BigInteger price;
     private  Long time;
-    private  AddressDto addressDto;
+    private  AddressDto address;
     private  AccommodationProviderDto accommodationProvider;
 
 
     public AccommodationDto() {}
-    public AccommodationDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, BigInteger price, Long time, AddressDto addressDto, AccommodationProviderDto accommodationProvider) {
+    public AccommodationDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, BigInteger price, Long time, AddressDto address, AccommodationProviderDto accommodationProvider) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
         this.price = price;
         this.time = time;
-        this.addressDto = addressDto;
+        this.address = address;
         this.accommodationProvider = accommodationProvider;
     }
 
@@ -54,8 +54,8 @@ public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
         return time;
     }
 
-    public AddressDto getAddressDto() {
-        return addressDto;
+    public AddressDto getAddress() {
+        return address;
     }
 
     public AccommodationProviderDto getAccommodationProvider() {
@@ -79,8 +79,8 @@ public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
         this.time = time;
     }
 
-    public void setAddressDto(AddressDto addressDto) {
-        this.addressDto = addressDto;
+    public void setAddress(AddressDto address) {
+        this.address = address;
     }
 
     public void setAccommodationProvider(AccommodationProviderDto accommodationProvider) {
@@ -179,7 +179,7 @@ public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
                 .add("type=" + type)
                 .add("price=" + price)
                 .add("time=" + time)
-                .add("addressDto=" + addressDto)
+                .add("addressDto=" + address)
                 .add("accommodationProvider=" + accommodationProvider)
                 .toString();
     }

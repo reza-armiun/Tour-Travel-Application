@@ -25,7 +25,7 @@
   </form>
 </app-modal>
 
-<form [formGroup]="profileForm" class="profile-form">
+<form [formGroup]="profileForm" (ngSubmit)="updateProfileHandler()" class="profile-form">
     <div class="profile__info">
       <div class="profile__img-wrapper">
         <input type="file" id="imgupload" style="display:none"/>
@@ -63,34 +63,34 @@
     </div>
 
     <div class="profile__details">
-      <div class="profile__address">
+      <div class="profile__address" formGroupName="address">
         <div class="address__header">Address Info
           <!--        <button class="address__btn">Edit</button>-->
         </div>
 
         <hr class="divider" />
         <div class="address-field">
-          <label>address: </label>
-          <input type="text">
+          <label>Street: </label>
+          <input type="text" name="street"  formControlName="street">
         </div>
         <div class="inline-fields">
           <div class="field">
             <label>City: </label>
-            <input type="text">
+            <input type="text" formControlName="city">
           </div>
           <div class="field">
             <label>Zip Code: </label>
-            <input type="text">
+            <input type="text" formControlName="zipCode">
           </div>
         </div>
         <div class="inline-fields">
           <div class="field">
             <label>Country: </label>
-            <input type="text">
+            <input type="text" formControlName="country">
           </div>
           <div class="field">
             <label>Country Code: </label>
-            <input type="text">
+            <input type="text" formControlName="countryCode">
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
             <div class="booking__date">{{booking?.date | date}}</div>
           </div>
           <div class="booking_actions">
-            <button class="view_btn">View Details</button>
+            <button type="button" class="view_btn" (click)="viewTourDetailsHandler(booking.id)">View Details</button>
           </div>
         </div>
       </div>

@@ -56,4 +56,10 @@ public class AuthController {
         log.debug("user : {}  password  changed successfully", updatePasswordRequest.getUsername());
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("profile")
+    public ResponseEntity<Void> updateProfile(@RequestBody Profile profile, Principal principal) {
+        this.authService.updateUserProfile(principal.getName(), profile);
+        return ResponseEntity.ok().build();
+    }
 }

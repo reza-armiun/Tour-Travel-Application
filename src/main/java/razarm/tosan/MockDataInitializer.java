@@ -451,9 +451,9 @@ public class MockDataInitializer implements CommandLineRunner {
         tourRateService.rateTour(signupRequest2.getUsername(), savedTour1.getId(), 5);
         tourRateService.rateTour(signupRequest3.getUsername(), savedTour1.getId(), 7);
 
-        var book1 = bookService.bookingTour(reza.getUsername(), savedTour1.getId(), mockBooking);
-        var book2 = bookService.bookingTour(signupRequest2.getUsername(), savedTour2.getId(), mockBooking2);
-        var book3 =bookService.bookingTour(signupRequest2.getUsername(), savedTour3.getId(), mockBooking3);
+        bookService.bookingTour(reza.getUsername(), savedTour1.getId(), mockBooking);
+        bookService.bookingTour(signupRequest2.getUsername(), savedTour2.getId(), mockBooking2);
+        bookService.bookingTour(signupRequest2.getUsername(), savedTour3.getId(), mockBooking3);
         return bookService.findAllBooking();
     }
 

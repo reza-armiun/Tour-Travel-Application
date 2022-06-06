@@ -84,4 +84,8 @@ export class AuthService {
   changePassword(changePassword: UpdatePasswordReq) {
     return this.http.put(`${this.rootUrl}/v1/change-password`, changePassword);
   }
+
+  updateProfile(profile: any) {
+    return this.http.put(`${this.rootUrl}/v1/profile`, profile);
+  }
 }
