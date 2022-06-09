@@ -25,7 +25,6 @@ export class BookingDetailsComponent implements OnInit, OnDestroy {
       const id = params['id'];
       if(id) {
         this.sub = this.bookingService.getBooking(id).subscribe(booking => {
-          console.log(booking);
           this.booking = booking;
           this.travelers = booking.travelers;
         });

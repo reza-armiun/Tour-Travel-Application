@@ -5,9 +5,11 @@
 <div id="background"> </div>
   <div class="container">
     <app-messages></app-messages>
+    <app-breadcrumb [items]="menuItems"></app-breadcrumb>
     <router-outlet></router-outlet>
   </div>
 
+<!--<app-country-dropdown></app-country-dropdown>-->
 
 <!--<app-search-dropdown [options]="['New Option1', 'New Option2', 'New Option3']"></app-search-dropdown>-->
 <!--<div style="display: flex">-->

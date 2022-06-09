@@ -1,13 +1,13 @@
 .messages-error {
-  margin-top: 40px;
   position: fixed;
+  top: 53px;
   z-index: 10;
   width: 100%;
   background-color: rgba(255, 0, 0 , 0.2);
 }
 .messages-success {
-  margin-top: 40px;
   position: fixed;
+  top: 53px;
   z-index: 10;
   width: 100%;
   background-color: rgba(113, 255, 129, 0.2);

@@ -1,0 +1,4 @@
+@use "../form";
+form{
+  @extend .form;
+}

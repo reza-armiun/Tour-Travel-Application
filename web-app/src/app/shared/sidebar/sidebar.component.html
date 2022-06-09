@@ -2,7 +2,7 @@
 <div [ngClass]="{'sidebar': true, 'hide': !(showSidebar$ | async)} ">
   <h2 class="header">Menu</h2>
   <hr/>
-  <div class="sidebar__item">Tours</div>
+  <div routerLink="/tour" routerLinkActive="active" class="sidebar__item" >Tours</div>
   <hr/>
   <div class="sidebar__item">Users</div>
   <hr/>

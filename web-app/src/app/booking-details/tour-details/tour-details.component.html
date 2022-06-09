@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="tour__photo">
-    <img [src]="tour?.imgUrl" />
+      <img   [src]="tour?.imgUrl" />
   </div>
   <div class="tour__details">
     <div class="tour__header">{{tour?.name}} </div>
@@ -29,13 +29,17 @@
     <div class="tour__orders">
       <mat-tab-group style="margin-top: 15px">
         <mat-tab label="Accommodation">
-          <app-accommodation></app-accommodation>
+          <app-accommodation [accommodationOrder]=" schedulePlans[0]?.accommodationOrder"></app-accommodation>
         </mat-tab>
         <mat-tab label="Vehicles">
-          <app-vehicle></app-vehicle>
+          <app-vehicle [vehicleOrders]=" schedulePlans[0]?.vehicleOrders" ></app-vehicle>
         </mat-tab>
-        <mat-tab label="Foods"></mat-tab>
-        <mat-tab label="Activities"></mat-tab>
+        <mat-tab label="Foods">
+          <app-food [foodOrders]="schedulePlans[0]?.foodOrders"></app-food>
+        </mat-tab>
+        <mat-tab label="Activities">
+          <app-activity [activities]="schedulePlans[0]?.activities"></app-activity>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>

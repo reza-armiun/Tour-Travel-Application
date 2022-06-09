@@ -28,6 +28,7 @@ import razarm.tosan.repository.domain.auth.Admin;
 import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.food.FoodType;
+import razarm.tosan.repository.domain.tour.ActivityType;
 import razarm.tosan.repository.domain.tour.TourType;
 import razarm.tosan.service.*;
 import razarm.tosan.service.tour.BookingService;
@@ -41,6 +42,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.Set;
 
@@ -124,6 +126,9 @@ public class MockDataInitializer implements CommandLineRunner {
                     .vehicle(PlaneDto.PlaneDtoBuilder.aPlaneDto()
                             .name("razarm plan1")
                             .allowedLuggage(2)
+                            .fromStation("station 1")
+                            .toStation("station 2")
+                                                     .ticketNumber("321317892y7171")
                             .price(new BigInteger("1000"))
                             .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                             .arrival(Instant.now().plus(1 , ChronoUnit.DAYS).atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
@@ -142,7 +147,10 @@ public class MockDataInitializer implements CommandLineRunner {
                             .name("razarm plan2")
                             .price(new BigInteger("1000"))
                             .allowedLuggage(2)
-                            .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                            .fromStation("terminal 1")
+                            .toStation("terminal 2")
+                                                     .ticketNumber("865456453")
+                                                     .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                             .arrival(Instant.now().plus(1 , ChronoUnit.DAYS).atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                             .vehicleProvider(VehicleProviderDto.VehicleProviderDtoBuilder.aVehicleProviderDto()
                                     .name("razarm company")
@@ -152,7 +160,26 @@ public class MockDataInitializer implements CommandLineRunner {
                             .build())
                     .build();
 
+    private  final VehicleOrderDto vehicleOrder3 =
+            VehicleOrderDto.VehicleOrderDtoBuilder.aVehicleOrderDto()
+                                                  .name("new order 3")
+                                                  .discount(2)
+                                                  .vehicle(PlaneDto.PlaneDtoBuilder.aPlaneDto()
+                                                                                   .name("razarm bus 3")
+                                                                                   .price(new BigInteger("1000"))
+                                                                                   .allowedLuggage(2)
+                                                                                   .ticketNumber("2131415457785678")
+                                                                                   .fromStation("terminal 1")
+                                                                                   .toStation("terminal 2")
+                                                                                   .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .arrival(Instant.now().plus(1 , ChronoUnit.DAYS).atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .vehicleProvider(VehicleProviderDto.VehicleProviderDtoBuilder.aVehicleProviderDto()
+                                                                                                                                                .name("razarm company")
+                                                                                                                                                .email("razarm@gmail.com")
 
+                                                                                                                                                .build())
+                                                                                   .build())
+                                                  .build();
 
     private final AddressDto address1 =
             AddressDto.AddressDtoBuilder.anAddressDto()
@@ -362,7 +389,19 @@ public class MockDataInitializer implements CommandLineRunner {
                         .destination(address2)
                         .accommodationOrder(accommodationOrder.get(0))
                         .foodOrders(Set.of(foodOrder.get(0)))
-                        .vehicleOrders(Set.of(vehicleOrder.get(0)))
+                        .vehicleOrders(Set.of(vehicleOrder.get(0), vehicleOrder.get(1), vehicleOrder.get(3)))
+                                                      .activities(Set.of(ActivityDto.ActivityDtoBuilder.anActivityDto()
+                                                                                                       .name("activity1")
+                                                                                                       .type(ActivityType.MUSEUM_VISITATION)
+                                                                                                       .startAt(ZonedDateTime.now())
+                                                                                                       .endAt(ZonedDateTime.now())
+                                                                                                       .build(),
+                                                                         ActivityDto.ActivityDtoBuilder.anActivityDto()
+                                                                                                       .name("activity 2")
+                                                                                                       .type(ActivityType.SWIMMING)
+                                                                                                       .startAt(ZonedDateTime.now())
+                                                                                                       .endAt(ZonedDateTime.now())
+                                                                                                       .build()))
                         .build();
 
         final SchedulePlanDto mockSchedulePlan2 =
@@ -481,6 +520,7 @@ public class MockDataInitializer implements CommandLineRunner {
 
         vehicleOrderService.create(vehicleOrder1);
         vehicleOrderService.create(vehicleOrder2);
+        vehicleOrderService.create(vehicleOrder3);
 
         return vehicleOrderService.findAll();
     }

@@ -4,7 +4,8 @@ import {
   catchError,
   combineLatest,
   concatMap,
-  filter, map,
+  find,
+  map,
   Observable,
   shareReplay,
   tap,
@@ -13,66 +14,8 @@ import {
 import {HttpClient} from "@angular/common/http";
 import {LoadingService} from "../shared/loading/loading.service";
 import {MessagesService} from "../shared/messages/messages.service";
+import {Tour} from "../model/Tour";
 
-
-//
-// interface Country {
-//   name: string;
-//   countryCode: string;
-// }
-// interface City {
-//   name: string;
-//   zipCode: number;
-//   country: Country;
-// }
-// interface Address {
-//   street: string;
-//   postalCode: string;
-//   city: City;
-// }
-//
-// interface TourismManager {
-//   name: string;
-//   email: string;
-//   phone: string;
-//   address: Address;
-//   nationalId: number;
-// }
-//
-// interface TourItem {
-//   name: string;
-//   type: string;
-//   guid: string;
-//   description: string;
-//   imageUrl: string;
-//   rating: number;
-//   price: number;
-//   date: string;
-//   categories: string[];
-//   tourismManager: TourismManager;
-// }
-// interface Accommodation {
-//   name: string;
-//   type: String;
-//   price: number;
-//   time: Date;
-//
-// }
-// interface AccommodationOrder {
-//   date: Date;
-//   discount: number;
-//   accommodation:
-// }
-//
-//
-// interface SchedulePlan {
-//   name: string;
-//   startTime: Date;
-//   arrivalTime: Date;
-//   source: Address;
-//   destination: Address;
-//   accommodationOrder: ;
-// }
 
 export interface Review {
   from: number;
@@ -87,7 +30,6 @@ export interface  Filters {
   providedIn: 'root'
 })
 export class ToursStore {
-  private rootUrl = 'http://localhost:8080';
 
   private toursSub$ = new BehaviorSubject<any>([]);
   private categoriesFilterSub$ = new BehaviorSubject<string []>([]);
@@ -104,13 +46,27 @@ export class ToursStore {
   constructor( private httpClient: HttpClient
               , private loadingService: LoadingService
               , private messageService: MessagesService) {
-    this.loadAllTours();
+    // this.loadAllTours();
   }
 
 
-  private loadAllTours() {
+
+
+  getTour(id: string) : Observable<any> {
+    return this.tours$.pipe(
+      concatMap(tourList => {
+        return tourList.length > 0 ? [...tourList] : this.httpClient.get<Tour>(`/v1/tour/${id}`);
+      }),
+      find(tour => {
+        if (tour?.id == id) return tour;
+        return null;
+      }),
+    );
+  }
+
+   loadAllTours() {
     const toursObs = this.httpClient
-      .get(`${this.rootUrl}/v1/tour`, )
+      .get(`/v1/tour`, )
       .pipe(
         tap(tours => this.toursSub$.next(tours)),
         catchError(err => {
@@ -120,7 +76,7 @@ export class ToursStore {
         shareReplay()
       );
 
-    this.loadingService.showLoadingUntilCompletion(toursObs).subscribe();
+    return this.loadingService.showLoadingUntilCompletion(toursObs);
   }
 
   setReviewsFilter(reviewsFilter: Review[]) {

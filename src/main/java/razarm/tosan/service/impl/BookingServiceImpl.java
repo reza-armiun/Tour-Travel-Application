@@ -53,7 +53,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void bookingTour(String username, String tourId, BookingDto bookingDto) throws UserNotFoundException {
+    public BookingDto bookingTour(String username, String tourId, BookingDto bookingDto) throws UserNotFoundException {
         var user =  userRepository.findByUsername(username);
         if(user == null) throw new UserNotFoundException("user not found");
 
@@ -67,10 +67,18 @@ public class BookingServiceImpl implements BookingService {
         newBookings.add(booking.cloneWithTour(tour));
         user.setBookings(newBookings);
         userRepository.update(user);
+
+
+        var editedUser =  userRepository.findByUsername(username);
+        var savedBooking = editedUser.getBookings().stream().sorted((o1, o2) -> o1.getDate().isBefore(o2.getDate()) ? 1 : -1).findFirst();
+        return  this.bookingToBookingDto.convert(savedBooking.get());
+
 //        var savedBooking = bookingRepository.save(booking.cloneWithUser(user).cloneWithTour(tour));
 
 //        return this.bookingToBookingDto.convert(savedBooking);
     }
+
+
 
     @Override
     public void editBooking(String username, BookingDto bookingDto) throws UserNotFoundException {

@@ -9,7 +9,7 @@ public interface BookingService {
 
 //   BookingDto bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException;
    void bookingNewTour(String username, BookingDto bookingDto) throws UserNotFoundException;
-   void bookingTour(String username, String tourId , BookingDto bookingDto) throws UserNotFoundException;
+   BookingDto bookingTour(String username, String tourId , BookingDto bookingDto) throws UserNotFoundException;
 
    void editBooking(String username, BookingDto bookingDto) throws UserNotFoundException;
    void removeBooking(String username, String bookingId);

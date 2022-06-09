@@ -28,7 +28,7 @@ public class BookingToBookingDto implements Mapper<Booking, BookingDto> {
                 .description(booking.getDescription())
                 .user(booking.getUser() != null ? userToUserDto.convert(booking.getUser()): null)
                 .travelers(booking.getTravelers().stream().map(travelerToTravelerDto::convert).collect(Collectors.toUnmodifiableSet()))
-                .tour(tourToTourDto.convert(booking.getTour()))
+                .tour(booking.getTour() != null ? tourToTourDto.convert(booking.getTour()) : null)
                 .createdAt(booking.getCreatedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .modifiedAt(booking.getModifiedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .createdBy(booking.getCreatedBy())

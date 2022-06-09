@@ -5,8 +5,12 @@ import {TourDetailsComponent} from "./tour-details/tour-details.component";
 
 
 const routes: Routes = [
-  {path: '', component: BookingDetailsComponent , pathMatch: 'full'},
-  {path: 'tour/:id', component: TourDetailsComponent}
+  {path: '', component: BookingDetailsComponent, data: {
+      breadCrumb: null
+    } , pathMatch: 'full'},
+  {path: 'tour/:id', component: TourDetailsComponent, data: {
+      breadCrumb: 'tour'
+    }},
 ];
 
 @NgModule({

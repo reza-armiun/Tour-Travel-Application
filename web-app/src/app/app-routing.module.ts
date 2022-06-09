@@ -6,20 +6,43 @@ import {SignOutComponent} from "./auth/sign-out/sign-out.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
-import {BookingDetailsComponent} from "./booking-details/booking-details.component";
-import {TourDetailsComponent} from "./booking-details/tour-details/tour-details.component";
 import {LazyAuthGuard} from "./lazy-auth.guard";
 import {AuthGuard} from "./auth.guard";
+import {ToursComponent} from "./tours/tours.component";
+import {BookingFormComponent} from "./booking-form/booking-form.component";
+import {TourFormComponent} from "./tour-form/tour-form.component";
 
 
 const routes: Routes = [
-  {path: '',canActivate: [AuthGuard],  component: HomeComponent, pathMatch: 'full'},
+  {path: '', canActivate: [AuthGuard], component: HomeComponent, pathMatch: 'full'},
   {path: 'signin', component: SignInComponent},
   {path: 'signout', component: SignOutComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', canActivate: [AuthGuard],  component: ProfileComponent},
-  {path: 'booking/:id' , canLoad: [LazyAuthGuard]
-    , loadChildren: () => import('./booking-details/booking-details.module').then(mod => mod.BookingDetailsModule)},
+  {path: 'tour/save', component: TourFormComponent},
+  {
+    path: 'profile', canActivate: [AuthGuard], data: {
+      breadCrumb: 'profile'
+    }
+    , component: ProfileComponent
+  },
+  {
+    path: 'tour', canActivate: [AuthGuard], data: {
+      breadCrumb: 'tour'
+    }
+    , component: ToursComponent
+  },
+  {
+    path: 'booking', canActivate: [AuthGuard], data: {
+      breadCrumb: 'booking'
+    }
+    , component: BookingFormComponent
+  },
+  {
+    path: 'booking/:id', canLoad: [LazyAuthGuard], data: {
+      breadCrumb: 'booking'
+    }
+    , loadChildren: () => import('./booking-details/booking-details.module').then(mod => mod.BookingDetailsModule)
+  },
   {path: '**', component: NotFoundComponent}
 ];
 

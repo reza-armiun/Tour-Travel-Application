@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.email
     ]),
-    username: new FormControl('', {updateOn: 'submit', validators: [
+    username: new FormControl('', {updateOn: 'blur', validators: [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),

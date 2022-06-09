@@ -55,8 +55,7 @@ export class ProfileStore {
   }
 
   loadProfileByUsername(username: string) {
-    const profileObs =  this.httpClient.get<Profile>(`${this.rootUrl}/v1/profile`, {params: { username}}).pipe(
-      tap(profile => console.log('profile ', profile)),
+    const profileObs =  this.httpClient.get<Profile>(`/v1/profile`, {params: { username}}).pipe(
       tap(profile => this.profileSub$.next(profile)),
       catchError(err => {
         this.messageService.showErrorForPeriodOfTime(1500, 'Failed to get profile details');
@@ -66,6 +65,11 @@ export class ProfileStore {
     this.loadingService.showLoadingUntilCompletion(profileObs).subscribe();
   }
 
-
+  updateProfile(profile: any) {
+    return this.httpClient.put(`/v1/profile`, profile).pipe(
+      tap(_ => this.profileSub$.next({...profile, bookings: this.profileSub$.value?.bookings})),
+      shareReplay()
+    );
+  }
 
 }

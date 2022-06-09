@@ -1,0 +1,8 @@
+<div *ngIf="items.length > 0" class="breadcrumb" >
+<!--  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>-->
+  <a routerLink="/" [class.active]="isLinkActive('')" >Home</a>
+  <div *ngFor="let item of items" class="breadcrumb__item">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <a [routerLink]="item.url"  [class.active]="isLinkActive(item.url)">{{item.label}}</a>
+  </div>
+</div>

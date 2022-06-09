@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, shareReplay, tap} from "rxjs";
+import {BehaviorSubject, Observable, shareReplay, tap} from "rxjs";
+import {Tour} from "../model/Tour";
 
 
 export interface Traveler {
@@ -14,14 +15,13 @@ export interface Booking {
   id: string;
   date: Date;
   description: string;
-  tour: any;
+  tour: Tour;
   travelers: Traveler[];
 }
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-  private rootUrl = 'http://localhost:8080';
   constructor(private httpClient: HttpClient) {}
 
   private tourSub$  = new BehaviorSubject<any>(null);
@@ -31,15 +31,27 @@ export class BookingService {
 
 
   getBooking(id: string) {
-    return this.httpClient.get<Booking>(`${this.rootUrl}/v1/booking/${id}`).pipe(
+    return this.httpClient.get<Booking>(`/v1/booking/${id}`).pipe(
       tap(booking => this.tourSub$.next(booking?.tour)),
     );
   }
 
 
   loadTour(id: string) {
-     this.httpClient.get(`${this.rootUrl}/v1/tour/${id}`).subscribe(
+     this.httpClient.get(`/v1/tour/${id}`).subscribe(
        tour => this.tourSub$.next(tour)
      );
+  }
+
+  bookingTour(booking: any, tourId: string): Observable<Booking> {
+    console.log(booking);
+      return this.httpClient.post<Booking>('/v1/booking', booking , {
+        params: {
+          'tour-id': tourId
+        }
+      }
+      ).pipe(
+        shareReplay(),
+      );
   }
 }

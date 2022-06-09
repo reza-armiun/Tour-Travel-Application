@@ -1,0 +1,41 @@
+<form >
+  <div class="form__header">
+    <div class="form__title">Tour Information</div>
+  </div>
+  <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+  <img *ngIf="imgUrl.value" [src]="imgUrl.value">
+  <mat-form-field>
+    <mat-label>imgUrl</mat-label>
+    <input matInput type="text" #imgUrl >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input matInput type="number">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input matInput type="date">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Guide</mat-label>
+    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3"
+              [cdkAutosizeMaxRows]="5"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3"
+              [cdkAutosizeMaxRows]="5"></textarea>
+  </mat-form-field>
+</form>

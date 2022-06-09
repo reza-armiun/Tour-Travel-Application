@@ -14,6 +14,8 @@ public class BookingDto extends BaseEntityDto {
     private  String description;
 
     private  Set<TravelerDto> travelers;
+
+
     private  TourDto tour;
 
     private  UserDto user;

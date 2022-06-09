@@ -1,6 +1,7 @@
 package razarm.tosan.controller.dto.accommodation;
 
 import com.fasterxml.jackson.annotation.*;
+import razarm.tosan.Priceable;
 import razarm.tosan.controller.dto.address.AddressDto;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
@@ -17,7 +18,7 @@ import java.util.StringJoiner;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = HotelDto.class, name = "HOTEL"),
 })
-public class AccommodationDto extends BaseEntityDto { //TODO make it abstract
+public class AccommodationDto extends BaseEntityDto implements Priceable { //TODO make it abstract
     private  String name;
 //    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  AccommodationType type;

@@ -30,15 +30,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatIconModule} from "@angular/material/icon";
 import { ModalComponent } from './shared/modal/modal.component';
-import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
-import {TourDetailsComponent} from "./booking-details/tour-details/tour-details.component";
 import {MatTabsModule} from "@angular/material/tabs";
-import { AccommodationComponent } from './booking-details/tour-details/accommodation/accommodation.component';
-import { VehicleComponent } from './booking-details/tour-details/vehicle/vehicle.component';
+import { CountryDropdownComponent } from './shared/country-dropdown/country-dropdown.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import { BookingFormComponent } from './booking-form/booking-form.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { TourFormComponent } from './tour-form/tour-form.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import { InfoFormComponent } from './tour-form/info-form/info-form.component';
+import { TourismManagerFormComponent } from './tour-form/tourism-manager-form/tourism-manager-form.component';
+import { SchedulePlansFormComponent } from './tour-form/schedule-plans-form/schedule-plans-form.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -62,6 +69,13 @@ import { VehicleComponent } from './booking-details/tour-details/vehicle/vehicle
     FiltersComponent,
     NotFoundComponent,
     ModalComponent,
+    CountryDropdownComponent,
+    BookingFormComponent,
+    BreadcrumbComponent,
+    TourFormComponent,
+    InfoFormComponent,
+    TourismManagerFormComponent,
+    SchedulePlansFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +89,11 @@ import { VehicleComponent } from './booking-details/tour-details/vehicle/vehicle
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
+    MatDatepickerModule
   ],
   providers: [AuthService, LoadingService, MessagesService
     ,{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}],

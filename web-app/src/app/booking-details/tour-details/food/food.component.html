@@ -1,0 +1,32 @@
+<table mat-table class="mat-elevation-z1" style="width: 100%"
+       [dataSource]="vehicles"
+       multiTemplateDataRows
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+    <td mat-cell *matCellDef="let food" colspan="1">{{food?.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Type</th>
+    <td mat-cell *matCellDef="let food" colspan="1">{{food?.type}}</td>
+  </ng-container>
+  <ng-container matColumnDef="ingredients">
+    <th mat-header-cell *matHeaderCellDef  colspan="2">Ingredients</th>
+    <td mat-cell *matCellDef="let food" colspan="2">{{food?.ingredients}}</td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef colspan="1">Price</th>
+    <td mat-cell *matCellDef="let food" colspan="1">{{food?.price}}</td>
+  </ng-container>
+  <ng-container matColumnDef="cookTime">
+    <th mat-header-cell *matHeaderCellDef colspan="1">Cook Time</th>
+    <td mat-cell *matCellDef="let food" colspan="1">{{food?.cookTime}}</td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+  <tr
+    mat-row *matRowDef="let activity; columns: displayedColumns"></tr>
+
+</table>

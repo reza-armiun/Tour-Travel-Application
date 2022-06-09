@@ -4,22 +4,27 @@ import {
   Route, Router,
   UrlSegment,
 } from '@angular/router';
-import {Observable, skipWhile, take, tap} from 'rxjs';
+import {delay, first, Observable, skipWhile, take, tap,} from 'rxjs';
 import {AuthService} from "./auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LazyAuthGuard implements CanLoad {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   canLoad(
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.signedin$.pipe(
-      skipWhile(value => value === null),
-      take(1)
+      // first(),
+      // tap(signin => {
+      //   console.log('lazy auth guard ', signin);
+      //   if(!signin) this.router.navigateByUrl('/signin');
+      // })
+      skipWhile(value => !value),
+      take(1),
     );
   }
 }

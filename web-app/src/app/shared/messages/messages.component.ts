@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MessagesService} from "./messages.service";
-import {delay, filter, finalize, Observable, tap} from "rxjs";
+import { Observable, tap} from "rxjs";
 
 @Component({
   selector: 'app-messages',
@@ -20,11 +20,12 @@ export class MessagesComponent implements OnInit {
       tap(() => this.showErrorMessage = true)
     );
     this.success$ = this.messageService.success.pipe(
-      tap(() => this.showErrorMessage = true)
+      tap(() => this.showSuccessMessage = true)
     );
   }
 
   onClose() {
     this.showErrorMessage = false;
+    this.showSuccessMessage = false;
   }
 }

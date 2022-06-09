@@ -3,6 +3,9 @@ package razarm.tosan.security.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import razarm.tosan.controller.dto.auth.Profile;
 import razarm.tosan.controller.dto.auth.SignupRequest;
@@ -14,6 +17,8 @@ import razarm.tosan.service.AuthService;
 import javax.naming.directory.InvalidAttributeValueException;
 import java.security.Principal;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("v1")
@@ -24,8 +29,16 @@ public class AuthController {
 
 
     @GetMapping("signedin")
-    public ResponseEntity<Optional<UserAuthDetails>> checkAuth(Principal principal) {
-        var authDetails = UserAuthDetails.builder().username(principal.getName()).authenticated(true).build();
+    public ResponseEntity<Optional<UserAuthDetails>> checkAuth(Authentication authentication) {
+        var authDetails =
+                UserAuthDetails.builder()
+                        .username(authentication.getName())
+                        .authenticated(true)
+                        .authorities(
+                                authentication.getAuthorities().stream()
+                                        .map(GrantedAuthority::getAuthority)
+                                        .collect(Collectors.toUnmodifiableSet()))
+                        .build();
         return ResponseEntity.ok(Optional.of(authDetails));
     }
 

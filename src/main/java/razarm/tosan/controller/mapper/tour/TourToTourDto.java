@@ -42,6 +42,7 @@ public class TourToTourDto implements Mapper<Tour, TourDto> {
                                         .map(schedulePlanToSchedulePlanDto::convert)
                                         .collect(Collectors.toUnmodifiableSet())
                                 : null)
+                                     .price(tour.calculatePrice())
                 .createdAt(tour.getCreatedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .modifiedAt(tour.getModifiedAt().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
                 .createdBy(tour.getCreatedBy())

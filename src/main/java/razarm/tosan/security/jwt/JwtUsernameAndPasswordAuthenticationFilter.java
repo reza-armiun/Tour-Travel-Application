@@ -125,6 +125,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                                        authorities.stream()
                                                                   .map(GrantedAuthority::getAuthority)
                                                                   .collect(Collectors.toSet()))
+                                                         .authenticated(true)
                                                .build();
         response.addHeader(
                 "user-info",

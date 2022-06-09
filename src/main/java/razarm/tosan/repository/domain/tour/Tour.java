@@ -91,7 +91,7 @@ public class Tour extends BaseEntity
 
     @Override
     public BigInteger calculatePrice() {
-        return this.schedulePlans.stream()
+        return this.schedulePlans != null ? this.schedulePlans.stream()
                 .map(
                         schedulePlan -> {
                             var accPrice =
@@ -109,7 +109,7 @@ public class Tour extends BaseEntity
 
                             return accPrice.add(foodPrice).add(vehiclePrice);
                         })
-                .reduce(new BigInteger("0"), BigInteger::add);
+                .reduce(new BigInteger("0"), BigInteger::add) : new BigInteger("0");
     }
 
     @Override

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalBackgroundService} from "./modal-background.service";
-import {Observable, of} from "rxjs";
+import {Observable, of, startWith} from "rxjs";
 
 @Component({
   selector: 'app-modal-background',

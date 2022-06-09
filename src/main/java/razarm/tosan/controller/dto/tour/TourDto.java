@@ -4,13 +4,19 @@ package razarm.tosan.controller.dto.tour;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.ToString;
+import razarm.tosan.Priceable;
 import razarm.tosan.controller.dto.BaseEntityDto;
+import razarm.tosan.controller.dto.food.FoodOrderDto;
 import razarm.tosan.repository.domain.tour.TourCategory;
 import razarm.tosan.repository.domain.tour.TourType;
 
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -23,7 +29,7 @@ public class TourDto extends BaseEntityDto {
     private  String imgUrl;
     private  Float rating;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private BigInteger price;
+    private BigInteger price ;
     private  ZonedDateTime date;
 
     private  TourismManagerDto tourismManager;
@@ -86,7 +92,17 @@ public class TourDto extends BaseEntityDto {
     }
 
     public BigInteger getPrice() {
-        return price;
+        return this.schedulePlans != null ?  schedulePlans.stream()
+                .map(
+                        schedulePlanDto ->
+                                Stream.of(
+                                         schedulePlanDto.getFoodOrders().stream().map(foodOrderDto -> (Priceable) foodOrderDto.getFood()).collect(Collectors.toList())
+                                         ,List.of((Priceable) schedulePlanDto.getAccommodationOrder().getAccommodation())
+                                         ,schedulePlanDto.getVehicleOrders().stream().map(vehicleOrderDto -> (Priceable) vehicleOrderDto.getVehicle()).collect(Collectors.toList()))
+                                        .flatMap(Collection::stream)
+                                        .map(Priceable::getPrice)
+                                        .reduce(new BigInteger("0"), BigInteger::add))
+                .reduce(new BigInteger("0"), BigInteger::add) : new BigInteger("0");
     }
 
     public void setPrice(BigInteger price) {

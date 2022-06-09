@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MessagesService} from "../shared/messages/messages.service";
 
 @Component({
   selector: 'app-tours',
@@ -8,13 +7,9 @@ import {MessagesService} from "../shared/messages/messages.service";
 })
 export class ToursComponent implements OnInit {
 
-  constructor(private messageService: MessagesService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  showError() {
-     this.messageService.showErrorForPeriodOfTime(2000,'Something goes wrong...');
-    // this.messageService.showErrors('Something goes wrong...')
-  }
 }

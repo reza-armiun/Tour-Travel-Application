@@ -10,6 +10,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
+import { FoodComponent } from './tour-details/food/food.component';
+import { ActivityComponent } from './tour-details/activity/activity.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import {MatButtonModule} from "@angular/material/button";
     TourDetailsComponent,
     BookingDetailsComponent,
     AccommodationComponent,
-    VehicleComponent
+    VehicleComponent,
+    FoodComponent,
+    ActivityComponent
   ],
   imports : [
     MatButtonModule,

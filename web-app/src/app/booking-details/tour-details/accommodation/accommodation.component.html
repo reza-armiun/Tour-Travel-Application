@@ -4,11 +4,11 @@
   <div class="accommodation_content">
     <div class="accommodation__field" style="color: orange">
       <label>Price: </label>
-      1222
+      {{accommodationOrder?.accommodation?.price}}
     </div>
     <div class="accommodation__field" style="color: dodgerblue">
       <label>Discount: </label>
-      3
+      {{accommodationOrder?.discount}}
     </div>
   </div>
   <div class="accommodation__address">
@@ -16,26 +16,28 @@
     <mat-divider style="width: 100%;border-color: rgba(0, 0, 0, 0.4)"></mat-divider>
     <div class="street">
       <label>Street: </label>
-      eqklwmelqkmelkqlkweknqenqwenkqjwenqwojenqowenoqneoqowneoinqwniqiownenoiqoniweonqwoneq
-      eqwekomqwopeqpwoepoqwopeqowepojqwopeoqnenqponepnwqpneonwopneqnonepowpnoeqpno
+      {{accommodationOrder?.accommodation?.address?.street}}
     </div>
     <mat-divider style="width: 100%; border-color: rgba(128, 128, 128, 0.1)"></mat-divider>
    <div class="address__fields">
      <div class="address__field">
        <label>Country: </label>
-       Ukraine
+       {{accommodationOrder?.accommodation?.address?.city?.country?.name}}
+
      </div>
      <div class="address__field">
        <label>Country Code: </label>
-       0163
+       {{accommodationOrder?.accommodation?.address?.city?.country?.countryCode}}
+
      </div>
      <div class="address__field">
        <label>City: </label>
-       Kiev
+       {{accommodationOrder?.accommodation?.address?.city?.name}}
      </div>
      <div class="address__field">
        <label>Zip Code: </label>
-       09321
+       {{accommodationOrder?.accommodation?.address?.city?.zipCode}}
+
      </div>
    </div>
   </div>

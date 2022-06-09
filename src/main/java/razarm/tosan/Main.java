@@ -17,6 +17,8 @@ public class Main {
 
 
     public static void main(String[] args) throws InvalidAttributeValueException, UserNotFoundException {
+        for (int i = 0; i < 999999; i++) System.out.println(i);
+
         SpringApplication.run(Main.class, args);
 //        MockDataInitializer.initialize();
 ////

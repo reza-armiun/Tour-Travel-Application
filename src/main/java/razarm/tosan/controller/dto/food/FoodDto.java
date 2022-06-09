@@ -2,6 +2,7 @@ package razarm.tosan.controller.dto.food;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import razarm.tosan.Priceable;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.food.FoodType;
 
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FoodDto extends BaseEntityDto {
+public class FoodDto extends BaseEntityDto implements Priceable {
     private  String name;
     private  FoodType type;
     private  String [] ingredients;

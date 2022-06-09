@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {LoadingService} from "../shared/loading/loading.service";
 import {MessagesService} from "../shared/messages/messages.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {countryWithCities} from "../shared/country-dropdown/countryWithCities";
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   profile: Profile | undefined;
   showPasswordModal = false;
   passwordFormSub: Subscription | undefined;
+  cities: string[] = [];
 
 
   profileForm = new FormGroup({
@@ -119,8 +121,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfileHandler() {
     if(this.profileForm.invalid) return;
-
-    this.loadingService.showLoadingUntilCompletion(this.authService.updateProfile(this.profileForm.value))
+    this.loadingService.showLoadingUntilCompletion(this.profileStore.updateProfile(this.profileForm.value))
       .subscribe({
         next: () => {
           this.messageService.showSuccessForPeriodOfTime(2000, 'Profile updated successfully');
@@ -134,5 +135,12 @@ export class ProfileComponent implements OnInit {
 
   viewTourDetailsHandler(id: string) {
     this.router.navigate(['/booking', id ] , {relativeTo: this.activatedRoute})
+  }
+
+  onSelectCountry(country: string) {
+      if(country)
+      { // @ts-ignore
+        this.cities = countryWithCities[country];
+      }
   }
 }

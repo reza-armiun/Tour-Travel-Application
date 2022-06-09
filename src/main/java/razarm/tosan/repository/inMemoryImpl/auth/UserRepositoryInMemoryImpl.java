@@ -57,6 +57,8 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
         return userDataMap.values().stream().map(userDataToUser::convert).collect(Collectors.toUnmodifiableList());
     }
 
+
+
     @Override
     public User findByUsername(String username) throws UserNotFoundException {
         var user =

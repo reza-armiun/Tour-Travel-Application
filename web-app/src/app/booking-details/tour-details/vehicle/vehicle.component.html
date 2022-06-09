@@ -1,1 +1,43 @@
-<p>vehicle works!</p>
+<table mat-table class="mat-elevation-z1" style="width: 100%"
+       [dataSource]="vehicles"
+       multiTemplateDataRows
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Type</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.type}}</td>
+  </ng-container>
+  <ng-container matColumnDef="ticketNumber">
+    <th mat-header-cell *matHeaderCellDef  colspan="2">Ticket Number</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="2">{{vehicle?.ticketNumber}}</td>
+  </ng-container>
+  <ng-container matColumnDef="from">
+    <th mat-header-cell *matHeaderCellDef colspan="1">From</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.fromStation}}</td>
+  </ng-container>
+  <ng-container matColumnDef="to">
+    <th mat-header-cell *matHeaderCellDef colspan="1">To</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.toStation}}</td>
+  </ng-container>
+  <ng-container matColumnDef="departure">
+    <th mat-header-cell *matHeaderCellDef colspan="2">Departure</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="2">{{vehicle?.departure | date}}</td>
+  </ng-container>
+  <ng-container matColumnDef="arrival">
+    <th mat-header-cell *matHeaderCellDef colspan="2">Arrival</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="2">{{vehicle?.arrival | date}}</td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef colspan="1">Price</th>
+    <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.price}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+  <tr
+    mat-row *matRowDef="let activity; columns: displayedColumns"></tr>
+
+</table>

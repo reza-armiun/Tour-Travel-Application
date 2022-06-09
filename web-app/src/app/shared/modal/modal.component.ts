@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModalBackgroundService} from "../modal-background/modal-background.service";
 import {Subscription} from "rxjs";
 
@@ -7,7 +7,7 @@ import {Subscription} from "rxjs";
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit, OnDestroy, OnChanges {
   @Input() show: boolean  = false;
   @Output() onClose = new EventEmitter<void>() ;
   sub: Subscription | undefined;
@@ -17,8 +17,10 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.modalBackgroundService.showBlackBackground$.subscribe(value => {
-        if(!value)
+        if(!value) {
+          this.onClose.emit();
           this.show = false;
+        }
       })
   }
 
@@ -38,5 +40,10 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   disableBubbling($event: MouseEvent) {
     $event.stopPropagation();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.show) this.showBackground();
+    else this.closeBackground();
   }
 }

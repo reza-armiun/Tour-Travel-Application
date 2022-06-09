@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AccommodationOrder} from "../../../model/AccommodationOrder";
 
 @Component({
   selector: 'app-accommodation',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accommodation.component.css']
 })
 export class AccommodationComponent implements OnInit {
-
+  @Input() accommodationOrder: AccommodationOrder | undefined ;
   constructor() { }
 
   ngOnInit(): void {

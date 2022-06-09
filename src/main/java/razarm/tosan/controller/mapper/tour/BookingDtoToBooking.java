@@ -6,6 +6,7 @@ import razarm.tosan.controller.mapper.Mapper;
 import razarm.tosan.controller.mapper.user.UserDtoToUser;
 import razarm.tosan.repository.domain.Booking;
 
+import java.time.Instant;
 import java.util.stream.Collectors;
 @Component
 public class BookingDtoToBooking implements Mapper<BookingDto, Booking> {
@@ -23,7 +24,7 @@ public class BookingDtoToBooking implements Mapper<BookingDto, Booking> {
     public Booking convert(BookingDto bookingDto) {
     return Booking.BookingBuilder.aBooking()
             .id(bookingDto.getId())
-            .date(bookingDto.getDate().toInstant())
+            .date(bookingDto.getDate() != null ? bookingDto.getDate().toInstant() : Instant.now())
             .description(bookingDto.getDescription())
             .user(bookingDto.getUser() != null ?userDtoToUser.convert(bookingDto.getUser()) : null)
             .travelers(bookingDto.getTravelers().stream().map(travelerDtoToTraveler::convert).collect(Collectors.toUnmodifiableSet()))

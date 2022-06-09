@@ -1,0 +1,28 @@
+<table mat-table class="mat-elevation-z1" style="width: 100%"
+       [dataSource]="activityData"
+       multiTemplateDataRows
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+    <td mat-cell *matCellDef="let activity" colspan="1">{{activity?.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Type</th>
+    <td mat-cell *matCellDef="let activity" colspan="1">{{activity?.type}}</td>
+  </ng-container>
+  <ng-container matColumnDef="startAt">
+    <th mat-header-cell *matHeaderCellDef  colspan="2">Start At</th>
+    <td mat-cell *matCellDef="let activity" colspan="2">{{activity?.startAt | date}}</td>
+  </ng-container>
+  <ng-container matColumnDef="endAt">
+    <th mat-header-cell *matHeaderCellDef colspan="1">End At</th>
+    <td mat-cell *matCellDef="let activity" colspan="1">{{activity?.endAt | date}}</td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+  <tr
+    mat-row *matRowDef="let activity; columns: displayedColumns"></tr>
+
+</table>

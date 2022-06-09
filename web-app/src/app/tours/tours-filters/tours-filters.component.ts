@@ -43,7 +43,6 @@ export class FiltersComponent implements OnInit {
       }else {
         this.categoriesFilter = this.categoriesFilter.filter(cat => cat !== el.name);
       }
-      console.log(this.categoriesFilter);
       this.toursStore.setCategories(this.categoriesFilter);
   }
 }

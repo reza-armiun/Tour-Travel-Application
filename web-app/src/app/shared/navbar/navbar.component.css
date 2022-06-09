@@ -1,6 +1,6 @@
 .navbar {
   margin: 0;
-  padding: 3px 15px;
+  padding: 0 15px 6px 15px;
   width: 100vw;
   background-color: rgba(55, 55, 69, 1);
   position: fixed;
@@ -11,7 +11,9 @@
   align-items: center;
 }
 .hamburger {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
   cursor: pointer;
 }
 .hamburger div{
@@ -43,25 +45,32 @@
 }
 .navbar-right {
   flex: 1;
-  padding-right: 50px;
+  padding-right: 8px;
   display: flex;
   justify-content: end;
   align-items: center;
 }
+.navbar-right .navbar__item {
+  display: flex;
+  align-items: flex-end;
+}
 
 .navbar__item {
+  height: 47px;
+  display: flex;
+  align-items: center;
   padding: 6px 12px ;
   text-decoration: none;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
   color: white;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
 }
 .navbar__item:hover {
   background-color: rgba(128, 128, 128, 0.5);
 }
 
 .active {
-  border-bottom: 2px solid white;
+  border-bottom: 3px solid white;
 }

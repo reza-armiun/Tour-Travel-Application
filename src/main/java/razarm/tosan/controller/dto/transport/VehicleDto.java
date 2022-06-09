@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import razarm.tosan.Priceable;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.repository.domain.transport.VehicleType;
 
@@ -20,7 +21,7 @@ import java.util.StringJoiner;
         @JsonSubTypes.Type(value = BusDto.class, name = "BUS"),
         @JsonSubTypes.Type(value = PlaneDto.class, name = "PLANE"),
 })
-public class VehicleDto extends BaseEntityDto {
+public class VehicleDto extends BaseEntityDto implements Priceable {
     protected  String name;
     protected  VehicleType type;
     protected  String fromStation;

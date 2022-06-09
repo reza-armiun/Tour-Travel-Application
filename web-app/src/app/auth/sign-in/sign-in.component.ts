@@ -13,6 +13,7 @@ import {MessagesService} from "../../shared/messages/messages.service";
 })
 export class SignInComponent implements OnInit, OnDestroy {
   subs: Subscription | undefined;
+  authSubs: Subscription | undefined;
 
 
   authForm = new FormGroup({
@@ -36,6 +37,9 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authSubs = this.authService.signedin$.subscribe(isSignedIn => {
+      if(isSignedIn) this.router.navigateByUrl('');
+    });
   }
 
   onSubmit() {
@@ -57,6 +61,7 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs?.unsubscribe();
+    this.authSubs?.unsubscribe();
   }
 
 

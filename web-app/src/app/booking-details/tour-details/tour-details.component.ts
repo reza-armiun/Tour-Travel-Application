@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookingService} from "../booking.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {SchedulePlan, Tour} from "../../model/Tour";
 
 @Component({
   selector: 'app-tour-details',
@@ -10,7 +11,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class TourDetailsComponent implements OnInit, OnDestroy {
   sub: Subscription | undefined;
-  tour: any;
+  tour: Tour | undefined;
+  schedulePlans: SchedulePlan[] = [];
   constructor(private bookingService: BookingService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -19,7 +21,10 @@ export class TourDetailsComponent implements OnInit, OnDestroy {
         let id = this.activatedRoute.snapshot.params['id'];
         this.bookingService.loadTour(id);
       }
-      this.tour = tour;
+      else {
+        this.tour = tour;
+        this.schedulePlans = tour?.schedulePlans;
+      }
       console.log('tour ', tour);
     })
   }

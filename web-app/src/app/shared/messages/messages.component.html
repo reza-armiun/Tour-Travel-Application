@@ -8,7 +8,7 @@
 </div>
 
 <div class="messages-success" *ngIf="(success$ | async) as success">
-    <div class="success" >
+    <div class="success" *ngIf="showSuccessMessage">
       <div class="message">{{success}}</div>
       <div class="close green" (click)="onClose()"></div>
     </div>

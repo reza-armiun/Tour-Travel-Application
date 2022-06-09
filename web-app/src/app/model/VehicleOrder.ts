@@ -12,7 +12,7 @@ interface VehicleProvider {
   modifiedAt: Date;
 }
 
-interface Vehicle {
+export interface Vehicle {
   id: string
   name: string;
   type: string;
