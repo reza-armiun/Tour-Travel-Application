@@ -1,1 +1,70 @@
-<p>schedule-plans-form works!</p>
+<table mat-table class="mat-elevation-z3" style="width: 100%; background-color: rgba(253, 189, 189, 0.03)"
+       [dataSource]="plansData"
+       multiTemplateDataRows
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+    <td mat-cell *matCellDef="let plan" colspan="1">{{plan?.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="startTime">
+    <th mat-header-cell *matHeaderCellDef  colspan="1">Start At</th>
+    <td mat-cell *matCellDef="let plan" colspan="1">{{plan?.startTime}}</td>
+  </ng-container>
+  <ng-container matColumnDef="arrivalTime">
+    <th mat-header-cell *matHeaderCellDef  colspan="2">Arrival Time</th>
+    <td mat-cell *matCellDef="let plan" colspan="2">{{plan?.arrivalTime}}</td>
+  </ng-container>
+  <ng-container matColumnDef="source">
+    <th mat-header-cell *matHeaderCellDef colspan="1">Source</th>
+    <td mat-cell *matCellDef="let plan" colspan="1">{{plan?.source}}</td>
+  </ng-container>
+  <ng-container matColumnDef="destination">
+    <th mat-header-cell *matHeaderCellDef colspan="1">Destination</th>
+    <td mat-cell *matCellDef="let plan" colspan="1">{{plan?.destination}}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions" >
+    <th mat-header-cell *matHeaderCellDef colspan="1">Destination</th>
+    <td mat-cell *matCellDef="let plan; let i = dataIndex;" colspan="1">
+      <mat-icon style="color: red; font-size: 20px;" class="app-icon" (click)="removePlan(i)">delete</mat-icon>
+      <mat-icon style="color: blue; font-size: 20px;" class="app-icon"  (click)="enableEditPlanMode(i)">edit</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr
+    mat-row *matRowDef="let activity; columns: displayedColumns ; let i = index"></tr>
+</table>
+
+<div class="stepper" >
+  <div class="step__headers">
+    <div class="step__header"
+         *ngFor="let item of stepperList "
+         (click)="onClickItem(item)"
+         [class.active]="activeItem.name==item.name"
+    >
+      <div class="step__icon"><mat-icon>{{item.icon}}</mat-icon></div>
+      <div class="step__title">{{item.name}}</div>
+    </div>
+
+  </div>
+  <!--    <mat-divider style="width: 100%; margin: 0" ></mat-divider>-->
+  <div class="step__contents">
+    <div class="step__content" *ngIf="activeItem.name == 'Plan Information'">
+      <app-plan-info-form></app-plan-info-form>
+    </div>
+    <div class="step__content" *ngIf="activeItem.name == 'Accommodations'" >
+      <app-accommodation-form></app-accommodation-form>
+    </div>
+    <div class="step__content"  *ngIf="activeItem.name == 'Foods'">
+      <app-foods-form></app-foods-form>
+    </div>
+    <div class="step__content"  *ngIf="activeItem.name == 'Vehicles'">
+      <app-vehicles-form></app-vehicles-form>
+    </div>
+    <div class="step__content"  *ngIf="activeItem.name == 'Activities'">
+      <app-activities-form></app-activities-form>
+    </div>
+
+  </div>
+
+</div>

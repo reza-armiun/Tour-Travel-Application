@@ -1,62 +1,8 @@
-$colors: (main: dodgerblue, secondary: #ffb700 ,hover: rgba(128, 128, 128, 0.2));
 @use "flex";
+@use "stepper";
 
 
 .container {}
 
-.stepper{
-  @extend .flex-column-start;
-  .step__headers {
-    width: 100%;
-    padding: 15px 40px;
-    background-color: transparent;
-    @extend  .flex-row-center;
-    column-gap: 15px;
-    .step__header {
-      padding: 4px 25px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      row-gap: 4px;
-      color: map-get($colors, main);
-      border-bottom: 4px solid transparent;
-      border-radius: 3px;
-      user-select: none;
-      &:hover {
-        background-color: map-get($colors, hover);
-        opacity: 0.85;
-      }
-      &.active {
-        border-bottom: 4px solid map-get($colors, secondary);
-        color: map-get($colors, secondary);
-      }
-      .step__icon {
-        display: flex;
-        justify-content: center;
-        .mat-icon {
-          font-size: 28px;
-        }
-        width: 100%;
-      }
-      .step__title {
-        font-size: 13px;
-        font-weight: 600;
-      }
-    }
-  }
-  .step__contents {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    min-height: 500px;
 
-    .step__content {
-      width: 60%;
-      min-height: 500px;
-      height: 100%;
-      background-color: lighten(map-get($colors, secondary), 47%) ;
-    }
-  }
-}
+

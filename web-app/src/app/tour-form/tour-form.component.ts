@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 
-interface  StepperItem  {
+export interface  StepperItem  {
   name: string;
   icon: string;
 }

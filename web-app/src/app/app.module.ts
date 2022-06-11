@@ -46,6 +46,11 @@ import { InfoFormComponent } from './tour-form/info-form/info-form.component';
 import { TourismManagerFormComponent } from './tour-form/tourism-manager-form/tourism-manager-form.component';
 import { SchedulePlansFormComponent } from './tour-form/schedule-plans-form/schedule-plans-form.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import { AccommodationFormComponent } from './tour-form/schedule-plans-form/accommodation-form/accommodation-form.component';
+import { VehiclesFormComponent } from './tour-form/schedule-plans-form/vehicles-form/vehicles-form.component';
+import { FoodsFormComponent } from './tour-form/schedule-plans-form/foods-form/foods-form.component';
+import { ActivitiesFormComponent } from './tour-form/schedule-plans-form/activities-form/activities-form.component';
+import { PlanInfoFormComponent } from './tour-form/schedule-plans-form/plan-info-form/plan-info-form.component';
 
 
 @NgModule({
@@ -76,6 +81,11 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     InfoFormComponent,
     TourismManagerFormComponent,
     SchedulePlansFormComponent,
+    AccommodationFormComponent,
+    VehiclesFormComponent,
+    FoodsFormComponent,
+    ActivitiesFormComponent,
+    PlanInfoFormComponent,
   ],
   imports: [
     BrowserModule,

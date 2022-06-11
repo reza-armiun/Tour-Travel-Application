@@ -24,11 +24,11 @@ import java.util.StringJoiner;
 public class VehicleDto extends BaseEntityDto implements Priceable {
     protected  String name;
     protected  VehicleType type;
+    protected  BigInteger price;
     protected  String fromStation;
     protected  String toStation;
     protected  String ticketNumber;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    protected  BigInteger price;
     protected  ZonedDateTime departure;
     protected  ZonedDateTime arrival;
     protected  VehicleProviderDto vehicleProvider;

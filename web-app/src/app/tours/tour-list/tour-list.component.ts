@@ -5,7 +5,7 @@ import {ToursStore} from "../../stores/tours.store";
 @Component({
   selector: 'app-tour-list',
   templateUrl: './tour-list.component.html',
-  styleUrls: ['./tour-list.component.css']
+  styleUrls: ['./tour-list.component.scss']
 })
 export class TourListComponent implements OnInit, OnDestroy {
   tourList$: Observable<any> | undefined;

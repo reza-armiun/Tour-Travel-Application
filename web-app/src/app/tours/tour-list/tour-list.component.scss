@@ -1,0 +1,29 @@
+
+
+
+.tours {
+  border-radius: 3px;
+  padding: 15px;
+  max-width: 500px;
+}
+
+.tours__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-add {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+  user-select: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 4px;
+  &:hover {
+    opacity: 0.85;
+  }
+}
+

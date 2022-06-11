@@ -1,6 +1,10 @@
 
   <div class="tours">
-
+    <div class="tours__header">
+      <div class="tours__title"> <h2>Tours</h2></div>
+      <button class="btn-add" routerLink="/tour/save">Add Tour</button>
+    </div>
+    <mat-divider></mat-divider>
     <div *ngFor="let tour of filteredTourList$ | async">
       <app-tour-item [tour]="tour" ></app-tour-item>
     </div>
