@@ -16,21 +16,25 @@ public class BusToBusData implements Mapper<Bus, BusData> {
     @Override
     public BusData convert(Bus bus) {
         return BusData.BusDataBuilder.aBusData()
-                                     .id(bus.getId())
-                                     .name(bus.getName())
-                                     .type(bus.getType())
-                                     .fromStation(bus.getFromStation())
-                                     .toStation(bus.getToStation())
-                                     .ticketNumber(bus.getTicketNumber())
-                                     .price(bus.getPrice())
-                                     .departure(bus.getDeparture())
-                                     .arrival(bus.getArrival())
-                                     .vehicleProvider(this.vehicleProviderToVehicleProviderData.convert(bus.getVehicleProvider()))
-                                     .busModel(bus.getBusModel())
-                                     .createdAt(bus.getCreatedAt())
-                                     .modifiedAt(bus.getModifiedAt())
-                                     .createdBy(bus.getCreatedBy())
-                                     .modifiedBy(bus.getModifiedBy())
-                                     .build();
+                .id(bus.getId())
+                .name(bus.getName())
+                .type(bus.getType())
+                .fromStation(bus.getFromStation())
+                .toStation(bus.getToStation())
+                .ticketNumber(bus.getTicketNumber())
+                .price(bus.getPrice())
+                .departure(bus.getDeparture())
+                .arrival(bus.getArrival())
+                .vehicleProvider(
+                        bus.getVehicleProvider() != null
+                                ? this.vehicleProviderToVehicleProviderData.convert(
+                                        bus.getVehicleProvider())
+                                : null)
+                .busModel(bus.getBusModel())
+                .createdAt(bus.getCreatedAt())
+                .modifiedAt(bus.getModifiedAt())
+                .createdBy(bus.getCreatedBy())
+                .modifiedBy(bus.getModifiedBy())
+                .build();
     }
 }

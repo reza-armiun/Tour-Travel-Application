@@ -10,6 +10,14 @@
       <label>Discount: </label>
       {{accommodationOrder?.discount}}
     </div>
+    <div class="accommodation__field" style="color: black">
+      <label>Check In: </label>
+      {{accommodationOrder?.accommodation?.checkIn | date}}
+    </div>
+    <div class="accommodation__field" style="color: black">
+      <label>Check Out: </label>
+      {{accommodationOrder?.accommodation?.checkOut | date}}
+    </div>
   </div>
   <div class="accommodation__address">
     <div class="header">Address Information</div>

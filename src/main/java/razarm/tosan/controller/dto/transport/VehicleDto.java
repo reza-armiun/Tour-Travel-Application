@@ -28,8 +28,9 @@ public class VehicleDto extends BaseEntityDto implements Priceable {
     protected  String fromStation;
     protected  String toStation;
     protected  String ticketNumber;
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     protected  ZonedDateTime departure;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     protected  ZonedDateTime arrival;
     protected  VehicleProviderDto vehicleProvider;
 

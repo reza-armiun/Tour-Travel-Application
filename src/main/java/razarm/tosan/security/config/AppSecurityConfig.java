@@ -1,6 +1,10 @@
 package razarm.tosan.security.config;
 
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -43,7 +47,8 @@ import java.util.List;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 @AllArgsConstructor
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
@@ -75,18 +80,16 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/v1/logout"))
-//                .logoutUrl("/v1/logout")
-//                .addLogoutHandler((request, response, authentication) -> {
-//                    log.info("logout user " );
-//                })
-
                 .logoutSuccessHandler(
                         (req, res, auth) -> {
                             final Cookie authCookie = WebUtils.getCookie(req, "Authorization");
-
                             String token = authCookie != null ? authCookie.getValue() : null;
-                            log.debug("Removing token: {} ", token);
+//                            log.debug("Removing token: {} ", token);
                             if (token != null) {
+                                final JwtParser jwtParser = Jwts.parserBuilder().setSigningKey(secretKey).build();
+                                Claims body = (Claims) jwtParser.parse(token).getBody();
+                                String username = body.getSubject();
+                                log.info("user logouts: {}", username);
                                 this.userSessionService.removeToken(token);
                             }
                             res.setStatus(HttpServletResponse.SC_OK);

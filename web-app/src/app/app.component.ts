@@ -18,7 +18,9 @@ export class AppComponent implements OnInit, OnDestroy{
   sub: Subscription | undefined;
   menuItems: MenuItem[] = [];
 
-  constructor(private authService: AuthService, private  router: Router, private  activatedRoute: ActivatedRoute) {
+  constructor(private authService: AuthService
+              , private  router: Router
+              , private  activatedRoute: ActivatedRoute) {
   }
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] | any {
     const children: ActivatedRoute[] = route.children;
@@ -48,7 +50,6 @@ export class AppComponent implements OnInit, OnDestroy{
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         let breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
-        console.log(breadcrumbs)
         return this.menuItems = breadcrumbs;
       });
 

@@ -13,8 +13,8 @@ public class HotelData extends AccommodationData {
     private final AccommodationType type = AccommodationType.HOTEL;
 
 
-    public HotelData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AddressData address, BigInteger price, Long time, AccommodationProviderData accommodationProvider, Integer floor, Integer room) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, address, price, time, accommodationProvider);
+    public HotelData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AddressData address, BigInteger price, Instant checkIn, Instant checkOut, AccommodationProviderData accommodationProvider, Integer floor, Integer room) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, address, price, checkIn, checkOut, accommodationProvider);
         this.floor = floor;
         this.room = room;
     }
@@ -26,7 +26,7 @@ public class HotelData extends AccommodationData {
 
     @Override
     public BaseEntityData cloneWithId(String id) {
-        return new HotelData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, time, accommodationProvider, floor, room);
+        return new HotelData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, checkIn, checkOut, accommodationProvider, floor, room);
     }
 
     public Integer getFloor() {
@@ -45,13 +45,14 @@ public class HotelData extends AccommodationData {
         protected String createdBy;
         protected String modifiedBy;
         protected String name;
-        protected AccommodationType type;
         protected AddressData address;
         protected BigInteger price;
-        protected Long time;
+        protected Instant checkIn;
+        protected Instant checkOut;
         protected AccommodationProviderData accommodationProvider;
         private Integer floor;
         private Integer room;
+        private AccommodationType type = AccommodationType.HOTEL;
 
         private HotelDataBuilder() {
         }
@@ -105,8 +106,13 @@ public class HotelData extends AccommodationData {
             return this;
         }
 
-        public HotelDataBuilder time(Long time) {
-            this.time = time;
+        public HotelDataBuilder checkIn(Instant checkIn) {
+            this.checkIn = checkIn;
+            return this;
+        }
+
+        public HotelDataBuilder checkOut(Instant checkOut) {
+            this.checkOut = checkOut;
             return this;
         }
 
@@ -125,9 +131,10 @@ public class HotelData extends AccommodationData {
             return this;
         }
 
+
+
         public HotelData build() {
-            HotelData hotelData = new HotelData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, time, accommodationProvider, floor, room);
-            return hotelData;
+            return new HotelData(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, checkIn, checkOut, accommodationProvider, floor, room);
         }
     }
 }

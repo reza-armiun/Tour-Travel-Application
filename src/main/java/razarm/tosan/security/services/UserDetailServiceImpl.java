@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import razarm.tosan.repository.domain.auth.User;
+import razarm.tosan.security.bruteforce.LoginAttemptService;
 import razarm.tosan.service.AuthService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -22,9 +24,25 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
     private final AuthService authService;
+    private final LoginAttemptService loginAttemptService;
+    private final HttpServletRequest request;
+
+    private String getClientIp() {
+        final String xfHeader = request.getHeader("X-Forwarded-For");
+        if(xfHeader == null) {
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
+    }
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        final String ip = getClientIp();
+        if(loginAttemptService.isBlocked(ip)) {
+            throw new InternalAuthenticationServiceException("Your ip is temporarily blocked, Please try later");
+        }
 
         try{
             final User user = this.authService.findUserByUsername(username);

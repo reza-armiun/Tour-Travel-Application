@@ -1,27 +1,27 @@
-<form >
+<form [formGroup]="form" >
   <div class="form__header">
     <div class="form__title">Plan Information</div>
   </div>
   <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput type="text">
+    <input matInput type="text" formControlName="name">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Start Time</mat-label>
-    <input matInput type="date">
+    <input matInput type="datetime-local" formControlName="startTime">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Arrival Time</mat-label>
-    <input matInput type="date">
+    <input matInput type="datetime-local" formControlName="arrivalTime">
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Source</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Destination</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
+   <div class="inline-fields">
+    <div class="mat-form-field">
+      <app-address-form formControlName="source"  title="Source"></app-address-form>
+    </div>
+     <div class="mat-form-field">
+       <app-address-form formControlName="destination"  title="Destination"></app-address-form>
+     </div>
+   </div>
 
 </form>

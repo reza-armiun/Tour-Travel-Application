@@ -4,7 +4,19 @@
 describe('login example', () => {
 
   beforeEach(() => {
-    cy.visit('http://localhost:4200/signin')
+
+    cy.visit('http://localhost:4200/signin', {
+      onBeforeLoad: win => {
+        win.sessionStorage.clear();
+      },
+      onLoad: (contentWindow) => {
+        // contentWindow is the remote page's window object
+        if (contentWindow.angular) {
+          // do something
+          console.log('loaded....');
+        }
+      },
+    });
   })
 
   it('should display 1 login form', () => {
@@ -33,3 +45,5 @@ describe('login example', () => {
   });
 
 });
+
+

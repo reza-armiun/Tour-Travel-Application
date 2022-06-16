@@ -13,16 +13,18 @@ public abstract class AccommodationData extends BaseEntityData implements Serial
     protected final AccommodationType type;
     protected final AddressData address;
     protected final BigInteger price;
-    protected final Long time;
+    protected final Instant checkIn;
+    protected final Instant checkOut;
     protected final AccommodationProviderData accommodationProvider;
 
-    public AccommodationData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, AddressData address, BigInteger price, Long time, AccommodationProviderData accommodationProvider) {
+    public AccommodationData(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, AddressData address, BigInteger price, Instant checkIn, Instant checkOut, AccommodationProviderData accommodationProvider) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
         this.address = address;
         this.price = price;
-        this.time = time;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         this.accommodationProvider = accommodationProvider;
     }
 
@@ -42,8 +44,12 @@ public abstract class AccommodationData extends BaseEntityData implements Serial
         return price;
     }
 
-    public Long getTime() {
-        return time;
+    public Instant getCheckIn() {
+        return checkIn;
+    }
+
+    public Instant getCheckOut() {
+        return checkOut;
     }
 
     public AccommodationProviderData getAccommodationProvider() {

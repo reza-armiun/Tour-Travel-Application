@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.accommodation;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 
@@ -8,6 +9,7 @@ import java.util.StringJoiner;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccommodationOrderDto extends BaseEntityDto {
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private  ZonedDateTime date;
     private  Integer discount;
     private  AccommodationDto accommodation;

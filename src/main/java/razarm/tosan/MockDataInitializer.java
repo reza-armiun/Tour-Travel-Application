@@ -272,8 +272,9 @@ public class MockDataInitializer implements CommandLineRunner {
                                     .name("hotel1")
                                     .type(AccommodationType.HOTEL)
                                     .price(new BigInteger("3000"))
-                                    .time(213L)
-                                    .addressDto(address1)
+                                                    .checkIn(ZonedDateTime.now())
+                                                    .checkOut(ZonedDateTime.now().plusDays(1))
+                                    .address(address1)
                                     .accommodationProvider(
                                             AccommodationProviderDto.AccommodationProviderDtoBuilder
                                                     .anAccommodationProviderDto()
@@ -294,8 +295,9 @@ public class MockDataInitializer implements CommandLineRunner {
                                     .name("hotel2")
                                     .type(AccommodationType.HOTEL)
                                     .price(new BigInteger("3000"))
-                                    .time(213L)
-                                    .addressDto(address1)
+                                    .checkIn(ZonedDateTime.now())
+                                    .checkOut(ZonedDateTime.now().plusDays(1))
+                                    .address(address1)
                                     .accommodationProvider(
                                             AccommodationProviderDto.AccommodationProviderDtoBuilder
                                                     .anAccommodationProviderDto()
@@ -431,7 +433,7 @@ public class MockDataInitializer implements CommandLineRunner {
                 .schedulePlans(Set.of(mockSchedulePlan))
                 .tourismManager(mockTourismManager)
                 .type(TourType.CITY)
-                .date(ZonedDateTime.now())
+                .date(OffsetDateTime.now())
                 .imgUrl("https://th.bing.com/th/id/OIP.YPTa9g7VLfC2rRjD4VQrMAHaE8?pid=ImgDet&rs=1")
                 .name("Razarm City Tour")
                 .description("Special tour for cool  guys")
@@ -441,7 +443,7 @@ public class MockDataInitializer implements CommandLineRunner {
                 .tourismManager(mockTourismManager)
                 .type(TourType.VILLAGE)
                 .imgUrl("https://th.bing.com/th/id/OIP.dHJ2e7OgXAVpbj38MxihIAHaE8?pid=ImgDet&rs=1")
-                .date(ZonedDateTime.now())
+                .date(OffsetDateTime.now())
                 .name("Armin Village Tour")
                 .description("Special tour for cool village guys")
                 .build();
@@ -450,7 +452,7 @@ public class MockDataInitializer implements CommandLineRunner {
                 .tourismManager(mockTourismManager)
                 .imgUrl("https://th.bing.com/th/id/OIP.haDqsmP5az2jk01FXuTPowHaE8?pid=ImgDet&rs=1")
                 .type(TourType.VILLAGE)
-                .date(ZonedDateTime.now())
+                .date(OffsetDateTime.now())
                 .name("Razarm Village Tour")
                 .description("Special Village tour")
                 .build();

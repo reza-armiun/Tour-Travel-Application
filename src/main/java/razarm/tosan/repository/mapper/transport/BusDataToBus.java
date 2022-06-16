@@ -16,20 +16,24 @@ public class BusDataToBus implements Mapper<BusData, Bus> {
     @Override
     public Bus convert(BusData busData) {
         return Bus.BusBuilder.aBus()
-                             .id(busData.getId())
-                             .name(busData.getName())
-                             .fromStation(busData.getFromStation())
-                             .toStation(busData.getToStation())
-                             .ticketNumber(busData.getTicketNumber())
-                             .price(busData.getPrice())
-                             .departure(busData.getDeparture())
-                             .arrival(busData.getArrival())
-                             .vehicleProvider(this.vehicleProviderDataToVehicleProvider.convert(busData.getVehicleProvider()))
-                             .busModel(busData.getBusModel())
-                             .createdAt(busData.getCreatedAt())
-                             .modifiedAt(busData.getModifiedAt())
-                             .createdBy(busData.getCreatedBy())
-                             .modifiedBy(busData.getModifiedBy())
-                             .build();
+                .id(busData.getId())
+                .name(busData.getName())
+                .fromStation(busData.getFromStation())
+                .toStation(busData.getToStation())
+                .ticketNumber(busData.getTicketNumber())
+                .price(busData.getPrice())
+                .departure(busData.getDeparture())
+                .arrival(busData.getArrival())
+                .vehicleProvider(
+                        busData.getVehicleProvider() != null
+                                ? this.vehicleProviderDataToVehicleProvider.convert(
+                                        busData.getVehicleProvider())
+                                : null)
+                .busModel(busData.getBusModel())
+                .createdAt(busData.getCreatedAt())
+                .modifiedAt(busData.getModifiedAt())
+                .createdBy(busData.getCreatedBy())
+                .modifiedBy(busData.getModifiedBy())
+                .build();
     }
 }

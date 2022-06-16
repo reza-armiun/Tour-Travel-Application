@@ -6,7 +6,7 @@ import {MessagesService} from "../shared/messages/messages.service";
 import {AuthService} from "../auth/auth.service";
 
 
-interface  Address{
+interface  Address {
   street: string;
   postalCode: string;
   city: string;
@@ -36,11 +36,11 @@ export interface Profile {
   providedIn: 'root'
 })
 export class ProfileStore {
-  rootUrl = 'http://localhost:8080';
   private profileSub$ = new BehaviorSubject<Profile | null>(null);
   profile$: Observable<Profile | null> = this.profileSub$.asObservable().pipe(
     shareReplay()
   );
+
 
 
   constructor(private httpClient: HttpClient
@@ -72,4 +72,16 @@ export class ProfileStore {
     );
   }
 
+  editProfileImg(file: File) {
+    let formData = new FormData();
+    formData.append("file", file)
+   return  this.httpClient.post('/v1/profile/img' , formData  , {
+     reportProgress: true,
+     responseType: 'text'
+   });
+  }
+
+  setProfileImgUrl(imgUrl: string) {
+    this.profileSub$.next(<Profile>{...this.profileSub$.getValue(), imageUrl: imgUrl})
+  }
 }

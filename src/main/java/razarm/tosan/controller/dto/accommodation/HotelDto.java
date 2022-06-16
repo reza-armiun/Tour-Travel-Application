@@ -14,8 +14,9 @@ public class HotelDto extends AccommodationDto {
     private  AccommodationType type = AccommodationType.HOTEL;
 
     public HotelDto() {}
-    public HotelDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, BigInteger price, Long time, AddressDto addressDto, AccommodationProviderDto accommodationProvider, Integer floor, Integer room) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, price, time, addressDto, accommodationProvider);
+
+    public HotelDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, BigInteger price, ZonedDateTime checkIn, ZonedDateTime checkOut, AddressDto address, AccommodationProviderDto accommodationProvider, Integer floor, Integer room, AccommodationType type1) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, price, checkIn, checkOut, address, accommodationProvider);
         this.floor = floor;
         this.room = room;
     }
@@ -35,19 +36,21 @@ public class HotelDto extends AccommodationDto {
 
 
     public static final class HotelDtoBuilder {
-        protected String id;
+        protected  String id;
         protected ZonedDateTime createdAt;
-        protected ZonedDateTime modifiedAt;
-        protected String createdBy;
-        protected String modifiedBy;
-        private String name;
-        private AccommodationType type;
+        protected  ZonedDateTime modifiedAt;
+        protected  String createdBy;
+        protected  String modifiedBy;
+        private  String name;
+        //    @JsonFormat(shape = JsonFormat.Shape.STRING)
         private BigInteger price;
-        private Long time;
-        private AddressDto addressDto;
+        private ZonedDateTime checkIn;
+        private ZonedDateTime checkOut;
+        private AddressDto address;
         private AccommodationProviderDto accommodationProvider;
-        private Integer floor;
-        private Integer room;
+        private  Integer floor;
+        private  Integer room;
+        private  AccommodationType type = AccommodationType.HOTEL;
 
         private HotelDtoBuilder() {
         }
@@ -86,23 +89,24 @@ public class HotelDto extends AccommodationDto {
             return this;
         }
 
-        public HotelDtoBuilder type(AccommodationType type) {
-            this.type = type;
-            return this;
-        }
 
         public HotelDtoBuilder price(BigInteger price) {
             this.price = price;
             return this;
         }
 
-        public HotelDtoBuilder time(Long time) {
-            this.time = time;
+        public HotelDtoBuilder checkIn(ZonedDateTime checkIn) {
+            this.checkIn = checkIn;
             return this;
         }
 
-        public HotelDtoBuilder addressDto(AddressDto addressDto) {
-            this.addressDto = addressDto;
+        public HotelDtoBuilder checkOut(ZonedDateTime checkOut) {
+            this.checkOut = checkOut;
+            return this;
+        }
+
+        public HotelDtoBuilder address(AddressDto address) {
+            this.address = address;
             return this;
         }
 
@@ -121,9 +125,13 @@ public class HotelDto extends AccommodationDto {
             return this;
         }
 
+        public HotelDtoBuilder type(AccommodationType type) {
+            this.type = type;
+            return this;
+        }
+
         public HotelDto build() {
-            HotelDto hotelDto = new HotelDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, price, time, addressDto, accommodationProvider, floor, room);
-            return hotelDto;
+            return new HotelDto(id, createdAt, modifiedAt, createdBy, modifiedBy, name, price, checkIn, checkOut, address, accommodationProvider, floor, room, null);
         }
     }
 }

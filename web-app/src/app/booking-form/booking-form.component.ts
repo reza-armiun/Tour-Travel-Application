@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ToursStore} from "../stores/tours.store";
 import {Observable, Subscription} from "rxjs";
 import {Tour} from "../model/Tour";
 import {FormArray, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {Booking, BookingService, Traveler} from "../booking-details/booking.service";
+import { BookingService, Traveler} from "../booking-details/booking.service";
 import {ErrorStateMatcher} from "@angular/material/core";
 
 const newTravelerFormGroup = () => new FormGroup({

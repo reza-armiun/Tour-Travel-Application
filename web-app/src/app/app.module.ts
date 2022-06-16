@@ -51,6 +51,11 @@ import { VehiclesFormComponent } from './tour-form/schedule-plans-form/vehicles-
 import { FoodsFormComponent } from './tour-form/schedule-plans-form/foods-form/foods-form.component';
 import { ActivitiesFormComponent } from './tour-form/schedule-plans-form/activities-form/activities-form.component';
 import { PlanInfoFormComponent } from './tour-form/schedule-plans-form/plan-info-form/plan-info-form.component';
+import {MatSelectModule} from "@angular/material/select";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { AddressFormComponent } from './address-form/address-form.component';
+import { ProfileImageDialogComponent } from './profile/profile-image-dialog/profile-image-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -86,6 +91,8 @@ import { PlanInfoFormComponent } from './tour-form/schedule-plans-form/plan-info
     FoodsFormComponent,
     ActivitiesFormComponent,
     PlanInfoFormComponent,
+    AddressFormComponent,
+    ProfileImageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +101,7 @@ import { PlanInfoFormComponent } from './tour-form/schedule-plans-form/plan-info
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     MatIconModule,
     MatDividerModule,
     MatTableModule,
@@ -103,7 +111,9 @@ import { PlanInfoFormComponent } from './tour-form/schedule-plans-form/plan-info
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSelectModule,
+    DragDropModule
   ],
   providers: [AuthService, LoadingService, MessagesService
     ,{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}],

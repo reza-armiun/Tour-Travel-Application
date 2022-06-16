@@ -1,41 +1,49 @@
-<form >
+<form  [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form__header">
     <div class="form__title">Tour Information</div>
   </div>
   <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput type="text">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+
+  <mat-form-field style="width: 250px !important;">
+    <mat-label>Type</mat-label>
+    <select matNativeControl style="width: 250px !important;" required formControlName="type">
+      <option value="CITY">City</option>
+      <option value="VILLAGE">Village</option>
+    </select>
   </mat-form-field>
 
+  <img *ngIf="imgUrl?.value" [src]="imgUrl?.value">
   <mat-form-field>
-    <mat-label>Type</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <img *ngIf="imgUrl.value" [src]="imgUrl.value">
-  <mat-form-field>
-    <mat-label>imgUrl</mat-label>
-    <input matInput type="text" #imgUrl >
+    <mat-label>Image</mat-label>
+    <input matInput type="text"   formControlName="imgUrl">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Price</mat-label>
-    <input matInput type="number">
+    <input matInput type="number" formControlName="price">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Date</mat-label>
-    <input matInput type="date">
+    <input matInput type="datetime-local" formControlName="date">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Guide</mat-label>
-    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3"
+    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3" formControlName="guide"
               [cdkAutosizeMaxRows]="5"></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
-    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3"
+    <textarea matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3" formControlName="description"
               [cdkAutosizeMaxRows]="5"></textarea>
   </mat-form-field>
+
+  <div class="actions">
+    <button  type="submit" class="btn-next"  >Next</button>
+  </div>
 </form>

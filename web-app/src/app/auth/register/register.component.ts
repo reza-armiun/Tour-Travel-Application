@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(4),
       Validators.maxLength(20)
     ]),
-    rePassword: new FormControl('', {updateOn: 'blur', validators: [
+    rePassword: new FormControl('', {updateOn: 'submit', validators: [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(20),
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.subs = this.loadingService.showLoadingUntilCompletion(this.authService.signup(this.authForm.value)).subscribe({
-      next: () => {
+      next: ( value) => {
         this.router.navigateByUrl("/signin");
       },
       error: ({error}) => {

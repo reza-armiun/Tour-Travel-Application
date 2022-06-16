@@ -117,4 +117,18 @@ export class ToursStore {
   }
 
 
+  sortByLowestPrice() {
+    let value = this.toursSub$.getValue();
+    this.toursSub$.next(value
+      .map((value: any,index: number) => ({...value, prevIndex: index }))
+      .sort((a: any, b: any) => +a.price >= +b.price ? 1 : -1)
+    );
+  }
+  sortByHighestPrice() {
+    let value = this.toursSub$.getValue();
+    this.toursSub$.next(value
+      .map((value: any,index: number) => ({...value, prevIndex: index }))
+      .sort((a: any, b: any) => +a.price < +b.price ? 1 : -1)
+    );
+  }
 }

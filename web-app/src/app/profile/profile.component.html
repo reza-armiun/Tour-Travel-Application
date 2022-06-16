@@ -28,12 +28,13 @@
 <form [formGroup]="profileForm" (ngSubmit)="updateProfileHandler()" class="profile-form">
     <div class="profile__info">
       <div class="profile__img-wrapper">
-        <input type="file" id="imgupload" style="display:none"/>
+<!--        <input type="file" id="imgupload" style="display:none"/>-->
 <!--        <img [src]="profile?.imageUrl"  (click)="showFilePicker()" />-->
-        <label for="file-input">
+<!--        <label for="file-input">-->
+        <label (click)="showProfileImgDialog()">
           <img [src]="profile?.imageUrl"/>
         </label>
-        <input id="file-input" type="file" style="display:none;"/>
+<!--        <input id="file-input" type="file" style="display:none;"/>-->
       </div>
       <div class="form-field">
         <label>Name: </label>

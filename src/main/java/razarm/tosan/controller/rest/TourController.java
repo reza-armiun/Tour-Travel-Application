@@ -3,10 +3,7 @@ package razarm.tosan.controller.rest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import razarm.tosan.controller.dto.tour.TourDto;
 import razarm.tosan.service.tour.TourService;
 
@@ -28,6 +25,13 @@ public class TourController {
     @GetMapping("tour/{id}")
     public ResponseEntity<TourDto> getTourItem(@PathVariable String id) {
         return  ResponseEntity.ok(tourService.findById(id));
+    }
+
+
+    @PostMapping("tour")
+    public ResponseEntity<String> saveTour(@RequestBody TourDto tourDto) {
+        var newTour = this.tourService.create(tourDto);
+        return ResponseEntity.ok(newTour.getId());
     }
 
 }

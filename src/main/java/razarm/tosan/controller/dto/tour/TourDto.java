@@ -4,6 +4,7 @@ package razarm.tosan.controller.dto.tour;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import razarm.tosan.Priceable;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.food.FoodOrderDto;
@@ -11,6 +12,7 @@ import razarm.tosan.repository.domain.tour.TourCategory;
 import razarm.tosan.repository.domain.tour.TourType;
 
 import java.math.BigInteger;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +32,8 @@ public class TourDto extends BaseEntityDto {
     private  Float rating;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigInteger price ;
-    private  ZonedDateTime date;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private OffsetDateTime date;
 
     private  TourismManagerDto tourismManager;
     private  Set<SchedulePlanDto> schedulePlans;
@@ -38,7 +41,7 @@ public class TourDto extends BaseEntityDto {
     public TourDto() { }
 
 
-    public TourDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Float rating, BigInteger price, ZonedDateTime date, TourismManagerDto tourismManager, Set<SchedulePlanDto> schedulePlans) {
+    public TourDto(String id, ZonedDateTime createdAt, ZonedDateTime modifiedAt, String createdBy, String modifiedBy, String name, TourType type, String guide, String description, String imgUrl, Float rating, BigInteger price, OffsetDateTime date, TourismManagerDto tourismManager, Set<SchedulePlanDto> schedulePlans) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
@@ -78,7 +81,7 @@ public class TourDto extends BaseEntityDto {
     }
 
 
-    public ZonedDateTime getDate() {
+    public OffsetDateTime getDate() {
         return date;
     }
 
@@ -133,7 +136,7 @@ public class TourDto extends BaseEntityDto {
         this.rating = rating;
     }
 
-    public void setDate(ZonedDateTime date) {
+    public void setDate(OffsetDateTime date) {
         this.date = date;
     }
 
@@ -183,7 +186,7 @@ public class TourDto extends BaseEntityDto {
         private  String imgUrl;
         private  Float rating;
         private BigInteger price;
-        private  ZonedDateTime date;
+        private  OffsetDateTime date;
         private TourismManagerDto tourismManager;
         private Set<SchedulePlanDto> schedulePlans;
 
@@ -254,7 +257,7 @@ public class TourDto extends BaseEntityDto {
             return this;
         }
 
-        public TourDtoBuilder date(ZonedDateTime date) {
+        public TourDtoBuilder date(OffsetDateTime date) {
             this.date = date;
             return this;
         }

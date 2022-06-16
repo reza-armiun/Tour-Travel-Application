@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SchedulePlan} from "../../model/Tour";
 import {StepperItem} from "../tour-form.component";
+import {TourFormService} from "../tour-form.service";
 
 
 
@@ -15,7 +16,7 @@ export class SchedulePlansFormComponent implements OnInit {
   plansData: SchedulePlan[] = [];
   stepperList:  StepperItem[] = [
     {name: 'Plan Information', icon: 'details'},
-    {name: 'Accommodations', icon: 'local_hotel'},
+    {name: 'Accommodation', icon: 'local_hotel'},
     {name: 'Foods', icon: 'restaurant_menu'},
     {name: 'Vehicles', icon: 'directions_car'},
     {name: 'Activities', icon: 'av_timer'},
@@ -23,7 +24,7 @@ export class SchedulePlansFormComponent implements OnInit {
   ];
   activeItem: StepperItem = {name: 'Plan Information', icon: 'details'};
 
-  constructor() { }
+  constructor(private tourFormService: TourFormService) { }
 
   ngOnInit(): void {
   }
@@ -38,5 +39,13 @@ export class SchedulePlansFormComponent implements OnInit {
 
   onClickItem(item: StepperItem) {
     this.activeItem = item;
+  }
+
+    onBack() {
+        this.tourFormService.prevStep();
+    }
+
+  onSubmit() {
+    this.tourFormService.saveTour();
   }
 }

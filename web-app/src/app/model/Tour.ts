@@ -29,7 +29,7 @@ export interface SchedulePlan {
 }
 
 export interface Tour {
-  id: string;
+  id?: string;
   name: string;
   type: string;
   guid: string;

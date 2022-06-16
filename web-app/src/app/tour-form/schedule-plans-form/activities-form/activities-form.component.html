@@ -1,1 +1,75 @@
-<p>activities-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onAddActivity()">
+  <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
+  <div class="activity_fields">
+    <div class="activity_times">
+      <mat-form-field>
+        <mat-label>Start At</mat-label>
+        <input matInput type="datetime-local"  formControlName="startAt" >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>End At</mat-label>
+        <input matInput type="datetime-local"  formControlName="endAt">
+      </mat-form-field>
+    </div>
+    <div class="activity_list">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text"  formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select style="margin-top: 8px"  formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="margin-left: 15px" type="submit" >Add Activity</button>
+
+    </div>
+  </div>
+
+
+  <mat-divider style="width: 100%; margin: 8px 0"></mat-divider>
+  <div class="activities">
+      <div cdkDropList class="activities_schedules drag-drop-list"
+           [cdkDropListData]="scheduleList"
+           (cdkDropListDropped)="dropScheduleList($event)">
+        <div class="schedule__item" style="background-color: transparent">
+          <div class="start-at" >
+            <h5>Start At</h5>
+          </div>
+          <div class="end-at">
+            <h5>End At</h5>
+          </div>
+        </div>
+        <div class="schedule__item drag-drop-item" *ngFor="let schedule of scheduleList" cdkDrag>
+
+          <div class="drop-placeholder" *cdkDragPlaceholder></div>
+
+          <div class="start-at">
+            <b> {{schedule.startAt | date: "YYYY:MM:dd hh:mm" }}</b>
+          </div>
+          <div class="end-at">
+            <b> {{schedule.endAt | date: "YYYY:MM:dd hh:mm"}}</b>
+          </div>
+        </div>
+
+      </div>
+
+    <div cdkDropList class="activities_items drag-drop-list"
+         [cdkDropListData]="scheduleList"
+         (cdkDropListDropped)="dropInfoList($event)">
+      <div class="activity__item" style="background-color: transparent">
+        <h5 >Activity</h5>
+      </div>
+
+      <div class="activity__item drag-drop-item" *ngFor="let info of activityInfos" cdkDrag>
+        <div class="drop-placeholder" *cdkDragPlaceholder></div>
+          {{info.name }}
+          <b>({{info.type }})</b>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
-import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Router} from "@angular/router";
 import {Subscription, tap} from "rxjs";
 import {LoadingService} from "../../shared/loading/loading.service";
@@ -12,6 +12,7 @@ import {MessagesService} from "../../shared/messages/messages.service";
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit, OnDestroy {
+  errorMessage = '';
   subs: Subscription | undefined;
   authSubs: Subscription | undefined;
 
@@ -51,11 +52,12 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.router.navigate(['./'], )
       },
       error: ({error}) => {
+        this.authForm.reset();
+        this.errorMessage = error.message;
         // if (error.username || error.password) {
           this.authForm.setErrors({credentials: true});
         // }
-      }
-    });
+      },});
   }
 
 

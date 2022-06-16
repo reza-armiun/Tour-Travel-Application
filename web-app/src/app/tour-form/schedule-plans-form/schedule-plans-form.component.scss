@@ -1,4 +1,54 @@
 @import "../stepper";
 
-@include stepper(20px, purple, rgba(19, 117, 19, 0.8), 100%) ;
+@include stepper(20px, rgba(255, 153, 0, 1), #444444, 100%) ;
 
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 15px;
+}
+.btn-next {
+  align-self: center;
+  margin-top: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  width: 170px;
+  padding: 10px 12px;
+  outline: none;
+  border-radius: 4px;
+  background-color: white;
+  color: rgba(255, 153, 0, 1);
+  border: 1px solid rgba(255, 153, 0, 1);
+  font-size: 15px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: rgba(255, 153, 0, 0.4);
+  }
+}
+
+.btn-prev {
+  @extend .btn-next;
+  background-color: white;
+  color: #551A8b;
+  border: 1px solid #551A8b;
+  &:hover {
+    color: white;
+    background-color: rgba(85, 26, 139 ,0.4 );
+  }
+}
+.btn-submit {
+  @extend .btn-next;
+  background-color: white;
+  color: rgba(19, 104, 250 ,1 );
+  border: 1px solid rgba(19, 104, 250 ,1 );
+  &:hover {
+    color: white;
+    background-color: rgba(19, 104, 250 ,0.4 );
+  }
+}

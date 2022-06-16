@@ -28,7 +28,7 @@ public class PlaneToPlaneDto implements Mapper<Plane, PlaneDto> {
             .cabinClass(plane.getCabinClass())
             .planeNumber(plane.getPlaneNumber())
             .price(plane.getPrice())
-            .vehicleProvider(vehicleProviderToVehicleProviderDto.convert(plane.getVehicleProvider()))
+            .vehicleProvider(plane.getVehicleProvider() != null ? vehicleProviderToVehicleProviderDto.convert(plane.getVehicleProvider()) : null)
             //                                       .discountRate(plane.discountRate())
             .departure(plane.getDeparture().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
             .arrival(plane.getArrival().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))

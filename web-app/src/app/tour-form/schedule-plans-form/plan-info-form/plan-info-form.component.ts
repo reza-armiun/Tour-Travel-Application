@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TourFormService} from "../../tour-form.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-plan-info-form',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plan-info-form.component.scss']
 })
 export class PlanInfoFormComponent implements OnInit {
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private tourFormService: TourFormService) {
+    this.form = tourFormService.schedulePlanInfoForm;
+  }
 
   ngOnInit(): void {
   }
+
 
 }

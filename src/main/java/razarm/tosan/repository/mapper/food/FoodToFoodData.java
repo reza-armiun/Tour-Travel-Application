@@ -21,7 +21,7 @@ public class FoodToFoodData implements Mapper<Food, FoodData> {
                 .ingredients(food.getIngredients())
                 .price(food.getPrice())
                 .cookTime(food.getCookTime())
-                .provider(foodProviderToFoodProviderData.convert(food.getProvider()))
+                .provider(food.getProvider() != null ? foodProviderToFoodProviderData.convert(food.getProvider()): null)
                 .createdAt(food.getCreatedAt())
                 .modifiedAt(food.getModifiedAt())
                 .createdBy(food.getCreatedBy())

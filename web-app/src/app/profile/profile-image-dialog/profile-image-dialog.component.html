@@ -1,0 +1,25 @@
+
+  <div  class="profile">
+    <div class="close" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </div>
+    <div class="profile__header">
+      <div class="profile__title">
+        Profile picture
+      </div>
+      <div class="profile__description">
+        A picture helps people recognize you and lets you know when you’re signed in to your account
+      </div>
+    </div>
+    <div class="profile__img-wrapper">
+      <div class="profile__img">
+        <label for="input-file">
+          <img matCardImage  [src]="img"   />
+        </label>
+        <input id="input-file" type="file" style="display:none;" (change)="onSelectFile($event)"  #fileInput>
+        <button  *ngIf="!editMode" (click)="fileInput.click()" >Add Profile Photo</button>
+        <button  *ngIf="editMode" (click)="editProfileImg()">Edit Profile Photo</button>
+      </div>
+
+    </div>
+  </div>

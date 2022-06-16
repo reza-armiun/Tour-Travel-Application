@@ -18,7 +18,7 @@ public class PlaneDtoToPlane implements Mapper<PlaneDto, Plane> {
             .id(planeDto.getId())
             .name(planeDto.getName())
             .type(planeDto.getType())
-            .vehicleProvider(vehicleProviderDtoToVehicleProvider.convert(planeDto.getVehicleProvider()))
+            .vehicleProvider(planeDto.getVehicleProvider() != null ? vehicleProviderDtoToVehicleProvider.convert(planeDto.getVehicleProvider()) : null)
             .fromStation(planeDto.getFromStation())
             .toStation(planeDto.getToStation())
             .ticketNumber(planeDto.getTicketNumber())

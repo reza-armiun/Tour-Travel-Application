@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {BehaviorSubject, catchError, finalize, map, Observable, of, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, finalize, map, Observable, of, shareReplay, tap, throwError} from "rxjs";
 
 interface SigninResponse {
   authenticated: boolean;
@@ -33,9 +33,17 @@ export class AuthService {
 
   private usernameSub$ = new BehaviorSubject<string | null>(null);
   signedin$ = new BehaviorSubject(false);
-  username$: Observable<string | null> = this.usernameSub$.asObservable();
+  username$: Observable<string | null> = this.usernameSub$.asObservable().pipe(
+    shareReplay()
+  );
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // const token = localStorage.getItem('user-info');
+    // if(token) {
+    //   const user = JSON.parse(token) as SigninResponse;
+    //
+    // }
+  }
 
   signin(credentials: SigninCredentials) {
     return this.http.post<HttpResponse<any>>(`/v1/login`, credentials, {observe: "response"}).pipe(
@@ -58,6 +66,7 @@ export class AuthService {
     if (userInfo) {
       const user = <SigninResponse>JSON.parse(userInfo.toString());
       this.signedin$.next(true);
+      console.log('check auth');
       this.usernameSub$.next(user.username);
       return of();
     } else

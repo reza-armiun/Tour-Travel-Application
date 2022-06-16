@@ -29,7 +29,7 @@ public class TourToTourDto implements Mapper<Tour, TourDto> {
                 .imgUrl(tour.getImgUrl())
                 .date(
                         tour.getDate() != null
-                                ? tour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE))
+                                ? tour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)).toOffsetDateTime()
                                 : null)
                 .tourismManager(
                         tour.getTourismManager() != null

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -72,11 +73,16 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
             return authenticationManager.authenticate(authentication);
 
-        } catch (IOException | AuthenticationException e) {
+        }
+        catch (InternalAuthenticationServiceException e) {
+            throw new AuthenticationCredentialsNotFoundException(e.getMessage());
+
+        }
+        catch (IOException | AuthenticationException e) {
             if(e instanceof AuthenticationException) {
 //                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ((AuthenticationException) e).getMessage());
 //                return null;
-                throw new AuthenticationCredentialsNotFoundException(e.getMessage());
+                throw new AuthenticationCredentialsNotFoundException("Invalid username or password, please try again");
             } else throw new UsernameNotFoundException("User name not found...."); //TODO
         }
 
@@ -93,7 +99,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         final String username = authResult.getName();
         final Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
         final UserDetails user = (UserDetails) authResult.getDetails();
-        log.info("USER DETAILS : {}", user);
+        log.info("successful authentication : {}", user.getUsername());
         final java.sql.Date expiration = java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays()).toString());
 
         final String token = Jwts.builder()
@@ -103,12 +109,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .setExpiration(expiration)
                 .signWith(secretKey)
                 .compact();
-//        final String userInfo = Jwts.builder()
-//                .setSubject(username)
-//                .claim("authorities" ,authorities)
-//                .setIssuedAt(new Date())
-//                .setExpiration(expiration)
-//                .compact();
 
         this.userSessionService.insertSession(
                 new Session(username , token));
@@ -130,12 +130,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         response.addHeader(
                 "user-info",
                 AppJsonMapper.getAppJsonMapper().writeValueAsString(userAuthDetails));
-
-//        final Cookie userInfoCookie =  new Cookie("user_info", userInfo);
-//        userInfoCookie.setMaxAge(maxAge);
-//        userInfoCookie.setPath("/");
-//        response.addCookie(userInfoCookie);
-
 
     }
 

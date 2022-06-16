@@ -21,6 +21,8 @@ export class FiltersComponent implements OnInit {
   constructor(private toursStore: ToursStore) { }
 
   ngOnInit(): void {
+    this.toursStore.setCategories([]);
+    this.toursStore.setReviewsFilter([]);
   }
 
   reviewFiltersHandler(el: HTMLInputElement) {

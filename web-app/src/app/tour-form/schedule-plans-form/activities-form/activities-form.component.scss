@@ -1,0 +1,130 @@
+@use '../../flex';
+
+form {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  padding: 30px 12px;
+  @extend .flex-column-start;
+  row-gap: 3px;
+  .activity_fields {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .activity_times {
+      @extend .flex-row-start;
+      flex-wrap: wrap;
+      flex: 2;
+      column-gap: 8px;
+    }
+    .activity_list {
+      flex: 3;
+      @extend .flex-row-center;
+      flex-wrap: wrap;
+      column-gap: 8px;
+    }
+  }
+
+
+
+
+  .mat-form-field {
+    width: inherit;
+
+    input {
+      box-sizing: border-box !important;
+      width: 100%;
+      padding: 4px 7px;
+    }
+  }
+
+  .form__header {
+    width: 100%;
+
+    .form__title {
+      font-size: 19px;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.activities {
+  width: 100%;
+  @extend .flex-row-start;
+  justify-content: center;
+  column-gap: 25px;
+  h5 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .activities_schedules {
+    @extend .flex-column-start;
+    align-items: center;
+    row-gap: 6px;
+    .schedule__item {
+      cursor: pointer;
+      width: 250px;
+      text-align: center;
+      height: 50px;
+      background-color: #cce4f5;
+      border-radius: 3px;
+      @extend .flex-row-center;
+      .start-at {
+        flex: 1;
+      }
+      .end-at {
+        flex: 1;
+      }
+    }
+  }
+  .activities_items {
+    @extend .flex-column-start;
+    align-items: center;
+    row-gap: 6px;
+    .activity__item {
+      cursor: pointer;
+      width: 250px;
+      background-color: #cce4f5;
+      height: 50px;
+      border-radius: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.cdk-drag-preview {
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Roboto;
+  width: 200px;
+  text-align: center;
+  height: 50px;
+  @extend .flex-row-center;
+  justify-content: space-around;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.drag-drop-list.cdk-drop-list-dragging .drag-drop-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drop-placeholder {
+  width: 100%;
+  border-radius: 4px;
+  background: #ccc;
+  min-height: 50px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

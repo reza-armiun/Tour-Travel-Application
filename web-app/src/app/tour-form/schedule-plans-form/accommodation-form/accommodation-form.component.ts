@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup} from "@angular/forms";
+import {TourFormService} from "../../tour-form.service";
 
 @Component({
   selector: 'app-accommodation-form',
@@ -6,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accommodation-form.component.scss']
 })
 export class AccommodationFormComponent implements OnInit {
-
-  constructor() { }
+  form: FormGroup;
+  constructor(private tourFormService: TourFormService) {
+    this.form = tourFormService.accommodationForm;
+  }
 
   ngOnInit(): void {
   }

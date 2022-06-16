@@ -17,7 +17,8 @@ interface Accommodation {
   type: string;
   name: string;
   price: number;
-  time: number;
+  checkIn: Date;
+  checkOut: Date;
   accommodationProvider: AccommodationProvider;
   address: Address;
   createdAt: Date;

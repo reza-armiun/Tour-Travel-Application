@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Profile, ProfileStore} from "./profile.store";
+import {Profile, ProfileStore} from "../stores/profile.store";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
@@ -7,6 +7,9 @@ import {LoadingService} from "../shared/loading/loading.service";
 import {MessagesService} from "../shared/messages/messages.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {countryWithCities} from "../shared/country-dropdown/countryWithCities";
+import {MatDialog} from "@angular/material/dialog";
+import {openProfileImageDialog} from "./profile-image-dialog/profile-image-dialog.component";
+
 
 @Component({
   selector: 'app-profile',
@@ -76,12 +79,13 @@ export class ProfileComponent implements OnInit {
               , private loadingService: LoadingService
               , private messageService: MessagesService
               , private router: Router
-              , private activatedRoute: ActivatedRoute) { }
+              , private activatedRoute: ActivatedRoute
+              , public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.profileStore.profile$.subscribe(profile => {
       if(profile){
-        this.profile= profile;
+        this.profile= {...profile};
         this.profileForm.patchValue({...profile}, );
       }
     })
@@ -143,4 +147,9 @@ export class ProfileComponent implements OnInit {
         this.cities = countryWithCities[country];
       }
   }
+
+  showProfileImgDialog() {
+    openProfileImageDialog(this.dialog, this.profile?.imageUrl).subscribe()
+  }
 }
+

@@ -7,6 +7,19 @@
   padding: 30px 30px;
   @extend  .flex-column-start;
   row-gap: 3px;
+  .inline-fields {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 2;
+
+    column-gap: 8px;
+
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+  }
   .mat-form-field {
     width: inherit;
     input {
@@ -22,5 +35,64 @@
       font-weight: 600;
     }
   }
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+  }
+  .btn-next {
+    align-self: center;
+    margin-top: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    width: 170px;
+    padding: 10px 12px;
+    outline: none;
+    border-radius: 4px;
+    background-color: white;
+    color: rgba(255, 153, 0, 1);
+    border: 1px solid rgba(255, 153, 0, 1);
+    font-size: 15px;
+    font-weight: bold;
+    &:hover {
+      color: white;
+      background-color: rgba(255, 153, 0, 0.4);
+    }
+  }
 
+  .btn-prev {
+    @extend .btn-next;
+    //background-color: rebeccapurple;
+    background-color: white;
+    color: #551A8b;
+    border: 1px solid #551A8b;
+    &:hover {
+      color: white;
+      background-color: rgba(85, 26, 139 ,0.4 );
+    }
+  }
+
+
+
+  .btn-submit {
+    @extend .btn-next;
+    background-color: rgba(128, 128, 128, 1);
+  }
+
+}
+.table-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  table {
+    border: 1px solid rgba(128, 128, 128, 0.6);
+    border-radius: 4px;
+  }
 }

@@ -21,7 +21,7 @@ public class FoodDtoToFood implements Mapper<FoodDto, Food> {
                                .ingredients(foodDto.getIngredients())
                                .price(foodDto.getPrice())
                                .cookTime(foodDto.getCookTime())
-                               .provider(foodProviderDtoToFoodProvider.convert(foodDto.getProvider()))
+                               .provider(foodDto.getProvider() != null ? foodProviderDtoToFoodProvider.convert(foodDto.getProvider()) : null)
                                .createdAt(foodDto.getCreatedAt().toInstant())
                                .modifiedAt(foodDto.getModifiedAt().toInstant())
                                .createdBy(foodDto.getCreatedBy())

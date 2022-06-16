@@ -4,11 +4,11 @@
 
 
 export interface Activity {
-  id: string;
+  id?: string;
   name: string;
   type: string;
   startAt: Date;
   endAt: Date;
-  createdBy: Date;
-  modifiedBy: Date;
+  createdBy?: Date;
+  modifiedBy?: Date;
 }

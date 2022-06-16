@@ -12,7 +12,9 @@ public class ActivityDto extends BaseEntityDto {
     private  String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private  ActivityType type;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private  ZonedDateTime startAt;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private  ZonedDateTime endAt;
 
 

@@ -1,0 +1,42 @@
+<fieldset [formGroup]="form">
+  <legend>{{title}}</legend>
+  <mat-form-field>
+    <input matInput
+           placeholder="Street"
+           formControlName="street" (blur)="onTouched()">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           placeholder="Postal Code"
+           formControlName="postalCode" (blur)="onTouched()">
+  </mat-form-field>
+  <ng-container formGroupName="city" >
+   <div class="inline-fields">
+     <mat-form-field>
+       <input matInput
+              placeholder="City"
+              formControlName="name" (blur)="onTouched()">
+     </mat-form-field>
+     <mat-form-field>
+       <input matInput
+              placeholder="Zip Code"
+              formControlName="zipCode" (blur)="onTouched()">
+     </mat-form-field>
+   </div>
+    <ng-container formGroupName="country">
+      <div class="inline-fields">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Country"
+                 formControlName="name" (blur)="onTouched()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="Country Code"
+                 formControlName="countryCode" (blur)="onTouched()">
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </ng-container>
+
+</fieldset>

@@ -26,7 +26,7 @@ public class BusDtoToBus implements Mapper<BusDto, Bus> {
             .busModel(busDto.getBusModel())
             .departure(busDto.getDeparture().toInstant())
             .arrival(busDto.getArrival().toInstant())
-            .vehicleProvider(vehicleProviderDtoToVehicleProvider.convert(busDto.getVehicleProvider()))
+            .vehicleProvider(busDto.getVehicleProvider() != null ? vehicleProviderDtoToVehicleProvider.convert(busDto.getVehicleProvider()) : null)
             .createdAt(busDto.getCreatedAt().toInstant())
             .modifiedAt(busDto.getModifiedAt().toInstant())
             .createdBy(busDto.getCreatedBy())

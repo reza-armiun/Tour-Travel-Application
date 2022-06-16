@@ -1,12 +1,16 @@
 package razarm.tosan.service.impl;
 
-import lombok.AllArgsConstructor;
+import com.google.common.io.Files;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import razarm.tosan.controller.dto.address.AddressInfo;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.web.multipart.MultipartFile;
 import razarm.tosan.controller.dto.auth.*;
 import razarm.tosan.controller.dto.tour.BookingInfo;
 import razarm.tosan.controller.mapper.user.UserToProfile;
@@ -24,19 +28,22 @@ import razarm.tosan.repository.domain.location.City;
 import razarm.tosan.repository.domain.location.Country;
 import razarm.tosan.security.model.UpdatePasswordRequest;
 import razarm.tosan.service.AuthService;
-import razarm.tosan.service.tour.BookingService;
 
 import javax.naming.directory.InvalidAttributeValueException;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class AuthServiceImpl implements AuthService {
 
@@ -45,9 +52,19 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserToUserDto userToUserDto;
     private final UserToProfile userToProfile;
-    private final BookingService bookingService;
     private final TourRepository tourRepository;
 
+    @Value("${app.server.address}")
+    private String appServerAddress;
+
+    public AuthServiceImpl(UserRepository userRepository, UserSessionRepository userSessionRepository, PasswordEncoder passwordEncoder, UserToUserDto userToUserDto, UserToProfile userToProfile, TourRepository tourRepository) {
+        this.userRepository = userRepository;
+        this.userSessionRepository = userSessionRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.userToUserDto = userToUserDto;
+        this.userToProfile = userToProfile;
+        this.tourRepository = tourRepository;
+    }
 
 
     @Override
@@ -203,5 +220,64 @@ public class AuthServiceImpl implements AuthService {
          this.userRepository.update(user);
     }
 
+    @Override
+    public String updateProfileImage(String username, MultipartFile file) throws IOException {
+        var user =this.userRepository.findByUsername(username);
+        String newImgUrl = appServerAddress + "/v1/profile/img/"+ Instant.now();
+        if(user != null) {
+            var uploadDir = new File("./files");
+            var fileName = username + "." + Files.getFileExtension(Objects.requireNonNull(file.getOriginalFilename()));
+            var isDir = Files.isDirectory().test(uploadDir);
+            if(!isDir) {
+                java.nio.file.Files.createDirectory(Path.of("./files"));
+            }
+            try (InputStream inputStream = file.getInputStream()) {
+                String dirPath = "./files/" + user.getId() +"/";
+                var path = Path.of(dirPath);
+                FileSystemUtils.deleteRecursively(path);
+                java.nio.file.Files.createDirectory(Path.of(dirPath));
+                java.nio.file.Files.copy(inputStream, Path.of(dirPath + fileName ), StandardCopyOption.REPLACE_EXISTING);
+
+                user.setImageUrl(newImgUrl);
+                userRepository.update(user);
+
+            } catch (IOException ioe) {
+                throw new IOException("Could not save image file: " + fileName, ioe);
+            }
+
+        }
+        return newImgUrl;
+    }
+
+    @Override
+    public Resource downloadProfileImage(String username) {
+        var user = this.userRepository.findByUsername(username);
+        var photoDir ="./files/" + user.getId();
+        try {
+            List<Path> result = findByFileName(Path.of(photoDir ), username);
+            if (result.size() > 0) {
+                Resource resource = new UrlResource(result.get(0).toAbsolutePath().toUri());
+                if (resource.exists()) return resource;
+                else throw new MalformedURLException();
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return null;
+    }
+
+
+    public static List<Path> findByFileName(Path path, String fileName)
+            throws IOException {
+
+        List<Path> result;
+        try (Stream<Path> walk = java.nio.file.Files.walk(path)) {
+            result = walk.filter(java.nio.file.Files::isRegularFile)
+                         .filter(p -> p.toString().contains(fileName))
+                         .collect(Collectors.toList());
+        }
+        return result;
+
+    }
 
 }

@@ -1,26 +1,24 @@
 <div class="container">
 
-  <div class="stepper" >
+  <div class="stepper"  *ngIf="(activeItem$ | async) as activeItem">
     <div class="step__headers">
       <div class="step__header"
-           *ngFor="let item of stepperList "
-           (click)="onClickItem(item)"
+           *ngFor="let item of stepperList; let i = index "
+           (click)="onClickItem(i, item)"
            [class.active]="activeItem.name==item.name"
       >
         <div class="step__icon"><mat-icon>{{item.icon}}</mat-icon></div>
         <div class="step__title">{{item.name}}</div>
       </div>
-
     </div>
-<!--    <mat-divider style="width: 100%; margin: 0" ></mat-divider>-->
-      <div class="step__contents">
-        <div class="step__content" *ngIf="activeItem.name == 'Tour Information'">
+      <div class="step__contents" >
+        <div class="step__content" *ngIf="activeItem?.name == 'Tour Information'">
           <app-info-form></app-info-form>
         </div>
-        <div class="step__content" *ngIf="activeItem.name == 'Tourism Manger'" >
+        <div class="step__content" *ngIf="activeItem?.name == 'Tourism Manger'" >
           <app-tourism-manager-form></app-tourism-manager-form>
         </div>
-        <div class="step__content"  *ngIf="activeItem.name == 'Schedule plans'">
+        <div class="step__content"  *ngIf="activeItem?.name == 'Schedule plans'">
           <app-schedule-plans-form></app-schedule-plans-form>
         </div>
       </div>

@@ -23,7 +23,7 @@ public class CustomTourToTourDto implements Mapper<CustomTour, TourDto>{
                 .name(customTour.getName())
                 .guide(customTour.getGuide())
                 .description(customTour.getDescription())
-                .date(customTour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                .date(customTour.getDate().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)).toOffsetDateTime())
                 .tourismManager(this.mapper.convert(customTour.getTourismManager()))
                 .build();
     }

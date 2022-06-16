@@ -11,6 +11,7 @@ import {AuthGuard} from "./auth.guard";
 import {ToursComponent} from "./tours/tours.component";
 import {BookingFormComponent} from "./booking-form/booking-form.component";
 import {TourFormComponent} from "./tour-form/tour-form.component";
+import {TourFormGuard} from "./tour-form.guard";
 
 
 const routes: Routes = [
@@ -18,7 +19,10 @@ const routes: Routes = [
   {path: 'signin', component: SignInComponent},
   {path: 'signout', component: SignOutComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'tour/save', component: TourFormComponent},
+  {path: 'tour/save', component: TourFormComponent, canDeactivate: [TourFormGuard], data: {
+      breadCrumb: 'tour'
+    }
+  },
   {
     path: 'profile', canActivate: [AuthGuard], data: {
       breadCrumb: 'profile'

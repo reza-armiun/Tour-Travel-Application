@@ -38,7 +38,7 @@
       New User? <a routerLink="/register"> Create an account</a>
     </div>
     <div class="error-segment" *ngIf="authForm.errors && authForm.errors['credentials']">
-         Invalid username or password, please try again
+         {{errorMessage}}
     </div>
     <button type="submit" >Login</button>
   </form>

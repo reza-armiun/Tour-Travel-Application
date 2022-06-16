@@ -1,45 +1,109 @@
-<form >
+<div class="table-wrapper">
+  <table mat-table  style="width: 95%; background-color: transparent"
+         [dataSource]="vehiclesData"
+         multiTemplateDataRows
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef  colspan="1">Type</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Price</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.price}}</td>
+    </ng-container>
+    <ng-container matColumnDef="from">
+      <th mat-header-cell *matHeaderCellDef colspan="1">From</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.from}}</td>
+    </ng-container>
+    <ng-container matColumnDef="to">
+      <th mat-header-cell *matHeaderCellDef colspan="1">To</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.to}}</td>
+    </ng-container>
+    <ng-container matColumnDef="ticketNumber">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Ticket Number</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.ticketNumber}}</td>
+    </ng-container>
+    <ng-container matColumnDef="departure">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Departure</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.departure}}</td>
+    </ng-container>
+    <ng-container matColumnDef="arrival">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Arrival</th>
+      <td mat-cell *matCellDef="let vehicle" colspan="1">{{vehicle?.arrival}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef colspan="1">Actions</th>
+      <td mat-cell *matCellDef="let plan; let i = dataIndex;" colspan="1">
+        <mat-icon style="color: red; font-size: 20px;cursor: pointer" class="app-icon" (click)="removeVehicle(i)">delete</mat-icon>
+        <mat-icon style="color: blue; font-size: 20px; cursor: pointer" class="app-icon"  (click)="enableEditVehicleMode(i)">edit</mat-icon>
+      </td>
+    </ng-container>
 
-  <div class="form__header">
-    <div class="form__title">Accommodation</div>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr
+      mat-row *matRowDef="let vehicle; columns: displayedColumns ; let i = index"></tr>
+  </table>
+</div>
+
+<form [formGroup]="form" >
+  <ng-container formArrayName="vehicles">
+    <ng-container *ngFor="let vehicle of vehicles.controls;  let i = index">
+      <ng-container *ngIf="i == currentFormIndex" [formGroupName]="i">
+
+
+        <div class="form__header">
+          <div class="form__title">Vehicles</div>
+        </div>
+        <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field style="width: 250px !important;">
+          <mat-label>Type</mat-label>
+          <select matNativeControl  required formControlName="type">
+            <option value="BUS">Bus</option>
+            <option value="PLANE">Plane</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Discount</mat-label>
+          <input matInput type="number" formControlName="discount">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>From</mat-label>
+          <input matInput type="text" formControlName="from">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>To</mat-label>
+          <input matInput type="text" formControlName="to">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ticket Number</mat-label>
+          <input matInput type="text" formControlName="ticketNumber">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Departure</mat-label>
+          <input matInput type="datetime-local" formControlName="departure">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Arrival</mat-label>
+          <input matInput type="datetime-local" formControlName="arrival">
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="btn-wrapper">
+    <button mat-raised-button color="primary" [disabled]="form.invalid" *ngIf="!editMode" (click)="addVehicle()">Add Vehicle</button>
+    <button mat-raised-button color="accent"   *ngIf="editMode" (click)="editVehicleHandler()">Edit Vehicle</button>
   </div>
-  <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Discount</mat-label>
-    <input matInput type="number">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Price</mat-label>
-    <input matInput type="number">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>From</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>To</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Ticket Number</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Departure</mat-label>
-    <input matInput type="date">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Arrival</mat-label>
-    <input matInput type="date">
-  </mat-form-field>
-
 </form>

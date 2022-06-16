@@ -1,6 +1,8 @@
 package razarm.tosan.service;
 
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 import razarm.tosan.controller.dto.auth.*;
 import razarm.tosan.exception.PasswordNotMatchException;
 import razarm.tosan.exception.UserNotFoundException;
@@ -8,6 +10,7 @@ import razarm.tosan.repository.domain.auth.User;
 import razarm.tosan.security.model.UpdatePasswordRequest;
 
 import javax.naming.directory.InvalidAttributeValueException;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -24,4 +27,7 @@ public interface AuthService {
     void updateUserProfile(String username, Profile profile);
 
     void updatePassword(UpdatePasswordRequest updatePasswordRequest) throws PasswordNotMatchException;
+
+    String updateProfileImage(String username, MultipartFile file) throws IOException;
+    Resource downloadProfileImage(String username);
 }

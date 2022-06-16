@@ -1,5 +1,6 @@
 package razarm.tosan.repository.domain.accommodation;
 
+import lombok.ToString;
 import razarm.tosan.repository.domain.BaseEntity;
 import razarm.tosan.repository.domain.Costable;
 import razarm.tosan.repository.domain.Timeable;
@@ -7,29 +8,44 @@ import razarm.tosan.repository.domain.location.Address;
 
 import java.math.BigInteger;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
-public abstract class Accommodation extends BaseEntity
-        implements Costable, Timeable {
+@ToString
+public abstract class Accommodation extends BaseEntity implements Costable, Timeable {
 
     protected final String name;
     protected final AccommodationType type;
     protected final Address address;
     protected final BigInteger price;
-    protected final Long time;
+    protected final ZonedDateTime checkIn;
+    protected final ZonedDateTime checkOut;
     protected final AccommodationProvider accommodationProvider;
     protected final Set<AccommodationOrder> accommodationOrders;
 
-
     public abstract AccommodationType getType();
 
-    public Accommodation(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, AccommodationType type, Address address, BigInteger price, Long time, AccommodationProvider accommodationProvider, Set<AccommodationOrder> accommodationOrders) {
+    public Accommodation(
+            String id,
+            Instant createdAt,
+            Instant modifiedAt,
+            String createdBy,
+            String modifiedBy,
+            String name,
+            AccommodationType type,
+            Address address,
+            BigInteger price,
+            ZonedDateTime checkIn,
+            ZonedDateTime checkOut,
+            AccommodationProvider accommodationProvider,
+            Set<AccommodationOrder> accommodationOrders) {
         super(id, createdAt, modifiedAt, createdBy, modifiedBy);
         this.name = name;
         this.type = type;
         this.address = address;
         this.price = price;
-        this.time = time;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         this.accommodationProvider = accommodationProvider;
         this.accommodationOrders = accommodationOrders;
     }
@@ -37,8 +53,6 @@ public abstract class Accommodation extends BaseEntity
     public String getName() {
         return name;
     }
-
-
 
     public Address getAddress() {
         return address;
@@ -48,8 +62,12 @@ public abstract class Accommodation extends BaseEntity
         return price;
     }
 
-    public Long getTime() {
-        return time;
+    public ZonedDateTime getCheckIn() {
+        return checkIn;
+    }
+
+    public ZonedDateTime getCheckOut() {
+        return checkOut;
     }
 
     public AccommodationProvider getAccommodationProvider() {
@@ -59,23 +77,5 @@ public abstract class Accommodation extends BaseEntity
     public Set<AccommodationOrder> getAccommodationOrders() {
         return accommodationOrders;
     }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Accommodation{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", modifiedAt=").append(modifiedAt);
-        sb.append(", createdBy='").append(createdBy).append('\'');
-        sb.append(", modifiedBy='").append(modifiedBy).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", type=").append(type);
-        sb.append(", address=").append(address);
-        sb.append(", price=").append(price);
-        sb.append(", time=").append(time);
-        sb.append(", accommodationProvider=").append(accommodationProvider);
-        sb.append(", accommodationOrders=").append(accommodationOrders);
-        sb.append('}');
-        return sb.toString();
-    }
 }
+

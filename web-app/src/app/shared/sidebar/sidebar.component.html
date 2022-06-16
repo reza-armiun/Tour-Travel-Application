@@ -1,13 +1,17 @@
 <div (click)="closeSidebar()" [ngClass]="{'black-screen': true, 'hide': !(showSidebar$ | async)} "></div>
 <div [ngClass]="{'sidebar': true, 'hide': !(showSidebar$ | async)} ">
-  <h2 class="header">Menu</h2>
+  <div class="profile"*ngIf="(profile$ | async) as profile">
+      <img matCardImage  [src]="profile?.imageUrl" class="profile__image">
+      <h4 class="profile__name">{{profile.username}}</h4>
+  </div>
+<!--  <h2 class="header">Menu</h2>-->
   <hr/>
   <div routerLink="/tour" routerLinkActive="active" class="sidebar__item" >Tours</div>
   <hr/>
-  <div class="sidebar__item">Users</div>
-  <hr/>
-  <div class="sidebar__item">Orders</div>
-  <hr/>
+<!--  <div class="sidebar__item">Users</div>-->
+<!--  <hr/>-->
+<!--  <div class="sidebar__item">Orders</div>-->
+<!--  <hr/>-->
   <div routerLink="/profile" routerLinkActive="active" class="sidebar__item">Profile</div>
   <hr/>
   <div (click)="onSignout()"  class="sidebar__item">Signout</div>

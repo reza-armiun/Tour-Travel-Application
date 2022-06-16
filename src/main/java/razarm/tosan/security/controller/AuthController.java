@@ -2,11 +2,13 @@ package razarm.tosan.security.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import razarm.tosan.controller.dto.auth.Profile;
 import razarm.tosan.controller.dto.auth.SignupRequest;
 import razarm.tosan.exception.PasswordNotMatchException;
@@ -15,6 +17,7 @@ import razarm.tosan.security.model.UserAuthDetails;
 import razarm.tosan.service.AuthService;
 
 import javax.naming.directory.InvalidAttributeValueException;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
 import java.util.function.Function;
@@ -66,7 +69,7 @@ public class AuthController {
     @PutMapping("change-password")
     public ResponseEntity<Void> updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest) throws PasswordNotMatchException {
         this.authService.updatePassword(updatePasswordRequest);
-        log.debug("user : {}  password  changed successfully", updatePasswordRequest.getUsername());
+        log.info("user : {}  password  changed successfully", updatePasswordRequest.getUsername());
         return ResponseEntity.ok().build();
     }
 
@@ -74,5 +77,15 @@ public class AuthController {
     public ResponseEntity<Void> updateProfile(@RequestBody Profile profile, Principal principal) {
         this.authService.updateUserProfile(principal.getName(), profile);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("profile/img")
+    public ResponseEntity<String> updateProfileImg(@RequestPart("file") MultipartFile file, Authentication authentication) throws IOException {
+        return ResponseEntity.ok(authService.updateProfileImage(authentication.getName(), file));
+    }
+
+    @GetMapping("profile/img/{time}")
+    public ResponseEntity<Resource> downloadProfileImage(Authentication authentication, @PathVariable String time) {
+        return ResponseEntity.ok(this.authService.downloadProfileImage(authentication.getName()));
     }
 }

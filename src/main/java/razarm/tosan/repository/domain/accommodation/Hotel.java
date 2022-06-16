@@ -5,6 +5,7 @@ import razarm.tosan.repository.domain.location.Address;
 
 import java.math.BigInteger;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 public class Hotel extends  Accommodation{
@@ -13,8 +14,8 @@ public class Hotel extends  Accommodation{
     private final AccommodationType type = AccommodationType.HOTEL;
 
 
-    public Hotel(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, Address address, BigInteger price, Long time, AccommodationProvider accommodationProvider, Set<AccommodationOrder> accommodationOrders, Integer floor, Integer room) {
-        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, address, price, time, accommodationProvider, accommodationOrders);
+    public Hotel(String id, Instant createdAt, Instant modifiedAt, String createdBy, String modifiedBy, String name, Address address, BigInteger price, ZonedDateTime checkIn, ZonedDateTime checkOut, AccommodationProvider accommodationProvider, Set<AccommodationOrder> accommodationOrders, Integer floor, Integer room) {
+        super(id, createdAt, modifiedAt, createdBy, modifiedBy, name, AccommodationType.HOTEL, address, price, checkIn, checkOut, accommodationProvider, accommodationOrders);
         this.floor = floor;
         this.room = room;
     }
@@ -36,7 +37,7 @@ public class Hotel extends  Accommodation{
 
     @Override
     public BaseEntity cloneWithId(String id) {
-        return new Hotel(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, time, accommodationProvider, accommodationOrders, floor, room);
+       return new Hotel(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, checkIn, checkOut, accommodationProvider, accommodationOrders, floor, room);
     }
 
     public Integer getFloor() {
@@ -48,7 +49,6 @@ public class Hotel extends  Accommodation{
     }
 
 
-
     public static final class HotelBuilder {
         protected String id;
         protected Instant createdAt;
@@ -58,7 +58,8 @@ public class Hotel extends  Accommodation{
         protected String name;
         protected Address address;
         protected BigInteger price;
-        protected Long time;
+        protected ZonedDateTime checkIn;
+        protected ZonedDateTime checkOut;
         protected AccommodationProvider accommodationProvider;
         protected Set<AccommodationOrder> accommodationOrders;
         private Integer floor;
@@ -102,6 +103,8 @@ public class Hotel extends  Accommodation{
             return this;
         }
 
+
+
         public HotelBuilder address(Address address) {
             this.address = address;
             return this;
@@ -112,8 +115,13 @@ public class Hotel extends  Accommodation{
             return this;
         }
 
-        public HotelBuilder time(Long time) {
-            this.time = time;
+        public HotelBuilder checkIn(ZonedDateTime checkIn) {
+            this.checkIn = checkIn;
+            return this;
+        }
+
+        public HotelBuilder checkOut(ZonedDateTime checkOut) {
+            this.checkOut = checkOut;
             return this;
         }
 
@@ -143,8 +151,7 @@ public class Hotel extends  Accommodation{
         }
 
         public Hotel build() {
-            Hotel hotel = new Hotel(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, time, accommodationProvider, accommodationOrders, floor, room);
-            return hotel;
+            return new Hotel(id, createdAt, modifiedAt, createdBy, modifiedBy, name, address, price, checkIn, checkOut, accommodationProvider, accommodationOrders, floor, room);
         }
     }
 }

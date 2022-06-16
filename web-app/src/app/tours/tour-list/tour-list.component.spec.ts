@@ -39,12 +39,14 @@ describe('Tour List Component Test', () => {
         el = fixture.debugElement;
         tourStore = TestBed.inject(ToursStore);
       });
+
   }))
   it('Should display tour list', fakeAsync(() => {
         tourStore.filteredTourList$.and.returnValue(of([]));
          fixture.detectChanges();
         const  tours = el.queryAll(By.css('.tour'));
         flush();
-        expect(tours.length).toBe(0);
+        // @ts-ignore
+    expect(tours.length).toBe(0);
   }))
 })

@@ -1,5 +1,6 @@
 package razarm.tosan.controller.dto.tour;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import razarm.tosan.controller.dto.BaseEntityDto;
 import razarm.tosan.controller.dto.accommodation.AccommodationOrderDto;
@@ -19,7 +20,9 @@ import java.util.StringJoiner;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public  class SchedulePlanDto extends BaseEntityDto implements Costable {
     private  String name;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private  ZonedDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private  ZonedDateTime arrivalTime;
     private  AddressDto source;
     private  AddressDto destination;

@@ -1,0 +1,7 @@
+@use "../tour-form/form";
+
+
+fieldset {
+  width: 100%;
+  @extend .form;
+}

@@ -12,6 +12,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserAuthDetails {
     private String username;
+    private String imgUrl;
     private boolean authenticated;
     private Set<String> authorities ;
 }

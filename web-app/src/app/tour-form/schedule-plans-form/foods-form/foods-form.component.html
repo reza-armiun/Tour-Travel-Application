@@ -1,35 +1,92 @@
+<div class="table-wrapper">
+  <table mat-table  style="width: 75%; background-color: transparent;"
+         [dataSource]="foodsData"
+         multiTemplateDataRows
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef  colspan="1">Name</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef  colspan="1">Type</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef  colspan="1">Discount</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.discount}}</td>
+    </ng-container>
+    <ng-container matColumnDef="ingredients">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Ingredients</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.ingredients}}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Price</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.price}}</td>
+    </ng-container>
+    <ng-container matColumnDef="cookTime">
+      <th mat-header-cell *matHeaderCellDef colspan="1">Cook Time</th>
+      <td mat-cell *matCellDef="let food" colspan="1">{{food?.cookTime}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef colspan="1">Actions</th>
+      <td mat-cell *matCellDef="let plan; let i = dataIndex;" colspan="1">
+        <mat-icon style="color: red; font-size: 20px;cursor: pointer" class="app-icon" (click)="removeFood(i)">delete</mat-icon>
+        <mat-icon style="color: blue; font-size: 20px; cursor: pointer" class="app-icon"  (click)="enableEditFoodMode(i)">edit</mat-icon>
+      </td>
+    </ng-container>
 
-<form >
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr
+      mat-row *matRowDef="let activity; columns: displayedColumns ; let i = index"></tr>
+  </table>
+</div>
 
-  <div class="form__header">
-    <div class="form__title">Food</div>
+
+<form [formGroup]="form" >
+  <ng-container formArrayName="foods">
+    <ng-container *ngFor="let food of foods.controls; let i = index">
+      <ng-container *ngIf="i == currentFormIndex" [formGroupName]="i" >
+
+        <div class="form__header">
+          <div class="form__title">Food</div>
+        </div>
+        <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field style="width: 250px !important;">
+          <mat-label>Type</mat-label>
+          <select matNativeControl  required formControlName="type">
+            <option value="DIARY">Diary</option>
+            <option value="PROTEIN">Protein</option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Discount</mat-label>
+          <input matInput type="number" formControlName="discount">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ingredients</mat-label>
+          <input matInput type="text" formControlName="ingredients">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Serve Time</mat-label>
+          <input matInput type="text" formControlName="cookTime">
+        </mat-form-field>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="btn-wrapper">
+    <button mat-raised-button color="primary" [disabled]="form.invalid" *ngIf="!editMode" (click)="addFood()">Add Food</button>
+    <button mat-raised-button color="accent"   *ngIf="editMode" (click)="editFoodHandler()">Edit Food</button>
   </div>
-  <mat-divider style="width: 100%; margin: 15px 0 8px 0"></mat-divider>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Discount</mat-label>
-    <input matInput type="number">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Ingredients</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Price</mat-label>
-    <input matInput type="number">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Serve Time</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-
 </form>
 

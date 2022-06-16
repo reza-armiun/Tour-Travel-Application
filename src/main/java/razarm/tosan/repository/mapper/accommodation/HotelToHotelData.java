@@ -17,20 +17,25 @@ public class HotelToHotelData implements Mapper<Hotel, HotelData> {
 
     @Override
     public HotelData convert(Hotel hotel) {
-    return HotelData.HotelDataBuilder.aHotelData()
-            .id(hotel.getId())
-            .name(hotel.getName())
-            .floor(hotel.getFloor())
-            .room(hotel.getRoom())
-            .price(hotel.getPrice())
-            .time(hotel.getTime())
-            .address(hotel.getAddress() != null ? this.addressToAddressData.convert(hotel.getAddress()) : null)
-            .accommodationProvider(this.accProviderToAccProviderData.convert(hotel.getAccommodationProvider()))
-            .type(hotel.getType())
-            .createdAt(hotel.getCreatedAt())
-            .modifiedAt(hotel.getModifiedAt())
-            .createdBy(hotel.getCreatedBy())
-            .modifiedBy(hotel.getModifiedBy())
-            .build();
+        return HotelData.HotelDataBuilder.aHotelData()
+                .id(hotel.getId())
+                .name(hotel.getName())
+                .floor(hotel.getFloor())
+                .room(hotel.getRoom())
+                .price(hotel.getPrice())
+                .checkIn(hotel.getCheckIn() != null ? hotel.getCheckIn().toInstant() : null)
+                .checkOut(hotel.getCheckOut() != null ? hotel.getCheckOut().toInstant() : null)
+                .address(
+                        hotel.getAddress() != null
+                                ? this.addressToAddressData.convert(hotel.getAddress())
+                                : null)
+                .accommodationProvider(
+                        hotel.getAccommodationProvider() != null ? this.accProviderToAccProviderData.convert(hotel.getAccommodationProvider()) : null)
+                .type(hotel.getType())
+                .createdAt(hotel.getCreatedAt())
+                .modifiedAt(hotel.getModifiedAt())
+                .createdBy(hotel.getCreatedBy())
+                .modifiedBy(hotel.getModifiedBy())
+                .build();
     }
 }

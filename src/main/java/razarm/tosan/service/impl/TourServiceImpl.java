@@ -42,10 +42,7 @@ public class TourServiceImpl implements TourService {
         var tour = tourDtoToTour.convert(tourDto);
         var plans = tour.getSchedulePlans();
         var planeWithSavedOrders = plans.stream()
-                .map(
-                        schedulePlan -> {
-                            return getSchedulePlan(schedulePlan);
-                        }).collect(Collectors.toUnmodifiableSet());
+                                        .map(this::getSchedulePlan).collect(Collectors.toUnmodifiableSet());
 
         var savedTour = tourRepository.save(tour.cloneWithSchedulePlans(planeWithSavedOrders));
         return tourToTourDto.convert(savedTour);
