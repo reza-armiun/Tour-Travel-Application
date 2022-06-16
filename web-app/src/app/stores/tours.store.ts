@@ -3,7 +3,7 @@ import {
   BehaviorSubject,
   catchError,
   combineLatest,
-  concatMap,
+  concatMap, filter,
   find,
   map,
   Observable,
@@ -35,6 +35,10 @@ export class ToursStore {
   private categoriesFilterSub$ = new BehaviorSubject<string []>([]);
   private reviewsFilterSub$ = new BehaviorSubject<Review []>([]);
   tours$: Observable<any> = this.toursSub$.asObservable().pipe(
+    map(tours => tours.map((tour: any) => {
+      if(tour.id == 96) tour.price =7000;
+      return tour;
+    })),
     shareReplay()
   );
   categoriesFilter: Observable<string []> = this.categoriesFilterSub$.asObservable().pipe(
@@ -128,7 +132,7 @@ export class ToursStore {
     let value = this.toursSub$.getValue();
     this.toursSub$.next(value
       .map((value: any,index: number) => ({...value, prevIndex: index }))
-      .sort((a: any, b: any) => +a.price < +b.price ? 1 : -1)
+      .sort((a: any, b: any) => +a.price <= +b.price ? 1 : -1)
     );
   }
 }

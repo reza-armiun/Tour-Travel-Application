@@ -41,7 +41,7 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
-    &:not(.is-first) {
+    &:not(:first-child) {
       border-left: 2px solid black;
     }
     //&:not(.is-first):before {
@@ -72,11 +72,9 @@
 }
 .tour__item-wrapper {
   position: absolute;
-  z-index: 10;
 }
 .tour__new-item-wrapper {
   position: absolute;
-  z-index: 9;
 }
 
 

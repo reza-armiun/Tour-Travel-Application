@@ -1,8 +1,13 @@
 import {
   AfterViewChecked, ChangeDetectionStrategy,
-  Component, ElementRef, OnChanges,
+  Component,
+  ElementRef,
+  OnChanges,
   OnDestroy,
-  OnInit, QueryList, SimpleChanges, ViewChildren
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  ViewChildren
 } from '@angular/core';
 import {filter, Observable, Subscription, tap} from "rxjs";
 import {ToursStore} from "../../stores/tours.store";
@@ -59,12 +64,12 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
     ]),
     trigger('newTourAnimation', [
       transition('* => new', [
-        // animate("1700ms", keyframes([
-        //   style({
-        //     transform: 'translateY({{heightSize}}px)',
-        //     display: '{{display}}'
-        //   }),
-        // ]))
+        animate("1700ms", keyframes([
+          style({
+            transform: 'translateY({{heightSize}}px)',
+            display: '{{display}}'
+          }),
+        ]))
       ], {params : { heightSize: "100", display: 'initial' }}),
       transition('* => void', [
         style({
@@ -81,9 +86,10 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   sub: Subscription | undefined;
   wildState = 'hide';
 
-  animateTransition = false;
+  animateTourTransition = false;
+  animateNewTourTransition = false;
   @ViewChildren('toursElements')toursElements : QueryList<ElementRef> | undefined;
-  hideOldTours = false;
+  // hideOldTours = false;
   showNewTours = false;
 
   constructor(private tourStore: ToursStore) {}
@@ -103,16 +109,32 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
         if(this.differenceWith(tours, this.currentTourList).length > 0) {
           return true;
         }
-        this.newTourList = tours;
-        this.newTourList.forEach((tour, index) => {
-          this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
-        })
-        setTimeout(() => {
-          if(tours.length) {
-            this.animateTransition =true;
-          }
-        }, 200)
-        return false;
+        if(this.showNewTours) {
+          this.currentTourList = tours;
+          this.currentTourList.forEach((tour, index) => {
+            this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
+          });
+          console.log('this.currentTourList',this.currentTourList)
+          setTimeout(() => {
+            if(tours.length) {
+              this.animateNewTourTransition = true;
+            }
+          }, 200);
+          return false;
+        } else {
+          this.newTourList = tours;
+          this.newTourList.forEach((tour, index) => {
+            this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
+          })
+          console.log('this.newTourList', this.newTourList)
+          setTimeout(() => {
+            if(tours.length) {
+              this.animateTourTransition = true;
+            }
+          }, 200)
+          return false;
+        }
+
       }),
       tap(tours => {
          this.currentTourList = tours;
@@ -132,7 +154,7 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   }
 
   sortByHighestPrice() {
-
+    this.tourStore.sortByHighestPrice();
   }
 
   sortByLowestPrice() {
@@ -140,7 +162,6 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   }
 
   sortByHighestRating() {
-    this.tourStore.sortByHighestPrice();
   }
 
   sortByLowestRating() {
@@ -157,10 +178,9 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   onHideTours(event: any) {
     // console.log('event ', event)
     if(event.toState == "new") {
-        this.hideOldTours = true;
         this.showNewTours= true;
 
-        this.animateTransition = false;
+        this.animateTourTransition = false;
     }
   }
 
@@ -172,21 +192,20 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   }
 
 
-
-  getTourNewHeight(id: number) {
+  getTourPosition(id: number) {
     return this.newTourList
       .find(tour => tour.id == id)?.heightSize || 0;
   }
 
   onHideNewTours(event: any) {
-    console.log(event)
+    // console.log(event)
     if(event.toState == "new") {
-      this.hideOldTours = false;
       this.showNewTours= false;
 
-      this.animateTransition = false;
+      this.animateNewTourTransition = false;
     }
   }
+
 }
 
 
