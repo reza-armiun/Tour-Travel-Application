@@ -119,20 +119,31 @@ export class ToursStore {
       );
 
   }
-
+   arraysEqual(a: any[], b: any[]) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; ++i) {
+      if (a[i].id != b[i].id) return false;
+    }
+    return true;
+  }
 
   sortByLowestPrice() {
-    let value = this.toursSub$.getValue();
-    this.toursSub$.next(value
+    let tours = this.toursSub$.getValue();
+    let newTours = tours
       .map((value: any,index: number) => ({...value, prevIndex: index }))
-      .sort((a: any, b: any) => +a.price >= +b.price ? 1 : -1)
-    );
+      .sort((a: any, b: any) => +a.price > +b.price ? 1 : -1);
+
+    if(!this.arraysEqual(tours, newTours))
+    this.toursSub$.next(newTours);
   }
   sortByHighestPrice() {
-    let value = this.toursSub$.getValue();
-    this.toursSub$.next(value
+    let tours = this.toursSub$.getValue();
+    let newTours = tours
       .map((value: any,index: number) => ({...value, prevIndex: index }))
-      .sort((a: any, b: any) => +a.price <= +b.price ? 1 : -1)
-    );
+      .sort((a: any, b: any) => +a.price < +b.price ? 1 : -1);
+    if(!this.arraysEqual(tours, newTours))
+      this.toursSub$.next(newTours);
   }
 }

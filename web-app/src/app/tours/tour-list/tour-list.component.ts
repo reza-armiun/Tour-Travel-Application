@@ -54,23 +54,21 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
 
     trigger('customAnimation', [
       transition('* => new', [
-        animate("1700ms", keyframes([
+        animate("1200ms", keyframes([
           style({
-            transform: 'translateY({{heightSize}}px)',
-            display: '{{display}}'
+            transform: 'translateY({{heightSize}}px) scale({{scaleP}})',
           }),
         ]))
-      ], {params : { heightSize: "100", display: 'initial' }})
+      ], {params : { heightSize: "100", scaleP: '1.0' }})
     ]),
     trigger('newTourAnimation', [
       transition('* => new', [
-        animate("1700ms", keyframes([
+        animate("1200ms", keyframes([
           style({
-            transform: 'translateY({{heightSize}}px)',
-            display: '{{display}}'
+            transform: 'translateY({{heightSize}}px) scale({{scaleP}})',
           }),
         ]))
-      ], {params : { heightSize: "100", display: 'initial' }}),
+      ], {params : { heightSize: "100", scaleP: '1.0' }}),
       transition('* => void', [
         style({
         })
@@ -78,18 +76,15 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
     ])
   ]
 })
-export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, OnChanges {
+export class TourListComponent implements OnInit, OnDestroy, OnChanges {
   currentTourList: any[] = [];
   newTourList: any[] = []
-  visible = false;
-  filteredTourList$: Observable<any> | undefined;
   sub: Subscription | undefined;
   wildState = 'hide';
 
   animateTourTransition = false;
   animateNewTourTransition = false;
   @ViewChildren('toursElements')toursElements : QueryList<ElementRef> | undefined;
-  // hideOldTours = false;
   showNewTours = false;
 
   constructor(private tourStore: ToursStore) {}
@@ -102,9 +97,7 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   ngOnInit(): void {
     this.sub = this.tourStore.loadAllTours().subscribe();
 
-
-    this.filteredTourList$ = this.tourStore.loadFilteredTours().pipe(
-
+    this.tourStore.loadFilteredTours().pipe(
       filter((tours) => {
         if(this.differenceWith(tours, this.currentTourList).length > 0) {
           return true;
@@ -114,39 +107,32 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
           this.currentTourList.forEach((tour, index) => {
             this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
           });
-          console.log('this.currentTourList',this.currentTourList)
           setTimeout(() => {
             if(tours.length) {
               this.animateNewTourTransition = true;
             }
           }, 200);
-          return false;
         } else {
           this.newTourList = tours;
           this.newTourList.forEach((tour, index) => {
             this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
           })
-          console.log('this.newTourList', this.newTourList)
           setTimeout(() => {
             if(tours.length) {
               this.animateTourTransition = true;
             }
           }, 200)
-          return false;
         }
+        return false;
 
       }),
       tap(tours => {
          this.currentTourList = tours;
       })
-    );
+    ).subscribe();
 
   }
 
-  ngAfterViewChecked(): void {
-
-    this.visible = true;
-  }
 
 
   ngOnDestroy(): void {
@@ -176,7 +162,6 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
 
 
   onHideTours(event: any) {
-    // console.log('event ', event)
     if(event.toState == "new") {
         this.showNewTours= true;
 
@@ -198,14 +183,19 @@ export class TourListComponent implements OnInit, OnDestroy,AfterViewChecked, On
   }
 
   onHideNewTours(event: any) {
-    // console.log(event)
     if(event.toState == "new") {
       this.showNewTours= false;
-
       this.animateNewTourTransition = false;
     }
   }
 
+
+  getTourScale(tourPosition: number) {
+    if(tourPosition > 0) return '1.01';
+    if(tourPosition == 0) return '1';
+    if(tourPosition < 0) return '0.99'
+    return '1';
+  }
 }
 
 
