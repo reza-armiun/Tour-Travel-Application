@@ -10,6 +10,7 @@
   border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 2px;
   background-color: white;
+  width: 470px;
 }
 .tour:hover {
   background-color: rgba(30, 144, 255, 0.02);

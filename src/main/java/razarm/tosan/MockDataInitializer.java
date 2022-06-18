@@ -425,9 +425,10 @@ public class MockDataInitializer implements CommandLineRunner {
                         .source(address2)
                         .destination(address3)
                         .accommodationOrder(accommodationOrder.get(0))
-                        .foodOrders(Set.of(foodOrder.get(1)))
+                        .foodOrders(Set.of(foodOrder.get(0),foodOrder.get(1)))
                         .vehicleOrders(Set.of(vehicleOrder.get(1)))
                         .build();
+
 
         final TourDto mockTour = TourDto.TourDtoBuilder.aTourDto()
                 .schedulePlans(Set.of(mockSchedulePlan))
@@ -456,7 +457,15 @@ public class MockDataInitializer implements CommandLineRunner {
                 .name("Razarm Village Tour")
                 .description("Special Village tour")
                 .build();
-
+        final TourDto mockTour4 = TourDto.TourDtoBuilder.aTourDto()
+                .schedulePlans(Set.of(mockSchedulePlan3))
+                .tourismManager(mockTourismManager)
+                .imgUrl("https://lp-cms-production.imgix.net/2019-06/a6469f3993128cbcdde6e2b0a90aa1d3-kyiv.jpg?sharp=10&vib=20&w=1200&auto=compress&fit=crop&fm=auto&h=800")
+                .type(TourType.CITY)
+                .date(OffsetDateTime.now())
+                .name(" Kyiv City Tour")
+                .description("Special Kyiv tour")
+                .build();
         final BookingDto mockBooking =
                 BookingDto.BookingDtoBuilder.aBookingDto()
                         .date(OffsetDateTime.now().toZonedDateTime())
@@ -479,22 +488,33 @@ public class MockDataInitializer implements CommandLineRunner {
                         .tour(mockTour3)
                         .description("mock Booking 3")
                         .build();
+        final BookingDto mockBooking4 =
+                BookingDto.BookingDtoBuilder.aBookingDto()
+                        .date(OffsetDateTime.now().toZonedDateTime())
+                        .travelers(Set.of(mockTraveler2))
+                        .tour(mockTour4)
+                        .description("mock Booking 4")
+                        .build();
         var tour1 = tourService.create(mockTour);
         var tour2 = tourService.create(mockTour2);
         var tour3 = tourService.create(mockTour3);
+        var tour4 = tourService.create(mockTour4);
         var savedTour1 = tourService.create(tour1);
         var savedTour2 = tourService.create(tour2);
         var savedTour3 = tourService.create(tour3);
+        var savedTour4 = tourService.create(tour4);
 
 
 
         tourRateService.rateTour(reza.getUsername(), savedTour1.getId(), 10);
         tourRateService.rateTour(signupRequest2.getUsername(), savedTour1.getId(), 5);
         tourRateService.rateTour(signupRequest3.getUsername(), savedTour1.getId(), 7);
+        tourRateService.rateTour(signupRequest3.getUsername(), savedTour4.getId(), 7);
 
         bookService.bookingTour(reza.getUsername(), savedTour1.getId(), mockBooking);
         bookService.bookingTour(signupRequest2.getUsername(), savedTour2.getId(), mockBooking2);
         bookService.bookingTour(signupRequest2.getUsername(), savedTour3.getId(), mockBooking3);
+        bookService.bookingTour(signupRequest2.getUsername(), savedTour3.getId(), mockBooking4);
         return bookService.findAllBooking();
     }
 

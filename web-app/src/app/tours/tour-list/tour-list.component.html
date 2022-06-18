@@ -1,16 +1,16 @@
 
-  <div class="tours" >
+<div class="tours" >
     <div class="tours__header">
       <div class="tours__title"> <h2>Tours</h2></div>
       <button class="btn-add" routerLink="/tour/save">Add Tour</button>
     </div>
     <mat-divider style="width: 100%; margin: 0px 0 6px 0"></mat-divider>
     <div class="sorts">
-      <div class="sort__item-wrapper is-first">
-        <div class="sort__item" (click)="sortByHighestPrice()">Highest Price</div>
-      </div>
       <div class="sort__item-wrapper">
         <div class="sort__item" (click)="sortByLowestPrice()" >Lowest Price</div>
+      </div>
+      <div class="sort__item-wrapper">
+        <div class="sort__item" (click)="sortByHighestPrice()">Highest Price</div>
       </div>
       <div class="sort__item-wrapper">
         <div class="sort__item" (click)="sortByHighestRating()" >Highest Rating</div>
@@ -20,38 +20,35 @@
       </div>
     </div>
     <div >
-    <ng-container *ngIf="(filteredTourList$ | async) as list"  >
-      <ng-container *ngIf="visible" >
         <div id="tours-wrapper" >
-<!--          <div *ngFor="let tour of newTourList; let i = index" [class.hide]="!animate" >-->
-<!--            -->
-<!--          </div>-->
-          <div *ngFor="let tour of list; let i = index"   #toursElements>
-
+          <div *ngFor="let tour of currentTourList; let i = index" [@wildState]="wildState"  #toursElements>
             <div
-                 [class.hide]="hideOldTours"
-                 [@customAnimation]="{value: animateTransition ? 'new': 'old', params: { heightSize: getTourNewHeight(tour.id)}}"
+                 [class.hide]="showNewTours"
+                 [@customAnimation]="{value: animateTourTransition ? 'new': 'old'
+                 , params: { heightSize: getTourPosition(tour.id)
+                 , scaleP: getTourScale(-getTourPosition(tour.id))}}"
                  (@customAnimation.done)="onHideTours($event)"
                  [style]="{top: getDistFromTopPx(i) }"
+
                  class="tour__item-wrapper">
-              <div [@wildState]="wildState">
+              <div >
                 <app-tour-item [tour]="tour" ></app-tour-item>
               </div>
             </div>
-
-            <div *ngIf="newTourList.length > 0"
+          </div>
+          <div *ngFor="let tour of newTourList; let i = index"   >
+            <div
                  class="tour__new-item-wrapper"
-                 [@newTourAnimation]="{value: animateTransition ? '': 'new', params: { heightSize: getTourNewHeight(newTourList[i].id)}}"
+                 [@newTourAnimation]="{value: animateNewTourTransition ? 'new': ''
+                 , params: { heightSize: -getTourPosition(tour.id) , scaleP: getTourScale(getTourPosition(tour.id))}}"
                  (@newTourAnimation.done)="onHideNewTours($event)"
                  [style]="{top: getDistFromTopPx(i) }"
-                  [class.hide]="!hideOldTours">
-                <app-tour-item [tour]="newTourList[i]" ></app-tour-item>
+                  [class.hide]="!showNewTours">
+                <app-tour-item [tour]="tour" ></app-tour-item>
             </div>
-
           </div>
+
         </div>
-      </ng-container>
-    </ng-container>
     </div>
 
   </div>
