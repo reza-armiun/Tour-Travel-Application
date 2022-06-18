@@ -5,18 +5,18 @@
       <button class="btn-add" routerLink="/tour/save">Add Tour</button>
     </div>
     <mat-divider style="width: 100%; margin: 0px 0 6px 0"></mat-divider>
-    <div class="sorts">
+    <div class="sorts" >
       <div class="sort__item-wrapper">
-        <div class="sort__item" (click)="sortByLowestPrice()" >Lowest Price</div>
+        <a  class="sort__item" (click)="sortByLowestPrice()" >Lowest Price</a>
       </div>
       <div class="sort__item-wrapper">
-        <div class="sort__item" (click)="sortByHighestPrice()">Highest Price</div>
+        <a class="sort__item" (click)="sortByHighestPrice()">Highest Price</a>
       </div>
       <div class="sort__item-wrapper">
-        <div class="sort__item" (click)="sortByHighestRating()" >Highest Rating</div>
+        <a class="sort__item" (click)="sortByHighestRating()" >Highest Rating</a>
       </div>
       <div class="sort__item-wrapper">
-        <div class="sort__item " (click)="sortByLowestRating()">Lowest Rating</div>
+        <a class="sort__item " (click)="sortByLowestRating()">Lowest Rating</a>
       </div>
     </div>
     <div >

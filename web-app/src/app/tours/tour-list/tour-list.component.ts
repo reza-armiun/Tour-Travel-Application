@@ -76,10 +76,11 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
     ])
   ]
 })
-export class TourListComponent implements OnInit, OnDestroy, OnChanges {
+export class TourListComponent implements OnInit, OnDestroy {
   currentTourList: any[] = [];
   newTourList: any[] = []
   sub: Subscription | undefined;
+  loadAllSub: Subscription | undefined;
   wildState = 'hide';
 
   animateTourTransition = false;
@@ -96,8 +97,8 @@ export class TourListComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.sub = this.tourStore.loadAllTours().subscribe();
-
-    this.tourStore.loadFilteredTours().pipe(
+    this.tourStore.loadFilteredTours().subscribe()
+    this.loadAllSub = this.tourStore.loadFilteredTours().pipe(
       filter((tours) => {
         if(this.differenceWith(tours, this.currentTourList).length > 0) {
           return true;
@@ -127,7 +128,9 @@ export class TourListComponent implements OnInit, OnDestroy, OnChanges {
 
       }),
       tap(tours => {
+        if(!this.showNewTours)
          this.currentTourList = tours;
+        else this.newTourList = tours;
       })
     ).subscribe();
 
@@ -137,28 +140,33 @@ export class TourListComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.loadAllSub?.unsubscribe();
+  }
+  checkAnimationRunning() {
+    if(this.animateTourTransition || this.animateNewTourTransition) return true;
+    return false;
   }
 
   sortByHighestPrice() {
+    if(this.checkAnimationRunning()) return;
     this.tourStore.sortByHighestPrice();
   }
 
   sortByLowestPrice() {
-      this.tourStore.sortByLowestPrice();
+    if(this.checkAnimationRunning()) return;
+    this.tourStore.sortByLowestPrice();
   }
 
   sortByHighestRating() {
+    if(this.checkAnimationRunning()) return;
     this.tourStore.sortByHighestRating();
   }
 
   sortByLowestRating() {
+    if(this.checkAnimationRunning()) return;
     this.tourStore.sortByLowestRating()
-
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
 
 
 
@@ -166,7 +174,6 @@ export class TourListComponent implements OnInit, OnDestroy, OnChanges {
   onHideTours(event: any) {
     if(event.toState == "new") {
         this.showNewTours= true;
-
         this.animateTourTransition = false;
     }
   }
