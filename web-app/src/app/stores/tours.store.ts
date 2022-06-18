@@ -146,4 +146,22 @@ export class ToursStore {
     if(!this.arraysEqual(tours, newTours))
       this.toursSub$.next(newTours);
   }
+
+  sortByHighestRating() {
+    let tours = this.toursSub$.getValue();
+    let newTours = tours
+      .map((value: any,index: number) => ({...value, prevIndex: index }))
+      .sort((a: any, b: any) => +a.rating < +b.rating ? 1 : -1);
+    if(!this.arraysEqual(tours, newTours))
+      this.toursSub$.next(newTours);
+  }
+
+  sortByLowestRating() {
+    let tours = this.toursSub$.getValue();
+    let newTours = tours
+      .map((value: any,index: number) => ({...value, prevIndex: index }))
+      .sort((a: any, b: any) => +a.rating > +b.rating ? 1 : -1);
+    if(!this.arraysEqual(tours, newTours))
+      this.toursSub$.next(newTours);
+  }
 }
