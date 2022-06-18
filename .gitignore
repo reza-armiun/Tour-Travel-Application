@@ -43,3 +43,4 @@ tomcat/*
 tomcat.*
 lib
 .DS_store
+var
