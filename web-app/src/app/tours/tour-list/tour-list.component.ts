@@ -22,31 +22,31 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
     trigger('wildState', [
       transition('void => *', [
       animate(1000, keyframes([
+        // style({
+        //   transform: 'translateX(-200px)',
+        //   opacity: 0,
+        //   offset: 0
+        // }),
+        // style({
+        //   transform: 'translateX(-100px)',
+        //   opacity: 0.5,
+        //   offset: 0.4
+        // }),
+        // style({
+        //   transform: 'translateX(-40px)',
+        //   opacity: 1,
+        //   offset: 0.8
+        // }),
         style({
-          transform: 'translateX(-200px)',
-          opacity: 0,
-          offset: 0
-        }),
-        style({
-          transform: 'translateX(-100px)',
-          opacity: 0.5,
-          offset: 0.4
-        }),
-        style({
-          transform: 'translateX(-40px)',
+          // transform: 'translateX(0px)',
           opacity: 1,
-          offset: 0.8
-        }),
-        style({
-          transform: 'translateX(0px)',
-          opacity: 1,
-          offset: 1
+          // offset: 1
         })
       ]))
     ]),
       transition('* => void', [
           animate(500, style({
-            transform: 'translateX(100px)',
+            // transform: 'translateX(100px)',
             opacity: 0
           }))
       ]),
@@ -148,9 +148,11 @@ export class TourListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   sortByHighestRating() {
+    this.tourStore.sortByHighestRating();
   }
 
   sortByLowestRating() {
+    this.tourStore.sortByLowestRating()
 
   }
 
