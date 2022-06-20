@@ -1,0 +1,28 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 15px;
+}
+
+.list__item {
+  /*width: 250px;*/
+  /*height: 150px;*/
+  /*background-color: darkorange;*/
+  /*color: white;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*border: 1px solid lightgray;*/
+  /*border-radius: 4px;*/
+}
+

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Component
 @AllArgsConstructor
-
 public class AuthenticationFailureListener implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     private final HttpServletRequest request;

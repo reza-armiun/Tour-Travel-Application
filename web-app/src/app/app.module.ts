@@ -56,6 +56,12 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AddressFormComponent } from './address-form/address-form.component';
 import { ProfileImageDialogComponent } from './profile/profile-image-dialog/profile-image-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {APIInterceptor} from "./APIInterceptor";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ListWithDisplacementComponent } from './list-with-displacement/list-with-displacement.component';
+import {ListWrapperComponent} from "./list-with-displacement/list-wrapper.component";
+import {ListItemDirective} from "./list-with-displacement/list-item.directive";
 
 
 @NgModule({
@@ -93,6 +99,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     PlanInfoFormComponent,
     AddressFormComponent,
     ProfileImageDialogComponent,
+    ListWithDisplacementComponent,
+    ListWrapperComponent,
+    ListItemDirective
   ],
   imports: [
     BrowserModule,
@@ -113,10 +122,21 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatStepperModule,
     MatDatepickerModule,
     MatSelectModule,
-    DragDropModule
+    DragDropModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
+
   providers: [AuthService, LoadingService, MessagesService
-    ,{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}],
+    ,{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

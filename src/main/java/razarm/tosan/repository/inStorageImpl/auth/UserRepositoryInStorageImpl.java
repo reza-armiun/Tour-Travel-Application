@@ -1,5 +1,7 @@
 package razarm.tosan.repository.inStorageImpl.auth;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.data.auth.UserData;
@@ -12,6 +14,8 @@ import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
+@Profile("IN_STORAGE")
 public class UserRepositoryInStorageImpl implements UserRepository, InStorageRepository<UserData> {
     private FileOutputStream fos;
     private FileInputStream fis;

@@ -1,12 +1,19 @@
-<app-sidebar></app-sidebar>
-<app-modal-background></app-modal-background>
-<app-navbar></app-navbar>
-<app-loading></app-loading>
-<div id="background"> </div>
-  <div class="container">
-    <app-messages></app-messages>
-    <app-breadcrumb [items]="menuItems"></app-breadcrumb>
-    <router-outlet></router-outlet>
-  </div>
+<!--<app-sidebar></app-sidebar>-->
+<!--<app-modal-background></app-modal-background>-->
+<!--<app-navbar></app-navbar>-->
+<!--<app-loading></app-loading>-->
+<!--<div id="background"> </div>-->
+<!--  <div class="container">-->
+<!--    <app-messages></app-messages>-->
+<!--    <app-breadcrumb [items]="menuItems"></app-breadcrumb>-->
+<!--    <router-outlet></router-outlet>-->
+<!--  </div>-->
 
+
+<!--<app-list-displacement [items]="items"></app-list-displacement>-->
+<app-list-with-displacement >
+  <div *ngFor="let it of items; let i = index"  appListItem [index]="i">
+    {{it}}
+  </div>
+</app-list-with-displacement>
 

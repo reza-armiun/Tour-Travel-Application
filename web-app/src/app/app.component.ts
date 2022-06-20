@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {filter, Subscription} from "rxjs";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
@@ -14,14 +14,24 @@ export interface MenuItem {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy , AfterViewInit{
   sub: Subscription | undefined;
   menuItems: MenuItem[] = [];
+  items: any[] = [];
 
   constructor(private authService: AuthService
               , private  router: Router
               , private  activatedRoute: ActivatedRoute) {
   }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.items = this.shuffle(this.items);
+      // console.log('this.shuffle(this.items)', this.items);
+    }, 1000)
+  }
+
+
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] | any {
     const children: ActivatedRoute[] = route.children;
 
@@ -44,6 +54,9 @@ export class AppComponent implements OnInit, OnDestroy{
     }
   }
   ngOnInit(): void {
+    for (let i = 0; i <=100 ; i++) {
+      this.items.push(i);
+    }
     this.sub = this.authService.checkAuth()
       .subscribe(() => {});
     this.router.events
@@ -58,6 +71,26 @@ export class AppComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
+
+
+
+
+  shuffle(array : any[]) {
+    let newArray = [...array];
+    let currentIndex = newArray.length,  randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      // And swap it with the current element.
+      [newArray[currentIndex], newArray[randomIndex]] = [
+        newArray[randomIndex], newArray[currentIndex]];
+    }
+
+    return newArray;
+  }
+
 
 
 

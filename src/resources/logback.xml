@@ -21,7 +21,8 @@
     </appender>
 
     <logger name="razarm.tosan.Main"  level="WARN"/>
-
+    <!--    Setting additivity to false disables the default behavior.
+    logger won't log to the console, and neither will any of its descendants.-->
     <logger name="razarm.tosan.security.controller.AuthController" level="info" additivity="false">
         <appender-ref ref="FILE" />
     </logger>

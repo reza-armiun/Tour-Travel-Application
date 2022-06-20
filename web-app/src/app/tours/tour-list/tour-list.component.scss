@@ -36,6 +36,7 @@
   flex-wrap: wrap;
   background-color: white;
   .sort__item-wrapper {
+    user-select: none;
     //width: fit-content;
     flex: fit-content;
     display: flex;

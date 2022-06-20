@@ -1,5 +1,7 @@
 package razarm.tosan.repository.inStorageImpl.accommodation;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 import razarm.tosan.repository.AccommodationOrderRepository;
 import razarm.tosan.repository.data.accommodation.AccommodationOrderData;
 import razarm.tosan.repository.domain.accommodation.AccommodationOrder;
@@ -12,6 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
+@Repository
+@Profile("IN_STORAGE")
 public class AccommodationOrderInStorageImpl implements AccommodationOrderRepository, InStorageRepository<AccommodationOrderData> {
 
     private  FileOutputStream fos;
@@ -54,7 +59,7 @@ public class AccommodationOrderInStorageImpl implements AccommodationOrderReposi
 
     @Override
     public void deleteById(String s) {
-
+        deleteById(s);
     }
 
     @Override

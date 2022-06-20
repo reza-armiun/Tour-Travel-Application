@@ -21,12 +21,12 @@
     </div>
     <div >
         <div id="tours-wrapper" >
-          <div *ngFor="let tour of currentTourList; let i = index" [@wildState]="wildState"  #toursElements>
+          <div *ngFor="let tour of currentTourList; let i = index" [@wildState]="wildState"  >
             <div
                  [class.hide]="showNewTours"
                  [@customAnimation]="{value: animateTourTransition ? 'new': 'old'
-                 , params: { heightSize: getTourPosition(tour.id)
-                 , scaleP: getTourScale(-getTourPosition(tour.id))}}"
+                 , params: {heightSize: getNewTourPosition(tour.id)
+                 , scaleP: getTourScale(-getNewTourPosition(tour.id))}}"
                  (@customAnimation.done)="onHideTours($event)"
                  [style]="{top: getDistFromTopPx(i) }"
 
@@ -40,7 +40,7 @@
             <div
                  class="tour__new-item-wrapper"
                  [@newTourAnimation]="{value: animateNewTourTransition ? 'new': ''
-                 , params: { heightSize: -getTourPosition(tour.id) , scaleP: getTourScale(getTourPosition(tour.id))}}"
+                 , params: {  heightSize: getOldTourPosition(tour.id) , scaleP: getTourScale(getNewTourPosition(tour.id))}}"
                  (@newTourAnimation.done)="onHideNewTours($event)"
                  [style]="{top: getDistFromTopPx(i) }"
                   [class.hide]="!showNewTours">

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -9,7 +9,12 @@ import {
 } from "@angular/forms";
 import {Subscription} from "rxjs";
 
-
+// export const config  =   {
+//     provide: NG_VALUE_ACCESSOR,
+//       multi: true,
+//       useExisting:forwardRef(()=> AddressFormComponent)
+//
+// }
 
 @Component({
   selector: 'app-address-form',
