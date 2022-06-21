@@ -32,7 +32,6 @@ export class ListWrapperComponent implements OnChanges, AfterContentChecked{
   }
 
   ngAfterContentChecked(): void {
-    console.log('items el', this.itemsEl);
     this.cd.reattach();
     // let changeList = changes['items'];
     if (this.itemsEl?.length) {
