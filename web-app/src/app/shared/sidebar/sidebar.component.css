@@ -71,7 +71,9 @@ hr {
 }
 
 .hide {
-  display: none;
+  width: 0;
+  opacity: 0;
+  /*display: none;*/
 }
 
 

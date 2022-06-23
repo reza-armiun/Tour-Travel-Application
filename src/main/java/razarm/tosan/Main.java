@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 
 @SpringBootApplication
 @EnableConfigurationProperties
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+//@EnableAspectJAutoProxy()
 public class Main {
     private static final Logger logger
             = LoggerFactory.getLogger(Main.class);

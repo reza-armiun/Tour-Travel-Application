@@ -1,6 +1,5 @@
 package razarm.tosan;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +23,6 @@ import razarm.tosan.exception.UserNotFoundException;
 import razarm.tosan.props.AppProperties;
 import razarm.tosan.repository.UserRepository;
 import razarm.tosan.repository.domain.accommodation.AccommodationType;
-import razarm.tosan.repository.domain.auth.Admin;
 import razarm.tosan.repository.domain.auth.Authority;
 import razarm.tosan.repository.domain.auth.PremiumUser;
 import razarm.tosan.repository.domain.food.FoodType;
@@ -42,7 +40,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.Set;
 

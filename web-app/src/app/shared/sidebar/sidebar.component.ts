@@ -3,11 +3,38 @@ import {SidebarService} from "./sidebar.service";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {Profile, ProfileStore} from "../../stores/profile.store";
+import {animate, keyframes, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
+  animations: [
+    trigger('animateSidebar', [
+      transition('hide => show', [
+        animate("280ms", keyframes([
+          style({
+            width: '0%'
+          }),
+          style({
+            width: '300px'
+          }),
+        ]))
+      ]),
+      transition('show => hide', [
+        animate(500, keyframes([
+          style({
+            width: '300px',
+            opacity: 1
+          }),
+          style({
+            width: '0%',
+            opacity: 0
+          }),
+        ]))
+      ], )
+    ])
+  ]
 })
 export class SidebarComponent implements OnInit {
   showSidebar$ : Observable<boolean> | undefined;

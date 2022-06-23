@@ -47,4 +47,10 @@ export class FiltersComponent implements OnInit {
       }
       this.toursStore.setCategories(this.categoriesFilter);
   }
+
+  checkIfDisabled(event: MouseEvent) {
+    if(this.toursStore.animationRunning$.getValue()) {
+      event.preventDefault();
+    }
+  }
 }

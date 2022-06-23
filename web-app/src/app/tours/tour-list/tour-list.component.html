@@ -7,46 +7,52 @@
     <mat-divider style="width: 100%; margin: 0px 0 6px 0"></mat-divider>
     <div class="sorts" >
       <div class="sort__item-wrapper">
-        <a  class="sort__item" (click)="sortByLowestPrice()" >Lowest Price</a>
+        <a  class="sort__item"  [class.active]="selectedItem == 'LOWEST_PRICE'" (click)="sortByLowestPrice()" >Lowest Price</a>
       </div>
       <div class="sort__item-wrapper">
-        <a class="sort__item" (click)="sortByHighestPrice()">Highest Price</a>
+        <a class="sort__item" [class.active]="selectedItem == 'HIGHEST_PRICE'" (click)="sortByHighestPrice()">Highest Price</a>
       </div>
       <div class="sort__item-wrapper">
-        <a class="sort__item" (click)="sortByHighestRating()" >Highest Rating</a>
+        <a class="sort__item" [class.active]="selectedItem == 'HIGHEST_RATE'" (click)="sortByHighestRating()" >Highest Rating</a>
       </div>
       <div class="sort__item-wrapper">
-        <a class="sort__item " (click)="sortByLowestRating()">Lowest Rating</a>
+        <a class="sort__item " [class.active]="selectedItem == 'LOWEST_RATE'" (click)="sortByLowestRating()">Lowest Rating</a>
       </div>
     </div>
     <div >
         <div id="tours-wrapper" >
-          <div *ngFor="let tour of currentTourList; let i = index" [@wildState]="wildState"  >
-            <div
-                 [class.hide]="showNewTours"
-                 [@customAnimation]="{value: animateTourTransition ? 'new': 'old'
-                 , params: {heightSize: getNewTourPosition(tour.id)
-                 , scaleP: getTourScale(-getNewTourPosition(tour.id))}}"
-                 (@customAnimation.done)="onHideTours($event)"
-                 [style]="{top: getDistFromTopPx(i) }"
+          <app-list-with-displacement *ngIf="currentTourList as tours" [items]="tours" [compare]="compare " (onAnimationend)="onAnimationend()" (onAnimationstart)="onAnimationstart()" >
+           <div *ngFor="let tour of tours; let i = index"  appListItem class="tour__item-wrapper" [index]="i" >
+             <app-tour-item [tour]="tour"  ></app-tour-item>
+           </div>
+          </app-list-with-displacement>
 
-                 class="tour__item-wrapper">
-              <div >
-                <app-tour-item [tour]="tour" ></app-tour-item>
-              </div>
-            </div>
-          </div>
-          <div *ngFor="let tour of newTourList; let i = index"   >
-            <div
-                 class="tour__new-item-wrapper"
-                 [@newTourAnimation]="{value: animateNewTourTransition ? 'new': ''
-                 , params: {  heightSize: getOldTourPosition(tour.id) , scaleP: getTourScale(getNewTourPosition(tour.id))}}"
-                 (@newTourAnimation.done)="onHideNewTours($event)"
-                 [style]="{top: getDistFromTopPx(i) }"
-                  [class.hide]="!showNewTours">
-                <app-tour-item [tour]="tour" ></app-tour-item>
-            </div>
-          </div>
+<!--          <div *ngFor="let tour of currentTourList; let i = index" [@wildState]="wildState"  >-->
+<!--            <div-->
+<!--                 [class.hide]="showNewTours"-->
+<!--                 [@customAnimation]="{value: animateTourTransition ? 'new': 'old'-->
+<!--                 , params: {heightSize: getNewTourPosition(tour.id)-->
+<!--                 , scaleP: getTourScale(-getNewTourPosition(tour.id))}}"-->
+<!--                 (@customAnimation.done)="onHideTours($event)"-->
+<!--                 [style]="{top: getDistFromTopPx(i) }"-->
+
+<!--                 class="tour__item-wrapper">-->
+<!--              <div >-->
+<!--                <app-tour-item [tour]="tour" ></app-tour-item>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div *ngFor="let tour of newTourList; let i = index"   >-->
+<!--            <div-->
+<!--                 class="tour__new-item-wrapper"-->
+<!--                 [@newTourAnimation]="{value: animateNewTourTransition ? 'new': ''-->
+<!--                 , params: {  heightSize: getOldTourPosition(tour.id) , scaleP: getTourScale(getNewTourPosition(tour.id))}}"-->
+<!--                 (@newTourAnimation.done)="onHideNewTours($event)"-->
+<!--                 [style]="{top: getDistFromTopPx(i) }"-->
+<!--                  [class.hide]="!showNewTours">-->
+<!--                <app-tour-item [tour]="tour" ></app-tour-item>-->
+<!--            </div>-->
+<!--          </div>-->
 
         </div>
     </div>

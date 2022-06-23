@@ -60,8 +60,8 @@ import {APIInterceptor} from "./APIInterceptor";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ListWithDisplacementComponent } from './list-with-displacement/list-with-displacement.component';
-import {ListWrapperComponent} from "./list-with-displacement/list-wrapper.component";
 import {ListItemDirective} from "./list-with-displacement/list-item.directive";
+import { SafeHtmlPipe } from './shared/safe-html.pipe';
 
 
 @NgModule({
@@ -100,8 +100,8 @@ import {ListItemDirective} from "./list-with-displacement/list-item.directive";
     AddressFormComponent,
     ProfileImageDialogComponent,
     ListWithDisplacementComponent,
-    ListWrapperComponent,
-    ListItemDirective
+    ListItemDirective,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

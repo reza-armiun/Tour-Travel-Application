@@ -23,11 +23,11 @@ export interface Review {
 }
 
 export enum SORT {
-  HIGHEST_PRICE,
-  LOWEST_PRICE,
-  HIGHEST_RATE,
-  LOWEST_RATE,
-  NONE
+  HIGHEST_PRICE = "HIGHEST_PRICE",
+  LOWEST_PRICE = "LOWEST_PRICE",
+  HIGHEST_RATE = "HIGHEST_RATE",
+  LOWEST_RATE ="LOWEST_RATE",
+  NONE= "NONE"
 }
 
 export interface  Filters {
@@ -48,7 +48,7 @@ export class ToursStore {
   private reviewsFilterSub$ = new BehaviorSubject<Review []>([]);
   tours$: Observable<any> = this.toursSub$.asObservable().pipe(
     map(tours => tours.map((tour: any) => {
-      if(tour.id == 96) tour.price =7000;
+      if(tour.id == 96) tour.price = 7000;
       return tour;
     })),
     shareReplay()
@@ -59,9 +59,13 @@ export class ToursStore {
   reviewsFilter: Observable<Review []> = this.reviewsFilterSub$.asObservable();
 
 
+  animationRunning$ = new BehaviorSubject<boolean>(false);
+
+
   constructor( private httpClient: HttpClient
               , private loadingService: LoadingService
               , private messageService: MessagesService) {
+    // this.animationRunning$.subscribe(value => console.log('animation running ', value))
   }
 
 
@@ -113,60 +117,62 @@ export class ToursStore {
     return  combineLatest([this.tours$, this.categoriesFilterSub$, this.reviewsFilterSub$, this.sortType$])
       .pipe(
         map(([tours, categoriesFilter, reviewsFilter, sortType]) => {
-          if(categoriesFilter.length === 0 && reviewsFilter.length === 0 && sortType === SORT.NONE) {
-            if(this.sortedTours.length == tours.length) return this.sortedTours;
+          if (categoriesFilter.length === 0 && reviewsFilter.length === 0 && sortType === SORT.NONE) {
+            if (this.sortedTours.length == tours.length) return this.sortedTours;
             else {
               this.sortedTours = tours;
               return tours;
             }
           }
 
-          let trList = [];
+          let trList: any[] = [];
 
-          function filterByReview(tour : any, reviews : Review[]) {
-            for(let review of reviews) {
-              if(tour.rating >= review.from && tour.rating <= review.to) return true;
+          function filterByReview(tour: any, reviews: Review[]) {
+            for (let review of reviews) {
+              if (tour.rating >= review.from && tour.rating <= review.to) return true;
             }
             return false;
           }
-          for(let tour of this.sortedTours) {
-              if(categoriesFilter.includes(tour.type.toLowerCase())
-                || filterByReview(tour ,reviewsFilter) ) {
-                trList.push(tour);
+
+          for (let tour of this.sortedTours) {
+            if (categoriesFilter.includes(tour.type.toLowerCase())
+              || filterByReview(tour, reviewsFilter)) {
+              trList.push(tour);
+            }
+          }
+          if (!trList.length) trList = [...tours];
+          if (sortType !== SORT.NONE) {
+            switch (sortType) {
+              case SORT.LOWEST_PRICE: {
+                trList = trList
+                  .map((value: any, index: number) => ({...value, prevIndex: index}))
+                  .sort((a: any, b: any) => +a.price - +b.price);
+                break;
+              }
+              case SORT.HIGHEST_PRICE: {
+                trList = trList
+                  .map((value: any, index: number) => ({...value, prevIndex: index}))
+                  .sort((a: any, b: any) => +b.price - +a.price);
+                break;
+              }
+              case SORT.LOWEST_RATE: {
+                trList = trList
+                  .map((value: any, index: number) => ({...value, prevIndex: index}))
+                  .sort((a: any, b: any) => +a.rating - +b.rating);
+                break;
+              }
+              case SORT.HIGHEST_RATE: {
+                trList = trList
+                  .map((value: any, index: number) => ({...value, prevIndex: index}))
+                  .sort((a: any, b: any) => +b.rating - +a.rating);
+                break;
+              }
+              default : {
+                break;
               }
             }
-          if(!trList.length) trList = [...this.sortedTours];
-          if(sortType !== SORT.NONE) {
-              switch (sortType) {
-                case SORT.LOWEST_PRICE: {
-                  trList = trList
-                    .map((value: any,index: number) => ({...value, prevIndex: index }))
-                    .sort((a: any, b: any) => +a.price - +b.price);
-                  break;
-                }
-                case SORT.HIGHEST_PRICE: {
-                  trList = trList
-                    .map((value: any,index: number) => ({...value, prevIndex: index }))
-                    .sort((a: any, b: any) => +b.price - +a.price);
-                  break;
-                }
-                case SORT.LOWEST_RATE: {
-                  trList = trList
-                    .map((value: any,index: number) => ({...value, prevIndex: index }))
-                    .sort((a: any, b: any) => +a.rating - +b.rating);
-                  break;
-                }
-                case SORT.HIGHEST_RATE: {
-                  trList = trList
-                    .map((value: any,index: number) => ({...value, prevIndex: index }))
-                    .sort((a: any, b: any) => +b.rating - +a.rating);
-                  break;
-                }
-                default : {
-                  break;
-                }
-              }
-            }
+            // this.sortType$.next(SORT.NONE);
+          }
 
           this.sortedTours = [...trList];
           return trList;
@@ -179,7 +185,7 @@ export class ToursStore {
     if (a === b) return true;
     if (a == null || b == null) return false;
     if (a.length !== b.length) return false;
-    for (let i = 0; i < a.length; ++i) {
+    for (let i = 0; i < a.length; i++) {
       if (a[i].id != b[i].id) return false;
     }
     return true;

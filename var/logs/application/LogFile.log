@@ -177,3 +177,21 @@
 19:33:44.808  [http-nio-8080-exec-9] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
 20:55:27.212  [http-nio-8080-exec-8] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
 21:02:50.133  [http-nio-8080-exec-1] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+16:49:13.719  [http-nio-8080-exec-7] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:13.727  [http-nio-8080-exec-8] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:13.731  [http-nio-8080-exec-9] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:13.738  [http-nio-8080-exec-1] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:13.740  [http-nio-8080-exec-10] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:13.744  [http-nio-8080-exec-4] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+16:49:30.906  [http-nio-8080-exec-3] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+18:46:44.023  [http-nio-8080-exec-3] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+18:46:44.030  [http-nio-8080-exec-4] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+18:46:48.899  [http-nio-8080-exec-5] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+18:46:50.361  [http-nio-8080-exec-8] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+18:48:57.634  [http-nio-8080-exec-5] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+18:49:01.842  [http-nio-8080-exec-8] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+20:31:45.888  [http-nio-8080-exec-2] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+20:33:33.284  [http-nio-8080-exec-3] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+20:33:40.279  [http-nio-8080-exec-6] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 
+21:06:28.892  [http-nio-8080-exec-4] INFO  r.t.s.config.AppSecurityConfig - user logouts: reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/logout 
+12:19:33.305  [http-nio-8080-exec-4] INFO  r.t.s.j.JwtUsernameAndPasswordAuthenticationFilter - successful authentication : reza IP_ADDRESS:0:0:0:0:0:0:0:1 REQUEST_URI:/v1/login 

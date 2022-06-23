@@ -21,14 +21,13 @@ export class AppComponent implements OnInit, OnDestroy , AfterViewInit{
 
   constructor(private authService: AuthService
               , private  router: Router
-              , private  activatedRoute: ActivatedRoute) {
-  }
+              , private  activatedRoute: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
     setInterval(() => {
       this.items = this.shuffle(this.items);
       // console.log('this.shuffle(this.items)', this.items);
-    }, 1000)
+    }, 5000)
   }
 
 
@@ -54,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy , AfterViewInit{
     }
   }
   ngOnInit(): void {
-    for (let i = 0; i <=100 ; i++) {
+    for (let i = 0; i <= 7 ; i++) {
       this.items.push(i);
     }
     this.sub = this.authService.checkAuth()

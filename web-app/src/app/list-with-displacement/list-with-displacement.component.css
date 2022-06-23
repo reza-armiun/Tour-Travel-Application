@@ -1,9 +1,9 @@
 .container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+  /*width: 100vw;*/
+  /*height: 100vh;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*margin-top: 50px;*/
 }
 
 .list {
@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  row-gap: 15px;
+  /*row-gap: 15px;*/
 }
 
 .list__item {
@@ -26,3 +26,6 @@
   /*border-radius: 4px;*/
 }
 
+.hide {
+  opacity: 0 ;
+}

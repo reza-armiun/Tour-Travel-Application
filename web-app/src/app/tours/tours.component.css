@@ -4,10 +4,9 @@ hr { display: block; height: 1px;
   padding: 0; }
 
 .container {
-  padding: 30px 50px;
+  /*padding: 10px 0px;*/
   border-radius: 8px;
-  min-height: 85vh;
-  width: 100vw;
+  min-height: 80vh;
   overflow-scrolling: auto;
 }
 .body {
@@ -28,9 +27,6 @@ hr { display: block; height: 1px;
   min-width: 550px;
   justify-self: center;
 }
-
-
-
 
 .categories {
   display: flex;
