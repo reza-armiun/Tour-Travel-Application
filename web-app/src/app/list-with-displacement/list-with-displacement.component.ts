@@ -93,7 +93,7 @@ export class ListWithDisplacementComponent implements OnInit, OnChanges, AfterCo
 
   ngAfterContentInit(): void {
     this.viewItems = this.itemsEl?.map(item => item.el);
-    this.cd.detectChanges()
+    this.cd.detectChanges();
   }
 
 

@@ -22,8 +22,8 @@
           <div class="currency">{{tour.price}}</div></div>
       </div>
     </div>
-    <div class="tour__container-book">
-      <a class="blue-btn" routerLink="/booking" [queryParams]="{'tour-id': tour?.id  }"   >Book Now</a>
+    <div class="tour__container-book" >
+      <a class="blue-btn"  [routerLink]="['/booking']"  [queryParams]="{'tour-id': tour?.id  }"     >Book Now</a>
     </div>
   </div>
 </div>

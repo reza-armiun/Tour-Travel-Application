@@ -1,5 +1,11 @@
-import {AfterViewChecked, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tour-item',
@@ -8,11 +14,10 @@ import {BehaviorSubject} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
-export class TourItemComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class TourItemComponent implements OnInit {
   @Input() tour :any ;
-  wildState = new BehaviorSubject('hide');
 
-  constructor() {
+  constructor(private router: Router, private cd : ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -20,12 +25,13 @@ export class TourItemComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
 
-  ngAfterViewChecked(): void {
-    this.wildState.next('show');
+  bookTour(event: any, id: any) {
+    this.cd.detectChanges();
+    event.preventDefault();
+    console.log('id ', id)
+      this.router.navigate(
+        ['/booking'],
+        { queryParams: { 'tour-id': id } }
+      );
   }
-
-  ngOnDestroy(): void {
-    this.wildState.next('hide');
-  }
-
 }

@@ -100,6 +100,8 @@
   font-weight: 700;
 }
 .blue-btn {
+  cursor: pointer;
+  user-select: none;
   padding: 5px 7px;
   text-decoration: none;
   background-color: white;
