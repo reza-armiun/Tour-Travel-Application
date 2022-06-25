@@ -26,12 +26,12 @@ export class TourItemComponent implements OnInit {
 
 
   bookTour(event: any, id: any) {
-    this.cd.detectChanges();
-    event.preventDefault();
-    console.log('id ', id)
-      this.router.navigate(
-        ['/booking'],
-        { queryParams: { 'tour-id': id } }
-      );
+    // this.cd.detectChanges();
+    // event.preventDefault();
+    // console.log('id ', id)
+    //   this.router.navigate(
+    //     ['/booking'],
+    //     { queryParams: { 'tour-id': id } }
+    //   );
   }
 }

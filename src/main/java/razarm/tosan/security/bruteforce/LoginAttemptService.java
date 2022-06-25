@@ -14,15 +14,21 @@ public class LoginAttemptService {
     private LoadingCache<String, Integer> attemptsCache;
 
     public LoginAttemptService() {
+
         super();
-        attemptsCache = CacheBuilder.newBuilder().
-                expireAfterWrite(45, TimeUnit.SECONDS).build(new CacheLoader<String, Integer>() {
-            @Override
-            public Integer load(String key) throws Exception {
-                return 0;
-            }
-        });
+        attemptsCache =
+                CacheBuilder.newBuilder()
+                        .concurrencyLevel(Runtime.getRuntime().availableProcessors())
+                        .expireAfterWrite(45, TimeUnit.SECONDS)
+                        .build(
+                                new CacheLoader<String, Integer>() {
+                                    @Override
+                                    public Integer load(String key) throws Exception {
+                                        return 0;
+                                    }
+                                });
     }
+
 
 
     public void loginSucceeded(String key) {

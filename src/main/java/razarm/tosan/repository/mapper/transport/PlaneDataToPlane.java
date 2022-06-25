@@ -16,24 +16,28 @@ public class PlaneDataToPlane implements Mapper<PlaneData, Plane> {
     @Override
     public Plane convert(PlaneData planeData) {
         return Plane.PlaneBuilder.aPlane()
-                                 .id(planeData.getId())
-                                 .name(planeData.getName())
-                                 .type(planeData.getType())
-                                 .fromStation(planeData.getFromStation())
-                                 .toStation(planeData.getToStation())
-                                 .ticketNumber(planeData.getTicketNumber())
-                                 .price(planeData.getPrice())
-                                 .departure(planeData.getDeparture())
-                                 .arrival(planeData.getArrival())
-                                 .vehicleProvider(this.vehicleProviderDataToVehicleProvider.convert(planeData.getVehicleProvider()))
-                                 .allowedLuggage(planeData.getAllowedLuggage())
-                                 .cabinClass(planeData.getCabinClass())
-                                 .planeNumber(planeData.getPlaneNumber())
-                                 .type(planeData.getType())
-                                 .createdAt(planeData.getCreatedAt())
-                                 .modifiedAt(planeData.getModifiedAt())
-                                 .createdBy(planeData.getCreatedBy())
-                                 .modifiedBy(planeData.getModifiedBy())
-                                 .build();
+                .id(planeData.getId())
+                .name(planeData.getName())
+                .type(planeData.getType())
+                .fromStation(planeData.getFromStation())
+                .toStation(planeData.getToStation())
+                .ticketNumber(planeData.getTicketNumber())
+                .price(planeData.getPrice())
+                .departure(planeData.getDeparture())
+                .arrival(planeData.getArrival())
+                .vehicleProvider(
+                        planeData.getVehicleProvider() != null
+                                ? this.vehicleProviderDataToVehicleProvider.convert(
+                                        planeData.getVehicleProvider())
+                                : null)
+                .allowedLuggage(planeData.getAllowedLuggage())
+                .cabinClass(planeData.getCabinClass())
+                .planeNumber(planeData.getPlaneNumber())
+                .type(planeData.getType())
+                .createdAt(planeData.getCreatedAt())
+                .modifiedAt(planeData.getModifiedAt())
+                .createdBy(planeData.getCreatedBy())
+                .modifiedBy(planeData.getModifiedBy())
+                .build();
     }
 }

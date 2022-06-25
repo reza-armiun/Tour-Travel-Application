@@ -8,6 +8,7 @@
          [class.hide]="prevItemsIndex.length && displacement != 'start'  "
          *ngFor="let item of itemsEl; let i = index"
          [innerHTML]="item.el.nativeElement.innerHTML  | safeHtml"
+         routeTransformer
          [@displacement]="{ value: displacement,
          params: {heightSize: (displacement == 'start' ? -getOffsetDiff(i)  : 0)  , scaleP: getScale(i) ?? 1}}"
          (@displacement.start)= "onDisplacementStart($event)"

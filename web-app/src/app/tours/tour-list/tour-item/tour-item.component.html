@@ -1,4 +1,4 @@
-<div class="tour" >
+<div class="tour" routeTransformer >
   <div class="tour__photo">
     <img  src="{{tour.imgUrl}}" >
   </div>
@@ -19,7 +19,7 @@
         </div>
         <div class="tour__price">
           Price From
-          <div class="currency">{{tour.price}}</div></div>
+          <div class="currency">{{tour.price | currency:"IRR ":"symbol" }}</div></div>
       </div>
     </div>
     <div class="tour__container-book" >

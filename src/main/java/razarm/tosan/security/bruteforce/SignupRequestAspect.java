@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public class SignupRequestAspect {
     private final HttpServletRequest httpServletRequest;
     private final LoginAttemptService loginAttemptService;
-    private SignupExecutionImpl signupExecution;
 
     private String getClientIp() {
         final String xfHeader = httpServletRequest.getHeader("X-Forwarded-For");
@@ -28,17 +27,11 @@ public class SignupRequestAspect {
         return xfHeader.split(",")[0];
     }
 
-    @Before("execution(* razarm.tosan.security.bruteforce.LoginAttemptService.loginSucceeded(..))")
-    public void beforeLogin() {
-        System.out.println("ASDASDASDASDASDASD");
-    }
 
-    @Around(
-            "execution(* razarm.tosan.security.controller.AuthController.signup(..)) && args(signupRequest) ")
+    @Around("execution(* razarm.tosan.security.controller.AuthController.signup(..)) && args(signupRequest) ")
     public Object beforeSignup(ProceedingJoinPoint pjp, SignupRequest signupRequest)
             throws Throwable {
         final String ip = getClientIp();
-        this.signupExecution.sayHello();
         if (loginAttemptService.isBlocked(ip)) {
             throw new IllegalStateException("Your ip is temporarily blocked, Please try later");
         } else {

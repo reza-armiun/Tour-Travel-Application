@@ -226,6 +226,7 @@ export class TourListComponent implements OnInit, OnDestroy {
   onAnimationstart() {
     this.tourStore.animationRunning$.next(true);
   }
+
 }
 
 

@@ -135,9 +135,9 @@ export class ListWithDisplacementComponent implements OnInit, OnChanges, AfterCo
     let prevOffsetTop = this.itemsOffsetTop[prevIndex];
     let currentOffsetTop = this.itemsRef?.get(i)?.nativeElement.offsetTop;
     let offset = currentOffsetTop - prevOffsetTop;
-      if(offset > 0) return '1.01';
+      if(offset > 0) return '1.05';
       if(offset === 0) return '1';
-      if(offset < 0) return '0.99'
+      if(offset < 0) return '0.95'
       return '1';
   }
 

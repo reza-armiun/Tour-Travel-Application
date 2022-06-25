@@ -302,6 +302,7 @@ export class TourFormService {
     console.log('tour', tour)
     this.httpClient.post('/v1/tour', tour)
       .subscribe(savedId => {
+        this.messageService.showSuccessForPeriodOfTime(4000, 'Tour Saved Successfully' );
       this.router.navigateByUrl('/');
     })
 

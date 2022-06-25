@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface TourService extends CrudService<TourDto, String> {
 
+
     List<TourDto> findAllByType(TourType type);
 }

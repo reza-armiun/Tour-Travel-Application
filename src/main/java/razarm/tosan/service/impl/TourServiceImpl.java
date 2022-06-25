@@ -1,5 +1,9 @@
 package razarm.tosan.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import razarm.tosan.controller.dto.tour.TourDto;
 import razarm.tosan.controller.mapper.tour.TourDtoToTour;
@@ -18,6 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TourServiceImpl implements TourService {
     private final TourRepository tourRepository;
     private final TourToTourDto tourToTourDto;
@@ -38,6 +43,7 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    @CacheEvict(value = "tours" ,allEntries = true)
     public TourDto create(TourDto tourDto) {
         var tour = tourDtoToTour.convert(tourDto);
         var plans = tour.getSchedulePlans();
@@ -87,12 +93,14 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    @CacheEvict(value = "tours" ,allEntries = true)
     public void update(TourDto tourDto) {
         var tour = tourDtoToTour.convert(tourDto);
         tourRepository.update(tour);
     }
 
     @Override
+    @Cacheable(value = "tours")
     public TourDto findById(String s) {
 
         TourDto tourDto = tourToTourDto.convert(tourRepository.findById(s));
@@ -101,11 +109,13 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    @CacheEvict(value = "tours" ,allEntries = true)
     public void deleteById(String s) {
         tourRepository.deleteById(s);
     }
 
     @Override
+    @Cacheable(value = "tours")
     public List<TourDto> findAll() {
         return tourRepository.findAll().stream()
                 .map(tourToTourDto::convert)

@@ -57,11 +57,12 @@ import { AddressFormComponent } from './address-form/address-form.component';
 import { ProfileImageDialogComponent } from './profile/profile-image-dialog/profile-image-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {APIInterceptor} from "./APIInterceptor";
-import { ServiceWorkerModule } from '@angular/service-worker';
+// import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ListWithDisplacementComponent } from './list-with-displacement/list-with-displacement.component';
 import {ListItemDirective} from "./list-with-displacement/list-item.directive";
 import { SafeHtmlPipe } from './shared/safe-html.pipe';
+import { RouteTransformerDirective } from './shared/route-transformer.directive';
 
 
 @NgModule({
@@ -101,7 +102,8 @@ import { SafeHtmlPipe } from './shared/safe-html.pipe';
     ProfileImageDialogComponent,
     ListWithDisplacementComponent,
     ListItemDirective,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    RouteTransformerDirective
   ],
   imports: [
     BrowserModule,
@@ -123,12 +125,12 @@ import { SafeHtmlPipe } from './shared/safe-html.pipe';
     MatDatepickerModule,
     MatSelectModule,
     DragDropModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   // Register the ServiceWorker as soon as the application is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // })
   ],
 
   providers: [AuthService, LoadingService, MessagesService

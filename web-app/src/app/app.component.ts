@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {filter, Subscription} from "rxjs";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
@@ -24,10 +24,10 @@ export class AppComponent implements OnInit, OnDestroy , AfterViewInit{
               , private  activatedRoute: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
-    setInterval(() => {
-      this.items = this.shuffle(this.items);
-      // console.log('this.shuffle(this.items)', this.items);
-    }, 5000)
+    // setInterval(() => {
+    //   this.items = this.shuffle(this.items);
+    //   // console.log('this.shuffle(this.items)', this.items);
+    // }, 5000)
   }
 
 

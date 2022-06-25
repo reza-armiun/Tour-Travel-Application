@@ -22,7 +22,7 @@
     <div >
         <div id="tours-wrapper" >
           <app-list-with-displacement *ngIf="currentTourList as tours" [items]="tours" [compare]="compare " (onAnimationend)="onAnimationend()" (onAnimationstart)="onAnimationstart()" >
-           <div *ngFor="let tour of tours; let i = index"  appListItem class="tour__item-wrapper" [index]="i" >
+           <div *ngFor="let tour of tours; let i = index"     appListItem class="tour__item-wrapper" [index]="i" >
              <app-tour-item [tour]="tour"  ></app-tour-item>
            </div>
           </app-list-with-displacement>
