@@ -10,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SignupRequest {
     private  String name;
@@ -19,7 +18,13 @@ public class SignupRequest {
     private  String password;
     private  String rePassword;
 
-
+    public SignupRequest(String name, String email, String username, String password, String rePassword) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.rePassword = rePassword;
+    }
 
     @Override
     public String toString() {

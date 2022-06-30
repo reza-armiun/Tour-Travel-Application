@@ -27,7 +27,7 @@ interface State {
 export class TourFormService {
   stepperList:  StepperItem[] = [
     {name: 'Tour Information', icon: 'info' , form: 'info'},
-    {name: 'Tourism Manger', icon: 'person_pin',  form: 'tourismManager'},
+    {name: 'Tourism Manager', icon: 'person_pin',  form: 'tourismManager'},
     {name: 'Schedule plans', icon: 'schedule', form: 'schedulePlans'},
   ];
   private activeItemSub$ = new BehaviorSubject<StepperItem>({name: 'Tour Information', icon: 'info'});

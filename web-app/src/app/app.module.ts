@@ -63,6 +63,8 @@ import { ListWithDisplacementComponent } from './list-with-displacement/list-wit
 import {ListItemDirective} from "./list-with-displacement/list-item.directive";
 import { SafeHtmlPipe } from './shared/safe-html.pipe';
 import { RouteTransformerDirective } from './shared/route-transformer.directive';
+import {ServiceWorkerModule} from "@angular/service-worker";
+import { CardPlaceholderComponent } from './shared/card-placeholder/card-placeholder.component';
 
 
 @NgModule({
@@ -103,7 +105,8 @@ import { RouteTransformerDirective } from './shared/route-transformer.directive'
     ListWithDisplacementComponent,
     ListItemDirective,
     SafeHtmlPipe,
-    RouteTransformerDirective
+    RouteTransformerDirective,
+    CardPlaceholderComponent
   ],
   imports: [
     BrowserModule,
@@ -125,12 +128,12 @@ import { RouteTransformerDirective } from './shared/route-transformer.directive'
     MatDatepickerModule,
     MatSelectModule,
     DragDropModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', {
-    //   enabled: environment.production,
-    //   // Register the ServiceWorker as soon as the application is stable
-    //   // or after 30 seconds (whichever comes first).
-    //   registrationStrategy: 'registerWhenStable:30000'
-    // })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
 
   providers: [AuthService, LoadingService, MessagesService

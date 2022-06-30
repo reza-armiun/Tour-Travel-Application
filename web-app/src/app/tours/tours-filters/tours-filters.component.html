@@ -4,19 +4,19 @@
   <div class="filter-segment">
     <div class="filter-segment__header">By Category</div>
     <div class="filter-segment__body" (click)="checkIfDisabled($event)">
-      <div class="filter-segment__item"><input type="checkbox" #city name="city" (change)="categoryFiltersHandler(city)">City</div>
-      <div class="filter-segment__item"><input type="checkbox" #village name="village" (change)="categoryFiltersHandler(village)">Village</div>
-      <div class="filter-segment__item"><input type="checkbox" #desert name="desert" (change)="categoryFiltersHandler(desert)">Desert</div>
-      <div class="filter-segment__item"><input type="checkbox" #foreign name="foreign" (change)="categoryFiltersHandler(foreign)">Foreign</div>
+      <div class="filter-segment__item"><label><input type="checkbox" #city name="city" (change)="categoryFiltersHandler(city)">City</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #village name="village" (change)="categoryFiltersHandler(village)">Village</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #desert name="desert" (change)="categoryFiltersHandler(desert)">Desert</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #foreign name="foreign" (change)="categoryFiltersHandler(foreign)">Foreign</label></div>
     </div>
   </div>
   <div class="filter-segment">
     <div class="filter-segment__header" >Review Score</div>
     <div class="filter-segment__body" (click)="checkIfDisabled($event)">
-      <div class="filter-segment__item"><input type="checkbox" #superb name="superb" (change)="reviewFiltersHandler(superb)">Superb: 9+</div>
-      <div class="filter-segment__item"><input type="checkbox" #verygood name="verygood" (change)="reviewFiltersHandler(verygood)">Very good: 8+</div>
-      <div class="filter-segment__item"><input type="checkbox" #good name="good" (change)="reviewFiltersHandler(good)">Good: 7+</div>
-      <div class="filter-segment__item"><input type="checkbox" #pleasant name="pleasant" (change)="reviewFiltersHandler(pleasant)" >Pleasant: 6+</div>
+      <div class="filter-segment__item"><label><input type="checkbox" #superb name="superb" (change)="reviewFiltersHandler(superb)">Superb: 9+</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #verygood name="verygood" (change)="reviewFiltersHandler(verygood)">Very good: 8+</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #good name="good" (change)="reviewFiltersHandler(good)">Good: 7+</label></div>
+      <div class="filter-segment__item"><label><input type="checkbox" #pleasant name="pleasant" (change)="reviewFiltersHandler(pleasant)" >Pleasant: 6+</label></div>
     </div>
   </div>
 </div>

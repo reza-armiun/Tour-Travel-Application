@@ -1,12 +1,15 @@
 <div class="container">
 
-  <div class="stepper"  *ngIf="(activeItem$ | async) as activeItem">
+  <div class="stepper"  *ngIf="(activeItem$ | async) as activeItem ">
     <div class="step__headers">
       <div class="step__header"
-           *ngFor="let item of stepperList; let i = index "
+           *ngFor="let item of stepperList; let i = index"
            (click)="onClickItem(i, item)"
-           [class.active]="activeItem.name==item.name"
-      >
+           [class.active]="activeItem.name==item.name && setActiveIndex(i)" >
+        <div  class="step__border"
+            [@motion] = "{ value: activeItem.name == item.name ? 'active' : 'none'
+            , params: { from: (prevActiveIndex - activeIndex) * 176.82 }}"
+        ></div>
         <div class="step__icon"><mat-icon>{{item.icon}}</mat-icon></div>
         <div class="step__title">{{item.name}}</div>
       </div>
@@ -15,7 +18,7 @@
         <div class="step__content" *ngIf="activeItem?.name == 'Tour Information'">
           <app-info-form></app-info-form>
         </div>
-        <div class="step__content" *ngIf="activeItem?.name == 'Tourism Manger'" >
+        <div class="step__content" *ngIf="activeItem?.name == 'Tourism Manager'" >
           <app-tourism-manager-form></app-tourism-manager-form>
         </div>
         <div class="step__content"  *ngIf="activeItem?.name == 'Schedule plans'">

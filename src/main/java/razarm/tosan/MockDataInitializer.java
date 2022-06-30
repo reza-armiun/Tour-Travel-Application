@@ -179,6 +179,50 @@ public class MockDataInitializer implements CommandLineRunner {
                                                                                    .build())
                                                   .build();
 
+    private  final VehicleOrderDto vehicleOrder4 =
+            VehicleOrderDto.VehicleOrderDtoBuilder.aVehicleOrderDto()
+                                                  .name("new order 4")
+                                                  .discount(2)
+                                                  .vehicle(PlaneDto.PlaneDtoBuilder.aPlaneDto()
+                                                                                   .name("razarm bus 4")
+                                                                                   .price(new BigInteger("500"))
+                                                                                   .allowedLuggage(2)
+                                                                                   .ticketNumber("231231231231")
+                                                                                   .fromStation("terminal 1")
+                                                                                   .toStation("terminal 2")
+                                                                                   .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .arrival(Instant.now().plus(1 , ChronoUnit.DAYS).atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .vehicleProvider(VehicleProviderDto.VehicleProviderDtoBuilder.aVehicleProviderDto()
+                                                                                                                                                .name("razarm company")
+                                                                                                                                                .email("razarm@gmail.com")
+
+                                                                                                                                                .build())
+                                                                                   .build())
+                                                  .build();
+
+    private  final VehicleOrderDto vehicleOrder5 =
+            VehicleOrderDto.VehicleOrderDtoBuilder.aVehicleOrderDto()
+                                                  .name("new order 5")
+                                                  .discount(2)
+                                                  .vehicle(PlaneDto.PlaneDtoBuilder.aPlaneDto()
+                                                                                   .name("razarm bus 4")
+                                                                                   .price(new BigInteger("150"))
+                                                                                   .allowedLuggage(2)
+                                                                                   .ticketNumber("231231231231")
+                                                                                   .fromStation("terminal 1")
+                                                                                   .toStation("terminal 2")
+                                                                                   .departure(Instant.now().atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .arrival(Instant.now().plus(1 , ChronoUnit.DAYS).atZone(ZoneId.of(AppProperties.DEFAULT_ZONE)))
+                                                                                   .vehicleProvider(VehicleProviderDto.VehicleProviderDtoBuilder.aVehicleProviderDto()
+                                                                                                                                                .name("razarm company")
+                                                                                                                                                .email("razarm@gmail.com")
+
+                                                                                                                                                .build())
+                                                                                   .build())
+                                                  .build();
+
+
+
     private final AddressDto address1 =
             AddressDto.AddressDtoBuilder.anAddressDto()
                     .street("street 1")
@@ -427,6 +471,30 @@ public class MockDataInitializer implements CommandLineRunner {
                         .vehicleOrders(Set.of(vehicleOrder.get(1)))
                         .build();
 
+        final SchedulePlanDto mockSchedulePlan4 =
+                SchedulePlanDto.SchedulePlanDtoBuilder.aSchedulePlanDto()
+                                                      .name("turkey to ukraine")
+                                                      .startTime(ZonedDateTime.now())
+                                                      .arrivalTime(ZonedDateTime.now().plusDays(1))
+                                                      .source(address2)
+                                                      .destination(address3)
+                                                      .accommodationOrder(accommodationOrder.get(0))
+                                                      .foodOrders(Set.of(foodOrder.get(0),foodOrder.get(1)))
+                                                      .vehicleOrders(Set.of(vehicleOrder.get(3)))
+                                                      .build();
+
+        final SchedulePlanDto mockSchedulePlan5 =
+                SchedulePlanDto.SchedulePlanDtoBuilder.aSchedulePlanDto()
+                                                      .name("turkey to ukraine")
+                                                      .startTime(ZonedDateTime.now())
+                                                      .arrivalTime(ZonedDateTime.now().plusDays(1))
+                                                      .source(address2)
+                                                      .destination(address3)
+                                                      .accommodationOrder(accommodationOrder.get(0))
+                                                      .foodOrders(Set.of(foodOrder.get(0),foodOrder.get(1)))
+                                                      .vehicleOrders(Set.of(vehicleOrder.get(3), vehicleOrder.get(4)))
+                                                      .build();
+
 
         final TourDto mockTour = TourDto.TourDtoBuilder.aTourDto()
                 .schedulePlans(Set.of(mockSchedulePlan))
@@ -464,6 +532,26 @@ public class MockDataInitializer implements CommandLineRunner {
                 .name(" Kyiv City Tour")
                 .description("Special Kyiv tour")
                 .build();
+        final TourDto mockTour5 = TourDto.TourDtoBuilder.aTourDto()
+                                                        .schedulePlans(Set.of(mockSchedulePlan4))
+                                                        .tourismManager(mockTourismManager)
+                                                        .imgUrl("https://guideme.com.ua/wp-content/uploads/2018/10/lviv-tours.jpg")
+                                                        .type(TourType.CITY)
+                                                        .date(OffsetDateTime.now())
+                                                        .name(" Lviv City Tour")
+                                                        .description("Special Lviv tour")
+                                                        .build();
+        final TourDto mockTour6 = TourDto.TourDtoBuilder.aTourDto()
+                                                        .schedulePlans(Set.of(mockSchedulePlan5))
+                                                        .tourismManager(mockTourismManager)
+                                                        .imgUrl("https://www.visit2odessa.com/wp-content/uploads/2017/11/odessa-highlights-tour.png")
+                                                        .type(TourType.CITY)
+                                                        .date(OffsetDateTime.now())
+                                                        .name(" Odessa City Tour")
+                                                        .description("Special Odessa tour")
+                                                        .build();
+
+
         final BookingDto mockBooking =
                 BookingDto.BookingDtoBuilder.aBookingDto()
                         .date(OffsetDateTime.now().toZonedDateTime())
@@ -493,14 +581,16 @@ public class MockDataInitializer implements CommandLineRunner {
                         .tour(mockTour4)
                         .description("mock Booking 4")
                         .build();
-        var tour1 = tourService.create(mockTour);
-        var tour2 = tourService.create(mockTour2);
-        var tour3 = tourService.create(mockTour3);
-        var tour4 = tourService.create(mockTour4);
-        var savedTour1 = tourService.create(tour1);
-        var savedTour2 = tourService.create(tour2);
-        var savedTour3 = tourService.create(tour3);
-        var savedTour4 = tourService.create(tour4);
+//        var tour1 = tourService.create(mockTour);
+//        var tour2 = tourService.create(mockTour2);
+//        var tour3 = tourService.create(mockTour3);
+//        var tour4 = tourService.create(mockTour4);
+        var savedTour1 = tourService.create(mockTour);
+        var savedTour2 = tourService.create(mockTour2);
+        var savedTour3 = tourService.create(mockTour3);
+        var savedTour4 = tourService.create(mockTour4);
+        var savedTour5 = tourService.create(mockTour5);
+        var savedTour6 = tourService.create(mockTour6);
 
 
 
@@ -508,6 +598,8 @@ public class MockDataInitializer implements CommandLineRunner {
         tourRateService.rateTour(signupRequest2.getUsername(), savedTour1.getId(), 5);
         tourRateService.rateTour(signupRequest3.getUsername(), savedTour1.getId(), 7);
         tourRateService.rateTour(signupRequest3.getUsername(), savedTour4.getId(), 7);
+        tourRateService.rateTour(signupRequest3.getUsername(), savedTour5.getId(), 8);
+        tourRateService.rateTour(signupRequest3.getUsername(), savedTour6.getId(), 10);
 
         bookService.bookingTour(reza.getUsername(), savedTour1.getId(), mockBooking);
         bookService.bookingTour(signupRequest2.getUsername(), savedTour2.getId(), mockBooking2);

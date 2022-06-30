@@ -10,7 +10,7 @@ export class RouteTransformerDirective {
   }
 
   @HostListener('click', ['$event'])
-  public onClick(event: { target: { tagName: string; getAttribute: (arg0: string) => any; }; preventDefault: () => void; }) {
+  public onClick(event: { target: any ; preventDefault: () => void; }) {
     if (event.target.tagName === 'A') {
       this.router.navigateByUrl(event.target.getAttribute('href'));
       event.preventDefault();

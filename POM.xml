@@ -16,6 +16,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <jakson-version>2.13.3</jakson-version>
         <jwt-version>0.11.5</jwt-version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -30,6 +31,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,29 +103,71 @@
         </dependency>
 
 
-<!--        <dependency>-->
-<!--            <groupId>ch.qos.logback</groupId>-->
-<!--            <artifactId>logback-core</artifactId>-->
-<!--            <version>1.2.7</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>ch.qos.logback</groupId>-->
-<!--            <artifactId>logback-classic</artifactId>-->
-<!--            <version>1.2.7</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-api</artifactId>-->
-<!--        </dependency>-->
-
     </dependencies>
     <build>
         <finalName>app</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.14.0</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <source>11</source>
+                    <target>11</target>
+                    <complianceLevel>11</complianceLevel>
+                    <!-- <encoding>UTF-8</encoding> -->
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <encoding>UTF-8 </encoding>
+                    <Xlint>ignore</Xlint>
+<!--                    <outxml>true</outxml>-->
+                    <forceAjcCompile>true</forceAjcCompile>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjrt</artifactId>
+<!--                            <groupId>com.aspectj.library.yours</groupId>-->
+<!--                            <artifactId>your-library</artifactId>-->
+                        </aspectLibrary>
+                    </aspectLibraries>
+                    <!-- this is important: start-->
+                    <sources/>
+                    <weaveDirectories>
+                        <weaveDirectory>${project.build.directory}/classes</weaveDirectory>
+                    </weaveDirectories>
+                    <!-- this is important: end-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- The right phase is very important! Compile and weave aspects after all classes compiled by javac -->
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>1.9.7</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>1.9.7</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

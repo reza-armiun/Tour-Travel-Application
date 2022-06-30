@@ -16,7 +16,7 @@
     </select>
   </mat-form-field>
 
-  <img *ngIf="imgUrl?.value" [src]="imgUrl?.value">
+  <img *ngIf="imgUrl?.value" [src]="imgUrl?.value" style="max-width: 350px">
   <mat-form-field>
     <mat-label>Image</mat-label>
     <input matInput type="text"   formControlName="imgUrl">

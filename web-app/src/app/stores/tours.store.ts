@@ -129,7 +129,7 @@ export class ToursStore {
 
           function filterByReview(tour: any, reviews: Review[]) {
             for (let review of reviews) {
-              if (tour.rating >= review.from && tour.rating <= review.to) return true;
+              if (tour.rating >= review.from &&  tour.rating <= review.to) return true;
             }
             return false;
           }
@@ -174,7 +174,8 @@ export class ToursStore {
             // this.sortType$.next(SORT.NONE);
           }
 
-          this.sortedTours = [...trList];
+          this.sortedTours = [...tours];
+          // this.sortedTours = [...trList];
           return trList;
         }),
         distinctUntilChanged((prev, curr) => this.arraysEqual(prev, curr))

@@ -1,6 +1,10 @@
 <div class="tour" routeTransformer >
   <div class="tour__photo">
-    <img  src="{{tour.imgUrl}}" >
+<!--    <div *ngIf="loadingImage " style="width: 200px; height: 120px; ">-->
+<!--      <app-card-placeholder></app-card-placeholder>-->
+<!--    </div>-->
+    <img  [alt]="tour.name" loading="eager"
+           src="{{tour.imgUrl}}" >
   </div>
   <div class="tour__container">
     <div class="tour__content">

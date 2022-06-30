@@ -8,6 +8,7 @@
 body {
   position: absolute;
   top: 0;
+  right: 0;
   width: 100vw;
   background-color: rgba(197, 177, 205, 0.15);
   z-index: -1;

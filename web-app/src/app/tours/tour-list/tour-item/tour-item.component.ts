@@ -1,37 +1,37 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  Input,
-  OnInit
+  Input, OnChanges,
+  OnInit, SimpleChanges
 } from '@angular/core';
-import {Router} from "@angular/router";
+import {animate, keyframes, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-tour-item',
   templateUrl: './tour-item.component.html',
   styleUrls: ['./tour-item.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
 
+  ],
 })
 export class TourItemComponent implements OnInit {
   @Input() tour :any ;
+  loadingImage = true;
 
-  constructor(private router: Router, private cd : ChangeDetectorRef) {
+  constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+
+  onStartLoading() {
+    this.loadingImage = true;
+  }
+
+  onFinishedLoading() {
+    this.loadingImage = false;
   }
 
 
-  bookTour(event: any, id: any) {
-    // this.cd.detectChanges();
-    // event.preventDefault();
-    // console.log('id ', id)
-    //   this.router.navigate(
-    //     ['/booking'],
-    //     { queryParams: { 'tour-id': id } }
-    //   );
-  }
 }

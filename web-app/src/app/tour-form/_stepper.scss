@@ -12,21 +12,32 @@ $colors: (main: #551A8b, secondary: #efedf0, iconColor: #ff9900 ,hover: rgba(128
     background-color: transparent;
     @extend  .flex-row-center;
     .step__header {
-      padding: 4px 40px;
+      position: relative;
+      padding: 8px 40px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       row-gap: 4px;
-      border-bottom: 4px solid rgba(128, 128, 128, 0.4);
+      //border-bottom: 4px solid rgba(128, 128, 128, 0.4);
       user-select: none;
       &:hover {
         background-color: map-get($colors, hover);
         opacity: 0.85;
       }
+      .step__border{
+        border-bottom: 4px solid rgba(128, 128, 128, 0.4);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+      }
       &.active {
-        border-bottom: 4px solid map-get($colors, main);
+        //border-bottom: 4px solid map-get($colors, main);
+        .step__border{
+          border-bottom: 4px solid map-get($colors, main);
+        }
       }
       .step__icon {
         display: flex;

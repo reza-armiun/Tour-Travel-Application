@@ -22,7 +22,8 @@
 .filter-segment__body {}
 .filter-segment__item {
   padding: 8px 0 0 3px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
   display: flex;
   align-items: center;
 }

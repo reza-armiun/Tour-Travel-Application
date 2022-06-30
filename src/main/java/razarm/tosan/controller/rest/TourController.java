@@ -2,12 +2,15 @@ package razarm.tosan.controller.rest;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import razarm.tosan.controller.dto.tour.TourDto;
 import razarm.tosan.service.tour.TourService;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("v1")
@@ -19,7 +22,9 @@ public class TourController {
 
     @GetMapping("tour")
     public ResponseEntity<List<TourDto>> getTourList() {
-        return ResponseEntity.ok(this.tourService.findAll());
+        return ResponseEntity.status(HttpStatus.OK)
+                             .cacheControl(CacheControl.maxAge(2, TimeUnit.MINUTES))
+                             .body(this.tourService.findAll());
     }
 
     @GetMapping("tour/{id}")
