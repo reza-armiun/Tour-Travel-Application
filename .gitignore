@@ -12,7 +12,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+*/yarn.lock
+*/dist
+*/cypress
+*/node_modules
 ### IntelliJ IDEA ###
 *.idea
 *.iws
