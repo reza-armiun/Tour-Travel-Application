@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {filter, Subscription} from "rxjs";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
+import {$localize} from "@angular/localize/init";
 
 
 export interface MenuItem {
@@ -15,13 +17,16 @@ export interface MenuItem {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy , AfterViewInit{
+  title = "TourArm";
   sub: Subscription | undefined;
   menuItems: MenuItem[] = [];
   items: any[] = [];
 
   constructor(private authService: AuthService
               , private  router: Router
-              , private  activatedRoute: ActivatedRoute) { }
+              , private  activatedRoute: ActivatedRoute, private titleService: Title) {
+    // titleService.setTitle($localize`${this.title}`);
+  }
 
   ngAfterViewInit(): void {
     // setInterval(() => {

@@ -7,18 +7,18 @@
     </div>
     <div routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar__item app-icon ">
       <img  class="icon invert  " src="assets/images/touricon.svg" alt="Bus" />
-      <b>TourArm</b>
+      <b i18n>TourArm</b>
     </div>
 <!--    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar__item"><b class="header">Home</b></a>-->
   </div>
   <div class="navbar-right">
     <ng-container *ngIf="signedin$ | async" >
-      <a routerLink="/profile" routerLinkActive="active" class="navbar__item">Profile</a>
-      <a routerLink="/signout" routerLinkActive="active" class="navbar__item">Signout</a>
+      <a routerLink="/profile" routerLinkActive="active" class="navbar__item" i18n>Profile</a>
+      <a routerLink="/signout" routerLinkActive="active" class="navbar__item" i18n>Signout</a>
     </ng-container>
     <ng-container *ngIf="!(signedin$ | async)">
-      <a routerLink="/register" routerLinkActive="active" class="navbar__item">Register</a>
-      <a routerLink="/signin" routerLinkActive="active" class="navbar__item">Signin</a>
+      <a routerLink="/register" routerLinkActive="active" class="navbar__item" i18n>Register</a>
+      <a routerLink="/signin" routerLinkActive="active" class="navbar__item" i18n>Signin</a>
     </ng-container>
   </div>
 

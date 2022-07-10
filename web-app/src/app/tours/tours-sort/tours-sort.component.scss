@@ -1,0 +1,43 @@
+.sorts {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  //background-color: white;
+
+
+  .sort__item {
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 8px 12px;
+    color: black;
+    font-weight: 500;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.5);
+    }
+  }
+  //.sort__item-wrapper {
+  //  user-select: none;
+  //  padding: 0;
+  //  //width: fit-content;
+  //  flex: fit-content;
+  //  display: flex;
+  //  justify-content: center;
+  //  cursor: pointer;
+  //
+  //
+  //}
+}
+.show {
+  display: initial;
+}
+.hide {
+  //display: none;
+  opacity: 0 !important;
+}
+.active {
+  font-weight: 700 !important;
+  color: #551A8b !important;
+}

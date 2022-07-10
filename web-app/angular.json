@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "web-app": {
+      "i18n": {
+        "locales": {
+          "en": "src/locale/messages.xlf",
+          "fa": "src/locale/messages.fa.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -63,6 +69,16 @@
               ],
               "outputHashing": "all"
             },
+            "fa": {
+              "aot": true,
+              "localize": ["fa"],
+              "baseHref": "/fa/",
+              "i18nMissingTranslation": "ignore"
+            },
+            "en": {
+              "localize": ["en"],
+              "baseHref": "/en/"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -79,6 +95,12 @@
           "configurations": {
             "production": {
               "browserTarget": "web-app:build:production"
+            },
+            "en": {
+              "browserTarget": "web-app:build:en"
+            },
+            "fa": {
+              "browserTarget": "web-app:build:fa"
             },
             "development": {
               "browserTarget": "web-app:build:development",

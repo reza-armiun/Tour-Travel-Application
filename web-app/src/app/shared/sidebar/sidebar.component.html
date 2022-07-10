@@ -1,18 +1,18 @@
-<div (click)="closeSidebar()" [ngClass]="{'black-screen': true, 'hide': !(showSidebar$ | async)} "></div>
-<div  [ngClass]="{'sidebar': true, 'hide': !(showSidebar$ | async)} " [@animateSidebar]="(showSidebar$ | async) ? 'show' : 'hide'" >
+<div  (click)="closeSidebar()" [ngClass]="{'black-screen': true, 'hide': !(showSidebar$ | async)} "></div>
+<div [style.display] = "(showSidebar$ | async) ? 'initial' : 'none'"   [ngClass]="{'sidebar': (locale ?? 'en') !== 'fa', 'right-sidebar': locale == 'fa' , 'hide': !(showSidebar$ | async)} " [@animateSidebar]="(showSidebar$ | async) ? 'show' : 'hide'" >
   <div class="profile"*ngIf="(profile$ | async) as profile">
       <img matCardImage  [src]="profile?.imageUrl" class="profile__image">
       <h4 class="profile__name">{{profile.username}}</h4>
   </div>
 <!--  <h2 class="header">Menu</h2>-->
   <hr/>
-  <div routerLink="/tour" routerLinkActive="active" class="sidebar__item" >Tours</div>
+  <div routerLink="/tour" routerLinkActive="active" class="sidebar__item" i18n>Tours</div>
   <hr/>
 <!--  <div class="sidebar__item">Users</div>-->
 <!--  <hr/>-->
 <!--  <div class="sidebar__item">Orders</div>-->
 <!--  <hr/>-->
-  <div routerLink="/profile" routerLinkActive="active" class="sidebar__item">Profile</div>
+  <div routerLink="/profile" routerLinkActive="active" class="sidebar__item" i18n>Profile</div>
   <hr/>
-  <div (click)="onSignout()"  class="sidebar__item">Signout</div>
+  <div (click)="onSignout()"  class="sidebar__item" i18n>Signout</div>
 </div>

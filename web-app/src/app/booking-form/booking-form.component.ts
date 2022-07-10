@@ -6,6 +6,7 @@ import {Tour} from "../model/Tour";
 import {FormArray, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import { BookingService, Traveler} from "../booking-details/booking.service";
 import {ErrorStateMatcher} from "@angular/material/core";
+import {ProfileStore} from "../stores/profile.store";
 
 const newTravelerFormGroup = () => new FormGroup({
   name: new FormControl('', {
@@ -46,6 +47,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
               , private tourStore: ToursStore
               , private bookingService: BookingService
               , private router: Router
+              , private profileStore: ProfileStore
               ) { }
 
 
@@ -101,11 +103,13 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.currentFormIndex = this.travelers.length - 1;
   }
 
-  bookingHandler() {
+  bookingHandler(tourName: any) {
     if(this.travelersTableData.length > 0 && this.tourId) {
         this.bookingService.bookingTour({travelers: [...this.travelersTableData] , description: this.form.value?.description } , this.tourId)
           .subscribe(booking => {
             this.router.navigate(['booking', booking.id ], )
+            this.profileStore
+              .addNewBookingInfo({id: booking.id, tourId: booking.tour.id ?? '', tourName: tourName, date: booking.date ? booking.date.toString() : new Date().toString()});
             console.log('booked tour ', booking);
           })
     }

@@ -15,16 +15,18 @@ hr { display: block; height: 1px;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  column-gap: 10px;
 }
 
 .filters-wrapper {
-  flex: 1;
+  flex: 1 1 300px;
   align-self: start;
   justify-self: center;
   max-width: 260px;
 }
 .tours {
-  min-width: 550px;
+  /*min-width: 550px;*/
+  padding: 10px;
   justify-self: center;
 }
 

@@ -1,7 +1,7 @@
 .tours {
   border-radius: 3px;
-  padding: 15px;
-  max-width: 500px;
+  //padding: 15px;
+  //max-width: 500px;
   min-height: 550px;
 
 }
@@ -68,7 +68,7 @@
 #tours-wrapper {
   width: 100%;
   position: relative;
-  max-width: 444px;
+  //max-width: 444px;
 }
 .tour__item-wrapper {
   position: absolute;
@@ -76,6 +76,25 @@
 .tour__new-item-wrapper {
   position: absolute;
 }
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  padding-left: 12px;
+  margin: 0;
+  .action__item {
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 8px 12px;
+    background-color: white;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+  }
+
+}
+
 
 
 .show {

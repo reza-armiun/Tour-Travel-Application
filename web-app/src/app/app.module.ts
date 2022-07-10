@@ -65,6 +65,7 @@ import { SafeHtmlPipe } from './shared/safe-html.pipe';
 import { RouteTransformerDirective } from './shared/route-transformer.directive';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import { CardPlaceholderComponent } from './shared/card-placeholder/card-placeholder.component';
+import { ToursSortComponent } from './tours/tours-sort/tours-sort.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { CardPlaceholderComponent } from './shared/card-placeholder/card-placeho
     ListItemDirective,
     SafeHtmlPipe,
     RouteTransformerDirective,
-    CardPlaceholderComponent
+    CardPlaceholderComponent,
+    ToursSortComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,11 @@
-import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {distinctUntilChanged, filter, of, Subscription, takeUntil, tap} from "rxjs";
+import {Component, OnDestroy, OnInit, Type} from '@angular/core';
+import {Subscription, tap} from "rxjs";
 import {SORT, ToursStore} from "../../stores/tours.store";
-import {animate, keyframes, style, transition, trigger} from "@angular/animations";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {ProfileImageDialogComponent} from "../../profile/profile-image-dialog/profile-image-dialog.component";
+import {FiltersComponent} from "../tours-filters/tours-filters.component";
+import {ToursSortComponent} from "../tours-sort/tours-sort.component";
 
 
 
@@ -11,48 +15,12 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('wildState', [
-      transition('void => *', [
-      animate(1000, keyframes([
-        style({
-          opacity: 1,
-        })
-      ]))
-    ]),
-      transition('* => void', [
-          animate(500, style({
-            // transform: 'translateX(100px)',
-            opacity: 0
-          }))
-      ]),
-    ]),
-
-    trigger('customAnimation', [
-      transition('* => new', [
-        animate("1200ms", keyframes([
-          style({
-            transform: 'translateY({{heightSize}}px) scale({{scaleP}})',
-          }),
-        ]))
-      ], {params : { heightSize: "100", scaleP: '1.0' }})
-    ]),
-    trigger('newTourAnimation', [
-      transition('* => new', [
-        animate("1200ms", keyframes([
-          style({
-            transform: 'translateY({{heightSize}}px) scale({{scaleP}})',
-          }),
-        ]))
-      ], {params : {heightSize: "100", scaleP: '1.0' }}),
-      transition('* => void', [
-        style({
-        })
-      ], {params : { heightSize: "100", display: 'initial' }})
-    ])
-  ]
 })
 export class TourListComponent implements OnInit, OnDestroy {
+  small = false;
+  xSmall =false;
+  breakpointSub : Subscription | undefined;
+
   currentTourList: any[] = [];
   newTourList: any[] = []
   sub: Subscription | undefined;
@@ -71,11 +39,13 @@ export class TourListComponent implements OnInit, OnDestroy {
     return o1.id == o2.id;
   }
 
-  constructor(private tourStore: ToursStore) {}
-   differenceWith(arr1: any[], arr2: any[]) {
-     return arr1
-       .filter(x => !arr2.map(val => val['id']).includes(x['id']))
-       .concat(arr2.filter(x => !arr1.map(val => val['id']).includes(x['id'])));
+  constructor(private tourStore: ToursStore, private breakPoints: BreakpointObserver,public dialog: MatDialog) {
+    this.breakpointSub = breakPoints.observe([Breakpoints.Small, Breakpoints.XSmall] ).subscribe(result => {
+      this.small = false;
+      this.xSmall = false;
+      if(result.breakpoints[Breakpoints.Small]) this.small = true;
+      if(result.breakpoints[Breakpoints.XSmall]) this.xSmall = true;
+    })
   }
 
   ngOnInit(): void {
@@ -88,45 +58,8 @@ export class TourListComponent implements OnInit, OnDestroy {
         }
         if(!this.tourStore.animationRunning$.getValue()) {
           this.currentTourList = tours;
-          // this.showNewItems = false;
-          // this.tourStore.animationRunning$.next(true);
         }
       })
-      // filter((tours) => {
-      //   if(this.tourStore.sortType$.getValue() === SORT.NONE) return true;
-      //   console.log(tours);
-      //   if(this.showNewTours) {
-      //     this.currentTourList = tours;
-      //     this.currentTourList.forEach((tour, index) => {
-      //         this.currentTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
-      //     });
-      //     console.log('this.newTourList', this.newTourList);
-      //     setTimeout(() => {
-      //       if(tours.length) {
-      //         this.animateNewTourTransition = true;
-      //       }
-      //     }, 200);
-      //   } else {
-      //     this.newTourList = tours;
-      //     this.newTourList.forEach((tour, index) => {
-      //       this.newTourList[index].heightSize = this.getDistFromTop(index) - this.getDistFromTop(tour.prevIndex);
-      //     })
-      //     setTimeout(() => {
-      //       if(tours.length) {
-      //         this.animateTourTransition = true;
-      //       }
-      //     }, 200)
-      //   }
-      //   return false;
-      //
-      // }),
-      // tap((tours) => {
-      //   if(!this.showNewTours){
-      //     this.currentTourList = tours;
-      //   } else {
-      //     this.newTourList = tours;
-      //   }
-      // })
     ).subscribe();
 
   }
@@ -138,6 +71,7 @@ export class TourListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
     this.loadAllSub?.unsubscribe();
+    this.breakpointSub?.unsubscribe();
   }
   checkAnimationRunning() {
     // if(this.animateTourTransition || this.animateNewTourTransition) return true;
@@ -170,10 +104,6 @@ export class TourListComponent implements OnInit, OnDestroy {
     this.tourStore.sortByLowestRating()
   }
 
-
-
-
-
   onHideTours(event: any) {
     if(event.toState == "new") {
         this.tourStore.sortType$.next(SORT.NONE) ;
@@ -181,41 +111,8 @@ export class TourListComponent implements OnInit, OnDestroy {
         this.animateTourTransition = false;
     }
   }
-  onHideNewTours(event: any) {
-    if(event.toState == "new") {
-      this.tourStore.sortType$.next(SORT.NONE);
-      this.showNewTours= false;
-      this.animateNewTourTransition = false;
-    }
-  }
-
-  // getDistFromTopPx(i: number) {
-  //   return (i * 186) + 'px'
-  // }
-  // getDistFromTop(i: number) {
-  //   return i * 186;
-  // }
 
 
-  // getNewTourPosition(id: number) {
-  //   return this.newTourList
-  //     .find(tour => tour.id == id)?.heightSize || 0;
-  // }
-  //
-  //
-  //
-  //
-  // getTourScale(tourPosition: number) {
-  //   if(tourPosition > 0) return '1.01';
-  //   if(tourPosition == 0) return '1';
-  //   if(tourPosition < 0) return '0.99'
-  //   return '1';
-  // }
-  //
-  // getOldTourPosition(id: number) {
-  //   return this.currentTourList
-  //     .find(tour => tour.id == id)?.heightSize || 0;
-  // }
 
 
   onAnimationend() {
@@ -227,6 +124,13 @@ export class TourListComponent implements OnInit, OnDestroy {
     this.tourStore.animationRunning$.next(true);
   }
 
+  showFilters() {
+    openComponentDialog(this.dialog, FiltersComponent)
+  }
+
+  showCategories() {
+    openComponentDialog(this.dialog, ToursSortComponent)
+  }
 }
 
 
@@ -234,3 +138,15 @@ export class TourListComponent implements OnInit, OnDestroy {
 
 
 
+export function openComponentDialog(dialog: MatDialog, component: Type<any>) {
+
+  const config = new MatDialogConfig();
+  config.minWidth = '100vw';
+
+
+  // config.autoFocus = true;
+
+  const dialogRef = dialog.open(component, config);
+
+  return dialogRef.afterClosed();
+}

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="22574054480616841" datatype="html">
+        <source>Register New Account</source>
+        <target>ثبت نام حساب جدید</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="402785015655073812" datatype="html">
+        <source>Name: </source>
+        <target>نام: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4374589633190318100" datatype="html">
+        <source>Email: </source>
+        <target>ایمیل: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5625146011024730344" datatype="html">
+        <source>Username: </source>
+        <target>نام کاربری: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1219158514664092395" datatype="html">
+        <source>
+        Username already taken, Please try another username.
+      </source>
+      <target>
+      نام کاربری قبلاً گرفته شده است، لطفاً نام کاربری دیگری را امتحان کنید.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8281836453106783702" datatype="html">
+        <source>Password: </source>
+        <target>رمز عبور: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2014213976775469501" datatype="html">
+        <source>Password Confirmation: </source>
+        <target>تایید رمز عبور: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3322756179897654594" datatype="html">
+        <source>
+        Password do not match.
+      </source>
+      <target>
+      رمز عبور مطابقت ندارد.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6372705444987159483" datatype="html">
+        <source>
+     Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/> Click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </source>
+    <target>
+        از قبل حساب کاربری دارید؟<x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/>اینجا کلیک کنید<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2039815200596177029" datatype="html">
+        <source>
+      Something goes wrong, please try again
+       </source>
+       <target>
+       مشکلی پیش آمده است، لطفاً دوباره امتحان کنید
+       </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3301086086650990787" datatype="html">
+        <source>Register</source>
+        <target>ثبت نام</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <target>ورود به سیستم</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3742496118436585286" datatype="html">
+        <source>
+        Username is required.
+      </source>
+      <target>
+      نام کاربری مورد نیاز است.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="539908731155066496" datatype="html">
+        <source>
+        Username must be at least 3 characters long.
+      </source>
+      <target>
+      نام کاربری باید حداقل 3 کاراکتر باشد.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1592909480897159554" datatype="html">
+        <source>
+        Maximum 20 characters.
+      </source>
+      <target>
+      حداکثر ۲۰ کاراکتر
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9212413924110292112" datatype="html">
+        <source>
+        Username should start with alphabetic characters.
+      </source>
+      <target>
+      نام کاربری باید با حروف الفبا شروع شود.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7218179738293233410" datatype="html">
+        <source>
+        Password is required.
+      </source>
+      <target>
+      رمز عبور مورد نیاز است.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6608971976980630874" datatype="html">
+        <source>
+        Password must be at least 4 characters long.
+      </source>
+      <target>
+      رمز عبور باید حداقل 4 کاراکتر باشد.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2953407701981667315" datatype="html">
+        <source>
+        Password 20 characters.
+      </source>
+      <target>
+      رمز عبور ۲۰ کاراکتر
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7962404027682988590" datatype="html">
+        <source>
+      New User? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/> Create an account<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </source>
+    <target>
+      کاربر جدید؟ <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/> یک حساب کاربری ایجاد کنید<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1732528767904041976" datatype="html">
+        <source>
+         <x id="INTERPOLATION" equiv-text="{{errorMessage}}"/>
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+      </trans-unit>
+       <trans-unit id="3212728109005302394" datatype="html">
+              <source>TourArm</source>
+              <target>تورآرم</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+                <context context-type="linenumber">10,11</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4915431133669985304" datatype="html">
+              <source>Profile</source>
+              <target>مشخصات</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+                <context context-type="linenumber">16,17</context>
+              </context-group>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+                <context context-type="linenumber">15,16</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="8354029220983676574" datatype="html">
+              <source>Signout</source>
+              <target>خروج از سیستم</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+                <context context-type="linenumber">17,18</context>
+              </context-group>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+                <context context-type="linenumber">17,18</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="2101902914887471883" datatype="html">
+              <source>Signin</source>
+              <target>ورود</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+                <context context-type="linenumber">21,22</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="5520837882591091600" datatype="html">
+              <source>Tours</source>
+              <target>تورها</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+                <context context-type="linenumber">9,10</context>
+              </context-group>
+            </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,4 +1,4 @@
-<div class="container"  >
+<div class="container" *ngIf="(tour$ | async) as tour " >
   <div class="travelers mat-elevation-z4" >
     <table mat-table class="mat-elevation-z3" style="width: 100%; background-color: rgba(253, 189, 189, 0.03)"
            [dataSource]="travelersTableData"
@@ -74,21 +74,21 @@
                   [cdkAutosizeMaxRows]="5" ></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" style=" width: 100%; padding: 5px"  [disabled]="travelersTableData.length == 0"  (click)="bookingHandler()">Book Now</button>
+      <button mat-raised-button color="primary" style=" width: 100%; padding: 5px"  [disabled]="travelersTableData.length == 0"  (click)="bookingHandler(tour.name)">Book Now</button>
 
     </form>
 
   </div>
   <div class="tour-info">
-    <mat-card *ngIf="(tour$ | async) as tour">
+    <mat-card *ngIf="(tour$ | async) as tour ">
       <img matCardImage [src]="tour?.imgUrl" >
-      <mat-card-title>{{tour?.name}}</mat-card-title>
+      <mat-card-title >{{tour?.name}}</mat-card-title>
       <mat-card-content>
         {{tour?.description}}
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions >
-        <button mat-raised-button color="primary" style=" width: 100%"  [disabled]="travelersTableData.length == 0"  (click)="bookingHandler()">Book Now</button>
+        <button mat-raised-button color="primary" style=" width: 100%"  [disabled]="travelersTableData.length == 0"  (click)="bookingHandler(tour.name)">Book Now</button>
       </mat-card-actions>
     </mat-card>
   </div>

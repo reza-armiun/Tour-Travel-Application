@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {SidebarService} from "./sidebar.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {Router} from "@angular/router";
 import {Profile, ProfileStore} from "../../stores/profile.store";
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
@@ -37,11 +37,14 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
   ]
 })
 export class SidebarComponent implements OnInit {
-  showSidebar$ : Observable<boolean> | undefined;
+  showSidebar$ : Observable<boolean> = of(false);
   profile$: Observable<Profile | null>;
+
+
   constructor(private sidebarService: SidebarService
               , private router: Router
-              , private profileStore: ProfileStore) {
+              , private profileStore: ProfileStore
+              , @Inject(LOCALE_ID) public locale: string) {
     this.profile$ = profileStore.profile$;
   }
 

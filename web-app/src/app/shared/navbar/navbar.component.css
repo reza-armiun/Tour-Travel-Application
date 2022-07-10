@@ -1,7 +1,7 @@
 .navbar {
   margin: 0;
   padding: 0 15px 6px 25px;
-  width: 100vw;
+  width: 100%;
   background-color: rgba(55, 55, 69, 1);
   position: fixed;
   z-index: 2000;

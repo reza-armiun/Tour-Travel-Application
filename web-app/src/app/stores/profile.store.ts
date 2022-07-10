@@ -84,4 +84,15 @@ export class ProfileStore {
   setProfileImgUrl(imgUrl: string) {
     this.profileSub$.next(<Profile>{...this.profileSub$.getValue(), imageUrl: imgUrl})
   }
+
+  addNewBookingInfo(bookingInfo: Booking) {
+    let currentProfile = this.profileSub$.getValue();
+    if(currentProfile?.bookings) {
+      // @ts-ignore
+      currentProfile?.bookings = [...currentProfile?.bookings, bookingInfo];
+      console.log('new profile ' , currentProfile);
+    }
+    // currentProfile?.bookings.push(bookingInfo);
+    this.profileSub$.next(currentProfile);
+  }
 }
