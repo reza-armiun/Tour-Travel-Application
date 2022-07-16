@@ -5,11 +5,16 @@ import { Router} from "@angular/router";
 import {Subscription, tap} from "rxjs";
 import {LoadingService} from "../../shared/loading/loading.service";
 import {MessagesService} from "../../shared/messages/messages.service";
+import {shakeAnimation} from "../../shared/animations/ShakeAnimation";
+
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
+  animations: [
+     shakeAnimation
+  ]
 })
 export class SignInComponent implements OnInit, OnDestroy {
   errorMessage = '';
@@ -53,10 +58,8 @@ export class SignInComponent implements OnInit, OnDestroy {
       },
       error: ({error}) => {
         this.authForm.reset();
-        this.errorMessage = error.message;
-        // if (error.username || error.password) {
+        // this.errorMessage = error.message;
           this.authForm.setErrors({credentials: true});
-        // }
       },});
   }
 
@@ -65,6 +68,5 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.subs?.unsubscribe();
     this.authSubs?.unsubscribe();
   }
-
 
 }

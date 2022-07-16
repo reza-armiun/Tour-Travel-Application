@@ -1,11 +1,11 @@
 
 <div class="tours" >
     <div class="tours__header" [style.padding]="xSmall ? '0 12px' : '0'">
-      <div class="tours__title"> <h2>Tours</h2></div>
-      <button class="btn-add" routerLink="/tour/save">Add Tour</button>
+      <div class="tours__title"> <h2 i18n>Tours</h2></div>
+      <button class="btn-add" routerLink="/tour/save" i18n>Add Tour</button>
     </div>
     <mat-divider style="width: 100%; margin: 0px 0 6px 0"></mat-divider>
-  <app-tours-sort *ngIf="!xSmall"></app-tours-sort>
+  <app-tours-sort *ngIf="!xSmall" ></app-tours-sort>
 <!--    <div class="sorts" *ngIf="!xSmall"  >-->
 <!--      <div class="sort__item-wrapper">-->
 <!--        <a  class="sort__item"  [class.active]="selectedItem == 'LOWEST_PRICE'" (click)="sortByLowestPrice()" >Lowest Price</a>-->
@@ -21,8 +21,8 @@
 <!--      </div>-->
 <!--    </div>-->
   <div *ngIf="xSmall" class="mobile-actions">
-    <a class="action__item" (click)="showFilters()">Filters</a>
-    <a class="action__item" (click)="showCategories()">Categories</a>
+    <a i18n class="action__item" (click)="showFilters()">Filters</a>
+    <a i18n class="action__item" (click)="showCategories()">Categories</a>
   </div>
     <div >
         <div id="tours-wrapper" >

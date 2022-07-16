@@ -6,10 +6,10 @@
   font-family: 'Roboto', sans-serif;
 }
 body {
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
-  right: 0;
-  width: 100vw;
+  left: 0;
+  /*width: 100vw;*/
   background-color: rgba(197, 177, 205, 0.15);
   z-index: -1;
   margin: 0;

@@ -1,6 +1,5 @@
 .password-form {
-  width: 400px;
-  max-width: 600px;
+  min-width: 350px;
   padding: 0 8px 15px 8px;
   background-color: white;
   border-radius: 22px;
@@ -106,7 +105,9 @@
 
 .profile__info {
   /*width: 40%;*/
-  min-width: 450px;
+  width: 450px;
+  min-width: 300px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -125,6 +126,8 @@
   margin-bottom: 30px;
 }
 .profile__img-wrapper img{
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
   cursor: pointer;
   width: 350px;
   height: 350px;
@@ -188,8 +191,9 @@ input:focus {
 }
 
 .profile__details {
-  width: 30%;
-  min-width: 400px;
+  width: 400px;
+  min-width: 300px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -239,6 +243,7 @@ input:focus {
   margin-top: 15px;
 }
 .field {
+  flex-grow: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -285,7 +290,7 @@ input:focus {
 
 .profile__bookings {
   width: 100%;
-  min-height: 300px;
+  /*min-height: 300px;*/
   padding: 30px 30px 50px 30px;
   display: flex;
   flex-direction: column;

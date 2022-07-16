@@ -1,5 +1,5 @@
 <div  (click)="closeSidebar()" [ngClass]="{'black-screen': true, 'hide': !(showSidebar$ | async)} "></div>
-<div [style.display] = "(showSidebar$ | async) ? 'initial' : 'none'"   [ngClass]="{'sidebar': (locale ?? 'en') !== 'fa', 'right-sidebar': locale == 'fa' , 'hide': !(showSidebar$ | async)} " [@animateSidebar]="(showSidebar$ | async) ? 'show' : 'hide'" >
+<div [style.display] = "(showSidebar$ | async) ? 'initial' : 'none'"   [ngClass]="{'sidebar': (locale || 'en') !== 'fa', 'right-sidebar': locale == 'fa' , 'hide': !(showSidebar$ | async)} " [@animateSidebar]="(showSidebar$ | async) ? 'show' : 'hide'" >
   <div class="profile"*ngIf="(profile$ | async) as profile">
       <img matCardImage  [src]="profile?.imageUrl" class="profile__image">
       <h4 class="profile__name">{{profile.username}}</h4>

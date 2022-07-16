@@ -96,7 +96,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-          <context context-type="linenumber">20,21</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
@@ -107,7 +107,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3742496118436585286" datatype="html">
@@ -182,13 +182,14 @@
           <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1732528767904041976" datatype="html">
+      <trans-unit id="6844415020386209387" datatype="html">
         <source>
-         <x id="INTERPOLATION" equiv-text="{{errorMessage}}"/>
+
+      Invalid credentials please try again.
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3212728109005302394" datatype="html">
@@ -202,7 +203,7 @@
         <source>Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
@@ -213,7 +214,7 @@
         <source>Signout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-          <context context-type="linenumber">17,18</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
@@ -224,7 +225,7 @@
         <source>Signin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5520837882591091600" datatype="html">
@@ -232,6 +233,164 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
           <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-list.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="106510390745937970" datatype="html">
+        <source>
+          Very Good
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;label blue&quot; &gt;"/>
+            <x id="INTERPOLATION" equiv-text="{{tour.rating || 0}}"/>
+          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55935356535166595" datatype="html">
+        <source>
+          Price From
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;currency&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{tour.price | currency:&quot;IRR &quot;:&quot;symbol&quot; }}"/><x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4511087526996953426" datatype="html">
+        <source>Book Now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3598555555810108957" datatype="html">
+        <source>Add Tour</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-list.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4163272119298020373" datatype="html">
+        <source>Filters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-list.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1902100407096396858" datatype="html">
+        <source>Categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-list.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="555655696475507251" datatype="html">
+        <source>Filter By:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="594128012739993471" datatype="html">
+        <source>By Category</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9199923431850217243" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #city name=&quot;city&quot; (change)=&quot;categoryFiltersHandler(city)&quot; &gt;"/>City</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5839008718873328666" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #village name=&quot;village&quot; (change)=&quot;categoryFiltersHandler(village)&quot; &gt;"/>Village</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7912033093865403358" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #desert name=&quot;desert&quot; (change)=&quot;categoryFiltersHandler(desert)&quot; &gt;"/>Desert</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5558897169220745790" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #foreign name=&quot;foreign&quot; (change)=&quot;categoryFiltersHandler(foreign)&quot; &gt;"/>Foreign</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3115522144078533439" datatype="html">
+        <source>Review Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1890459894770591792" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #superb name=&quot;superb&quot; (change)=&quot;reviewFiltersHandler(superb)&quot; &gt;"/>Superb: 9+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4821335081483510370" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #verygood name=&quot;verygood&quot; (change)=&quot;reviewFiltersHandler(verygood)&quot; &gt;"/>Very good: 8+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3288798737571034192" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #good name=&quot;good&quot; (change)=&quot;reviewFiltersHandler(good)&quot; &gt;"/>Good: 7+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5393917028046903088" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #pleasant name=&quot;pleasant&quot; (change)=&quot;reviewFiltersHandler(pleasant)&quot;  &gt;"/>Pleasant: 6+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7327504596859695306" datatype="html">
+        <source>Lowest Price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1164915355334563616" datatype="html">
+        <source>Highest Price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8558207980043005699" datatype="html">
+        <source>Highest Rating</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4283495026495989728" datatype="html">
+        <source>Lowest Rating</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
     </body>

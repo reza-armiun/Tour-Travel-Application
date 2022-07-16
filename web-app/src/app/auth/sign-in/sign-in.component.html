@@ -6,7 +6,7 @@
       <h2 class="header" i18n>Login</h2>
       <hr/>
       <label i18n>Username: </label>
-      <input type="text"  name="username" formControlName="username">
+      <input [@shake]="(username?.errors && (username?.touched || username?.dirty)) ? 'error' : ''" type="text" name="username" formControlName="username">
       <div i18n class="error-segment" *ngIf="username?.getError('required') && (username?.touched || username?.dirty)">
         Username is required.
       </div>
@@ -22,7 +22,7 @@
     </div>
     <div  class="form-field">
       <label i18n>Password: </label>
-      <input type="password" name="password" formControlName="password">
+      <input [@shake]="(password?.errors && (password?.touched || password?.dirty)) ? 'error' : ''" type="password" name="password" formControlName="password">
       <div i18n class="error-segment" *ngIf="password?.getError('required') && (password?.touched || password?.dirty)">
         Password is required.
       </div>
@@ -38,7 +38,8 @@
       New User? <a routerLink="/register" > Create an account</a>
     </div>
     <div i18n class="error-segment" *ngIf="authForm.errors && authForm.errors['credentials']">
-         {{errorMessage}}
+<!--         {{errorMessage}}-->
+      Invalid credentials please try again.
     </div>
     <button i18n type="submit" >Login</button>
   </form>

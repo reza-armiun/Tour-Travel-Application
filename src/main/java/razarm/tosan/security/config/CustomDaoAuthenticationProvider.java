@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 @Slf4j
 public class CustomDaoAuthenticationProvider extends DaoAuthenticationProvider {
-    private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {

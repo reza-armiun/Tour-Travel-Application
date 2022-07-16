@@ -5,6 +5,7 @@
   "projects": {
     "web-app": {
       "i18n": {
+        "sourceLocale": "en-US",
         "locales": {
           "en": "src/locale/messages.xlf",
           "fa": "src/locale/messages.fa.xlf"
@@ -27,7 +28,7 @@
               "path": "custom-webpack.config.ts",
               "replaceDuplicatePlugins": true
             },
-            "outputPath": "dist/web-app",
+            "outputPath": "dist/web-app/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -49,16 +50,18 @@
           },
           "configurations": {
             "production": {
+              "localize": true,
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "2.2mb",
+                  "maximumError": "2.2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2mb",
-                  "maximumError": "7kb"
+                  "maximumWarning": "2.2mb",
+                  "maximumError": "2.2mb"
                 }
               ],
               "fileReplacements": [
@@ -135,6 +138,69 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/web-app/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true
+            },
+            "fa": {
+              "i18nMissingTranslation": "ignore"
+            },
+            "en": {},
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "web-app:build:development",
+              "serverTarget": "web-app:server:development"
+            },
+            "production": {
+              "browserTarget": "web-app:build:production",
+              "serverTarget": "web-app:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web-app:build:production",
+              "serverTarget": "web-app:server:production"
+            },
+            "development": {
+              "browserTarget": "web-app:build:development",
+              "serverTarget": "web-app:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

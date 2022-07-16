@@ -3,6 +3,7 @@
   cursor: pointer;
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
   margin-top: 8px;
   flex-grow: 1;
   align-items: center;

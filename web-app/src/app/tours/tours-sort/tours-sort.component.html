@@ -1,6 +1,6 @@
-<div class="sorts"   >
-    <a  class="sort__item"  [class.active]="selectedItem == 'LOWEST_PRICE'" (click)="sortByLowestPrice()" >Lowest Price</a>
-    <a class="sort__item" [class.active]="selectedItem == 'HIGHEST_PRICE'" (click)="sortByHighestPrice()">Highest Price</a>
-    <a class="sort__item" [class.active]="selectedItem == 'HIGHEST_RATE'" (click)="sortByHighestRating()" >Highest Rating</a>
-    <a class="sort__item " [class.active]="selectedItem == 'LOWEST_RATE'" (click)="sortByLowestRating()">Lowest Rating</a>
-</div>
+  <div class="sorts"   >
+    <a  class="sort__item" i18n  [class.active]="selectedItem == 'LOWEST_PRICE'" (click)="sortByLowestPrice()" >Lowest Price</a>
+    <a class="sort__item" i18n [class.active]="selectedItem == 'HIGHEST_PRICE'" (click)="sortByHighestPrice()">Highest Price</a>
+    <a class="sort__item" i18n [class.active]="selectedItem == 'HIGHEST_RATE'" (click)="sortByHighestRating()" >Highest Rating</a>
+    <a class="sort__item " i18n [class.active]="selectedItem == 'LOWEST_RATE'" (click)="sortByLowestRating()">Lowest Rating</a>
+  </div>

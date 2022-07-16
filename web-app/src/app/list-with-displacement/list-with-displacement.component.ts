@@ -50,7 +50,7 @@ import {ListItemDirective} from "./list-item.directive";
 })
 export class ListWithDisplacementComponent implements OnInit, OnChanges, AfterContentInit, AfterViewChecked {
   @Input('items') items: any [] = [];
-  @Input('compare')  compare: ((o1: any, o2: any) => boolean) = (o1:any, o2:any) => {
+  @Input('compare')  compare: ((o1: any, o2: any) => boolean) = (o1: any, o2: any) => {
     return o1 == o2;
   };
 
@@ -68,6 +68,7 @@ export class ListWithDisplacementComponent implements OnInit, OnChanges, AfterCo
   constructor(private cd: ChangeDetectorRef) {
     cd.detach();
   }
+
 
 
 
@@ -104,7 +105,7 @@ export class ListWithDisplacementComponent implements OnInit, OnChanges, AfterCo
         // console.log('offsetTop', offsetTop)
         this.itemsOffsetTop.push(offsetTop);
       })
-      this.cd.detectChanges()
+      this.cd.detectChanges();
   }
 
 

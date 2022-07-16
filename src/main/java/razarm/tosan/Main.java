@@ -5,16 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import razarm.tosan.exception.UserNotFoundException;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import java.net.UnknownHostException;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 
 @SpringBootApplication
 @EnableConfigurationProperties
-//@EnableAspectJAutoProxy()
+@EnableAspectJAutoProxy()
 @EnableScheduling()
 public class Main {
     private static final Logger logger
@@ -42,6 +45,8 @@ public class Main {
 //        authQuestion.run(new HashMap<>());
 
     }
+
+
 
 
 }

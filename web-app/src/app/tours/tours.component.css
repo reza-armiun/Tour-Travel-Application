@@ -26,7 +26,8 @@ hr { display: block; height: 1px;
 }
 .tours {
   /*min-width: 550px;*/
-  padding: 10px;
+  /*padding: 10px;*/
+  margin-top: 20px;
   justify-self: center;
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../../auth/auth.service";
 import {SidebarService} from "../sidebar/sidebar.service";
@@ -11,7 +11,9 @@ import {SidebarService} from "../sidebar/sidebar.service";
 export class NavbarComponent implements OnInit {
   signedin$: BehaviorSubject<boolean> | null;
 
-  constructor(private authService: AuthService, private sidebarService: SidebarService) {
+  constructor(private authService: AuthService
+              , private sidebarService: SidebarService
+              , @Inject(LOCALE_ID) public locale: string) {
     this.signedin$ = authService.signedin$;
   }
 
@@ -21,4 +23,6 @@ export class NavbarComponent implements OnInit {
   showSidebar() {
     this.sidebarService.openSidebar();
   }
+
+
 }

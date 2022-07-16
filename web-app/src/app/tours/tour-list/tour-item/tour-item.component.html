@@ -1,4 +1,4 @@
-<div class="tour" routeTransformer [style.width]="xSmall ? '100vw' : '470px'" >
+<div class="tour" routeTransformer [style.width]="xSmall ? '90vw' : '470px' "    >
   <div class="tour__photo">
 <!--    <div *ngIf="loadingImage " style="width: 200px; height: 120px; ">-->
 <!--      <app-card-placeholder></app-card-placeholder>-->
@@ -7,27 +7,27 @@
            src="{{tour.imgUrl}}" >
   </div>
   <div class="tour__container">
-    <div class="tour__content">
-      <div class="tour__content-main">
+    <div class="tour__content" >
+      <div class="tour__content-main" [style]="{width: xSmall ?  '100%' : 'min-content'}">
         <div class="tour__content-header">{{tour.name}}</div>
         <div class="tour__content-text">
           {{tour.description}}
         </div>
       </div>
       <div class="tour__content-review">
-        <div class="tour__score">
+        <div i18n class="tour__score">
           Very Good
           <div class="label blue" >
             {{tour.rating || 0}}
           </div>
         </div>
-        <div class="tour__price">
+        <div i18n class="tour__price">
           Price From
           <div class="currency">{{tour.price | currency:"IRR ":"symbol" }}</div></div>
       </div>
     </div>
     <div class="tour__container-book" >
-      <a class="blue-btn"  [routerLink]="['/booking']"  [queryParams]="{'tour-id': tour?.id  }"     >Book Now</a>
+      <a class="blue-btn"  [routerLink]="['/booking']"  [queryParams]="{'tour-id': tour?.id  }"  i18n >Book Now</a>
     </div>
   </div>
 </div>

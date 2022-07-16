@@ -7,8 +7,8 @@
   //background-color: white;
 
 
-  .sort__item {
     user-select: none;
+  .sort__item {
     cursor: pointer;
     border: 1px solid black;
     padding: 8px 12px;
@@ -40,4 +40,7 @@
 .active {
   font-weight: 700 !important;
   color: #551A8b !important;
+}
+:host-context(.blue) .sorts {
+  background-color: #1368fa !important;
 }

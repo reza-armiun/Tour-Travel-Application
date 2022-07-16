@@ -110,6 +110,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .signWith(secretKey)
                 .compact();
 
+
         this.userSessionService.insertSession(
                 new Session(username , token));
 
@@ -151,7 +152,6 @@ class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
             response.getWriter().write(json);
-
         } catch (Exception e1) {
             e1.printStackTrace();
         }

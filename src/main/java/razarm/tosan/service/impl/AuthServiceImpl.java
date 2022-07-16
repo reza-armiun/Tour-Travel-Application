@@ -105,41 +105,8 @@ public class AuthServiceImpl implements AuthService {
         final Instant now = Instant.now();
         var session = new UserSession(user.getUsername(), user.getPassword().substring(0, 8), now, now.plus(15, ChronoUnit.DAYS));
          userSessionRepository.save(session);
-         return new UserDetails() { //TODO refactor this
-             @Override
-             public String getUsername() {
-                 return user.getUsername();
-             }
-
-             @Override
-             public Collection<? extends GrantedAuthority> getAuthorities() {
-                 return user.getAuthorities();
-             }
-             @Override
-             public String getPassword() {
-                 return null;
-             }
-
-             @Override
-             public boolean isAccountNonExpired() {
-                 return false;
-             }
-
-             @Override
-             public boolean isAccountNonLocked() {
-                 return false;
-             }
-
-             @Override
-             public boolean isCredentialsNonExpired() {
-                 return false;
-             }
-
-             @Override
-             public boolean isEnabled() {
-                 return true;
-             }
-         };
+         user.setPassword(null);
+         return user;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class AuthController {
 
 
     @PostMapping("signup")
-    public ResponseEntity<Optional<UserAuthDetails>> signup(@RequestBody SignupRequest signupRequest) throws InvalidAttributeValueException {
+    public  ResponseEntity<Optional<UserAuthDetails>> signup(@RequestBody SignupRequest signupRequest) throws InvalidAttributeValueException {
         this.authService.signup(signupRequest);
         var authDetails = UserAuthDetails.builder().username(signupRequest.getUsername());
         return ResponseEntity.ok(Optional.of(authDetails.build()));

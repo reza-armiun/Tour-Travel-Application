@@ -111,7 +111,7 @@ import { ToursSortComponent } from './tours/tours-sort/tours-sort.component';
     ToursSortComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,

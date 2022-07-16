@@ -25,11 +25,14 @@ export class TourItemComponent implements OnInit {
   breakpointSub: Subscription | undefined;
 
   constructor(private breakpoints: BreakpointObserver) {
-    this.breakpointSub = breakpoints.observe([Breakpoints.Small, Breakpoints.HandsetPortrait] ).subscribe(result => {
+    let mobile = '(max-width: 600px)';
+    this.breakpointSub = breakpoints.observe([Breakpoints.Small, Breakpoints.HandsetPortrait ,mobile] ).subscribe(result => {
       this.small = false;
       this.xSmall = false;
+      console.log('result ', result)
       if(result.breakpoints[Breakpoints.Small]) this.small = true;
-      if(result.breakpoints[Breakpoints.HandsetPortrait]) this.xSmall = true;
+      // if(result.breakpoints[Breakpoints.HandsetPortrait]) this.xSmall = true;
+      if(result.breakpoints[mobile]) this.xSmall = true;
     })
 
   }

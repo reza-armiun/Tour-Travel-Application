@@ -11,24 +11,24 @@
         </context-group>
       </trans-unit>
       <trans-unit id="402785015655073812" datatype="html">
-        <source>Name: </source>
-        <target>نام: </target>
+        <source>Name:</source>
+        <target>نام:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4374589633190318100" datatype="html">
-        <source>Email: </source>
-        <target>ایمیل: </target>
+        <source>Email:</source>
+        <target>ایمیل:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5625146011024730344" datatype="html">
-        <source>Username: </source>
-        <target>نام کاربری: </target>
+        <source>Username:</source>
+        <target>نام کاربری:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">16,17</context>
@@ -40,19 +40,19 @@
       </trans-unit>
       <trans-unit id="1219158514664092395" datatype="html">
         <source>
-        Username already taken, Please try another username.
-      </source>
-      <target>
-      نام کاربری قبلاً گرفته شده است، لطفاً نام کاربری دیگری را امتحان کنید.
-      </target>
+          Username already taken, Please try another username.
+        </source>
+        <target>
+          نام کاربری قبلاً گرفته شده است، لطفاً نام کاربری دیگری را امتحان کنید.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">33,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8281836453106783702" datatype="html">
-        <source>Password: </source>
-        <target>رمز عبور: </target>
+        <source>Password:</source>
+        <target>رمز عبور:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">37,38</context>
@@ -62,9 +62,23 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
+
+      <trans-unit id="6844415020386209387" datatype="html">
+        <source>
+          Invalid credentials please try again.
+        </source>
+        <target>
+          اطلاعات نامعتبر لطفا دوباره امتحان کنید.
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">40,43</context>
+        </context-group>
+      </trans-unit>
+
       <trans-unit id="2014213976775469501" datatype="html">
-        <source>Password Confirmation: </source>
-        <target>تایید رمز عبور: </target>
+        <source>Password Confirmation:</source>
+        <target>تایید رمز عبور:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">41,42</context>
@@ -72,11 +86,11 @@
       </trans-unit>
       <trans-unit id="3322756179897654594" datatype="html">
         <source>
-        Password do not match.
-      </source>
-      <target>
-      رمز عبور مطابقت ندارد.
-      </target>
+          Password do not match.
+        </source>
+        <target>
+          رمز عبور مطابقت ندارد.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">44,46</context>
@@ -84,11 +98,16 @@
       </trans-unit>
       <trans-unit id="6372705444987159483" datatype="html">
         <source>
-     Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/> Click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-    </source>
-    <target>
-        از قبل حساب کاربری دارید؟<x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/>اینجا کلیک کنید<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-    </target>
+          Already have an account?
+          <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/>
+          Click here
+          <x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+        </source>
+        <target>
+          از قبل حساب کاربری دارید؟<x id="START_LINK" ctype="x-a"
+                                      equiv-text="&lt;a routerLink=&quot;/signin&quot;&gt;"/>اینجا کلیک کنید
+          <x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">48,50</context>
@@ -96,11 +115,11 @@
       </trans-unit>
       <trans-unit id="2039815200596177029" datatype="html">
         <source>
-      Something goes wrong, please try again
-       </source>
-       <target>
-       مشکلی پیش آمده است، لطفاً دوباره امتحان کنید
-       </target>
+          Something goes wrong, please try again
+        </source>
+        <target>
+          مشکلی پیش آمده است، لطفاً دوباره امتحان کنید
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">51,53</context>
@@ -128,11 +147,11 @@
       </trans-unit>
       <trans-unit id="3742496118436585286" datatype="html">
         <source>
-        Username is required.
-      </source>
-      <target>
-      نام کاربری مورد نیاز است.
-      </target>
+          Username is required.
+        </source>
+        <target>
+          نام کاربری مورد نیاز است.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">10,12</context>
@@ -140,11 +159,11 @@
       </trans-unit>
       <trans-unit id="539908731155066496" datatype="html">
         <source>
-        Username must be at least 3 characters long.
-      </source>
-      <target>
-      نام کاربری باید حداقل 3 کاراکتر باشد.
-      </target>
+          Username must be at least 3 characters long.
+        </source>
+        <target>
+          نام کاربری باید حداقل 3 کاراکتر باشد.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">13,15</context>
@@ -152,11 +171,11 @@
       </trans-unit>
       <trans-unit id="1592909480897159554" datatype="html">
         <source>
-        Maximum 20 characters.
-      </source>
-      <target>
-      حداکثر ۲۰ کاراکتر
-      </target>
+          Maximum 20 characters.
+        </source>
+        <target>
+          حداکثر ۲۰ کاراکتر
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -164,11 +183,11 @@
       </trans-unit>
       <trans-unit id="9212413924110292112" datatype="html">
         <source>
-        Username should start with alphabetic characters.
-      </source>
-      <target>
-      نام کاربری باید با حروف الفبا شروع شود.
-      </target>
+          Username should start with alphabetic characters.
+        </source>
+        <target>
+          نام کاربری باید با حروف الفبا شروع شود.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -176,11 +195,11 @@
       </trans-unit>
       <trans-unit id="7218179738293233410" datatype="html">
         <source>
-        Password is required.
-      </source>
-      <target>
-      رمز عبور مورد نیاز است.
-      </target>
+          Password is required.
+        </source>
+        <target>
+          رمز عبور مورد نیاز است.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -188,11 +207,11 @@
       </trans-unit>
       <trans-unit id="6608971976980630874" datatype="html">
         <source>
-        Password must be at least 4 characters long.
-      </source>
-      <target>
-      رمز عبور باید حداقل 4 کاراکتر باشد.
-      </target>
+          Password must be at least 4 characters long.
+        </source>
+        <target>
+          رمز عبور باید حداقل 4 کاراکتر باشد.
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -200,11 +219,11 @@
       </trans-unit>
       <trans-unit id="2953407701981667315" datatype="html">
         <source>
-        Password 20 characters.
-      </source>
-      <target>
-      رمز عبور ۲۰ کاراکتر
-      </target>
+          Password 20 characters.
+        </source>
+        <target>
+          رمز عبور ۲۰ کاراکتر
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">32,34</context>
@@ -212,11 +231,17 @@
       </trans-unit>
       <trans-unit id="7962404027682988590" datatype="html">
         <source>
-      New User? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/> Create an account<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-    </source>
-    <target>
-      کاربر جدید؟ <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/> یک حساب کاربری ایجاد کنید<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-    </target>
+          New User?
+          <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/>
+          Create an account
+          <x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+        </source>
+        <target>
+          کاربر جدید؟
+          <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/register&quot; &gt;"/>
+          یک حساب کاربری ایجاد کنید
+          <x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">37,39</context>
@@ -224,61 +249,246 @@
       </trans-unit>
       <trans-unit id="1732528767904041976" datatype="html">
         <source>
-         <x id="INTERPOLATION" equiv-text="{{errorMessage}}"/>
-    </source>
+          <x id="INTERPOLATION" equiv-text="{{errorMessage}}"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">40,42</context>
         </context-group>
       </trans-unit>
-       <trans-unit id="3212728109005302394" datatype="html">
-              <source>TourArm</source>
-              <target>تورآرم</target>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-                <context context-type="linenumber">10,11</context>
-              </context-group>
-            </trans-unit>
-            <trans-unit id="4915431133669985304" datatype="html">
-              <source>Profile</source>
-              <target>مشخصات</target>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-                <context context-type="linenumber">16,17</context>
-              </context-group>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
-                <context context-type="linenumber">15,16</context>
-              </context-group>
-            </trans-unit>
-            <trans-unit id="8354029220983676574" datatype="html">
-              <source>Signout</source>
-              <target>خروج از سیستم</target>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-                <context context-type="linenumber">17,18</context>
-              </context-group>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
-                <context context-type="linenumber">17,18</context>
-              </context-group>
-            </trans-unit>
-            <trans-unit id="2101902914887471883" datatype="html">
-              <source>Signin</source>
-              <target>ورود</target>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
-                <context context-type="linenumber">21,22</context>
-              </context-group>
-            </trans-unit>
-            <trans-unit id="5520837882591091600" datatype="html">
-              <source>Tours</source>
-              <target>تورها</target>
-              <context-group purpose="location">
-                <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
-                <context context-type="linenumber">9,10</context>
-              </context-group>
-            </trans-unit>
+      <trans-unit id="3212728109005302394" datatype="html">
+        <source>TourArm</source>
+        <target>تورآرم</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4915431133669985304" datatype="html">
+        <source>Profile</source>
+        <target>مشخصات</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8354029220983676574" datatype="html">
+        <source>Signout</source>
+        <target>خروج از سیستم</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2101902914887471883" datatype="html">
+        <source>Signin</source>
+        <target>ورود</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/navbar/navbar.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5520837882591091600" datatype="html">
+        <source>Tours</source>
+        <target>تورها</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+
+      <trans-unit id="5520837882591091600" datatype="html">
+        <source>Tours</source>
+        <target>تورها</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-list.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="106510390745937970" datatype="html">
+        <source>
+          Very Good
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;label blue&quot; &gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{tour.rating || 0}}"/>
+          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+        </source>
+        <target>
+          خیلی خوب
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;label blue&quot; &gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{tour.rating || 0}}"/>
+          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55935356535166595" datatype="html">
+        <source>
+          Price From
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;currency&quot;&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{tour.price | currency:&quot;IRR &quot;:&quot;symbol&quot; }}"/>
+          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+        </source>
+        <target>
+          قیمت از
+          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div class=&quot;currency&quot;&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{tour.price | currency:&quot;IRR &quot;:&quot;symbol&quot; }}"/>
+          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4511087526996953426" datatype="html">
+        <source>Book Now</source>
+        <target>اکنون ثبت کن</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tour-list/tour-item/tour-item.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="555655696475507251" datatype="html">
+        <source>Filter By:</source>
+        <target>محدود شده توسط:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="594128012739993471" datatype="html">
+        <source>By Category</source>
+        <target>بر اساس طبقه بندی</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9199923431850217243" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #city name=&quot;city&quot; (change)=&quot;categoryFiltersHandler(city)&quot; &gt;"/>City</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #city name=&quot;city&quot; (change)=&quot;categoryFiltersHandler(city)&quot; &gt;"/>شهر</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5839008718873328666" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #village name=&quot;village&quot; (change)=&quot;categoryFiltersHandler(village)&quot; &gt;"/>Village</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #village name=&quot;village&quot; (change)=&quot;categoryFiltersHandler(village)&quot; &gt;"/>دهکده</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7912033093865403358" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #desert name=&quot;desert&quot; (change)=&quot;categoryFiltersHandler(desert)&quot; &gt;"/>Desert</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #desert name=&quot;desert&quot; (change)=&quot;categoryFiltersHandler(desert)&quot; &gt;"/>کویر</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5558897169220745790" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #foreign name=&quot;foreign&quot; (change)=&quot;categoryFiltersHandler(foreign)&quot; &gt;"/>Foreign</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #foreign name=&quot;foreign&quot; (change)=&quot;categoryFiltersHandler(foreign)&quot; &gt;"/>خارجی</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3115522144078533439" datatype="html">
+        <source>Review Score</source>
+        <target>امتیاز بررسی</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1890459894770591792" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #superb name=&quot;superb&quot; (change)=&quot;reviewFiltersHandler(superb)&quot; &gt;"/>Superb: 9+</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #superb name=&quot;superb&quot; (change)=&quot;reviewFiltersHandler(superb)&quot; &gt;"/>عالی: 9+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4821335081483510370" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #verygood name=&quot;verygood&quot; (change)=&quot;reviewFiltersHandler(verygood)&quot; &gt;"/>Very good: 8+</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #verygood name=&quot;verygood&quot; (change)=&quot;reviewFiltersHandler(verygood)&quot; &gt;"/>خیلی خوب: 8+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3288798737571034192" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #good name=&quot;good&quot; (change)=&quot;reviewFiltersHandler(good)&quot; &gt;"/>Good: 7+</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #good name=&quot;good&quot; (change)=&quot;reviewFiltersHandler(good)&quot; &gt;"/>خوب: 7+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.htFml</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5393917028046903088" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #pleasant name=&quot;pleasant&quot; (change)=&quot;reviewFiltersHandler(pleasant)&quot;  &gt;"/>Pleasant: 6+</source>
+        <target><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; #pleasant name=&quot;pleasant&quot; (change)=&quot;reviewFiltersHandler(pleasant)&quot;  &gt;"/>خوشایند: 6+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3115522144078533439" datatype="html">
+        <source>Review Score</source>
+        <target>امتیاز بررسی</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-filters/tours-filters.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7327504596859695306" datatype="html">
+        <source>Lowest Price</source>
+        <target>پایین ترین قیمت</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1164915355334563616" datatype="html">
+        <source>Highest Price</source>
+        <target>بالاترین قیمت</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8558207980043005699" datatype="html">
+        <source>Highest Rating</source>
+        <target>بالاترین رتبه</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4283495026495989728" datatype="html">
+        <source>Lowest Rating</source>
+        <target>پایین ترین رتبه</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tours/tours-sort/tours-sort.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
